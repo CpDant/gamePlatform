@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class RemAssistClBean implements Serializable{
 
-	
+	private static final long serialVersionUID = 1L;
 	private String codiceFiscaleAssistCl;
 	private String codiceFiscaleAdmin;
 	
@@ -18,12 +18,15 @@ public class RemAssistClBean implements Serializable{
 	public String getCodiceFiscaleAssistCl() {
 		return codiceFiscaleAssistCl;
 	}
+	
 	public void setCodiceFiscaleAssistCl(String codiceFiscaleAssistCl) {
 		this.codiceFiscaleAssistCl = codiceFiscaleAssistCl;
 	}
+	
 	public String getCodiceFiscaleAdmin() {
 		return codiceFiscaleAdmin;
 	}
+	
 	public void setCodiceFiscaleAdmin(String codiceFiscaleAdmin) {
 		this.codiceFiscaleAdmin = codiceFiscaleAdmin;
 	}
