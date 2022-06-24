@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class RemAssistClBean implements Serializable{
-
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String codiceFiscaleAssistCl;
 	private String codiceFiscaleAdmin;
 	
