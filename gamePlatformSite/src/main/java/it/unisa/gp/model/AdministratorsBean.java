@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class AdministratorsBean implements Serializable  {
 	
+	private static final long serialVersionUID = 1L;
 	private String codiceFiscale;
 	private String nome;
 	private String cognome;

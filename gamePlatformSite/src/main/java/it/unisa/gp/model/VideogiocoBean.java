@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class VideogiocoBean implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private String codice; 
     private String nomeSoftwareHouse;
     private String nomeVideogioco;

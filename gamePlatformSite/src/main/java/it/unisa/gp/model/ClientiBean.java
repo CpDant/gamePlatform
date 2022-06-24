@@ -99,4 +99,27 @@ public class ClientiBean implements Serializable{
 		this.videogiochiFruibili = videogiochiFruibili;
 	}
 	
+	public String toString() {
+		return "ClientiBean [codiceFiscale=" + codiceFiscale + ", nome=" + nome + ", cognome=" + cognome
+				+ ", dataNascita=" + dataNascita + ", ruolo=" + ruolo + ", email=" + email + ", passWord=" + passWord
+				+ ", username=" + username + ", videogiochiFruibili=" + videogiochiFruibili + ", indFatt=" + indFatt
+				+ ", numeroCartaPagam=" + numeroCartaPagam + "]";
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClientiBean other = (ClientiBean) obj;
+		return Objects.equals(codiceFiscale, other.codiceFiscale) && Objects.equals(cognome, other.cognome)
+				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(email, other.email)
+				&& Objects.equals(indFatt, other.indFatt) && Objects.equals(nome, other.nome)
+				&& numeroCartaPagam == other.numeroCartaPagam && Objects.equals(passWord, other.passWord)
+				&& Objects.equals(ruolo, other.ruolo) && Objects.equals(username, other.username)
+				&& videogiochiFruibili == other.videogiochiFruibili;
+	}
+	
 }
