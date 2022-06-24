@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class VideogiocoBean implements Serializable {
+	
 	private String codice; 
     private String nomeSoftwareHouse;
     private String nomeVideogioco;
