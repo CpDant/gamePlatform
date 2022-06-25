@@ -12,7 +12,7 @@ public class AcquistiBean implements Serializable{
 	private String codiceFiscaleCliente;
 	private int costoIva;
 	private int costoNetto;
-	LocalDateTime dataOra;
+	private LocalDateTime dataOra;
 	private String indFatt;
 	private long numeroCartaPag;
 	

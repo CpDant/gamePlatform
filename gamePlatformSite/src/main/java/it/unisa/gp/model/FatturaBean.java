@@ -11,7 +11,7 @@ public class FatturaBean implements Serializable{
 	private int numero;
 	private int costoIva;
 	private int costoNetto;
-	LocalDateTime dataOra;
+	private LocalDateTime dataOra;
 	private String indFatt;
 	
 	public FatturaBean(int id, int numero, int costoIva, int costoNetto, LocalDateTime dataOra, String indFatt) {
