@@ -13,18 +13,17 @@ public class MainContext implements ServletContextListener{
 	public void contextInitialized(ServletContextEvent event){
 		
 		ServletContext context = event.getServletContext();
-		
 		DataSource ds = null;
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-			ds = (DataSource) envCtx.lookup("jdbc/GAME_PLATFORM");
+			ds = (DataSource) envCtx.lookup("jdbc/gameplatform");
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
 		}		
-
+		
 		context.setAttribute("DataSource", ds);
 		System.out.println("Creazione DataSource..."+ds.toString());
 		

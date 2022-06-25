@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Context>
-<Resource name="jdbc/EmpolyeeDB"
+<Resource name="jdbc/gameplatform"
 	auth="Container"
 	driverClassName="com.mysql.cj.jdbc.Driver"
 	type="javax.sql.DataSource"
-	username="username"
+	username="root"
 	password="password"
-	url="jdbc:mysql://localhost:3306/GAME_PLATFORM"/>
+	url="jdbc:mysql://localhost:3306/gameplatform"/>
 </Context>

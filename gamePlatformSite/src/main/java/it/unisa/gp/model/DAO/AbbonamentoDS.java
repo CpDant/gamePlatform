@@ -17,13 +17,13 @@ import it.unisa.gp.model.interfaceDS.Abbonamento;
 public class AbbonamentoDS implements Abbonamento{
 
 	
-	private static final String TABLE_NAME = "Abbonamento";
+	private static final String TABLE_NAME = "abbonamento";
 	private DataSource ds = null;
 
 	public AbbonamentoDS(DataSource ds) {
 		this.ds = ds;
 		
-		System.out.println("DataSource Product Model creation....");
+		System.out.println("Creazione DataSource...");
 	}
 	
 	
