@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+
 import javax.sql.DataSource;
 
 import it.unisa.gp.model.bean.AbbonamentoBean;
@@ -18,7 +19,9 @@ public class AbbonamentoDS implements Abbonamento{
 
 	
 	private static final String TABLE_NAME = "abbonamento";
+	
 	private DataSource ds = null;
+	
 
 	public AbbonamentoDS(DataSource ds) {
 		this.ds = ds;
@@ -44,6 +47,7 @@ public class AbbonamentoDS implements Abbonamento{
 
 			preparedStmt.executeUpdate();
 
+			connection.setAutoCommit(false);
 			connection.commit();
 		} finally {
 			try {
@@ -161,6 +165,7 @@ public class AbbonamentoDS implements Abbonamento{
 		Collection<AbbonamentoBean> products = new LinkedList<AbbonamentoBean>();
 
 		String selectSQL = "SELECT * FROM " + AbbonamentoDS.TABLE_NAME;
+		
 
 		if (order != null && !order.equals("")) {
 			selectSQL += " ORDER BY " + order;
@@ -171,10 +176,9 @@ public class AbbonamentoDS implements Abbonamento{
 			preparedStmt = connection.prepareStatement(selectSQL);
 
 			ResultSet rs = preparedStmt.executeQuery();
-
+			AbbonamentoBean bean = new AbbonamentoBean(null,0,0);
 			while (rs.next()) {
-				AbbonamentoBean bean = new AbbonamentoBean(null,0,0);
-
+				
 				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
 				bean.setCosto(rs.getInt("COSTO"));
 				bean.setDurata(rs.getInt("DURATA"));

@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,36 +36,18 @@ public class TesterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		out.println("<p> Ciao </p>");
-		DataSource ds = null;
-		response.setContentType("text/html");
 		
-        try {
-            Context initCtx = new InitialContext();
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
-
-            ds = (DataSource) envCtx.lookup("jdbc/gameplatform");
-
-        } catch (NamingException e) {
-            System.out.println("Error:" + e.getMessage());
-        }  
-		Abbonamento model = new AbbonamentoDS(ds);
-		AbbonamentoBean bean = new AbbonamentoBean("test abb", 1000, 12);
-		
+		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+		Abbonamento abb = new AbbonamentoDS(ds);
+		AbbonamentoBean bean = new AbbonamentoBean("aldo",30,50);
 		try {
-			model.doSave(bean);
+			abb.doSave(bean);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		try {
-			model.doRetrieveAll(null);
-			
-			out.println("<p>" + model.doRetrieveAll(null) + "</p>");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+       
 	}
 
 	/**
