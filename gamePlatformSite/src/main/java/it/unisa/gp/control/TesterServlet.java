@@ -39,7 +39,7 @@ public class TesterServlet extends HttpServlet {
 		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		Abbonamento abb = new AbbonamentoDS(ds);
-		AbbonamentoBean bean = new AbbonamentoBean("aldo",30,50);
+		AbbonamentoBean bean = new AbbonamentoBean("alfred cuozzo",30,50);
 		try {
 			abb.doSave(bean);
 		} catch (SQLException e) {
