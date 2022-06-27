@@ -5,7 +5,7 @@
 		auth="Container"
 		driverClassName="com.mysql.cj.jdbc.Driver"
 		type="javax.sql.DataSource"
-		username="root"
+		username="gameadmin"
 		password="admin"
-		url="jdbc:mysql://localhost:3306/gameplatform"/>
+		url="jdbc:mysql://87.11.152.16:3306/gameplatform"/>
 </Context>
