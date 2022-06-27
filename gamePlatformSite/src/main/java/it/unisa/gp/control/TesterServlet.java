@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import java.util.Collection;
+
 import it.unisa.gp.model.DAO.AbbonamentoDS;
 import it.unisa.gp.model.bean.AbbonamentoBean;
 import it.unisa.gp.model.interfaceDS.Abbonamento;
@@ -40,6 +42,8 @@ public class TesterServlet extends HttpServlet {
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		Abbonamento abb = new AbbonamentoDS(ds);
 		AbbonamentoBean bean = new AbbonamentoBean("alfred cuozzo",30,50);
+		
+		// funziona
 		try {
 			abb.doSave(bean);
 		} catch (SQLException e) {
@@ -47,7 +51,47 @@ public class TesterServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-       
+		// funziona
+		try {
+			abb.doUpdate(bean,45,67);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		// funziona
+		try {
+			abb.doDelete(bean.getNomeUnivoco());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		// funziona
+		try {
+			bean = abb.doRetrieveByKey("alfredo cuozzo");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		out.println(bean.toString()); 	//print di debug
+		
+		
+		// funziona
+		Collection<AbbonamentoBean> abbonament = null;
+
+		try {
+			abbonament = (Collection<AbbonamentoBean>) abb.doRetrieveAll("NOME_UNIVOCO ASC");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		out.println(abbonament.toString()); 
+
 	}
 
 	/**

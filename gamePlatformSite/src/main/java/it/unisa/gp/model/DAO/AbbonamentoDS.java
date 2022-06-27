@@ -67,7 +67,7 @@ public class AbbonamentoDS implements Abbonamento{
 		PreparedStatement preparedStmt = null;
 		
 		String updateSQL = "UPDATE " + AbbonamentoDS.TABLE_NAME
-				+ " SET (COSTO, DURATA) VALUES (?, ?), WHERE NOME_UNIVOCO = ?";
+				+ " SET COSTO = ? , DURATA = ?" + " WHERE NOME_UNIVOCO = ?";
 		
 		try {
 			connection = ds.getConnection();
@@ -78,6 +78,7 @@ public class AbbonamentoDS implements Abbonamento{
 
 			preparedStmt.executeUpdate();
 
+			connection.setAutoCommit(false);
 			connection.commit();
 		} finally {
 			try {
