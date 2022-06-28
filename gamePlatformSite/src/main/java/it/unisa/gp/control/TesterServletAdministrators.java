@@ -3,7 +3,7 @@ package it.unisa.gp.control;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-
+import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,21 +14,21 @@ import javax.sql.DataSource;
 
 import java.util.Collection;
 
-import it.unisa.gp.model.DAO.AbbonamentoDS;
-import it.unisa.gp.model.bean.AbbonamentoBean;
-import it.unisa.gp.model.interfaceDS.Abbonamento;
+import it.unisa.gp.model.DAO.AdministratorsDS;
+import it.unisa.gp.model.bean.AdministratorsBean;
+import it.unisa.gp.model.interfaceDS.Administrators;
 
 /**
- * Servlet implementation class TesterServlet
+ * Servlet implementation class TesterServletAdministrators
  */
-@WebServlet("/TesterServlet")
-public class TesterServlet extends HttpServlet {
+@WebServlet("/TesterServletAdministrators")
+public class TesterServletAdministrators extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TesterServlet() {
+    public TesterServletAdministrators() {
         super();
     }
 
@@ -40,58 +40,62 @@ public class TesterServlet extends HttpServlet {
 		out.println("<p> Ciao </p>");
 		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		Abbonamento abb = new AbbonamentoDS(ds);
-		AbbonamentoBean bean = new AbbonamentoBean("giuseppino cuozzo",30,50);
+		Administrators adm = new AdministratorsDS(ds);
+		AdministratorsBean bean = new AdministratorsBean("125","AAlessio","Spera", LocalDate.of(2001,9,11), "email", "passwordFiga", 2500);
 		
 		
+		/*//funziona
 		try {
-			abb.doSave(bean);
+			adm.doSave(bean);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 		
-		/* //funziona
+		
+		/*	//funziona
 		try {
-			abb.doUpdate(bean,45,67);
+			adm.doUpdate(bean,"Giuseppino","Spera", LocalDate.of(2001,9,11), "email", "passwordFiga", 2500);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/		
 		
-		
-		// funziona
+		/*	//funziona
 		try {
-			abb.doDelete(bean.getNomeUnivoco());
+			adm.doDelete(bean.getCodiceFiscale());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 		
-		
-		// funziona
+		/*	//funziona
 		try {
-			bean = abb.doRetrieveByKey("alfredo cuozzo");
+			bean = adm.doRetrieveByKey("CA123");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		out.println(bean.toString()); 	//print di debug
+		*/
 		
-		
-		// funziona
-		Collection<AbbonamentoBean> abbonament = null;
+		Collection<AdministratorsBean> admini = null;
 
 		try {
-			abbonament = (Collection<AbbonamentoBean>) abb.doRetrieveAll("NOME_UNIVOCO ASC");
+			admini = (Collection<AdministratorsBean>) adm.doRetrieveAll("CODICE_FISCALE ASC");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		out.println(abbonament.toString()); 
-	*/
+		out.println(admini.toString()); 
+		
+		
+		
 	}
 
 	/**
