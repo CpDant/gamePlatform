@@ -180,9 +180,9 @@ public class AdministratorsDS implements Administrators{
 			preparedStmt = connection.prepareStatement(selectSQL);
 
 			ResultSet rs = preparedStmt.executeQuery();
-			AdministratorsBean bean = new AdministratorsBean(null, null, null, null, null, null, 0);
+			
 			while (rs.next()) {
-				
+				AdministratorsBean bean = new AdministratorsBean(null, null, null, null, null, null, 0);
 				bean.setCodiceFiscale(rs.getString("CODICE_FISCALE"));
 				bean.setNome(rs.getString("NOME"));
 				bean.setCognome(rs.getString("COGNOME"));
