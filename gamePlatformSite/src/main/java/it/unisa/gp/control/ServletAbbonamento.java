@@ -19,16 +19,16 @@ import it.unisa.gp.model.bean.AbbonamentoBean;
 import it.unisa.gp.model.interfaceDS.Abbonamento;
 
 /**
- * Servlet implementation class TesterServlet
+ * Servlet implementation class ServletAbbonamento
  */
-@WebServlet("/TesterServlet")
-public class TesterServlet extends HttpServlet {
+@WebServlet("/ServletAbbonamento")
+public class ServletAbbonamento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TesterServlet() {
+    public ServletAbbonamento() {
         super();
     }
 
@@ -43,7 +43,7 @@ public class TesterServlet extends HttpServlet {
 		Abbonamento abb = new AbbonamentoDS(ds);
 		AbbonamentoBean bean = new AbbonamentoBean("alfredoo cuozzo",30,50);
 		
-		
+	/*	
 		try {
 			abb.doSave(bean);
 		} catch (SQLException e) {
@@ -51,7 +51,7 @@ public class TesterServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		/*
+		
 		try {
 			abb.doUpdate(bean,45,67);
 		} catch (SQLException e) {
@@ -79,10 +79,10 @@ public class TesterServlet extends HttpServlet {
 		
 		out.println(bean.toString()); 	//print di debug
 		
-		
+		*/
 		// funziona
 		Collection<AbbonamentoBean> abbonament = null;
-
+	
 		try {
 			abbonament = (Collection<AbbonamentoBean>) abb.doRetrieveAll("NOME_UNIVOCO ASC");
 		} catch (SQLException e) {
@@ -91,7 +91,7 @@ public class TesterServlet extends HttpServlet {
 		}
 		
 		out.println(abbonament.toString()); 
-	*/
+	
 	}
 
 	/**
