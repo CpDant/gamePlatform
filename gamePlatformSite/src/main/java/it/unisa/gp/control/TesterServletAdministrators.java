@@ -41,10 +41,10 @@ public class TesterServletAdministrators extends HttpServlet {
 		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		Administrators adm = new AdministratorsDS(ds);
-		AdministratorsBean bean = new AdministratorsBean("125","AAlessio","Spera", LocalDate.of(2001,9,11), "email", "passwordFiga", 2500);
+		AdministratorsBean bean = new AdministratorsBean("nuovo","Andrea","Genovese", LocalDate.of(2000,5,7), "emailnuova", "paolo", 207);
 		
-		
-		/*//funziona
+		/*
+		//funziona
 		try {
 			adm.doSave(bean);
 		} catch (SQLException e) {
@@ -53,15 +53,16 @@ public class TesterServletAdministrators extends HttpServlet {
 		}
 		*/
 		
-		
-		/*	//funziona
+		/*
+		//funziona
 		try {
-			adm.doUpdate(bean,"Giuseppino","Spera", LocalDate.of(2001,9,11), "email", "passwordFiga", 2500);
+			adm.doUpdate(bean,"Giuse","Spera", LocalDate.of(2025,9,11), "email", "passwordFiga", 2500);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/		
+		*/
+				
 		
 		/*	//funziona
 		try {
@@ -72,9 +73,10 @@ public class TesterServletAdministrators extends HttpServlet {
 		}
 		*/
 		
-		/*	//funziona
+		/*
+			//funziona
 		try {
-			bean = adm.doRetrieveByKey("CA123");
+			bean = adm.doRetrieveByKey("125");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,6 +85,7 @@ public class TesterServletAdministrators extends HttpServlet {
 		out.println(bean.toString()); 	//print di debug
 		*/
 		
+		/*
 		Collection<AdministratorsBean> admini = null;
 
 		try {
@@ -93,7 +96,7 @@ public class TesterServletAdministrators extends HttpServlet {
 		}
 		
 		out.println(admini.toString()); 
-		
+		*/
 		
 		
 	}

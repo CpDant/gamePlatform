@@ -72,10 +72,10 @@ public class AdministratorsDS implements Administrators{
 			preparedStmt = connection.prepareStatement(updateSQL);
 			preparedStmt.setString(1, nome);
 			preparedStmt.setString(2, cognome);
-			preparedStmt.setDate(3, java.sql.Date.valueOf( adm.getDataNascita()));
-			preparedStmt.setString(4, adm.getEmail());
-			preparedStmt.setString(5, adm.getPassWord());
-			preparedStmt.setInt(6, adm.getRetribuzioneAnnuale());
+			preparedStmt.setDate(3, java.sql.Date.valueOf(dataNascita));
+			preparedStmt.setString(4, email);
+			preparedStmt.setString(5, passWord);
+			preparedStmt.setInt(6, retribuzioneAnnuale);
 			preparedStmt.setString(7, adm.getCodiceFiscale());
 			
 			preparedStmt.executeUpdate();
@@ -142,7 +142,8 @@ public class AdministratorsDS implements Administrators{
 				bean.setCodiceFiscale(rs.getString("CODICE_FISCALE"));
 				bean.setNome(rs.getString("NOME"));
 				bean.setCognome(rs.getString("COGNOME"));
-				//bean.setDataNascita(rs.getDate("DATA_NASCITA"));
+				Date date = rs.getDate("DATA_NASCITA"); 
+				bean.setDataNascita(date.toLocalDate());
 				bean.setEmail(rs.getString("EMAIL"));
 				bean.setPassWord(rs.getString("PASS_WORD"));
 				bean.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
@@ -185,7 +186,8 @@ public class AdministratorsDS implements Administrators{
 				bean.setCodiceFiscale(rs.getString("CODICE_FISCALE"));
 				bean.setNome(rs.getString("NOME"));
 				bean.setCognome(rs.getString("COGNOME"));
-				//bean.setDataNascita(rs.getDate("DATA_NASCITA"));
+				Date date = rs.getDate("DATA_NASCITA"); 
+				bean.setDataNascita(date.toLocalDate());
 				bean.setEmail(rs.getString("EMAIL"));
 				bean.setPassWord(rs.getString("PASS_WORD"));
 				bean.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
