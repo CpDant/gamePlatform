@@ -11,61 +11,82 @@ public class TicketsBean implements Serializable{
     private String codiceFiscaleAssistCl;
     private String codiceFiscaleCliente;
     private boolean resolved;
-    public  enum CategoriaProbl{account, pagamenti, abbonamenti, rimborso, fattura};
+    public enum CategoriaProbl{account, pagamenti, abbonamenti, rimborso, fattura};
+    private CategoriaProbl categoria;
     private String messaggio;
     private LocalDateTime dataOra;
     
-	public TicketsBean(int id, String codiceFiscaleAssistCl, String codiceFiscaleCliente,
-			String messaggio, LocalDateTime dataOra) {
+	public TicketsBean(int id, String codiceFiscaleAssistCl, String codiceFiscaleCliente, CategoriaProbl categoria ,String messaggio, LocalDateTime dataOra) {
 		super();
 		this.id = id;
 		this.codiceFiscaleAssistCl = codiceFiscaleAssistCl;
 		this.codiceFiscaleCliente = codiceFiscaleCliente;
 		this.resolved = false;
+		this.categoria = categoria;
 		this.messaggio = messaggio;
 		this.dataOra = dataOra;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getCodiceFiscaleAssistCl() {
 		return codiceFiscaleAssistCl;
 	}
+
 	public void setCodiceFiscaleAssistCl(String codiceFiscaleAssistCl) {
 		this.codiceFiscaleAssistCl = codiceFiscaleAssistCl;
 	}
+
 	public String getCodiceFiscaleCliente() {
 		return codiceFiscaleCliente;
 	}
+
 	public void setCodiceFiscaleCliente(String codiceFiscaleCliente) {
 		this.codiceFiscaleCliente = codiceFiscaleCliente;
 	}
+
 	public boolean isResolved() {
 		return resolved;
 	}
+
 	public void setResolved(boolean resolved) {
 		this.resolved = resolved;
 	}
+
+	public CategoriaProbl getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(CategoriaProbl categoria) {
+		this.categoria = categoria;
+	}
+
 	public String getMessaggio() {
 		return messaggio;
 	}
+
 	public void setMessaggio(String messaggio) {
 		this.messaggio = messaggio;
 	}
+
 	public LocalDateTime getDataOra() {
 		return dataOra;
 	}
 
-	public String toString() {
-		return "TicketsBean [id=" + id + ", codiceFiscaleAssistCl=" + codiceFiscaleAssistCl + ", codiceFiscaleCliente="
-				+ codiceFiscaleCliente + ", resolved=" + resolved + ", messaggio=" + messaggio + ", dataOra=" + dataOra
-				+ "]";
-	}
 	public void setDataOra(LocalDateTime dataOra) {
 		this.dataOra = dataOra;
+	}
+
+	public String toString() {
+		return "TicketsBean [id=" + id + ", codiceFiscaleAssistCl=" + codiceFiscaleAssistCl + ", codiceFiscaleCliente="
+				+ codiceFiscaleCliente + ", resolved=" + resolved + ", categoria=" + categoria + ", messaggio="
+				+ messaggio + ", dataOra=" + dataOra + "]";
 	}
 
 	public boolean equals(Object obj) {
@@ -76,9 +97,10 @@ public class TicketsBean implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		TicketsBean other = (TicketsBean) obj;
-		return Objects.equals(codiceFiscaleAssistCl, other.codiceFiscaleAssistCl)
+		return categoria == other.categoria && Objects.equals(codiceFiscaleAssistCl, other.codiceFiscaleAssistCl)
 				&& Objects.equals(codiceFiscaleCliente, other.codiceFiscaleCliente)
 				&& Objects.equals(dataOra, other.dataOra) && id == other.id
 				&& Objects.equals(messaggio, other.messaggio) && resolved == other.resolved;
-	}	
-}
+	}
+
+}	
