@@ -1,7 +1,7 @@
 package it.unisa.gp.model.bean;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class SoftwareHouseBean implements Serializable {
@@ -9,9 +9,9 @@ public class SoftwareHouseBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String nomeUnivoco;
     private String locazione;
-    private LocalDateTime dataDiFondazione;
+    private LocalDate dataDiFondazione;
 	
-	public SoftwareHouseBean(String nomeUnivoco, String locazione, LocalDateTime dataDiFondazione) {
+	public SoftwareHouseBean(String nomeUnivoco, String locazione, LocalDate dataDiFondazione) {
 		super();
 		this.nomeUnivoco = nomeUnivoco;
 		this.locazione = locazione;
@@ -34,11 +34,11 @@ public class SoftwareHouseBean implements Serializable {
 		this.locazione = locazione;
 	}
 
-	public LocalDateTime getDataDiFondazione() {
+	public LocalDate getDataDiFondazione() {
 		return dataDiFondazione;
 	}
 
-	public void setDataDiFondazione(LocalDateTime dataDiFondazione) {
+	public void setDataDiFondazione(LocalDate dataDiFondazione) {
 		this.dataDiFondazione = dataDiFondazione;
 	}
 

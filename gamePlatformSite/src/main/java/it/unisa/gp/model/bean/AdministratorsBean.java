@@ -1,7 +1,7 @@
 package it.unisa.gp.model.bean;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class AdministratorsBean implements Serializable  {
@@ -10,13 +10,18 @@ public class AdministratorsBean implements Serializable  {
 	private String codiceFiscale;
 	private String nome;
 	private String cognome;
+<<<<<<< HEAD
 	private LocalDateTime dataNascita;
 	private final String RUOLO = "admin";
+=======
+	private LocalDate dataNascita;
+	private final String RUOLO = "admin";
+>>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
 	private String email;
 	private String passWord;
     private int retribuzioneAnnuale;
 	
-	public AdministratorsBean(String codiceFiscale, String nome, String cognome, LocalDateTime dataNascita,
+	public AdministratorsBean(String codiceFiscale, String nome, String cognome, LocalDate dataNascita,
 			String email, String passWord, int retribuzioneAnnuale) {
 		super();
 		this.codiceFiscale = codiceFiscale;
@@ -52,11 +57,11 @@ public class AdministratorsBean implements Serializable  {
 		this.cognome = cognome;
 	}
 
-	public LocalDateTime getDataNascita() {
+	public LocalDate getDataNascita() {
 		return dataNascita;
 	}
 
-	public void setDataNascita(LocalDateTime dataNascita) {
+	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
 

@@ -1,29 +1,27 @@
 package it.unisa.gp.model.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
 
-
 import javax.sql.DataSource;
 
-import it.unisa.gp.model.bean.AbbonamentoBean;
-import it.unisa.gp.model.interfaceDS.Abbonamento;
+import it.unisa.gp.model.bean.SoftwareHouseBean;
+import it.unisa.gp.model.interfaceDS.SoftwareHouse;
 
+public class SoftwareHouseDS implements SoftwareHouse{
 
-
-public class AbbonamentoDS implements Abbonamento{
-
-	
-	private static final String TABLE_NAME = "abbonamento";
+	private static final String TABLE_NAME = "software_house";
 	
 	private DataSource ds = null;
 	
 
-	public AbbonamentoDS(DataSource ds) {
+	public SoftwareHouseDS(DataSource ds) {
 		this.ds = ds;
 		
 		System.out.println("Creazione DataSource...");
@@ -31,19 +29,19 @@ public class AbbonamentoDS implements Abbonamento{
 	
 	
 	@Override
-	public synchronized void doSave(AbbonamentoBean abb) throws SQLException {
+	public void doSave(SoftwareHouseBean soft) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
-		String insertSQL = "INSERT INTO " + AbbonamentoDS.TABLE_NAME
-				+ " (NOME_UNIVOCO, COSTO, DURATA) VALUES (?, ?, ?)";
+		String insertSQL = "INSERT INTO " + SoftwareHouseDS.TABLE_NAME
+				+ " (NOME_UNIVOCO, LOCAZIONE, DATA_DI_FONDAZIONE) VALUES (?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(insertSQL);
-			preparedStmt.setString(1, abb.getNomeUnivoco());
-			preparedStmt.setInt(2, abb.getCosto());
-			preparedStmt.setInt(3, abb.getDurata());
+			preparedStmt.setString(1, soft.getNomeUnivoco());
+			preparedStmt.setString(2, soft.getLocazione());
+			preparedStmt.setDate(3, java.sql.Date.valueOf(soft.getDataDiFondazione()));
 
 			preparedStmt.executeUpdate();
 
@@ -62,20 +60,19 @@ public class AbbonamentoDS implements Abbonamento{
 	}
 
 	@Override
-	public synchronized void doUpdate(AbbonamentoBean abb, int costo, int durata) throws SQLException {
+	public void doUpdate(SoftwareHouseBean soft, String locazione, LocalDate dataFondazione) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
-		String updateSQL = "UPDATE " + AbbonamentoDS.TABLE_NAME
-				+ " SET COSTO = ? , DURATA = ?" + " WHERE NOME_UNIVOCO = ?";
+		String updateSQL = "UPDATE " + SoftwareHouseDS.TABLE_NAME
+				+ " SET LOCAZIONE = ? , DATA_DI_FONDAZIONE = ?" + " WHERE NOME_UNIVOCO = ?";
 		
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(updateSQL);
-			preparedStmt.setInt(1, costo);
-			preparedStmt.setInt(2, durata);
-			preparedStmt.setString(3, abb.getNomeUnivoco());
-
+			preparedStmt.setString(1, locazione);
+			preparedStmt.setDate(2, java.sql.Date.valueOf(dataFondazione));
+			preparedStmt.setString(3, soft.getNomeUnivoco());
 			preparedStmt.executeUpdate();
 
 			connection.setAutoCommit(false);
@@ -90,17 +87,16 @@ public class AbbonamentoDS implements Abbonamento{
 			}
 		}
 		
-		
 	}
 
 	@Override
-	public synchronized boolean doDelete(String name) throws SQLException {
+	public boolean doDelete(String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + AbbonamentoDS.TABLE_NAME + " WHERE NOME_UNIVOCO = ?";
+		String deleteSQL = "DELETE FROM " + SoftwareHouseDS.TABLE_NAME + " WHERE NOME_UNIVOCO = ?";
 
 		try {
 			connection = ds.getConnection();
@@ -122,26 +118,28 @@ public class AbbonamentoDS implements Abbonamento{
 	}
 
 	@Override
-	public synchronized AbbonamentoBean doRetrieveByKey(String name) throws SQLException {
-		
+	public SoftwareHouseBean doRetrieveByKey(String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		AbbonamentoBean bean = new AbbonamentoBean(null,0,0);
+		SoftwareHouseBean bean = new SoftwareHouseBean(null,null,null);
 
-		String selectSQL = "SELECT * FROM " + AbbonamentoDS.TABLE_NAME + " WHERE NOME_UNIVOCO = ?";
+		String selectSQL = "SELECT * FROM " + SoftwareHouseDS.TABLE_NAME + " WHERE NOME_UNIVOCO = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(selectSQL);
 			preparedStmt.setString(1, name);
+			
 
 			ResultSet rs = preparedStmt.executeQuery();
 
 			while (rs.next()) {
 				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
-				bean.setCosto(rs.getInt("COSTO"));
-				bean.setDurata(rs.getInt("DURATA"));
+				bean.setLocazione(rs.getString("LOCAZIONE"));
+				Date date = rs.getDate("DATA_DI_FONDAZIONE");
+				bean.setDataDiFondazione(date.toLocalDate());
+				
 			}
 
 		} finally {
@@ -154,18 +152,16 @@ public class AbbonamentoDS implements Abbonamento{
 			}
 		}
 		return bean;
-		
 	}
 
 	@Override
-	public synchronized Collection<AbbonamentoBean> doRetrieveAll(String order) throws SQLException {
-		
+	public Collection<SoftwareHouseBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<AbbonamentoBean> products = new LinkedList<AbbonamentoBean>();
+		Collection<SoftwareHouseBean> softHouse = new LinkedList<SoftwareHouseBean>();
 
-		String selectSQL = "SELECT * FROM " + AbbonamentoDS.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + SoftwareHouseDS.TABLE_NAME;
 		
 
 		if (order != null && !order.equals("")) {
@@ -179,11 +175,13 @@ public class AbbonamentoDS implements Abbonamento{
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while (rs.next()) {
-				AbbonamentoBean bean = new AbbonamentoBean(null,0,0);
+				SoftwareHouseBean bean = new SoftwareHouseBean(null,null,null);
+				
 				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
-				bean.setCosto(rs.getInt("COSTO"));
-				bean.setDurata(rs.getInt("DURATA"));
-				products.add(bean);
+				bean.setLocazione(rs.getString("LOCAZIONE"));
+				Date date = rs.getDate("DATA_DI_FONDAZIONE");
+				bean.setDataDiFondazione(date.toLocalDate());
+				softHouse.add(bean);
 			}
 
 		} finally {
@@ -195,7 +193,7 @@ public class AbbonamentoDS implements Abbonamento{
 					connection.close();
 			}
 		}
-		return products;
+		return softHouse;
 	}
 
 }

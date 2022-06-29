@@ -1,7 +1,7 @@
 package it.unisa.gp.model.bean;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class ClientiBean implements Serializable{
@@ -10,23 +10,36 @@ public class ClientiBean implements Serializable{
 	private String codiceFiscale;
 	private String nome;
 	private String cognome;
+<<<<<<< HEAD
 	private LocalDateTime dataNascita;
 	private final String RUOLO = "cliente";
+=======
+	private LocalDate dataNascita;
+	private final String ruolo;
+>>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
 	private String email;
 	private String passWord;
 	private String username;
     private int videogiochiFruibili;
     private String indFatt;
-    private int numeroCartaPagam;
+    private long numeroCartaPagam;
     
+<<<<<<< HEAD
 	public ClientiBean(String codiceFiscale, String nome, String cognome, LocalDateTime dataNascita,
+=======
+	public ClientiBean(String codiceFiscale, String nome, String cognome, LocalDate dataNascita,
+>>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
 			String email, String passWord, String username, int videogiochiFruibili, String indFatt,
-			int numeroCartaPagam) {
+			long numeroCartaPagam) {
 		super();
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
+<<<<<<< HEAD
+=======
+		this.ruolo = "cust";
+>>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
 		this.email = email;
 		this.passWord = passWord;
 		this.username = username;
@@ -40,10 +53,10 @@ public class ClientiBean implements Serializable{
 	public void setIndFatt(String indFatt) {
 		this.indFatt = indFatt;
 	}
-	public int getNumeroCartaPagam() {
+	public long getNumeroCartaPagam() {
 		return numeroCartaPagam;
 	}
-	public void setNumeroCartaPagam(int numeroCartaPagam) {
+	public void setNumeroCartaPagam(long numeroCartaPagam) {
 		this.numeroCartaPagam = numeroCartaPagam;
 	}
 	public String getRuolo() {
@@ -67,10 +80,10 @@ public class ClientiBean implements Serializable{
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-	public LocalDateTime getDataNascita() {
+	public LocalDate getDataNascita() {
 		return dataNascita;
 	}
-	public void setDataNascita(LocalDateTime dataNascita) {
+	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
 	public String getEmail() {
