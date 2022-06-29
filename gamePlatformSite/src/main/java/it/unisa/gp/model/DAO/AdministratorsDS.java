@@ -23,7 +23,7 @@ public class AdministratorsDS implements Administrators{
 	}
 	
 	@Override
-	public void doSave(AdministratorsBean adm) throws SQLException {
+	public synchronized void doSave(AdministratorsBean adm) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
@@ -58,7 +58,7 @@ public class AdministratorsDS implements Administrators{
 	}
 
 	@Override
-	public void doUpdate(AdministratorsBean adm, String nome, String cognome, LocalDate dataNascita, String email,
+	public synchronized void doUpdate(AdministratorsBean adm, String nome, String cognome, LocalDate dataNascita, String email,
 			String passWord, int retribuzioneAnnuale) throws SQLException {
 		
 		Connection connection = null;
@@ -122,7 +122,7 @@ public class AdministratorsDS implements Administrators{
 	}
 
 	@Override
-	public AdministratorsBean doRetrieveByKey(String codiceFiscale) throws SQLException {
+	public synchronized AdministratorsBean doRetrieveByKey(String codiceFiscale) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
