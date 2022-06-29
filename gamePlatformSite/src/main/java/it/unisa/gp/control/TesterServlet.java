@@ -65,12 +65,8 @@ public class TesterServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		*/
-<<<<<<< HEAD
 		
 		/*
-=======
->>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
-		
 		/*
 		try {
 			abb.doDelete(bean.getNomeUnivoco());
