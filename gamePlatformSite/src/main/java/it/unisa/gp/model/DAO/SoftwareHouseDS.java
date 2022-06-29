@@ -29,7 +29,7 @@ public class SoftwareHouseDS implements SoftwareHouse{
 	
 	
 	@Override
-	public void doSave(SoftwareHouseBean soft) throws SQLException {
+	public synchronized void doSave(SoftwareHouseBean soft) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
@@ -60,7 +60,7 @@ public class SoftwareHouseDS implements SoftwareHouse{
 	}
 
 	@Override
-	public void doUpdate(SoftwareHouseBean soft, String locazione, LocalDate dataFondazione) throws SQLException {
+	public synchronized void doUpdate(SoftwareHouseBean soft, String locazione, LocalDate dataFondazione) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
@@ -90,7 +90,7 @@ public class SoftwareHouseDS implements SoftwareHouse{
 	}
 
 	@Override
-	public boolean doDelete(String name) throws SQLException {
+	public synchronized boolean doDelete(String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -118,7 +118,7 @@ public class SoftwareHouseDS implements SoftwareHouse{
 	}
 
 	@Override
-	public SoftwareHouseBean doRetrieveByKey(String name) throws SQLException {
+	public synchronized SoftwareHouseBean doRetrieveByKey(String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -155,7 +155,7 @@ public class SoftwareHouseDS implements SoftwareHouse{
 	}
 
 	@Override
-	public Collection<SoftwareHouseBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<SoftwareHouseBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 

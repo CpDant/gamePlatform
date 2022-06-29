@@ -28,7 +28,7 @@ public class WishlistDS implements Wishlist{
 	
 	
 	@Override
-	public void doSave(WishlistBean wish) throws SQLException {
+	public synchronized void doSave(WishlistBean wish) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
@@ -57,7 +57,7 @@ public class WishlistDS implements Wishlist{
 	}
 
 	@Override
-	public void doUpdate(WishlistBean wish, int nProd) throws SQLException {
+	public synchronized void doUpdate(WishlistBean wish, int nProd) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
@@ -86,7 +86,7 @@ public class WishlistDS implements Wishlist{
 	}
 
 	@Override
-	public boolean doDelete(String name) throws SQLException {
+	public synchronized boolean doDelete(String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -114,7 +114,7 @@ public class WishlistDS implements Wishlist{
 	}
 
 	@Override
-	public WishlistBean doRetrieveByKey(String name) throws SQLException {
+	public synchronized WishlistBean doRetrieveByKey(String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -147,7 +147,7 @@ public class WishlistDS implements Wishlist{
 	}
 
 	@Override
-	public Collection<WishlistBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<WishlistBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 

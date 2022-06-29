@@ -29,7 +29,7 @@ public class ClientiDS implements Clienti{
 	
 	
 	@Override
-	public void doSave(ClientiBean clienti) throws SQLException {
+	public synchronized void doSave(ClientiBean clienti) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
@@ -68,7 +68,7 @@ public class ClientiDS implements Clienti{
 	}
 
 	@Override
-	public void doUpdate(ClientiBean clienti, String nome, String cognome, LocalDate dataNascita,
+	public synchronized void doUpdate(ClientiBean clienti, String nome, String cognome, LocalDate dataNascita,
 			String email, String passWord, String username, int vidFruibili, String indFatt, long numCartaPag)
 			throws SQLException {
 		
@@ -107,7 +107,7 @@ public class ClientiDS implements Clienti{
 	}
 
 	@Override
-	public boolean doDelete(String name) throws SQLException {
+	public synchronized boolean doDelete(String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -135,7 +135,7 @@ public class ClientiDS implements Clienti{
 	}
 
 	@Override
-	public ClientiBean doRetrieveByKey(String name) throws SQLException {
+	public synchronized ClientiBean doRetrieveByKey(String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -178,7 +178,7 @@ public class ClientiDS implements Clienti{
 	}
 
 	@Override
-	public Collection<ClientiBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<ClientiBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 

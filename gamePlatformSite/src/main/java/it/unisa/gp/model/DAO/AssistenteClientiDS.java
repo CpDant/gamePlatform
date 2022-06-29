@@ -22,7 +22,7 @@ public class AssistenteClientiDS implements AssistenteClienti {
 	}
 	
 	@Override
-	public void doSave(AssistenteClientiBean ass) throws SQLException {
+	public synchronized void doSave(AssistenteClientiBean ass) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
@@ -60,7 +60,7 @@ public class AssistenteClientiDS implements AssistenteClienti {
 	}
 
 	@Override
-	public void doUpdate(AssistenteClientiBean ass, String nome, String cognome, LocalDate dataNascita, String email,
+	public synchronized void doUpdate(AssistenteClientiBean ass, String nome, String cognome, LocalDate dataNascita, String email,
 			String password, int retribuzioneAnnuale, int ticketDaRisolvere, int ticketRisolti) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
@@ -98,7 +98,7 @@ public class AssistenteClientiDS implements AssistenteClienti {
 	}
 
 	@Override
-	public boolean doDelete(String codiceFiscale) throws SQLException {
+	public synchronized boolean doDelete(String codiceFiscale) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -126,7 +126,7 @@ public class AssistenteClientiDS implements AssistenteClienti {
 	}
 
 	@Override
-	public AssistenteClientiBean doRetrieveByKey(String codiceFiscale) throws SQLException {
+	public synchronized AssistenteClientiBean doRetrieveByKey(String codiceFiscale) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -166,7 +166,7 @@ public class AssistenteClientiDS implements AssistenteClienti {
 	}
 
 	@Override
-	public Collection<AssistenteClientiBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<AssistenteClientiBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
