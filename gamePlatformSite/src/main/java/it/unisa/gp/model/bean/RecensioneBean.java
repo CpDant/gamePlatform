@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
-
 public class RecensioneBean implements Serializable{
 	
 	public enum Grado{uno, due, tre, quattro, cinque};

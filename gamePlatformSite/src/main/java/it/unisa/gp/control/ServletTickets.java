@@ -3,8 +3,7 @@ package it.unisa.gp.control;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Collection;
+import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,23 +12,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import it.unisa.gp.model.DAO.ClientiDS;
-import it.unisa.gp.model.bean.ClientiBean;
-import it.unisa.gp.model.interfaceDS.Clienti;
+import java.util.Collection;
+
+import it.unisa.gp.model.DAO.TicketsDS;
+import it.unisa.gp.model.bean.TicketsBean;
+import it.unisa.gp.model.bean.TicketsBean.CategoriaProbl;
+import it.unisa.gp.model.interfaceDS.Tickets;
 
 /**
- * Servlet implementation class ServletClienti
+ * Servlet implementation class ServletTickets
  */
-@WebServlet("/ServletClienti")
-public class ServletClienti extends HttpServlet {
+@WebServlet("/ServletTickets")
+public class ServletTickets extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletClienti() {
+    public ServletTickets() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -40,63 +41,55 @@ public class ServletClienti extends HttpServlet {
 		out.println("<p> Ciao </p>");
 		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		Clienti abb = new ClientiDS(ds);
-		
-		ClientiBean bean = new ClientiBean("DNTFNC02A07L245L", "Francesco Paolo", "D'Antuono", LocalDate.of(2005, 1, 7), "francescopaolo177@gmail.com" , "admin" , "CpDant", 20, "Via Casa D'Auria 3", 53);
-		
-		
+		Tickets tic = new TicketsDS(ds);
+		TicketsBean bean = new TicketsBean(123,"VTLCRI01H12H703D","DNTFNC02A07L245X", CategoriaProbl.account, "ciao", LocalDateTime.of(2000,5,7,19,30));
+	
+		/*
 		try {
-			abb.doSave(bean);
+			tic.doSave(bean);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
+		*/
 		
+		try {
+			tic.doUpdate(bean, false, CategoriaProbl.pagamenti, "ciao", LocalDateTime.of(2000,6,8,19,56));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		
 		/*
 		try {
-			abb.doUpdate(bean,"Francesco Paolo", "D'Antuono", LocalDate.of(2002, 1, 7), "francescopaolo177@gmail.com", "admin", "CpDant", 25, "Via Casa D'Auria 3", 50);
+			tic.doDelete(bean.getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
-		
-		/*
+	
 		try {
-			abb.doDelete(bean.getCodiceFiscale());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		
-		/*
-		try {
-			bean = abb.doRetrieveByKey("DNTFNC02A07L245X");
+			bean = tic.doRetrieveByKey(123);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		out.println(bean.toString());
-		*/
-		
-		
-		
-		
-		Collection<ClientiBean> software = null;
+		out.println(bean.toString()); 	//print di debug
+	
+		Collection<TicketsBean> tick = null;
 
 		try {
-			software = (Collection<ClientiBean>) abb.doRetrieveAll("CODICE_FISCALE DESC");
+			tick = (Collection<TicketsBean>) tic.doRetrieveAll("ID ASC");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		out.println(software.toString());
-		
-		
+		out.println(tick.toString()); 
+		*/
+	
 	}
 
 	/**
