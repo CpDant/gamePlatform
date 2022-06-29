@@ -165,7 +165,7 @@ public class SupervisoreVideogiochiDS implements SupervisoreVideogiochi {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<SupervisoreVideogiochiBean> products = new LinkedList<SupervisoreVideogiochiBean>();
+		Collection<SupervisoreVideogiochiBean> array = new LinkedList<SupervisoreVideogiochiBean>();
 
 		String selectSQL = "SELECT * FROM " + SupervisoreVideogiochiDS.TABLE_NAME;
 		
@@ -188,7 +188,7 @@ public class SupervisoreVideogiochiDS implements SupervisoreVideogiochi {
 				sup.setEmail(rs.getString("EMAIL"));
 				sup.setPassWord(rs.getString("PASS_WORD"));
 				sup.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
-				products.add(sup);
+				array.add(sup);
 			}
 
 		} finally {
@@ -200,7 +200,7 @@ public class SupervisoreVideogiochiDS implements SupervisoreVideogiochi {
 					connection.close();
 			}
 		}
-		return products;
+		return array;
 	}
 
 }
