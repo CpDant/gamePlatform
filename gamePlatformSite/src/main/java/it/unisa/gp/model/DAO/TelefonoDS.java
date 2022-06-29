@@ -160,8 +160,8 @@ public class TelefonoDS implements Telefono{
 
 
 	@Override
-	public void doUpdate(TelefonoBean tel, String codiceFiscaleCliente) throws SQLException {
-		// TODO Auto-generated method stub
+	public synchronized void doUpdate(TelefonoBean tel, String codiceFiscaleCliente) throws SQLException {
+		// non implementato poiché inutile
 		
 	}
 
