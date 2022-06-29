@@ -1,7 +1,6 @@
 package it.unisa.gp.model.DAO;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,7 +61,7 @@ public class TicketsDS implements Tickets{
 		}
 	}
 
-	@Override	//manca enum categeoriaProb
+	@Override	
 	public synchronized void doUpdate(TicketsBean tic, boolean resolved, CategoriaProbl categoriaProbl,
 			String messaggio, LocalDateTime dataOra) throws SQLException {
 		

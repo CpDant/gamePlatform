@@ -42,24 +42,26 @@ public class ServletTickets extends HttpServlet {
 		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		Tickets tic = new TicketsDS(ds);
-		TicketsBean bean = new TicketsBean(123,"VTLCRI01H12H703D","DNTFNC02A07L245X", CategoriaProbl.account, "ciao", LocalDateTime.of(2000,5,7,19,30));
+		TicketsBean bean = new TicketsBean(54,"123de","DNTFNC02A07L245L", CategoriaProbl.account, "ciao", LocalDateTime.of(2000,5,7,19,30));
 	
-		/*
+		//funziona
 		try {
 			tic.doSave(bean);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
-		*/
 		
+		
+		/*//funziona
 		try {
-			tic.doUpdate(bean, false, CategoriaProbl.pagamenti, "ciao", LocalDateTime.of(2000,6,8,19,56));
+			tic.doUpdate(bean, false, CategoriaProbl.pagamenti, "bunogiorno", LocalDateTime.of(2000,6,8,21,56));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+		
+		*/
 		
 		/*
 		try {
@@ -68,7 +70,9 @@ public class ServletTickets extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 	
+		/*//funziona
 		try {
 			bean = tic.doRetrieveByKey(123);
 		} catch (SQLException e) {
@@ -77,7 +81,8 @@ public class ServletTickets extends HttpServlet {
 		}
 		
 		out.println(bean.toString()); 	//print di debug
-	
+		*/
+		
 		Collection<TicketsBean> tick = null;
 
 		try {
@@ -88,7 +93,7 @@ public class ServletTickets extends HttpServlet {
 		}
 		
 		out.println(tick.toString()); 
-		*/
+		
 	
 	}
 

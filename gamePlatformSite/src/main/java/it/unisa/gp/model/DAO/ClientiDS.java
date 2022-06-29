@@ -25,8 +25,7 @@ public class ClientiDS implements Clienti{
 		
 		System.out.println("Creazione DataSource...");
 	}
-	
-	
+		
 	
 	@Override
 	public synchronized void doSave(ClientiBean clienti) throws SQLException {
