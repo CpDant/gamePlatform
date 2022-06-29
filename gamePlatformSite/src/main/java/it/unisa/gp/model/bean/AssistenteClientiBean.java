@@ -1,7 +1,7 @@
 package it.unisa.gp.model.bean;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class AssistenteClientiBean implements Serializable {
@@ -10,27 +10,26 @@ public class AssistenteClientiBean implements Serializable {
 	private String codiceFiscale;
 	private String nome;
 	private String cognome;
-	private LocalDateTime dataNascita;
-	private final String ruolo;
+	private LocalDate dataNascita;
+	private final String RUOLO = "assCl";
 	private String email;
 	private String passWord;
     private int retribuzioneAnnuale;
-    private int ticket_da_risolvere;
-    private int ticket_risolti;
+    private int ticketDaRisolvere;
+    private int ticketRisolti;
 
-	public AssistenteClientiBean(String codiceFiscale, String nome, String cognome, LocalDateTime dataNascita, String ruolo,
-			String email, String passWord, int retribuzioneAnnuale, int ticket_da_risolvere, int ticket_risolti) {
+	public AssistenteClientiBean(String codiceFiscale, String nome, String cognome, LocalDate dataNascita,
+			String email, String passWord, int retribuzioneAnnuale) {
 		super();
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
-		this.ruolo = "assCl";
 		this.email = email;
 		this.passWord = passWord;
 		this.retribuzioneAnnuale = retribuzioneAnnuale;
-		this.ticket_da_risolvere = 0;
-		this.ticket_risolti = 0;
+		this.ticketDaRisolvere = 0;
+		this.ticketRisolti = 0;
 	}
     
 	public String getCodiceFiscale() {
@@ -51,10 +50,10 @@ public class AssistenteClientiBean implements Serializable {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-	public LocalDateTime getDataNascita() {
+	public LocalDate getDataNascita() {
 		return dataNascita;
 	}
-	public void setDataNascita(LocalDateTime dataNascita) {
+	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
 	public String getEmail() {
@@ -75,28 +74,28 @@ public class AssistenteClientiBean implements Serializable {
 	public void setRetribuzioneAnnuale(int retribuzioneAnnuale) {
 		this.retribuzioneAnnuale = retribuzioneAnnuale;
 	}
-	public int getTicket_da_risolvere() {
-		return ticket_da_risolvere;
+	public int getTicketDaRisolvere() {
+		return ticketDaRisolvere;
 	}
-	public void setTicket_da_risolvere(int ticket_da_risolvere) {
-		this.ticket_da_risolvere = ticket_da_risolvere;
+	public void setTicketDaRisolvere(int ticketDaRisolvere) {
+		this.ticketDaRisolvere = ticketDaRisolvere;
 	}
-	public int getTicket_risolti() {
-		return ticket_risolti;
+	public int getTicketRisolti() {
+		return ticketRisolti;
 	}
-	public void setTicket_risolti(int ticket_risolti) {
-		this.ticket_risolti = ticket_risolti;
+	public void setTicketRisolti(int ticketRisolti) {
+		this.ticketRisolti = ticketRisolti;
 	}
 
 	public String getRuolo() {
-		return ruolo;
+		return RUOLO;
 	}
 
 	public String toString() {
 		return "AssistenteClientiBean [codiceFiscale=" + codiceFiscale + ", nome=" + nome + ", cognome=" + cognome
-				+ ", dataNascita=" + dataNascita + ", ruolo=" + ruolo + ", email=" + email + ", passWord=" + passWord
-				+ ", retribuzioneAnnuale=" + retribuzioneAnnuale + ", ticket_da_risolvere=" + ticket_da_risolvere
-				+ ", ticket_risolti=" + ticket_risolti + "]";
+				+ ", dataNascita=" + dataNascita + ", ruolo=" + RUOLO + ", email=" + email + ", passWord=" + passWord
+				+ ", retribuzioneAnnuale=" + retribuzioneAnnuale + ", ticketDaRisolvere=" + ticketDaRisolvere
+				+ ", ticketRisolti=" + ticketRisolti + "]";
 	}
 
 	public boolean equals(Object obj) {
@@ -110,8 +109,8 @@ public class AssistenteClientiBean implements Serializable {
 		return Objects.equals(codiceFiscale, other.codiceFiscale) && Objects.equals(cognome, other.cognome)
 				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(email, other.email)
 				&& Objects.equals(nome, other.nome) && Objects.equals(passWord, other.passWord)
-				&& retribuzioneAnnuale == other.retribuzioneAnnuale && Objects.equals(ruolo, other.ruolo)
-				&& ticket_da_risolvere == other.ticket_da_risolvere && ticket_risolti == other.ticket_risolti;
+				&& retribuzioneAnnuale == other.retribuzioneAnnuale && Objects.equals(RUOLO, other.RUOLO)
+				&& ticketDaRisolvere == other.ticketDaRisolvere && ticketRisolti == other.ticketRisolti;
 	}
 	
 }

@@ -11,7 +11,7 @@ public class ClientiBean implements Serializable{
 	private String nome;
 	private String cognome;
 	private LocalDateTime dataNascita;
-	private final String ruolo;
+	private final String RUOLO = "cliente";
 	private String email;
 	private String passWord;
 	private String username;
@@ -19,7 +19,7 @@ public class ClientiBean implements Serializable{
     private String indFatt;
     private int numeroCartaPagam;
     
-	public ClientiBean(String codiceFiscale, String nome, String cognome, LocalDateTime dataNascita, String ruolo,
+	public ClientiBean(String codiceFiscale, String nome, String cognome, LocalDateTime dataNascita,
 			String email, String passWord, String username, int videogiochiFruibili, String indFatt,
 			int numeroCartaPagam) {
 		super();
@@ -27,7 +27,6 @@ public class ClientiBean implements Serializable{
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
-		this.ruolo = ruolo;
 		this.email = email;
 		this.passWord = passWord;
 		this.username = username;
@@ -48,7 +47,7 @@ public class ClientiBean implements Serializable{
 		this.numeroCartaPagam = numeroCartaPagam;
 	}
 	public String getRuolo() {
-		return ruolo;
+		return RUOLO;
 	}
 	public String getCodiceFiscale() {
 		return codiceFiscale;
@@ -101,7 +100,7 @@ public class ClientiBean implements Serializable{
 	
 	public String toString() {
 		return "ClientiBean [codiceFiscale=" + codiceFiscale + ", nome=" + nome + ", cognome=" + cognome
-				+ ", dataNascita=" + dataNascita + ", ruolo=" + ruolo + ", email=" + email + ", passWord=" + passWord
+				+ ", dataNascita=" + dataNascita + ", ruolo=" + RUOLO + ", email=" + email + ", passWord=" + passWord
 				+ ", username=" + username + ", videogiochiFruibili=" + videogiochiFruibili + ", indFatt=" + indFatt
 				+ ", numeroCartaPagam=" + numeroCartaPagam + "]";
 	}
@@ -118,7 +117,7 @@ public class ClientiBean implements Serializable{
 				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(email, other.email)
 				&& Objects.equals(indFatt, other.indFatt) && Objects.equals(nome, other.nome)
 				&& numeroCartaPagam == other.numeroCartaPagam && Objects.equals(passWord, other.passWord)
-				&& Objects.equals(ruolo, other.ruolo) && Objects.equals(username, other.username)
+				&& Objects.equals(RUOLO, other.RUOLO) && Objects.equals(username, other.username)
 				&& videogiochiFruibili == other.videogiochiFruibili;
 	}
 	

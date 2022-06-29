@@ -1,7 +1,7 @@
 package it.unisa.gp.model.bean;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class SupervisoreVideogiochiBean implements Serializable {
@@ -10,20 +10,19 @@ public class SupervisoreVideogiochiBean implements Serializable {
 	private String codiceFiscale;
 	private String nome;
 	private String cognome;
-	private LocalDateTime dataNascita;
-	private final String ruolo;
+	private LocalDate dataNascita;
+	private final String RUOLO = "supVid";
 	private String email;
 	private String passWord;
     private int retribuzioneAnnuale;
     
-	public SupervisoreVideogiochiBean(String codiceFiscale, String nome, String cognome, LocalDateTime dataNascita,
+	public SupervisoreVideogiochiBean(String codiceFiscale, String nome, String cognome, LocalDate dataNascita,
 			String email, String passWord, int retribuzioneAnnuale) {
 		super();
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
-		this.ruolo = "supVid";
 		this.email = email;
 		this.passWord = passWord;
 		this.retribuzioneAnnuale = retribuzioneAnnuale;
@@ -53,16 +52,16 @@ public class SupervisoreVideogiochiBean implements Serializable {
 		this.cognome = cognome;
 	}
 
-	public LocalDateTime getDataNascita() {
+	public LocalDate getDataNascita() {
 		return dataNascita;
 	}
 
-	public void setDataNascita(LocalDateTime dataNascita) {
+	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
 
 	public String getRuolo() {
-		return ruolo;
+		return RUOLO;
 	}
 
 	public String getEmail() {
@@ -91,7 +90,7 @@ public class SupervisoreVideogiochiBean implements Serializable {
 
 	public String toString() {
 		return "SupervisoreVideogiochiBean [codiceFiscale=" + codiceFiscale + ", nome=" + nome + ", cognome=" + cognome
-				+ ", dataNascita=" + dataNascita + ", ruolo=" + ruolo + ", email=" + email + ", passWord=" + passWord
+				+ ", dataNascita=" + dataNascita + ", ruolo=" + RUOLO + ", email=" + email + ", passWord=" + passWord
 				+ ", retribuzioneAnnuale=" + retribuzioneAnnuale + "]";
 	} 
 
@@ -106,7 +105,7 @@ public class SupervisoreVideogiochiBean implements Serializable {
 		return Objects.equals(codiceFiscale, other.codiceFiscale) && Objects.equals(cognome, other.cognome)
 				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(email, other.email)
 				&& Objects.equals(nome, other.nome) && Objects.equals(passWord, other.passWord)
-				&& retribuzioneAnnuale == other.retribuzioneAnnuale && Objects.equals(ruolo, other.ruolo);
+				&& retribuzioneAnnuale == other.retribuzioneAnnuale && Objects.equals(RUOLO, other.RUOLO);
 	}
     
 }

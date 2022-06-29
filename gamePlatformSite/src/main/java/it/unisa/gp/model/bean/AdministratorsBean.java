@@ -11,7 +11,7 @@ public class AdministratorsBean implements Serializable  {
 	private String nome;
 	private String cognome;
 	private LocalDateTime dataNascita;
-	private final String ruolo;
+	private final String RUOLO = "admin";
 	private String email;
 	private String passWord;
     private int retribuzioneAnnuale;
@@ -23,7 +23,6 @@ public class AdministratorsBean implements Serializable  {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
-		this.ruolo = "admin";
 		this.email = email;
 		this.passWord = passWord;
 		this.retribuzioneAnnuale = retribuzioneAnnuale;
@@ -62,7 +61,7 @@ public class AdministratorsBean implements Serializable  {
 	}
 
 	public String getRuolo() {
-		return ruolo;
+		return RUOLO;
 	}
 
 	public String getEmail() {
@@ -91,7 +90,7 @@ public class AdministratorsBean implements Serializable  {
 
 	public String toString() {
 		return "AdministratorsBean [codiceFiscale=" + codiceFiscale + ", nome=" + nome + ", cognome=" + cognome
-				+ ", dataNascita=" + dataNascita + ", ruolo=" + ruolo + ", email=" + email + ", passWord=" + passWord
+				+ ", dataNascita=" + dataNascita + ", ruolo=" + RUOLO + ", email=" + email + ", passWord=" + passWord
 				+ ", retribuzioneAnnuale=" + retribuzioneAnnuale + "]";
 	}
 
@@ -106,6 +105,6 @@ public class AdministratorsBean implements Serializable  {
 		return Objects.equals(codiceFiscale, other.codiceFiscale) && Objects.equals(cognome, other.cognome)
 				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(email, other.email)
 				&& Objects.equals(nome, other.nome) && Objects.equals(passWord, other.passWord)
-				&& retribuzioneAnnuale == other.retribuzioneAnnuale && Objects.equals(ruolo, other.ruolo);
+				&& retribuzioneAnnuale == other.retribuzioneAnnuale && Objects.equals(RUOLO, other.RUOLO);
 	}    
 }
