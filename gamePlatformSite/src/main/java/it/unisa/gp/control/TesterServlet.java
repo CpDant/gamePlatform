@@ -11,9 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.util.Collection;
+
+import it.unisa.gp.model.DAO.AbbonamentoDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
+import it.unisa.gp.model.DAO.VideogiocoDS;
+import it.unisa.gp.model.bean.AbbonamentoBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
+import it.unisa.gp.model.bean.VideogiocoBean;
+import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
+import it.unisa.gp.model.interfaceDS.Abbonamento;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
+import it.unisa.gp.model.interfaceDS.Videogioco;
 
 /**
  * Servlet implementation class TesterServlet
@@ -37,13 +45,12 @@ public class TesterServlet extends HttpServlet {
 		out.println("<p> Ciao </p>");
 
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		AssistenteClienti ass = new AssistenteClientiDS(ds);
-		AssistenteClientiBean bean = new AssistenteClientiBean("VTLCRIH703H10DEd", "Ciro", "Vitale", LocalDate.of(2001,06,12),
-				"ciro@email.it", "passwordTest", 10000);
+		Videogioco abb = new VideogiocoDS(ds);
+		VideogiocoBean bean = new VideogiocoBean(null,null,null,0,0,0,null);
 
 		/*
 		try {
-			ass.doSave(bean);
+			abb.doSave(bean);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,26 +59,26 @@ public class TesterServlet extends HttpServlet {
 
 		/*
 		try {
-			ass.doUpdate(bean,"Alfredo", "Cuozzo", LocalDate.of(2001,06,13),
-					"alf@email.it", "passwordTest1", 100001, 1, 5);
+			abb.doUpdate(bean, "rocket league", 100, Pegi.diciotto, 2006, 30);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		*/
-		/*
 		
+		/*
 		try {
-			ass.doDelete(bean.getCodiceFiscale());
+			abb.doDelete(bean.getNomeUnivoco());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		*/
-		/*
 		
+		
+		/*
 		try {
-			bean = ass.doRetrieveByKey("VTLCRI01H12H703D");
+			bean = abb.doRetrieveByKey("0asca966");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,19 +86,19 @@ public class TesterServlet extends HttpServlet {
 
 		out.println(bean.toString()); 	//print di debug
 		*/
-		/*
 		
-		Collection<AssistenteClientiBean> abbonament = null;
+		
+		Collection<VideogiocoBean> abbonament = null;
 
 		try {
-			abbonament = (Collection<AssistenteClientiBean>) ass.doRetrieveAll(null);
+			abbonament = (Collection<VideogiocoBean>) abb.doRetrieveAll(null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		out.println(abbonament.toString()); 
-		*/
+		 
 	}
 
 	/**
