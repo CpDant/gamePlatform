@@ -182,7 +182,7 @@ public class ClientiDS implements Clienti{
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<ClientiBean> clienti = new LinkedList<ClientiBean>();
+		Collection<ClientiBean> array = new LinkedList<ClientiBean>();
 
 		String selectSQL = "SELECT * FROM " + ClientiDS.TABLE_NAME;
 		
@@ -210,7 +210,7 @@ public class ClientiDS implements Clienti{
 				bean.setVideogiochiFruibili(rs.getInt("VIDEOGIOCHI_FRUIBILI"));
 				bean.setIndFatt(rs.getString("IND_FATT"));
 				bean.setNumeroCartaPagam(rs.getLong("NUMERO_CARTA_PAGAM"));
-				clienti.add(bean);
+				array.add(bean);
 			}
 
 		} finally {
@@ -222,7 +222,7 @@ public class ClientiDS implements Clienti{
 					connection.close();
 			}
 		}
-		return clienti;
+		return array;
 	}
 }
 

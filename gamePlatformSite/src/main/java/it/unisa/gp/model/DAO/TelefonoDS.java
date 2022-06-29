@@ -123,7 +123,7 @@ public class TelefonoDS implements Telefono{
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<TelefonoBean> telefono = new LinkedList<TelefonoBean>();
+		Collection<TelefonoBean> array = new LinkedList<TelefonoBean>();
 
 		String selectSQL = "SELECT * FROM " + TelefonoDS.TABLE_NAME;
 		
@@ -143,7 +143,7 @@ public class TelefonoDS implements Telefono{
 				
 				bean.setNumero(rs.getLong("NUMERO"));
 				bean.setCodiceFiscaleCliente(rs.getString("CODICE_FISCALE_CLIENTE"));
-				telefono.add(bean);
+				array.add(bean);
 			}
 
 		} finally {
@@ -155,7 +155,7 @@ public class TelefonoDS implements Telefono{
 					connection.close();
 			}
 		}
-		return telefono;
+		return array;
 	}
 
 

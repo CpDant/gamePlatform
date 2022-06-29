@@ -155,7 +155,7 @@ public class AziendaDS implements Azienda{
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<AziendaBean> aziende = new LinkedList<AziendaBean>();
+		Collection<AziendaBean> array = new LinkedList<AziendaBean>();
 
 		String selectSQL = "SELECT * FROM " + AziendaDS.TABLE_NAME;
 		
@@ -176,7 +176,7 @@ public class AziendaDS implements Azienda{
 				bean.setCodiceFiscaleCliente(rs.getString("CODICE_FISCALE_CLIENTE"));
 				bean.setSdi(rs.getString("SDI"));
 				bean.setPec(rs.getString("PEC"));
-				aziende.add(bean);
+				array.add(bean);
 			}
 
 		} finally {
@@ -188,7 +188,7 @@ public class AziendaDS implements Azienda{
 					connection.close();
 			}
 		}
-		return aziende;
+		return array;
 	}
 	
 }

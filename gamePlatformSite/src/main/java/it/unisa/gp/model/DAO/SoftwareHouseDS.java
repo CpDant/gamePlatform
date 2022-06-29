@@ -159,7 +159,7 @@ public class SoftwareHouseDS implements SoftwareHouse{
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<SoftwareHouseBean> softHouse = new LinkedList<SoftwareHouseBean>();
+		Collection<SoftwareHouseBean> array = new LinkedList<SoftwareHouseBean>();
 
 		String selectSQL = "SELECT * FROM " + SoftwareHouseDS.TABLE_NAME;
 		
@@ -181,7 +181,7 @@ public class SoftwareHouseDS implements SoftwareHouse{
 				bean.setLocazione(rs.getString("LOCAZIONE"));
 				Date date = rs.getDate("DATA_DI_FONDAZIONE");
 				bean.setDataDiFondazione(date.toLocalDate());
-				softHouse.add(bean);
+				array.add(bean);
 			}
 
 		} finally {
@@ -193,7 +193,7 @@ public class SoftwareHouseDS implements SoftwareHouse{
 					connection.close();
 			}
 		}
-		return softHouse;
+		return array;
 	}
 
 }

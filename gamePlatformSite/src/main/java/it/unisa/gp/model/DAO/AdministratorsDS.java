@@ -167,7 +167,7 @@ public class AdministratorsDS implements Administrators{
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<AdministratorsBean> amministratori = new LinkedList<AdministratorsBean>();
+		Collection<AdministratorsBean> array = new LinkedList<AdministratorsBean>();
 
 		String selectSQL = "SELECT * FROM " + AdministratorsDS.TABLE_NAME;
 
@@ -191,7 +191,7 @@ public class AdministratorsDS implements Administrators{
 				bean.setEmail(rs.getString("EMAIL"));
 				bean.setPassWord(rs.getString("PASS_WORD"));
 				bean.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
-				amministratori.add(bean);
+				array.add(bean);
 			}
 
 		} finally {
@@ -203,7 +203,7 @@ public class AdministratorsDS implements Administrators{
 					connection.close();
 			}
 		}
-		return amministratori;
+		return array;
 	}
 
 }

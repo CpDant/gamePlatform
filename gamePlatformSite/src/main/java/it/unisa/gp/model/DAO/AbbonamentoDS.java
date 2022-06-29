@@ -163,7 +163,7 @@ public class AbbonamentoDS implements Abbonamento{
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<AbbonamentoBean> products = new LinkedList<AbbonamentoBean>();
+		Collection<AbbonamentoBean> array = new LinkedList<AbbonamentoBean>();
 
 		String selectSQL = "SELECT * FROM " + AbbonamentoDS.TABLE_NAME;
 		
@@ -183,7 +183,7 @@ public class AbbonamentoDS implements Abbonamento{
 				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
 				bean.setCosto(rs.getInt("COSTO"));
 				bean.setDurata(rs.getInt("DURATA"));
-				products.add(bean);
+				array.add(bean);
 			}
 
 		} finally {
@@ -195,7 +195,7 @@ public class AbbonamentoDS implements Abbonamento{
 					connection.close();
 			}
 		}
-		return products;
+		return array;
 	}
 
 }
