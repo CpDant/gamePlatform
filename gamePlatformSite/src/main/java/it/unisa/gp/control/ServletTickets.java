@@ -81,7 +81,7 @@ public class ServletTickets extends HttpServlet {
 		}
 		
 		out.println(bean.toString()); 	//print di debug
-		*/
+		
 		
 		Collection<TicketsBean> tick = null;
 
@@ -93,7 +93,7 @@ public class ServletTickets extends HttpServlet {
 		}
 		
 		out.println(tick.toString()); 
-		
+		*/
 	
 	}
 
