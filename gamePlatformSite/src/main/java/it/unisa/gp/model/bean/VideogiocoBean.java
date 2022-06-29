@@ -11,11 +11,12 @@ public class VideogiocoBean implements Serializable {
     private String nomeVideogioco;
     private int dimensione;
     public  enum Pegi{tre,sette,dodici,sedici, diciotto};
+    private Pegi pegi;
     private int  annoDiProduzione;
     private int costo;
     
 	public VideogiocoBean(String codice, String nomeSoftwareHouse, String nomeVideogioco, int dimensione,
-			int annoDiProduzione, int costo) {
+			int annoDiProduzione, int costo, Pegi pegi) {
 		super();
 		this.codice = codice;
 		this.nomeSoftwareHouse = nomeSoftwareHouse;
@@ -23,12 +24,19 @@ public class VideogiocoBean implements Serializable {
 		this.dimensione = dimensione;
 		this.annoDiProduzione = annoDiProduzione;
 		this.costo = costo;
+		this.pegi = pegi;
 	}
 	public String getCodice() {
 		return codice;
 	}
 	public void setCodice(String codice) {
 		this.codice = codice;
+	}
+	public Pegi getPegi() {
+		return pegi;
+	}
+	public void setPegi(Pegi pegi) {
+		this.pegi = pegi;
 	}
 	public String getNomeSoftwareHouse() {
 		return nomeSoftwareHouse;
@@ -63,7 +71,7 @@ public class VideogiocoBean implements Serializable {
 
 	public String toString() {
 		return "VideogiocoBean [codice=" + codice + ", nomeSoftwareHouse=" + nomeSoftwareHouse + ", nomeVideogioco="
-				+ nomeVideogioco + ", dimensione=" + dimensione + ", annoDiProduzione=" + annoDiProduzione + ", costo="
+				+ nomeVideogioco + ", dimensione=" + dimensione + ", pegi=" + pegi +", annoDiProduzione=" + annoDiProduzione + ", costo="
 				+ costo + "]";
 	}
 
@@ -78,7 +86,8 @@ public class VideogiocoBean implements Serializable {
 		return annoDiProduzione == other.annoDiProduzione && Objects.equals(codice, other.codice)
 				&& costo == other.costo && dimensione == other.dimensione
 				&& Objects.equals(nomeSoftwareHouse, other.nomeSoftwareHouse)
-				&& Objects.equals(nomeVideogioco, other.nomeVideogioco);
+				&& Objects.equals(nomeVideogioco, other.nomeVideogioco)
+				&& Objects.equals(pegi, other.pegi);
 	}
 	
 }
