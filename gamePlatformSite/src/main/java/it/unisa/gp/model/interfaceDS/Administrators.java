@@ -2,10 +2,7 @@ package it.unisa.gp.model.interfaceDS;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.sql.*;
 import java.util.Collection;
-
-import it.unisa.gp.model.bean.AbbonamentoBean;
 import it.unisa.gp.model.bean.AdministratorsBean;
 
 public interface Administrators {

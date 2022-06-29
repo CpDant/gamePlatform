@@ -10,13 +10,8 @@ public class ClientiBean implements Serializable{
 	private String codiceFiscale;
 	private String nome;
 	private String cognome;
-<<<<<<< HEAD
-	private LocalDateTime dataNascita;
-	private final String RUOLO = "cliente";
-=======
 	private LocalDate dataNascita;
-	private final String ruolo;
->>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
+	private final String RUOLO = "cliente";
 	private String email;
 	private String passWord;
 	private String username;
@@ -24,11 +19,8 @@ public class ClientiBean implements Serializable{
     private String indFatt;
     private long numeroCartaPagam;
     
-<<<<<<< HEAD
-	public ClientiBean(String codiceFiscale, String nome, String cognome, LocalDateTime dataNascita,
-=======
+
 	public ClientiBean(String codiceFiscale, String nome, String cognome, LocalDate dataNascita,
->>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
 			String email, String passWord, String username, int videogiochiFruibili, String indFatt,
 			long numeroCartaPagam) {
 		super();
@@ -36,10 +28,6 @@ public class ClientiBean implements Serializable{
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dataNascita = dataNascita;
-<<<<<<< HEAD
-=======
-		this.ruolo = "cust";
->>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
 		this.email = email;
 		this.passWord = passWord;
 		this.username = username;

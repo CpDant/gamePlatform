@@ -139,7 +139,7 @@ public class ClientiDS implements Clienti{
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		ClientiBean bean = new ClientiBean(null,null,null,null,null,null,0,null,0);
+		ClientiBean bean = new ClientiBean(null,null,null,null,null,null,null,0,null,0);
 
 		String selectSQL = "SELECT * FROM " + ClientiDS.TABLE_NAME + " WHERE CODICE_FISCALE = ?";
 

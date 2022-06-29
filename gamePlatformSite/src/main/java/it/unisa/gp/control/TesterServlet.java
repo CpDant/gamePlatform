@@ -60,7 +60,7 @@ public class TesterServlet extends HttpServlet {
 		}
 		*/
 		/*
-		// funziona
+		
 		try {
 			ass.doDelete(bean.getCodiceFiscale());
 		} catch (SQLException e) {
@@ -69,7 +69,7 @@ public class TesterServlet extends HttpServlet {
 		}
 		*/
 		/*
-		// funziona
+		
 		try {
 			bean = ass.doRetrieveByKey("VTLCRI01H12H703D");
 		} catch (SQLException e) {
@@ -80,7 +80,7 @@ public class TesterServlet extends HttpServlet {
 		out.println(bean.toString()); 	//print di debug
 		*/
 		/*
-		// funziona
+		
 		Collection<AssistenteClientiBean> abbonament = null;
 
 		try {
