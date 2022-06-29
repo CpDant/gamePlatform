@@ -16,10 +16,7 @@ import it.unisa.gp.model.interfaceDS.Abbonamento;
 
 
 public class AbbonamentoDS implements Abbonamento{
-
-	
 	private static final String TABLE_NAME = "abbonamento";
-	
 	private DataSource ds = null;
 	
 

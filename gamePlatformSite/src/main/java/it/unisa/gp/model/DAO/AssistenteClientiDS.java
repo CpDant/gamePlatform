@@ -170,7 +170,7 @@ public class AssistenteClientiDS implements AssistenteClienti {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<AssistenteClientiBean> products = new LinkedList<AssistenteClientiBean>();
+		Collection<AssistenteClientiBean> array = new LinkedList<AssistenteClientiBean>();
 
 		String selectSQL = "SELECT * FROM " + AssistenteClientiDS.TABLE_NAME;
 		
@@ -195,7 +195,7 @@ public class AssistenteClientiDS implements AssistenteClienti {
 				ass.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
 				ass.setTicketDaRisolvere(rs.getInt("TICKET_DA_RISOLVERE"));
 				ass.setTicketRisolti(rs.getInt("TICKET_RISOLTI"));
-				products.add(ass);
+				array.add(ass);
 			}
 
 		} finally {
@@ -207,7 +207,7 @@ public class AssistenteClientiDS implements AssistenteClienti {
 					connection.close();
 			}
 		}
-		return products;
+		return array;
 	}
 
 }
