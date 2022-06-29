@@ -45,7 +45,6 @@ public class ServletClienti extends HttpServlet {
 		ClientiBean bean = new ClientiBean("DNTFNC02A07L245L", "Francesco Paolo", "D'Antuono", LocalDate.of(2005, 1, 7), "francescopaolo177@gmail.com" , "admin" , "CpDant", 20, "Via Casa D'Auria 3", 53);
 		
 		
-		
 		try {
 			abb.doSave(bean);
 		} catch (SQLException e) {

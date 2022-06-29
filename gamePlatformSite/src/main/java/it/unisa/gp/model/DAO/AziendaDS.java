@@ -9,37 +9,36 @@ import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
-import it.unisa.gp.model.bean.WishlistBean;
-import it.unisa.gp.model.interfaceDS.Wishlist;
+import it.unisa.gp.model.bean.AziendaBean;
+import it.unisa.gp.model.interfaceDS.Azienda;
 
-public class WishlistDS implements Wishlist{
+public class AziendaDS implements Azienda{
 
-	
-	private static final String TABLE_NAME = "wishlist";
+	private static final String TABLE_NAME = "azienda";
 	
 	private DataSource ds = null;
-	
 
-	public WishlistDS(DataSource ds) {
+	public AziendaDS(DataSource ds) {
 		this.ds = ds;
 		
 		System.out.println("Creazione DataSource...");
 	}
-	
-	
 	@Override
-	public synchronized void doSave(WishlistBean wish) throws SQLException {
+	public synchronized void doSave(AziendaBean azi) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
-		String insertSQL = "INSERT INTO " + WishlistDS.TABLE_NAME
-				+ " (CODICE_FISCALE_CLIENTE, N_PROD) VALUES (?, ?)";
+		String insertSQL = "INSERT INTO " + AziendaDS.TABLE_NAME
+				+ " (P_IVA, CODICE_FISCALE_CLIENTE, SDI, PEC) VALUES (?, ?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(insertSQL);
-			preparedStmt.setString(1, wish.getCodiceFiscaleCliente());
-			preparedStmt.setInt(2, wish.getnProd());
+			preparedStmt.setString(1, azi.getpIva());
+			preparedStmt.setString(2, azi.getCodiceFiscaleCliente());
+			preparedStmt.setString(3, azi.getSdi());
+			preparedStmt.setString(4, azi.getPec());
+			
 			preparedStmt.executeUpdate();
 
 			connection.setAutoCommit(false);
@@ -53,22 +52,23 @@ public class WishlistDS implements Wishlist{
 					connection.close();
 			}
 		}
-		
 	}
 
 	@Override
-	public synchronized void doUpdate(WishlistBean wish, int nProd) throws SQLException {
+	public synchronized void doUpdate(AziendaBean azi, String sdi, String pec) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
-		String updateSQL = "UPDATE " + WishlistDS.TABLE_NAME
-				+ " SET N_PROD = ?" + " WHERE CODICE_FISCALE_CLIENTE = ?";
+		String updateSQL = "UPDATE " + AziendaDS.TABLE_NAME
+				+ " SET SDI = ?, PEC = ?" + " WHERE P_IVA = ?";
 		
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(updateSQL);
-			preparedStmt.setInt(1, nProd);
-			preparedStmt.setString(2, wish.getCodiceFiscaleCliente());
+			preparedStmt.setString(1, sdi);
+			preparedStmt.setString(2, pec);
+			preparedStmt.setString(3, azi.getpIva());
+
 			preparedStmt.executeUpdate();
 
 			connection.setAutoCommit(false);
@@ -86,18 +86,18 @@ public class WishlistDS implements Wishlist{
 	}
 
 	@Override
-	public synchronized boolean doDelete(String name) throws SQLException {
+	public synchronized boolean doDelete(String pIva) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + WishlistDS.TABLE_NAME + " WHERE CODICE_FISCALE_CLIENTE = ?";
+		String deleteSQL = "DELETE FROM " + AziendaDS.TABLE_NAME + " WHERE P_IVA = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(deleteSQL);
-			preparedStmt.setString(1, name);
+			preparedStmt.setString(1, pIva);
 
 			result = preparedStmt.executeUpdate();
 
@@ -114,24 +114,27 @@ public class WishlistDS implements Wishlist{
 	}
 
 	@Override
-	public synchronized WishlistBean doRetrieveByKey(String name) throws SQLException {
+	public synchronized AziendaBean doRetrieveByKey(String pIva) throws SQLException {
+		
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		WishlistBean bean = new WishlistBean(null,0);
+		AziendaBean bean = new AziendaBean(null,null,null,null);
 
-		String selectSQL = "SELECT * FROM " + WishlistDS.TABLE_NAME + " WHERE CODICE_FISCALE_CLIENTE = ?";
+		String selectSQL = "SELECT * FROM " + AziendaDS.TABLE_NAME + " WHERE P_IVA = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(selectSQL);
-			preparedStmt.setString(1, name);
+			preparedStmt.setString(1, pIva);
+
 			ResultSet rs = preparedStmt.executeQuery();
 
 			while (rs.next()) {
+				bean.setpIva(rs.getString("P_IVA"));
 				bean.setCodiceFiscaleCliente(rs.getString("CODICE_FISCALE_CLIENTE"));
-				bean.setnProd(rs.getInt("N_PROD"));
-				
+				bean.setSdi(rs.getString("SDI"));
+				bean.setPec(rs.getString("PEC"));
 			}
 
 		} finally {
@@ -147,13 +150,14 @@ public class WishlistDS implements Wishlist{
 	}
 
 	@Override
-	public synchronized Collection<WishlistBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<AziendaBean> doRetrieveAll(String order) throws SQLException {
+		
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<WishlistBean> wish = new LinkedList<WishlistBean>();
+		Collection<AziendaBean> array = new LinkedList<AziendaBean>();
 
-		String selectSQL = "SELECT * FROM " + WishlistDS.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + AziendaDS.TABLE_NAME;
 		
 
 		if (order != null && !order.equals("")) {
@@ -167,11 +171,12 @@ public class WishlistDS implements Wishlist{
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while (rs.next()) {
-				WishlistBean bean = new WishlistBean(null,0);
-				
+				AziendaBean bean = new AziendaBean(null,null,null,null);
+				bean.setpIva(rs.getString("P_IVA"));
 				bean.setCodiceFiscaleCliente(rs.getString("CODICE_FISCALE_CLIENTE"));
-				bean.setnProd(rs.getInt("N_PROD"));
-				wish.add(bean);
+				bean.setSdi(rs.getString("SDI"));
+				bean.setPec(rs.getString("PEC"));
+				array.add(bean);
 			}
 
 		} finally {
@@ -183,7 +188,7 @@ public class WishlistDS implements Wishlist{
 					connection.close();
 			}
 		}
-		return wish;
+		return array;
 	}
-
+	
 }

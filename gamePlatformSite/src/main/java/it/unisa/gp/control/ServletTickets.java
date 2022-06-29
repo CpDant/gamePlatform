@@ -3,7 +3,7 @@ package it.unisa.gp.control;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,89 +14,82 @@ import javax.sql.DataSource;
 
 import java.util.Collection;
 
-import it.unisa.gp.model.DAO.SoftwareHouseDS;
-
-import it.unisa.gp.model.bean.SoftwareHouseBean;
-
-import it.unisa.gp.model.interfaceDS.SoftwareHouse;
+import it.unisa.gp.model.DAO.TicketsDS;
+import it.unisa.gp.model.bean.TicketsBean;
+import it.unisa.gp.model.bean.TicketsBean.CategoriaProbl;
+import it.unisa.gp.model.interfaceDS.Tickets;
 
 /**
- * Servlet implementation class ServletSoftwareHouse
+ * Servlet implementation class ServletTickets
  */
-@WebServlet("/ServletSoftwareHouse")
-public class ServletSoftwareHouse extends HttpServlet {
+@WebServlet("/ServletTickets")
+public class ServletTickets extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletSoftwareHouse() {
+    public ServletTickets() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		PrintWriter out = response.getWriter();
 		out.println("<p> Ciao </p>");
 		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		SoftwareHouse abb = new SoftwareHouseDS(ds);
-		
-		SoftwareHouseBean bean = new SoftwareHouseBean("ea sportss", "Canada", LocalDate.of(1987,12,22));
-		
+		Tickets tic = new TicketsDS(ds);
+		TicketsBean bean = new TicketsBean(123,"VTLCRI01H12H703D","DNTFNC02A07L245X", CategoriaProbl.account, "ciao", LocalDateTime.of(2000,5,7,19,30));
+	
 		/*
 		try {
-			abb.doSave(bean);
+			tic.doSave(bean);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
 		*/
+		
+		try {
+			tic.doUpdate(bean, false, CategoriaProbl.pagamenti, "ciao", LocalDateTime.of(2000,6,8,19,56));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		
 		/*
 		try {
-			abb.doUpdate(bean,"Brasie",LocalDate.of(2012, 2, 12));
+			tic.doDelete(bean.getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
-		
-		/*
+	
 		try {
-			abb.doDelete(bean.getNomeUnivoco());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		
-		/*
-		try {
-			bean = abb.doRetrieveByKey("ea sportsss");
+			bean = tic.doRetrieveByKey(123);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		out.println(bean.toString());
-		*/
-				
-		Collection<SoftwareHouseBean> software = null;
+		out.println(bean.toString()); 	//print di debug
+	
+		Collection<TicketsBean> tick = null;
 
 		try {
-			software = (Collection<SoftwareHouseBean>) abb.doRetrieveAll("NOME_UNIVOCO DESC");
+			tick = (Collection<TicketsBean>) tic.doRetrieveAll("ID ASC");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		out.println(software.toString());
-		
+		out.println(tick.toString()); 
+		*/
+	
 	}
 
 	/**
