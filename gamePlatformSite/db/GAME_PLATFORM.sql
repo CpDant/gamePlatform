@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS recensione(
     codice varchar(15) NOT NULL,
     data_ora_ins DATETIME NOT NULL,
     descrizione varchar(1000),
-    grado_di_apprezzamento enum('1','2','3','4','5') NOT NULL,
+    grado_di_apprezzamento enum('uno','due','tre','quattro','cinque') NOT NULL,
     PRIMARY KEY(codice_fiscale_cliente, codice),
     FOREIGN KEY(codice_fiscale_cliente) REFERENCES clienti(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(codice) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE
