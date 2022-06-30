@@ -33,7 +33,7 @@ public class ClientiDS implements Clienti{
 		PreparedStatement preparedStmt = null;
 		
 		String insertSQL = "INSERT INTO " + ClientiDS.TABLE_NAME
-				+ " (CODICE_FISCALE, NOME, COGNOME, DATA_NASCITA, RUOLO, EMAIL, PASS_WORD, USERNAME, VIDEOGIOCHI_FRUIBILI, IND_FATT, NUMERO_CARTA_PAGAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " (CODICE_FISCALE, NOME, COGNOME, DATA_NASCITA, RUOLO, EMAIL, PASS_WORD, USERNAME, VIDEOGIOCHI_FRUIBILI, IND_FATT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
@@ -48,7 +48,6 @@ public class ClientiDS implements Clienti{
 			preparedStmt.setString(8, clienti.getUsername());
 			preparedStmt.setInt(9, clienti.getVideogiochiFruibili());
 			preparedStmt.setString(10, clienti.getIndFatt());
-			preparedStmt.setLong(11, clienti.getNumeroCartaPagam());
 
 			preparedStmt.executeUpdate();
 
@@ -68,14 +67,14 @@ public class ClientiDS implements Clienti{
 
 	@Override
 	public synchronized void doUpdate(ClientiBean clienti, String nome, String cognome, LocalDate dataNascita,
-			String email, String passWord, String username, int vidFruibili, String indFatt, long numCartaPag)
+			String email, String passWord, String username, int vidFruibili, String indFatt)
 			throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
 		String updateSQL = "UPDATE " + ClientiDS.TABLE_NAME
-				+ " SET NOME = ?, COGNOME = ?, DATA_NASCITA = ?, EMAIL = ?, PASS_WORD = ?, USERNAME = ?, VIDEOGIOCHI_FRUIBILI = ?, IND_FATT = ?, NUMERO_CARTA_PAGAM = ?" + " WHERE CODICE_FISCALE = ?";
+				+ " SET NOME = ?, COGNOME = ?, DATA_NASCITA = ?, EMAIL = ?, PASS_WORD = ?, USERNAME = ?, VIDEOGIOCHI_FRUIBILI = ?, IND_FATT = ?" + " WHERE CODICE_FISCALE = ?";
 		
 		try {
 			connection = ds.getConnection();
@@ -88,8 +87,7 @@ public class ClientiDS implements Clienti{
 			preparedStmt.setString(6, username);
 			preparedStmt.setInt(7, vidFruibili);
 			preparedStmt.setString(8, indFatt);
-			preparedStmt.setLong(9, numCartaPag);
-			preparedStmt.setString(10, clienti.getCodiceFiscale());
+			preparedStmt.setString(9, clienti.getCodiceFiscale());
 			preparedStmt.executeUpdate();
 
 			connection.setAutoCommit(false);
@@ -138,7 +136,7 @@ public class ClientiDS implements Clienti{
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		ClientiBean bean = new ClientiBean(null,null,null,null,null,null,null,0,null,0);
+		ClientiBean bean = new ClientiBean(null,null,null,null,null,null,null,null);
 
 		String selectSQL = "SELECT * FROM " + ClientiDS.TABLE_NAME + " WHERE CODICE_FISCALE = ?";
 
@@ -161,7 +159,6 @@ public class ClientiDS implements Clienti{
 				bean.setUsername(rs.getString("USERNAME"));
 				bean.setVideogiochiFruibili(rs.getInt("VIDEOGIOCHI_FRUIBILI"));
 				bean.setIndFatt(rs.getString("IND_FATT"));
-				bean.setNumeroCartaPagam(rs.getLong("NUMERO_CARTA_PAGAM"));
 			}
 
 		} finally {
@@ -197,7 +194,7 @@ public class ClientiDS implements Clienti{
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while (rs.next()) {
-				ClientiBean bean = new ClientiBean(null,null,null,null,null,null,null,0,null,0);
+				ClientiBean bean = new ClientiBean(null,null,null,null,null,null,null,null);
 				bean.setCodiceFiscale(rs.getString("CODICE_FISCALE"));
 				bean.setNome(rs.getString("NOME"));
 				bean.setCognome(rs.getString("COGNOME"));
@@ -208,7 +205,6 @@ public class ClientiDS implements Clienti{
 				bean.setUsername(rs.getString("USERNAME"));
 				bean.setVideogiochiFruibili(rs.getInt("VIDEOGIOCHI_FRUIBILI"));
 				bean.setIndFatt(rs.getString("IND_FATT"));
-				bean.setNumeroCartaPagam(rs.getLong("NUMERO_CARTA_PAGAM"));
 				array.add(bean);
 			}
 

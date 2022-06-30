@@ -17,12 +17,10 @@ public class ClientiBean implements Serializable{
 	private String username;
     private int videogiochiFruibili;
     private String indFatt;
-    private long numeroCartaPagam;
     
 
 	public ClientiBean(String codiceFiscale, String nome, String cognome, LocalDate dataNascita,
-			String email, String passWord, String username, int videogiochiFruibili, String indFatt,
-			long numeroCartaPagam) {
+			String email, String passWord, String username, String indFatt) {
 		super();
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
@@ -31,21 +29,14 @@ public class ClientiBean implements Serializable{
 		this.email = email;
 		this.passWord = passWord;
 		this.username = username;
-		this.videogiochiFruibili = videogiochiFruibili;
+		this.videogiochiFruibili = 0;
 		this.indFatt = indFatt;
-		this.numeroCartaPagam = numeroCartaPagam;
 	}
 	public String getIndFatt() {
 		return indFatt;
 	}
 	public void setIndFatt(String indFatt) {
 		this.indFatt = indFatt;
-	}
-	public long getNumeroCartaPagam() {
-		return numeroCartaPagam;
-	}
-	public void setNumeroCartaPagam(long numeroCartaPagam) {
-		this.numeroCartaPagam = numeroCartaPagam;
 	}
 	public String getRuolo() {
 		return RUOLO;
@@ -103,7 +94,7 @@ public class ClientiBean implements Serializable{
 		return "ClientiBean [codiceFiscale=" + codiceFiscale + ", nome=" + nome + ", cognome=" + cognome
 				+ ", dataNascita=" + dataNascita + ", ruolo=" + RUOLO + ", email=" + email + ", passWord=" + passWord
 				+ ", username=" + username + ", videogiochiFruibili=" + videogiochiFruibili + ", indFatt=" + indFatt
-				+ ", numeroCartaPagam=" + numeroCartaPagam + "]";
+				+ "]";
 	}
 
 	public boolean equals(Object obj) {
@@ -117,7 +108,7 @@ public class ClientiBean implements Serializable{
 		return Objects.equals(codiceFiscale, other.codiceFiscale) && Objects.equals(cognome, other.cognome)
 				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(email, other.email)
 				&& Objects.equals(indFatt, other.indFatt) && Objects.equals(nome, other.nome)
-				&& numeroCartaPagam == other.numeroCartaPagam && Objects.equals(passWord, other.passWord)
+				&& Objects.equals(passWord, other.passWord)
 				&& Objects.equals(RUOLO, other.RUOLO) && Objects.equals(username, other.username)
 				&& videogiochiFruibili == other.videogiochiFruibili;
 	}
