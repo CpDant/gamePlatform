@@ -34,12 +34,25 @@ public class AcquistiDS implements Acquisti{
 	public synchronized void doSave(AcquistiBean acq) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
+		PreparedStatement preparedStmtIndFatt = null;
 		
 		String insertSQL = "INSERT INTO " + AcquistiDS.TABLE_NAME
 				+ " (ID, CODICE_RISCATTO, CODICE_FISCALE_CLIENTE, COSTO_IVA, COSTO_NETTO, DATA_ORA, IND_FATT, NUMERO_CARTA_PAGAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		
+		String indFattSQL = "SELECT IND_FATT FROM CLIENTI "
+				+ "WHERE CODICE_FISCALE = ?";
+		
 		try {
 			connection = ds.getConnection();
+			
+			preparedStmtIndFatt = connection.prepareStatement(indFattSQL);
+			preparedStmtIndFatt.setString(1, acq.getCodiceFiscaleCliente());
+			ResultSet rs = preparedStmtIndFatt.executeQuery();
+			String indFatt = null;
+			if(rs.next()) {
+				indFatt = rs.getString("IND_FATT");
+			}
+			
 			preparedStmt = connection.prepareStatement(insertSQL);
 			preparedStmt.setInt(1, acq.getId());
 			preparedStmt.setString(2, acq.getCodiceRiscatto());
@@ -47,7 +60,7 @@ public class AcquistiDS implements Acquisti{
 			preparedStmt.setInt(4, acq.getCostoIva());
 			preparedStmt.setInt(5, acq.getCostoNetto());
 			preparedStmt.setTimestamp(6, Timestamp.valueOf(acq.getDataOra()));
-			preparedStmt.setString(7, acq.getIndFatt());
+			preparedStmt.setString(7, indFatt);
 			preparedStmt.setLong(8, acq.getNumeroCartaPag());
 			preparedStmt.executeUpdate();
 
@@ -57,6 +70,8 @@ public class AcquistiDS implements Acquisti{
 			try {
 				if (preparedStmt != null)
 					preparedStmt.close();
+				if (preparedStmtIndFatt != null)
+					preparedStmtIndFatt.close();
 			} finally {
 				if (connection != null)
 					connection.close();
