@@ -42,7 +42,7 @@ public class ServletClienti extends HttpServlet {
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		Clienti abb = new ClientiDS(ds);
 		
-		ClientiBean bean = new ClientiBean("DNTFNC02A07L245L", "Francesco Paolo", "D'Antuono", LocalDate.of(2005, 1, 7), "francescopaolo177@gmail.com" ,"passwordBrutta", "CpDant", 20, "Via Casa D'Auria 3", 53);
+		ClientiBean bean = new ClientiBean("DNTFNC02A07L245L", "Francesco Paolo", "D'Antuono", LocalDate.of(2005, 1, 7), "francescopaolo177@gmail.com" ,"passwordBrutta", "CpDant", "Via Casa D'Auria 3");
 		
 		
 		try {

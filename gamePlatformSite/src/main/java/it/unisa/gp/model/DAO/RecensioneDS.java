@@ -27,7 +27,7 @@ public class RecensioneDS implements Recensione{
 	}
 	
 	@Override
-	public void doSave(RecensioneBean rec) throws SQLException {
+	public synchronized void doSave(RecensioneBean rec) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
@@ -59,7 +59,7 @@ public class RecensioneDS implements Recensione{
 	}
 
 	@Override
-	public void doUpdate(RecensioneBean rec, LocalDateTime dataOraIns, String descrizione, Grado gradoDiApprezzamento)
+	public synchronized void doUpdate(RecensioneBean rec, LocalDateTime dataOraIns, String descrizione, Grado gradoDiApprezzamento)
 			throws SQLException {
 		
 		Connection connection = null;
@@ -93,7 +93,7 @@ public class RecensioneDS implements Recensione{
 	}
 
 	@Override
-	public boolean doDelete(String codiceFiscaleCliente, String codice) throws SQLException {
+	public synchronized boolean doDelete(String codiceFiscaleCliente, String codice) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -122,7 +122,7 @@ public class RecensioneDS implements Recensione{
 	}
 
 	@Override
-	public RecensioneBean doRetrieveByKey(String codiceFiscaleCliente, String codice) throws SQLException {
+	public synchronized RecensioneBean doRetrieveByKey(String codiceFiscaleCliente, String codice) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
@@ -160,7 +160,7 @@ public class RecensioneDS implements Recensione{
 	}
 
 	@Override
-	public Collection<RecensioneBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<RecensioneBean> doRetrieveAll(String order) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;

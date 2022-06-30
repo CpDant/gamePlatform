@@ -9,38 +9,37 @@ import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
-import it.unisa.gp.model.bean.DispositivoBean;
-import it.unisa.gp.model.interfaceDS.Dispositivo;
+import it.unisa.gp.model.bean.PresenteInBean;
+import it.unisa.gp.model.interfaceDS.PresenteIn;
 
-public class DispositivoDS implements Dispositivo{
+public class PresenteInDS implements PresenteIn{
 
-	
-	private static final String TABLE_NAME = "dispositivo";
+	private static final String TABLE_NAME = "presente_in";
 	
 	private DataSource ds = null;
 	
 
-	public DispositivoDS(DataSource ds) {
+	public PresenteInDS(DataSource ds) {
 		this.ds = ds;
 		
 		System.out.println("Creazione DataSource...");
 	}
 	
 	
-	
 	@Override
-	public synchronized void doSave(DispositivoBean disp) throws SQLException {
+	public synchronized void doSave(PresenteInBean pres) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
-		String insertSQL = "INSERT INTO " + DispositivoDS.TABLE_NAME
-				+ " (NOME, CODICE_VIDEOGIOCO) VALUES (?, ?)";
+		String insertSQL = "INSERT INTO " + PresenteInDS.TABLE_NAME
+				+ " (NOME_UNIVOCO, CODICE_VIDEOGIOCO) VALUES (?, ?)";
 		
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(insertSQL);
-			preparedStmt.setString(1, disp.getNome());
-			preparedStmt.setString(2, disp.getCodiceVideogioco());
+			preparedStmt.setString(1, pres.getNomeUnivoco());
+			preparedStmt.setString(2, pres.getCodiceVidoegioco());
+
 			preparedStmt.executeUpdate();
 
 			connection.setAutoCommit(false);
@@ -58,19 +57,19 @@ public class DispositivoDS implements Dispositivo{
 	}
 
 	@Override
-	public synchronized boolean doDelete(String name, String cod) throws SQLException {
+	public synchronized boolean doDelete(String name, String codice) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + DispositivoDS.TABLE_NAME + " WHERE NOME = ? AND CODICE_VIDEOGIOCO = ?";
+		String deleteSQL = "DELETE FROM " + PresenteInDS.TABLE_NAME + " WHERE NOME_UNIVOCO = ? AND CODICE_VIDEOGIOCO = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(deleteSQL);
 			preparedStmt.setString(1, name);
-			preparedStmt.setString(2, cod);
+			preparedStmt.setString(2, codice);
 
 			result = preparedStmt.executeUpdate();
 
@@ -87,24 +86,26 @@ public class DispositivoDS implements Dispositivo{
 	}
 
 	@Override
-	public synchronized DispositivoBean doRetrieveByKey(String name, String cod) throws SQLException {
+	public synchronized PresenteInBean doRetrieveByKey(String name, String codice) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		DispositivoBean bean = new DispositivoBean(null,null);
+		PresenteInBean bean = new PresenteInBean(null,null);
 
-		String selectSQL = "SELECT * FROM " + DispositivoDS.TABLE_NAME + " WHERE NOME = ? AND CODICE_VIDEOGIOCO = ?";
+		String selectSQL = "SELECT * FROM " + PresenteInDS.TABLE_NAME + " WHERE NOME_UNIVOCO = ? AND CODICE_VIDEOGIOCO = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(selectSQL);
 			preparedStmt.setString(1, name);
-			preparedStmt.setString(2, cod);
+			preparedStmt.setString(2, codice);
+
 			ResultSet rs = preparedStmt.executeQuery();
 
 			while (rs.next()) {
-				bean.setNome(rs.getString("NOME"));
-				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
+				bean.setCodiceVidoegioco(rs.getString("CODICE_VIDEOGIOCO"));
+				
 			}
 
 		} finally {
@@ -120,13 +121,13 @@ public class DispositivoDS implements Dispositivo{
 	}
 
 	@Override
-	public synchronized Collection<DispositivoBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<PresenteInBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<DispositivoBean> disp = new LinkedList<DispositivoBean>();
+		Collection<PresenteInBean> array = new LinkedList<PresenteInBean>();
 
-		String selectSQL = "SELECT * FROM " + DispositivoDS.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + PresenteInDS.TABLE_NAME;
 		
 
 		if (order != null && !order.equals("")) {
@@ -140,11 +141,11 @@ public class DispositivoDS implements Dispositivo{
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while (rs.next()) {
-				DispositivoBean bean = new DispositivoBean(null,null);
+				PresenteInBean bean = new PresenteInBean(null,null);
 				
-				bean.setNome(rs.getString("NOME"));
-				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
-				disp.add(bean);
+				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
+				bean.setCodiceVidoegioco(rs.getString("CODICE_VIDEOGIOCO"));
+				array.add(bean);
 			}
 
 		} finally {
@@ -156,7 +157,7 @@ public class DispositivoDS implements Dispositivo{
 					connection.close();
 			}
 		}
-		return disp;
+		return array;
 	}
 
 }
