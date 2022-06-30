@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,14 +15,23 @@ import javax.sql.DataSource;
 import java.util.Collection;
 
 import it.unisa.gp.model.DAO.AbbonamentoDS;
+import it.unisa.gp.model.DAO.AcquistiDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
+import it.unisa.gp.model.DAO.ClientiDS;
+import it.unisa.gp.model.DAO.FatturaDS;
 import it.unisa.gp.model.DAO.VideogiocoDS;
 import it.unisa.gp.model.bean.AbbonamentoBean;
+import it.unisa.gp.model.bean.AcquistiBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
+import it.unisa.gp.model.bean.ClientiBean;
+import it.unisa.gp.model.bean.FatturaBean;
 import it.unisa.gp.model.bean.VideogiocoBean;
 import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
 import it.unisa.gp.model.interfaceDS.Abbonamento;
+import it.unisa.gp.model.interfaceDS.Acquisti;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
+import it.unisa.gp.model.interfaceDS.Clienti;
+import it.unisa.gp.model.interfaceDS.Fattura;
 import it.unisa.gp.model.interfaceDS.Videogioco;
 
 /**
@@ -45,12 +56,10 @@ public class TesterServlet extends HttpServlet {
 		out.println("<p> Ciao </p>");
 
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		Videogioco abb = new VideogiocoDS(ds);
-		VideogiocoBean bean = new VideogiocoBean(null,null,null,0,0,0,null);
-
+		Fattura fat = new FatturaDS(ds);
 		/*
 		try {
-			abb.doSave(bean);
+			fat.doSave(123, LocalDateTime.now());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,17 +68,8 @@ public class TesterServlet extends HttpServlet {
 
 		/*
 		try {
-			abb.doUpdate(bean, "rocket league", 100, Pegi.diciotto, 2006, 30);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		
-		/*
-		/*
-		try {
-			abb.doDelete(bean.getNomeUnivoco());
+			FatturaBean bean = new FatturaBean(123, 1, 0, 0, null, null);
+			fat.doUpdate(bean, 10, 10000, LocalDateTime.now(), "Via indFFFFFF");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,9 +77,19 @@ public class TesterServlet extends HttpServlet {
 		*/
 		
 		
-		/*
+		
 		try {
-			bean = abb.doRetrieveByKey("0asca966");
+			fat.doDelete(123, 1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		/*
+		FatturaBean bean = null;
+		try {
+			bean = fat.doRetrieveByKey(123, 1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,17 +98,17 @@ public class TesterServlet extends HttpServlet {
 		out.println(bean.toString()); 	//print di debug
 		*/
 		
-		
-		Collection<VideogiocoBean> abbonament = null;
+		/*
+		Collection<FatturaBean> abbonament = null;
 
 		try {
-			abbonament = (Collection<VideogiocoBean>) abb.doRetrieveAll(null);
+			abbonament = (Collection<FatturaBean>) fat.doRetrieveAll(null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		out.println(abbonament.toString()); 
+		*/
 		 
 	}
 
