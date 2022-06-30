@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS clienti(
     nome varchar(20) NOT NULL,
 	cognome varchar(20) NOT NULL,
     data_nascita DATE NOT NULL,
-    ruolo varchar(7) DEFAULT "cliente",
+    ruolo varchar(8) DEFAULT "cliente",
     email varchar(50) NOT NULL,
     pass_word char(40) NOT NULL,
 	username varchar(15) NOT NULL,
