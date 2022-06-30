@@ -13,9 +13,9 @@ public interface Recensione {
 	
 	public void doUpdate(RecensioneBean rec, LocalDateTime dataOraIns, String descrizione, Grado gradoDiApprezzamento) throws SQLException;
 
-	public boolean doDelete(long numero) throws SQLException;
+	public boolean doDelete(String codiceFiscaleCliente,  String codice) throws SQLException;
 
-	public RecensioneBean doRetrieveByKey(long numero) throws SQLException;
+	public RecensioneBean doRetrieveByKey(String codiceFiscaleCliente,  String codice) throws SQLException;
 	
 	public Collection<RecensioneBean> doRetrieveAll(String order) throws SQLException;
 }

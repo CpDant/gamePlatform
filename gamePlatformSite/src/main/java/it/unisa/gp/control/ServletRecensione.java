@@ -3,7 +3,8 @@ package it.unisa.gp.control;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Collection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,91 +13,86 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import java.util.Collection;
+import it.unisa.gp.model.DAO.RecensioneDS;
+import it.unisa.gp.model.bean.RecensioneBean;
+import it.unisa.gp.model.bean.RecensioneBean.Grado;
+import it.unisa.gp.model.interfaceDS.Recensione;
 
-import it.unisa.gp.model.DAO.SoftwareHouseDS;
-
-import it.unisa.gp.model.bean.SoftwareHouseBean;
-
-import it.unisa.gp.model.interfaceDS.SoftwareHouse;
 
 /**
- * Servlet implementation class ServletSoftwareHouse
+ * Servlet implementation class ServletRecensione
  */
-@WebServlet("/ServletSoftwareHouse")
-public class ServletSoftwareHouse extends HttpServlet {
+@WebServlet("/ServletRecensione")
+public class ServletRecensione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletSoftwareHouse() {
+    public ServletRecensione() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		PrintWriter out = response.getWriter();
 		out.println("<p> Ciao </p>");
 		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		SoftwareHouse abb = new SoftwareHouseDS(ds);
+		Recensione rec = new RecensioneDS(ds);
+		RecensioneBean bean = new RecensioneBean("DNTFNC02A07L245L", "1234C", LocalDateTime.of(2022,1,2,10,15), "complimenti", Grado.uno);
 		
-		SoftwareHouseBean bean = new SoftwareHouseBean("ea sportss", "Canada", LocalDate.of(1987,12,22));
-		
-		/*
+		/*//funziona
 		try {
-			abb.doSave(bean);
+			rec.doSave(bean);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
 		
-		
-		/*
+		//funziona
 		try {
-			abb.doUpdate(bean,"Brasie",LocalDate.of(2012, 2, 12));
+			rec.doUpdate(bean, LocalDateTime.of(2021,1,2,10,16), "Dovete mettere nuovi aggiornamenti", Grado.quattro);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
-		
-		/*
-		try {
-			abb.doDelete(bean.getNomeUnivoco());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		
-		/*
-		try {
-			bean = abb.doRetrieveByKey("ea sportsss");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		out.println(bean.toString());
-		*/
+		 
 				
-		Collection<SoftwareHouseBean> software = null;
-
+		//funziona
 		try {
-			software = (Collection<SoftwareHouseBean>) abb.doRetrieveAll("NOME_UNIVOCO DESC");
+			rec.doDelete(bean.getCodiceFiscaleCliente(),bean.getCodice());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		out.println(software.toString());
 		
+		//funziona
+		try {
+			bean = rec.doRetrieveByKey("DNTFNC02A07L245L","1234C");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		out.println(bean.toString()); 	//print di debug
+		
+		// funziona
+		Collection<RecensioneBean> array = null;
+		
+		try {
+			array = (Collection<RecensioneBean>) rec.doRetrieveAll("CODICE_FISCALE_CLIENTE ASC");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		out.println(array.toString()); 
+		*/	
 	}
 
 	/**
