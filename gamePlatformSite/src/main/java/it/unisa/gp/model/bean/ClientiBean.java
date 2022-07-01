@@ -15,7 +15,6 @@ public class ClientiBean implements Serializable{
 	private String email;
 	private String passWord;
 	private String username;
-    private int videogiochiFruibili;
     private String indFatt;
     
 
@@ -29,7 +28,6 @@ public class ClientiBean implements Serializable{
 		this.email = email;
 		this.passWord = passWord;
 		this.username = username;
-		this.videogiochiFruibili = 0;
 		this.indFatt = indFatt;
 	}
 	public String getIndFatt() {
@@ -83,17 +81,12 @@ public class ClientiBean implements Serializable{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public int getVideogiochiFruibili() {
-		return videogiochiFruibili;
-	}
-	public void setVideogiochiFruibili(int videogiochiFruibili) {
-		this.videogiochiFruibili = videogiochiFruibili;
-	}
+	
 	
 	public String toString() {
 		return "ClientiBean [codiceFiscale=" + codiceFiscale + ", nome=" + nome + ", cognome=" + cognome
 				+ ", dataNascita=" + dataNascita + ", ruolo=" + RUOLO + ", email=" + email + ", passWord=" + passWord
-				+ ", username=" + username + ", videogiochiFruibili=" + videogiochiFruibili + ", indFatt=" + indFatt
+				+ ", username=" + username + ", indFatt=" + indFatt
 				+ "]";
 	}
 
@@ -109,8 +102,7 @@ public class ClientiBean implements Serializable{
 				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(email, other.email)
 				&& Objects.equals(indFatt, other.indFatt) && Objects.equals(nome, other.nome)
 				&& Objects.equals(passWord, other.passWord)
-				&& Objects.equals(RUOLO, other.RUOLO) && Objects.equals(username, other.username)
-				&& videogiochiFruibili == other.videogiochiFruibili;
+				&& Objects.equals(RUOLO, other.RUOLO) && Objects.equals(username, other.username);
 	}
 	
 }

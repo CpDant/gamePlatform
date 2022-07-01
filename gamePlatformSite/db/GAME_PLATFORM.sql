@@ -78,7 +78,6 @@ CREATE TABLE IF NOT EXISTS clienti(
     email varchar(50) NOT NULL,
     pass_word char(40) NOT NULL,
 	username varchar(15) NOT NULL,
-    videogiochi_fruibili int DEFAULT 0,
     ind_fatt varchar(50),
     PRIMARY KEY(codice_fiscale)
 );
@@ -120,13 +119,6 @@ CREATE TABLE IF NOT EXISTS azienda(
     sdi varchar(10) NOT NULL,
     pec varchar(50) NOT NULL,
     PRIMARY KEY(p_iva),
-    FOREIGN KEY(codice_fiscale_cliente) REFERENCES clienti(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS wishlist(
-	codice_fiscale_cliente char(16) NOT NULL,
-    n_prod int NOT NULL,
-    PRIMARY KEY(codice_fiscale_cliente),
     FOREIGN KEY(codice_fiscale_cliente) REFERENCES clienti(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -256,22 +248,6 @@ CREATE TABLE IF NOT EXISTS presente_in(
     FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS wish_contiene_vid(
-	codice_fiscale_cliente char(16) NOT NULL,
-    codice_videogioco varchar(15) NOT NULL,
-    PRIMARY KEY(codice_fiscale_cliente, codice_videogioco),
-    FOREIGN KEY(codice_fiscale_cliente) REFERENCES clienti(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS wish_contiene_abb(
-	codice_fiscale_cliente char(16) NOT NULL,
-    nome_univoco_abb varchar(20) NOT NULL,    
-    PRIMARY KEY(codice_fiscale_cliente, nome_univoco_abb),
-    FOREIGN KEY(codice_fiscale_cliente) REFERENCES clienti(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE NO ACTION
-);
-
 CREATE TABLE IF NOT EXISTS acq_contiene_vid(
 	id int NOT NULL,
     codice_videogioco varchar(15) NOT NULL,
@@ -284,6 +260,6 @@ CREATE TABLE IF NOT EXISTS acq_contiene_abb(
 	id int NOT NULL,
     nome_univoco_abb varchar(20) NOT NULL, 
     PRIMARY KEY(id, nome_univoco_abb),
-   FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE NO ACTION,
+    FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE NO ACTION,
     FOREIGN KEY(id) REFERENCES acquisti(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
