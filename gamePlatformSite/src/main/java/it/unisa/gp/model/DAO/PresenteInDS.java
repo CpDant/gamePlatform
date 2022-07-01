@@ -38,7 +38,7 @@ public class PresenteInDS implements PresenteIn{
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(insertSQL);
 			preparedStmt.setString(1, pres.getNomeUnivoco());
-			preparedStmt.setString(2, pres.getCodiceVidoegioco());
+			preparedStmt.setString(2, pres.getCodiceVideogioco());
 
 			preparedStmt.executeUpdate();
 
@@ -104,7 +104,7 @@ public class PresenteInDS implements PresenteIn{
 
 			while (rs.next()) {
 				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
-				bean.setCodiceVidoegioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
 				
 			}
 
@@ -144,7 +144,7 @@ public class PresenteInDS implements PresenteIn{
 				PresenteInBean bean = new PresenteInBean(null,null);
 				
 				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
-				bean.setCodiceVidoegioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
 				array.add(bean);
 			}
 

@@ -7,12 +7,12 @@ public class PresenteInBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private String nomeUnivoco;
-	private String codiceVidoegioco;
+	private String codiceVideogioco;
 	
-	public PresenteInBean(String nomeUnivoco, String codiceVidoegioco) {
+	public PresenteInBean(String nomeUnivoco, String codiceVideogioco) {
 		super();
 		this.nomeUnivoco = nomeUnivoco;
-		this.codiceVidoegioco = codiceVidoegioco;
+		this.codiceVideogioco = codiceVideogioco;
 	}
 
 	public String getNomeUnivoco() {
@@ -23,16 +23,16 @@ public class PresenteInBean implements Serializable{
 		this.nomeUnivoco = nomeUnivoco;
 	}
 
-	public String getCodiceVidoegioco() {
-		return codiceVidoegioco;
+	public String getCodiceVideogioco() {
+		return codiceVideogioco;
 	}
 
-	public void setCodiceVidoegioco(String codiceVidoegioco) {
-		this.codiceVidoegioco = codiceVidoegioco;
+	public void setCodiceVideogioco(String codiceVideogioco) {
+		this.codiceVideogioco = codiceVideogioco;
 	}
 
 	public String toString() {
-		return "PresenteInBean [nomeUnivoco=" + nomeUnivoco + ", codiceVidoegioco=" + codiceVidoegioco + "]";
+		return "PresenteInBean [nomeUnivoco=" + nomeUnivoco + ", codiceVidoegioco=" + codiceVideogioco + "]";
 	}
 
 	public boolean equals(Object obj) {
@@ -43,7 +43,7 @@ public class PresenteInBean implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		PresenteInBean other = (PresenteInBean) obj;
-		return Objects.equals(codiceVidoegioco, other.codiceVidoegioco)
+		return Objects.equals(codiceVideogioco, other.codiceVideogioco)
 				&& Objects.equals(nomeUnivoco, other.nomeUnivoco);
 	}
 	
