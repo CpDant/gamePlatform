@@ -41,9 +41,9 @@ public class ServletAbbonamento extends HttpServlet {
 		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		Abbonamento abb = new AbbonamentoDS(ds);
-		AbbonamentoBean bean = new AbbonamentoBean("alfredoo cuozzo",30,50);
+		AbbonamentoBean bean = new AbbonamentoBean("donato cuozzo",30,50);
 		
-	/*	
+	
 		try {
 			abb.doSave(bean);
 		} catch (SQLException e) {
@@ -51,7 +51,7 @@ public class ServletAbbonamento extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
+		/*
 		try {
 			abb.doUpdate(bean,45,67);
 		} catch (SQLException e) {
@@ -79,7 +79,7 @@ public class ServletAbbonamento extends HttpServlet {
 		
 		out.println(bean.toString()); 	//print di debug
 		
-		*/
+		
 		// funziona
 		Collection<AbbonamentoBean> abbonament = null;
 	
@@ -91,7 +91,7 @@ public class ServletAbbonamento extends HttpServlet {
 		}
 		
 		out.println(abbonament.toString()); 
-	
+	*/
 	}
 
 	/**
