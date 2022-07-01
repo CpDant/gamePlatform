@@ -9,34 +9,34 @@ import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
-import it.unisa.gp.model.bean.RemVideogBean;
-import it.unisa.gp.model.interfaceDS.RemVideog;
+import it.unisa.gp.model.bean.ModVideogBean;
+import it.unisa.gp.model.interfaceDS.ModVideog;
 
-public class RemVideogDS implements RemVideog{
+public class ModVideogDS implements ModVideog {
 
-	private static final String TABLE_NAME = "rem_videog";
+	private static final String TABLE_NAME = "mod_videog";
 	
 	private DataSource ds = null;
 	
-	public RemVideogDS(DataSource ds) {
+	public ModVideogDS(DataSource ds) {
 		this.ds = ds;
 		
-		System.out.println("Creazione DataSource...");
+		System.out.println("Creazione DataSource...");	
 	}
 	
 	@Override
-	public void doSave(RemVideogBean rem) throws SQLException {
+	public void doSave(ModVideogBean mod) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
-		String insertSQL = "INSERT INTO " + RemVideogDS.TABLE_NAME
+		String insertSQL = "INSERT INTO " + ModVideogDS.TABLE_NAME
 				+ " (CODICE_FISCALE_SUP_VID, CODICE_VIDEOGIOCO) VALUES (?, ?)";
 		
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(insertSQL);
-			preparedStmt.setString(1, rem.getCodiceFiscaleSupVid());
-			preparedStmt.setString(2, rem.getCodiceVideogioco());
+			preparedStmt.setString(1, mod.getCodiceFiscaleSupVid());
+			preparedStmt.setString(2, mod.getCodiceVideogioco());
 
 			preparedStmt.executeUpdate();
 
@@ -60,7 +60,7 @@ public class RemVideogDS implements RemVideog{
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + RemVideogDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_VIDEOGIOCO = ?";
+		String deleteSQL = "DELETE FROM " + ModVideogDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_VIDEOGIOCO = ?";
 
 		try {
 			connection = ds.getConnection();
@@ -83,13 +83,13 @@ public class RemVideogDS implements RemVideog{
 	}
 
 	@Override
-	public RemVideogBean doRetrieveByKey(String codiceFiscaleSupVid, String codiceVideogioco) throws SQLException {
+	public ModVideogBean doRetrieveByKey(String codiceFiscaleSupVid, String codiceVideogioco) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		RemVideogBean bean = new RemVideogBean(null,null);
+		ModVideogBean bean = new ModVideogBean(null,null);
 
-		String selectSQL = "SELECT * FROM " + RemVideogDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_VIDEOGIOCO = ?";
+		String selectSQL = "SELECT * FROM " + ModVideogDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_VIDEOGIOCO = ?";
 
 		try {
 			connection = ds.getConnection();
@@ -117,13 +117,13 @@ public class RemVideogDS implements RemVideog{
 	}
 
 	@Override
-	public Collection<RemVideogBean> doRetrieveAll(String order) throws SQLException {
+	public Collection<ModVideogBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<RemVideogBean> array = new LinkedList<RemVideogBean>();
+		Collection<ModVideogBean> array = new LinkedList<ModVideogBean>();
 
-		String selectSQL = "SELECT * FROM " + RemVideogDS.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + ModVideogDS.TABLE_NAME;
 		
 
 		if (order != null && !order.equals("")) {
@@ -137,7 +137,7 @@ public class RemVideogDS implements RemVideog{
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while (rs.next()) {
-				RemVideogBean bean = new RemVideogBean(null,null);
+				ModVideogBean bean = new ModVideogBean(null,null);
 				bean.setCodiceFiscaleSupVid(rs.getString("CODICE_FISCALE_SUP_VID"));
 				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
 				array.add(bean);
@@ -153,7 +153,6 @@ public class RemVideogDS implements RemVideog{
 			}
 		}
 		return array;
-		
 	}
 
 }
