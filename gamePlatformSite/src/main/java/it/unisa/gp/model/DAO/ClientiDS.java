@@ -33,7 +33,7 @@ public class ClientiDS implements Clienti{
 		PreparedStatement preparedStmt = null;
 		
 		String insertSQL = "INSERT INTO " + ClientiDS.TABLE_NAME
-				+ " (CODICE_FISCALE, NOME, COGNOME, DATA_NASCITA, RUOLO, EMAIL, PASS_WORD, USERNAME, VIDEOGIOCHI_FRUIBILI, IND_FATT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " (CODICE_FISCALE, NOME, COGNOME, DATA_NASCITA, RUOLO, EMAIL, PASS_WORD, USERNAME, IND_FATT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
@@ -46,8 +46,7 @@ public class ClientiDS implements Clienti{
 			preparedStmt.setString(6, clienti.getEmail());
 			preparedStmt.setString(7, clienti.getPassWord());
 			preparedStmt.setString(8, clienti.getUsername());
-			preparedStmt.setInt(9, clienti.getVideogiochiFruibili());
-			preparedStmt.setString(10, clienti.getIndFatt());
+			preparedStmt.setString(9, clienti.getIndFatt());
 
 			preparedStmt.executeUpdate();
 
@@ -67,14 +66,14 @@ public class ClientiDS implements Clienti{
 
 	@Override
 	public synchronized void doUpdate(ClientiBean clienti, String nome, String cognome, LocalDate dataNascita,
-			String email, String passWord, String username, int vidFruibili, String indFatt)
+			String email, String passWord, String username, String indFatt)
 			throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
 		String updateSQL = "UPDATE " + ClientiDS.TABLE_NAME
-				+ " SET NOME = ?, COGNOME = ?, DATA_NASCITA = ?, EMAIL = ?, PASS_WORD = ?, USERNAME = ?, VIDEOGIOCHI_FRUIBILI = ?, IND_FATT = ?" + " WHERE CODICE_FISCALE = ?";
+				+ " SET NOME = ?, COGNOME = ?, DATA_NASCITA = ?, EMAIL = ?, PASS_WORD = ?, USERNAME = ?, IND_FATT = ?" + " WHERE CODICE_FISCALE = ?";
 		
 		try {
 			connection = ds.getConnection();
@@ -85,9 +84,8 @@ public class ClientiDS implements Clienti{
 			preparedStmt.setString(4, email);
 			preparedStmt.setString(5, passWord);
 			preparedStmt.setString(6, username);
-			preparedStmt.setInt(7, vidFruibili);
-			preparedStmt.setString(8, indFatt);
-			preparedStmt.setString(9, clienti.getCodiceFiscale());
+			preparedStmt.setString(7, indFatt);
+			preparedStmt.setString(8, clienti.getCodiceFiscale());
 			preparedStmt.executeUpdate();
 
 			connection.setAutoCommit(false);
@@ -157,7 +155,6 @@ public class ClientiDS implements Clienti{
 				bean.setEmail(rs.getString("EMAIL"));
 				bean.setPassWord(rs.getString("PASS_WORD"));
 				bean.setUsername(rs.getString("USERNAME"));
-				bean.setVideogiochiFruibili(rs.getInt("VIDEOGIOCHI_FRUIBILI"));
 				bean.setIndFatt(rs.getString("IND_FATT"));
 			}
 
@@ -203,7 +200,6 @@ public class ClientiDS implements Clienti{
 				bean.setEmail(rs.getString("EMAIL"));
 				bean.setPassWord(rs.getString("PASS_WORD"));
 				bean.setUsername(rs.getString("USERNAME"));
-				bean.setVideogiochiFruibili(rs.getInt("VIDEOGIOCHI_FRUIBILI"));
 				bean.setIndFatt(rs.getString("IND_FATT"));
 				array.add(bean);
 			}
