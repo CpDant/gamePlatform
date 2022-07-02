@@ -18,6 +18,7 @@ import it.unisa.gp.model.DAO.AbbonamentoDS;
 import it.unisa.gp.model.DAO.AcquistiDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
 import it.unisa.gp.model.DAO.ClientiDS;
+import it.unisa.gp.model.DAO.RemInAbbDS;
 import it.unisa.gp.model.DAO.RemVideogDS;
 import it.unisa.gp.model.DAO.SoftwareHouseDS;
 import it.unisa.gp.model.DAO.SupervisoreVideogiochiDS;
@@ -27,6 +28,7 @@ import it.unisa.gp.model.bean.AbbonamentoBean;
 import it.unisa.gp.model.bean.AcquistiBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
 import it.unisa.gp.model.bean.ClientiBean;
+import it.unisa.gp.model.bean.RemInAbbBean;
 import it.unisa.gp.model.bean.RemVideogBean;
 import it.unisa.gp.model.bean.SoftwareHouseBean;
 import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
@@ -37,6 +39,7 @@ import it.unisa.gp.model.interfaceDS.Abbonamento;
 import it.unisa.gp.model.interfaceDS.Acquisti;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
 import it.unisa.gp.model.interfaceDS.Clienti;
+import it.unisa.gp.model.interfaceDS.RemInAbb;
 import it.unisa.gp.model.interfaceDS.RemVideog;
 import it.unisa.gp.model.interfaceDS.SoftwareHouse;
 import it.unisa.gp.model.interfaceDS.SupervisoreVideogiochi;
@@ -66,34 +69,55 @@ public class TesterServlet extends HttpServlet {
 
         
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-        
+        /*
         Abbonamento abb = new AbbonamentoDS(ds);
-        AbbonamentoBean abbBean = new AbbonamentoBean("donato cuozzo",30,50);
+        AbbonamentoBean abbBean1 = new AbbonamentoBean("donato cuozzo",30,50);
+        AbbonamentoBean abbBean2 = new AbbonamentoBean("alfredo cuozzo",30,50);
 
         SoftwareHouse soft = new SoftwareHouseDS(ds);
         SoftwareHouseBean softBean = new SoftwareHouseBean("ea sports", "usa", LocalDate.of(1995, 10, 3));
 
         Videogioco vid = new VideogiocoDS(ds);
-        VideogiocoBean vidBean = new VideogiocoBean("asc5", "ea sports", "Fifa 21", 10000, 2015, 50, Pegi.tre);
+        VideogiocoBean vidBean1 = new VideogiocoBean("asc5", "ea sports", "Fifa 21", 10000, 2015, 50, Pegi.tre);
+        VideogiocoBean vidBean2 = new VideogiocoBean("ads465", "ea sports", "rocket", 645, 2015, 60, Pegi.tre);
+        VideogiocoBean vidBean3 = new VideogiocoBean("cas6541", "ea sports", "ufc", 64544, 2015, 30, Pegi.tre);
 
         SupervisoreVideogiochi sup = new SupervisoreVideogiochiDS(ds);
         SupervisoreVideogiochiBean supBean = new SupervisoreVideogiochiBean("acs4csa45", "ciro", "Vitale", LocalDate.of(2001, 10, 3), "ciro@email", "passwrod", 51000);
 
         AddInAbb add = new AddInAbbDS(ds);
-        AddInAbbBean bean = new AddInAbbBean("acs4csa45", "asc5", "donato cuozzo");
+        AddInAbbBean addBean1 = new AddInAbbBean("acs4csa45", "asc5", "donato cuozzo");
+        AddInAbbBean addBean2 = new AddInAbbBean("acs4csa45", "ads465", "donato cuozzo");
+        AddInAbbBean addBean3 = new AddInAbbBean("acs4csa45", "cas6541", "donato cuozzo");
+        AddInAbbBean addBean4 = new AddInAbbBean("acs4csa45", "cas6541", "alfredo cuozzo");
+        AddInAbbBean addBean5 = new AddInAbbBean("acs4csa45", "asc5", "alfredo cuozzo");
+        */
         
         
         RemVideog rem = new RemVideogDS(ds);
-        RemVideogBean beanR = new RemVideogBean("acs4csa45", "asc5");
+        RemVideogBean beanR = new RemVideogBean("acs4csa45", "cas6541");
         
+        /*
+        RemInAbb remAbb = new RemInAbbDS(ds);
+        RemInAbbBean remBean = new RemInAbbBean("acs4csa45", "cas6541", "donato cuozzo");
+        */
         try {
-            
-            abb.doSave(abbBean);
+            /*
+            abb.doSave(abbBean1);
+            abb.doSave(abbBean2);
             soft.doSave(softBean);
-            vid.doSave(vidBean);
+            vid.doSave(vidBean1);
+            vid.doSave(vidBean2);
+            vid.doSave(vidBean3);
             sup.doSave(supBean);
-            add.doSave(bean);
-             
+            add.doSave(addBean1);
+            add.doSave(addBean2);
+            add.doSave(addBean3);
+            add.doSave(addBean4);
+            add.doSave(addBean5);
+        	remAbb.doSave(remBean);
+        	*/
+        	
         	rem.doSave(beanR);
         	
         } catch (SQLException e) {

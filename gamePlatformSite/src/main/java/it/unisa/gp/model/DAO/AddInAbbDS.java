@@ -86,6 +86,34 @@ public class AddInAbbDS implements AddInAbb{
 		}
 		return (result != 0);
 	}
+	
+	public synchronized boolean doDelete(String codiceVid, String name) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		int result = 0;
+
+		String deleteSQL = "DELETE FROM " + AddInAbbDS.TABLE_NAME + " WHERE CODICE_VIDEOGIOCO = ? AND nome_univoco_abb = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(deleteSQL);
+			preparedStmt.setString(1, codiceVid);
+			preparedStmt.setString(2, name);
+
+			result = preparedStmt.executeUpdate();
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return (result != 0);
+	}
 
 	@Override
 	public synchronized AddInAbbBean doRetrieveByKey(String codiceSup, String codiceVid, String name) throws SQLException {
