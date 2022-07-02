@@ -10,7 +10,10 @@ import java.util.LinkedList;
 import javax.sql.DataSource;
 
 import it.unisa.gp.model.bean.ModVideogBean;
+import it.unisa.gp.model.bean.VideogiocoBean;
+import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
 import it.unisa.gp.model.interfaceDS.ModVideog;
+import it.unisa.gp.model.interfaceDS.Videogioco;
 
 public class ModVideogDS implements ModVideog {
 
@@ -25,12 +28,14 @@ public class ModVideogDS implements ModVideog {
 	}
 	
 	@Override
-	public void doSave(ModVideogBean mod) throws SQLException {
+	public void doSave(ModVideogBean mod, String codice, String nomeVideogioco, int dimensione, int annoProduzione,
+			int costo, Pegi pegi) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
 		String insertSQL = "INSERT INTO " + ModVideogDS.TABLE_NAME
 				+ " (CODICE_FISCALE_SUP_VID, CODICE_VIDEOGIOCO) VALUES (?, ?)";
+		
 		
 		try {
 			connection = ds.getConnection();
@@ -51,6 +56,10 @@ public class ModVideogDS implements ModVideog {
 					connection.close();
 			}
 		}
+		
+		Videogioco vid = new VideogiocoDS(ds);
+		VideogiocoBean vidBean = new VideogiocoBean(codice, null, null, 0, 0, 0, null);
+		vid.doUpdate(vidBean,nomeVideogioco, dimensione, pegi, annoProduzione, costo);
 	}
 
 	@Override
