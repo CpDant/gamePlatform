@@ -223,11 +223,11 @@ CREATE TABLE IF NOT EXISTS rem_in_abb(
 );
 
 CREATE TABLE IF NOT EXISTS add_in_abb(
-	codice_fiscale_sup_vid char(16) NOT NULL,
+	codice_fiscale_sup_vid char(16),
     codice_videogioco varchar(15) NOT NULL,
     nome_univoco_abb varchar(20) NOT NULL,
-    PRIMARY KEY(codice_fiscale_sup_vid, codice_videogioco, nome_univoco_abb),
-    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY(codice_videogioco, nome_univoco_abb),
+    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE CASCADE
 );
