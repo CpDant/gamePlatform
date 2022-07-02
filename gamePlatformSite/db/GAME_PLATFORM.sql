@@ -160,56 +160,56 @@ CREATE TABLE IF NOT EXISTS add_sup_vid(
 	codice_fiscale_sup_vid char(16) NOT NULL,
  	codice_fiscale_admin char(16) NOT NULL,   
     PRIMARY KEY(codice_fiscale_sup_vid, codice_fiscale_admin),
-    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(codice_fiscale_admin) REFERENCES administrators(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(codice_fiscale_admin) REFERENCES administrators(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS rem_sup_vid(
 	codice_fiscale_sup_vid char(16) NOT NULL,
  	codice_fiscale_admin char(16) NOT NULL,   
     PRIMARY KEY(codice_fiscale_sup_vid, codice_fiscale_admin),
-    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(codice_fiscale_admin) REFERENCES administrators(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(codice_fiscale_admin) REFERENCES administrators(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS add_assist_cl(
 	codice_fiscale_assist_cl char(16) NOT NULL,
  	codice_fiscale_admin char(16) NOT NULL,   
     PRIMARY KEY(codice_fiscale_assist_cl, codice_fiscale_admin),
-    FOREIGN KEY(codice_fiscale_assist_cl) REFERENCES assistente_clienti(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(codice_fiscale_admin) REFERENCES administrators(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY(codice_fiscale_assist_cl) REFERENCES assistente_clienti(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(codice_fiscale_admin) REFERENCES administrators(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS rem_assist_cl(
 	codice_fiscale_assist_cl char(16) NOT NULL,
  	codice_fiscale_admin char(16) NOT NULL,   
     PRIMARY KEY(codice_fiscale_assist_cl, codice_fiscale_admin),
-    FOREIGN KEY(codice_fiscale_assist_cl) REFERENCES assistente_clienti(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(codice_fiscale_admin) REFERENCES administrators(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY(codice_fiscale_assist_cl) REFERENCES assistente_clienti(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(codice_fiscale_admin) REFERENCES administrators(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS add_videog(
 	codice_fiscale_sup_vid char(16) NOT NULL,
     codice_videogioco varchar(15) NOT NULL,
     PRIMARY KEY(codice_fiscale_sup_vid, codice_videogioco),
-    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS rem_videog(
 	codice_fiscale_sup_vid char(16) NOT NULL,
     codice_videogioco varchar(15) NOT NULL,
     PRIMARY KEY(codice_fiscale_sup_vid, codice_videogioco),
-    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS mod_videog(
 	codice_fiscale_sup_vid char(16) NOT NULL,
     codice_videogioco varchar(15) NOT NULL,
     PRIMARY KEY(codice_fiscale_sup_vid, codice_videogioco),
-    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS rem_in_abb(
@@ -217,9 +217,9 @@ CREATE TABLE IF NOT EXISTS rem_in_abb(
     codice_videogioco varchar(15) NOT NULL,
     nome_univoco_abb varchar(20) NOT NULL,
     PRIMARY KEY(codice_fiscale_sup_vid, codice_videogioco, nome_univoco_abb),
-    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS add_in_abb(
@@ -227,17 +227,17 @@ CREATE TABLE IF NOT EXISTS add_in_abb(
     codice_videogioco varchar(15) NOT NULL,
     nome_univoco_abb varchar(20) NOT NULL,
     PRIMARY KEY(codice_fiscale_sup_vid, codice_videogioco, nome_univoco_abb),
-    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS mod_abb(
 	codice_fiscale_sup_vid char(16) NOT NULL,
     nome_univoco_abb varchar(20) NOT NULL,
     PRIMARY KEY(codice_fiscale_sup_vid, nome_univoco_abb),
-    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE SET NULL
+    FOREIGN KEY(codice_fiscale_sup_vid) REFERENCES supervisore_videogiochi(codice_fiscale) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS presente_in(
@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS acq_contiene_vid(
 	id int NOT NULL,
     codice_videogioco varchar(15) NOT NULL,
     PRIMARY KEY(id, codice_videogioco),
-    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE SET NULL ON DELETE SET NULL,
+    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(id) REFERENCES acquisti(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -260,6 +260,6 @@ CREATE TABLE IF NOT EXISTS acq_contiene_abb(
 	id int NOT NULL,
     nome_univoco_abb varchar(20) NOT NULL, 
     PRIMARY KEY(id, nome_univoco_abb),
-    FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(id) REFERENCES acquisti(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
