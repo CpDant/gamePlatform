@@ -32,10 +32,6 @@ public class RemVideogDS implements RemVideog{
 		String insertSQL = "INSERT INTO " + RemVideogDS.TABLE_NAME
 				+ " (CODICE_FISCALE_SUP_VID, CODICE_VIDEOGIOCO) VALUES (?, ?)";
 		
-		VideogiocoDS bean = new VideogiocoDS(ds);
-		bean.doDelete(rem.getCodiceVideogioco());
-	
-		
 		
 		try {
 			connection = ds.getConnection();
@@ -56,6 +52,10 @@ public class RemVideogDS implements RemVideog{
 					connection.close();
 			}
 		}
+		
+		VideogiocoDS bean = new VideogiocoDS(ds);
+		bean.doDelete(rem.getCodiceVideogioco());
+		
 	}
 
 	@Override

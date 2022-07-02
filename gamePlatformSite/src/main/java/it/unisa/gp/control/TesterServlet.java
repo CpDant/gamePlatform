@@ -18,6 +18,7 @@ import it.unisa.gp.model.DAO.AbbonamentoDS;
 import it.unisa.gp.model.DAO.AcquistiDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
 import it.unisa.gp.model.DAO.ClientiDS;
+import it.unisa.gp.model.DAO.RemVideogDS;
 import it.unisa.gp.model.DAO.SoftwareHouseDS;
 import it.unisa.gp.model.DAO.SupervisoreVideogiochiDS;
 import it.unisa.gp.model.DAO.AddInAbbDS;
@@ -26,6 +27,7 @@ import it.unisa.gp.model.bean.AbbonamentoBean;
 import it.unisa.gp.model.bean.AcquistiBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
 import it.unisa.gp.model.bean.ClientiBean;
+import it.unisa.gp.model.bean.RemVideogBean;
 import it.unisa.gp.model.bean.SoftwareHouseBean;
 import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
 import it.unisa.gp.model.bean.AddInAbbBean;
@@ -35,6 +37,7 @@ import it.unisa.gp.model.interfaceDS.Abbonamento;
 import it.unisa.gp.model.interfaceDS.Acquisti;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
 import it.unisa.gp.model.interfaceDS.Clienti;
+import it.unisa.gp.model.interfaceDS.RemVideog;
 import it.unisa.gp.model.interfaceDS.SoftwareHouse;
 import it.unisa.gp.model.interfaceDS.SupervisoreVideogiochi;
 import it.unisa.gp.model.interfaceDS.AddInAbb;
@@ -61,19 +64,9 @@ public class TesterServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
         out.println("<p> Ciao </p>");
 
-<<<<<<< HEAD
-		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		Videogioco fat = new VideogiocoDS(ds);
-		
-		VideogiocoBean bean = new VideogiocoBean ("1223","ea sportss","fifa",100,2012,15,Pegi.diciotto);
-		try {
-			fat.doSave(bean);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-=======
+        
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+        
         Abbonamento abb = new AbbonamentoDS(ds);
         AbbonamentoBean abbBean = new AbbonamentoBean("donato cuozzo",30,50);
 
@@ -88,44 +81,30 @@ public class TesterServlet extends HttpServlet {
 
         AddInAbb add = new AddInAbbDS(ds);
         AddInAbbBean bean = new AddInAbbBean("acs4csa45", "asc5", "donato cuozzo");
-
+        
+        
+        RemVideog rem = new RemVideogDS(ds);
+        RemVideogBean beanR = new RemVideogBean("acs4csa45", "asc5");
+        
         try {
+            
             abb.doSave(abbBean);
             soft.doSave(softBean);
             vid.doSave(vidBean);
             sup.doSave(supBean);
             add.doSave(bean);
+             
+        	rem.doSave(beanR);
+        	
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
->>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
-		
+        
+        
+        
+        
 
-		/*
-		try {
-			AddInAbbBean bean = new AddInAbbBean(123, 1, 0, 0, null, null);
-			fat.doUpdate(bean, 10, 10000, LocalDateTime.now(), "Via indFFFFFF");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-<<<<<<< HEAD
-		
-=======
-		*/
-		
-		
-		/*
->>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
-		try {
-			fat.doDelete(123, 1);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		
 		/*
 		AddInAbbBean bean = null;
 		try {
