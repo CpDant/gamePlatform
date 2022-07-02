@@ -9,17 +9,17 @@ import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
-import it.unisa.gp.model.bean.PresenteInBean;
-import it.unisa.gp.model.interfaceDS.PresenteIn;
+import it.unisa.gp.model.bean.AddInAbbBean;
+import it.unisa.gp.model.interfaceDS.AddInAbb;
 
-public class PresenteInDS implements PresenteIn{
+public class AddInAbbDS implements AddInAbb{
 
-	private static final String TABLE_NAME = "presente_in";
+	private static final String TABLE_NAME = "add_in_abb";
 	
 	private DataSource ds = null;
 	
 
-	public PresenteInDS(DataSource ds) {
+	public AddInAbbDS(DataSource ds) {
 		this.ds = ds;
 		
 		System.out.println("Creazione DataSource...");
@@ -27,18 +27,19 @@ public class PresenteInDS implements PresenteIn{
 	
 	
 	@Override
-	public synchronized void doSave(PresenteInBean pres) throws SQLException {
+	public synchronized void doSave(AddInAbbBean addInAbb) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
-		String insertSQL = "INSERT INTO " + PresenteInDS.TABLE_NAME
-				+ " (NOME_UNIVOCO, CODICE_VIDEOGIOCO) VALUES (?, ?)";
+		String insertSQL = "INSERT INTO " + AddInAbbDS.TABLE_NAME
+				+ " (codice_fiscale_sup_vid, CODICE_VIDEOGIOCO, nome_univoco_abb) VALUES (?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(insertSQL);
-			preparedStmt.setString(1, pres.getNomeUnivoco());
-			preparedStmt.setString(2, pres.getCodiceVideogioco());
+			preparedStmt.setString(1, addInAbb.getCodiceFiscaleSupVid());
+			preparedStmt.setString(2, addInAbb.getCodiceVideogioco());
+			preparedStmt.setString(3, addInAbb.getNomeUnivocoAbb());
 
 			preparedStmt.executeUpdate();
 
@@ -57,19 +58,20 @@ public class PresenteInDS implements PresenteIn{
 	}
 
 	@Override
-	public synchronized boolean doDelete(String name, String codice) throws SQLException {
+	public synchronized boolean doDelete(String codiceSup, String codiceVid, String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + PresenteInDS.TABLE_NAME + " WHERE NOME_UNIVOCO = ? AND CODICE_VIDEOGIOCO = ?";
+		String deleteSQL = "DELETE FROM " + AddInAbbDS.TABLE_NAME + " WHERE codice_fiscale_sup_vid = ? AND CODICE_VIDEOGIOCO = ? AND nome_univoco_abb = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(deleteSQL);
-			preparedStmt.setString(1, name);
-			preparedStmt.setString(2, codice);
+			preparedStmt.setString(1, codiceSup);
+			preparedStmt.setString(2, codiceVid);
+			preparedStmt.setString(3, name);
 
 			result = preparedStmt.executeUpdate();
 
@@ -86,25 +88,27 @@ public class PresenteInDS implements PresenteIn{
 	}
 
 	@Override
-	public synchronized PresenteInBean doRetrieveByKey(String name, String codice) throws SQLException {
+	public synchronized AddInAbbBean doRetrieveByKey(String codiceSup, String codiceVid, String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		PresenteInBean bean = new PresenteInBean(null,null);
+		AddInAbbBean bean = new AddInAbbBean(null,null,null);
 
-		String selectSQL = "SELECT * FROM " + PresenteInDS.TABLE_NAME + " WHERE NOME_UNIVOCO = ? AND CODICE_VIDEOGIOCO = ?";
+		String selectSQL = "SELECT * FROM " + AddInAbbDS.TABLE_NAME + " WHERE codice_fiscale_sup_vid = ? AND CODICE_VIDEOGIOCO = ? AND nome_univoco_abb = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(selectSQL);
-			preparedStmt.setString(1, name);
-			preparedStmt.setString(2, codice);
+			preparedStmt.setString(1, codiceSup);
+			preparedStmt.setString(2, codiceVid);
+			preparedStmt.setString(3, name);
 
 			ResultSet rs = preparedStmt.executeQuery();
 
 			while (rs.next()) {
-				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
+				bean.setCodiceFiscaleSupVid(rs.getString("codice_fiscale_sup_vid"));
 				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setNomeUnivocoAbb(rs.getString("nome_univoco_abb"));
 				
 			}
 
@@ -121,13 +125,13 @@ public class PresenteInDS implements PresenteIn{
 	}
 
 	@Override
-	public synchronized Collection<PresenteInBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<AddInAbbBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<PresenteInBean> array = new LinkedList<PresenteInBean>();
+		Collection<AddInAbbBean> array = new LinkedList<AddInAbbBean>();
 
-		String selectSQL = "SELECT * FROM " + PresenteInDS.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + AddInAbbDS.TABLE_NAME;
 		
 
 		if (order != null && !order.equals("")) {
@@ -141,10 +145,11 @@ public class PresenteInDS implements PresenteIn{
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while (rs.next()) {
-				PresenteInBean bean = new PresenteInBean(null,null);
+				AddInAbbBean bean = new AddInAbbBean(null,null,null);
 				
-				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
+				bean.setCodiceFiscaleSupVid(rs.getString("codice_fiscale_sup_vid"));
 				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setNomeUnivocoAbb(rs.getString("nome_univoco_abb"));
 				array.add(bean);
 			}
 
