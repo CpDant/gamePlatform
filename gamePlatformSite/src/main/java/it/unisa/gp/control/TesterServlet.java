@@ -18,32 +18,41 @@ import it.unisa.gp.model.DAO.AbbonamentoDS;
 import it.unisa.gp.model.DAO.AcquistiDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
 import it.unisa.gp.model.DAO.ClientiDS;
+import it.unisa.gp.model.DAO.ModAbbDS;
 import it.unisa.gp.model.DAO.RemInAbbDS;
+import it.unisa.gp.model.DAO.RemSupVidDS;
 import it.unisa.gp.model.DAO.RemVideogDS;
 import it.unisa.gp.model.DAO.SoftwareHouseDS;
 import it.unisa.gp.model.DAO.SupervisoreVideogiochiDS;
 import it.unisa.gp.model.DAO.AddInAbbDS;
+import it.unisa.gp.model.DAO.AddSupVidDS;
 import it.unisa.gp.model.DAO.VideogiocoDS;
 import it.unisa.gp.model.bean.AbbonamentoBean;
 import it.unisa.gp.model.bean.AcquistiBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
 import it.unisa.gp.model.bean.ClientiBean;
+import it.unisa.gp.model.bean.ModAbbBean;
 import it.unisa.gp.model.bean.RemInAbbBean;
+import it.unisa.gp.model.bean.RemSupVidBean;
 import it.unisa.gp.model.bean.RemVideogBean;
 import it.unisa.gp.model.bean.SoftwareHouseBean;
 import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
 import it.unisa.gp.model.bean.AddInAbbBean;
+import it.unisa.gp.model.bean.AddSupVidBean;
 import it.unisa.gp.model.bean.VideogiocoBean;
 import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
 import it.unisa.gp.model.interfaceDS.Abbonamento;
 import it.unisa.gp.model.interfaceDS.Acquisti;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
 import it.unisa.gp.model.interfaceDS.Clienti;
+import it.unisa.gp.model.interfaceDS.ModAbb;
 import it.unisa.gp.model.interfaceDS.RemInAbb;
+import it.unisa.gp.model.interfaceDS.RemSupVid;
 import it.unisa.gp.model.interfaceDS.RemVideog;
 import it.unisa.gp.model.interfaceDS.SoftwareHouse;
 import it.unisa.gp.model.interfaceDS.SupervisoreVideogiochi;
 import it.unisa.gp.model.interfaceDS.AddInAbb;
+import it.unisa.gp.model.interfaceDS.AddSupVid;
 import it.unisa.gp.model.interfaceDS.Videogioco;
 
 /**
@@ -93,14 +102,24 @@ public class TesterServlet extends HttpServlet {
         AddInAbbBean addBean5 = new AddInAbbBean("acs4csa45", "asc5", "alfredo cuozzo");
         */
         
-        
+        /*
         RemVideog rem = new RemVideogDS(ds);
         RemVideogBean beanR = new RemVideogBean("acs4csa45", "cas6541");
-        
+        */
         /*
         RemInAbb remAbb = new RemInAbbDS(ds);
         RemInAbbBean remBean = new RemInAbbBean("acs4csa45", "cas6541", "donato cuozzo");
+        
+        ModAbb modAbb = new ModAbbDS(ds);
+        ModAbbBean modBean = new ModAbbBean("acs4csa45", "alfredo cuozzo");
+        
+        AddSupVid addSupVid = new AddSupVidDS(ds);
+        AddSupVidBean addSupVidBean = new AddSupVidBean("mioCodiceFisc","ABCD123");
         */
+        
+        RemSupVid remSupVid = new RemSupVidDS(ds);
+        RemSupVidBean remSupVidBean = new RemSupVidBean("acs4csa45","ABCD123");
+        
         try {
             /*
             abb.doSave(abbBean1);
@@ -115,10 +134,8 @@ public class TesterServlet extends HttpServlet {
             add.doSave(addBean3);
             add.doSave(addBean4);
             add.doSave(addBean5);
-        	remAbb.doSave(remBean);
         	*/
-        	
-        	rem.doSave(beanR);
+        	remSupVid.doSave(remSupVidBean);
         	
         } catch (SQLException e) {
             // TODO Auto-generated catch block

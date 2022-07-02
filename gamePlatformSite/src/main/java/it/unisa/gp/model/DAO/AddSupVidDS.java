@@ -4,44 +4,48 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
-import it.unisa.gp.model.bean.ModVideogBean;
-import it.unisa.gp.model.bean.VideogiocoBean;
-import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
-import it.unisa.gp.model.interfaceDS.ModVideog;
-import it.unisa.gp.model.interfaceDS.Videogioco;
+import it.unisa.gp.model.bean.AddSupVidBean;
+import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
+import it.unisa.gp.model.interfaceDS.AddSupVid;
+import it.unisa.gp.model.interfaceDS.SupervisoreVideogiochi;
 
-public class ModVideogDS implements ModVideog {
+public class AddSupVidDS implements AddSupVid{
 
-	private static final String TABLE_NAME = "mod_videog";
+	private static final String TABLE_NAME = "add_sup_vid";
 	
 	private DataSource ds = null;
 	
-	public ModVideogDS(DataSource ds) {
+	public AddSupVidDS(DataSource ds) {
 		this.ds = ds;
 		
-		System.out.println("Creazione DataSource...");	
+		System.out.println("Creazione DataSource...");
 	}
 	
 	@Override
-	public void doSave(ModVideogBean mod, String codice, String nomeVideogioco, int dimensione, int annoProduzione,
-			int costo, Pegi pegi) throws SQLException {
+	public synchronized void doSave(AddSupVidBean addSupBean, String codiceFiscale, String nome, String cognome, LocalDate dataNascita,
+			String email, String passWord, int retribuzioneAnnuale) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
-		String insertSQL = "INSERT INTO " + ModVideogDS.TABLE_NAME
-				+ " (CODICE_FISCALE_SUP_VID, CODICE_VIDEOGIOCO) VALUES (?, ?)";
+		String insertSQL = "INSERT INTO " + AddSupVidDS.TABLE_NAME
+				+ " (CODICE_FISCALE_SUP_VID, CODICE_FISCALE_ADMIN) VALUES (?, ?)";
 		
+		
+		SupervisoreVideogiochiBean supVidBean = new SupervisoreVideogiochiBean(codiceFiscale,nome,cognome,dataNascita,email,passWord,retribuzioneAnnuale);
+		SupervisoreVideogiochi supVid = new SupervisoreVideogiochiDS(ds);
+		supVid.doSave(supVidBean);
 		
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(insertSQL);
-			preparedStmt.setString(1, mod.getCodiceFiscaleSupVid());
-			preparedStmt.setString(2, mod.getCodiceVideogioco());
+			preparedStmt.setString(1, addSupBean.getCodiceFiscaleSupVid());
+			preparedStmt.setString(2, addSupBean.getCodiceFiscaleAdmin());
 
 			preparedStmt.executeUpdate();
 
@@ -55,27 +59,24 @@ public class ModVideogDS implements ModVideog {
 				if (connection != null)
 					connection.close();
 			}
-		}
+		}	
 		
-		Videogioco vid = new VideogiocoDS(ds);
-		VideogiocoBean vidBean = new VideogiocoBean(codice, null, null, 0, 0, 0, null);
-		vid.doUpdate(vidBean,nomeVideogioco, dimensione, pegi, annoProduzione, costo);
 	}
 
 	@Override
-	public boolean doDelete(String codiceFiscaleSupVid, String codiceVideogioco) throws SQLException {
+	public synchronized boolean doDelete(String supVid, String admin) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + ModVideogDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_VIDEOGIOCO = ?";
+		String deleteSQL = "DELETE FROM " + AddSupVidDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_FISCALE_ADMIN = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(deleteSQL);
-			preparedStmt.setString(1, codiceFiscaleSupVid);
-			preparedStmt.setString(2, codiceVideogioco);
+			preparedStmt.setString(1, supVid);
+			preparedStmt.setString(2, admin);
 
 			result = preparedStmt.executeUpdate();
 
@@ -92,25 +93,25 @@ public class ModVideogDS implements ModVideog {
 	}
 
 	@Override
-	public ModVideogBean doRetrieveByKey(String codiceFiscaleSupVid, String codiceVideogioco) throws SQLException {
+	public synchronized AddSupVidBean doRetrieveByKey(String supVid, String admin) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		ModVideogBean bean = new ModVideogBean(null,null);
+		AddSupVidBean bean = new AddSupVidBean(null,null);
 
-		String selectSQL = "SELECT * FROM " + ModVideogDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_VIDEOGIOCO = ?";
+		String selectSQL = "SELECT * FROM " + AddSupVidDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_FISCALE_ADMIN = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(selectSQL);
-			preparedStmt.setString(1, codiceFiscaleSupVid);
-			preparedStmt.setString(2, codiceVideogioco);
+			preparedStmt.setString(1, supVid);
+			preparedStmt.setString(2, admin);
 
 			ResultSet rs = preparedStmt.executeQuery();
 
 			while (rs.next()) {
 				bean.setCodiceFiscaleSupVid(rs.getString("CODICE_FISCALE_SUP_VID"));
-				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setCodiceFiscaleAdmin(rs.getString("CODICE_FISCALE_ADMIN"));
 			}
 
 		} finally {
@@ -126,13 +127,13 @@ public class ModVideogDS implements ModVideog {
 	}
 
 	@Override
-	public Collection<ModVideogBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<AddSupVidBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<ModVideogBean> array = new LinkedList<ModVideogBean>();
+		Collection<AddSupVidBean> array = new LinkedList<AddSupVidBean>();
 
-		String selectSQL = "SELECT * FROM " + ModVideogDS.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + AddSupVidDS.TABLE_NAME;
 		
 
 		if (order != null && !order.equals("")) {
@@ -146,9 +147,9 @@ public class ModVideogDS implements ModVideog {
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while (rs.next()) {
-				ModVideogBean bean = new ModVideogBean(null,null);
+				AddSupVidBean bean = new AddSupVidBean(null,null);
 				bean.setCodiceFiscaleSupVid(rs.getString("CODICE_FISCALE_SUP_VID"));
-				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setCodiceFiscaleAdmin(rs.getString("CODICE_FISCALE_ADMIN"));
 				array.add(bean);
 			}
 

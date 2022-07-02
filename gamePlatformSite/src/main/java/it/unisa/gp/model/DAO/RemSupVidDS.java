@@ -9,39 +9,35 @@ import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
-import it.unisa.gp.model.bean.ModVideogBean;
-import it.unisa.gp.model.bean.VideogiocoBean;
-import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
-import it.unisa.gp.model.interfaceDS.ModVideog;
-import it.unisa.gp.model.interfaceDS.Videogioco;
+import it.unisa.gp.model.bean.RemSupVidBean;
+import it.unisa.gp.model.interfaceDS.RemSupVid;
+import it.unisa.gp.model.interfaceDS.SupervisoreVideogiochi;
 
-public class ModVideogDS implements ModVideog {
+public class RemSupVidDS implements RemSupVid{
 
-	private static final String TABLE_NAME = "mod_videog";
+	private static final String TABLE_NAME = "rem_sup_vid";
 	
 	private DataSource ds = null;
 	
-	public ModVideogDS(DataSource ds) {
+	public RemSupVidDS(DataSource ds) {
 		this.ds = ds;
 		
-		System.out.println("Creazione DataSource...");	
+		System.out.println("Creazione DataSource...");
 	}
 	
 	@Override
-	public void doSave(ModVideogBean mod, String codice, String nomeVideogioco, int dimensione, int annoProduzione,
-			int costo, Pegi pegi) throws SQLException {
+	public synchronized void doSave(RemSupVidBean remSupVidBean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
-		String insertSQL = "INSERT INTO " + ModVideogDS.TABLE_NAME
-				+ " (CODICE_FISCALE_SUP_VID, CODICE_VIDEOGIOCO) VALUES (?, ?)";
-		
-		
+		String insertSQL = "INSERT INTO " + RemSupVidDS.TABLE_NAME
+				+ " (CODICE_FISCALE_SUP_VID, CODICE_FISCALE_ADMIN) VALUES (?, ?)";
+				
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(insertSQL);
-			preparedStmt.setString(1, mod.getCodiceFiscaleSupVid());
-			preparedStmt.setString(2, mod.getCodiceVideogioco());
+			preparedStmt.setString(1, remSupVidBean.getCodiceFiscaleSupVid());
+			preparedStmt.setString(2, remSupVidBean.getCodiceFiscaleAdmin());
 
 			preparedStmt.executeUpdate();
 
@@ -57,25 +53,25 @@ public class ModVideogDS implements ModVideog {
 			}
 		}
 		
-		Videogioco vid = new VideogiocoDS(ds);
-		VideogiocoBean vidBean = new VideogiocoBean(codice, null, null, 0, 0, 0, null);
-		vid.doUpdate(vidBean,nomeVideogioco, dimensione, pegi, annoProduzione, costo);
+		SupervisoreVideogiochi supVid = new SupervisoreVideogiochiDS(ds);
+		supVid.doDelete(remSupVidBean.getCodiceFiscaleSupVid());
+		
 	}
 
 	@Override
-	public boolean doDelete(String codiceFiscaleSupVid, String codiceVideogioco) throws SQLException {
+	public synchronized boolean doDelete(String supVid, String admin) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + ModVideogDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_VIDEOGIOCO = ?";
+		String deleteSQL = "DELETE FROM " + RemSupVidDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_FISCALE_ADMIN = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(deleteSQL);
-			preparedStmt.setString(1, codiceFiscaleSupVid);
-			preparedStmt.setString(2, codiceVideogioco);
+			preparedStmt.setString(1, supVid);
+			preparedStmt.setString(2, admin);
 
 			result = preparedStmt.executeUpdate();
 
@@ -92,25 +88,25 @@ public class ModVideogDS implements ModVideog {
 	}
 
 	@Override
-	public ModVideogBean doRetrieveByKey(String codiceFiscaleSupVid, String codiceVideogioco) throws SQLException {
+	public synchronized RemSupVidBean doRetrieveByKey(String supVid, String admin) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		ModVideogBean bean = new ModVideogBean(null,null);
+		RemSupVidBean bean = new RemSupVidBean(null,null);
 
-		String selectSQL = "SELECT * FROM " + ModVideogDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_VIDEOGIOCO = ?";
+		String selectSQL = "SELECT * FROM " + RemSupVidDS.TABLE_NAME + " WHERE CODICE_FISCALE_SUP_VID = ? AND CODICE_FISCALE_ADMIN = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(selectSQL);
-			preparedStmt.setString(1, codiceFiscaleSupVid);
-			preparedStmt.setString(2, codiceVideogioco);
+			preparedStmt.setString(1, supVid);
+			preparedStmt.setString(2, admin);
 
 			ResultSet rs = preparedStmt.executeQuery();
 
 			while (rs.next()) {
 				bean.setCodiceFiscaleSupVid(rs.getString("CODICE_FISCALE_SUP_VID"));
-				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setCodiceFiscaleAdmin(rs.getString("CODICE_FISCALE_ADMIN"));
 			}
 
 		} finally {
@@ -126,13 +122,13 @@ public class ModVideogDS implements ModVideog {
 	}
 
 	@Override
-	public Collection<ModVideogBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<RemSupVidBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		Collection<ModVideogBean> array = new LinkedList<ModVideogBean>();
+		Collection<RemSupVidBean> array = new LinkedList<RemSupVidBean>();
 
-		String selectSQL = "SELECT * FROM " + ModVideogDS.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + RemSupVidDS.TABLE_NAME;
 		
 
 		if (order != null && !order.equals("")) {
@@ -146,9 +142,9 @@ public class ModVideogDS implements ModVideog {
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while (rs.next()) {
-				ModVideogBean bean = new ModVideogBean(null,null);
+				RemSupVidBean bean = new RemSupVidBean(null,null);
 				bean.setCodiceFiscaleSupVid(rs.getString("CODICE_FISCALE_SUP_VID"));
-				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setCodiceFiscaleAdmin(rs.getString("CODICE_FISCALE_ADMIN"));
 				array.add(bean);
 			}
 
@@ -163,5 +159,4 @@ public class ModVideogDS implements ModVideog {
 		}
 		return array;
 	}
-
 }
