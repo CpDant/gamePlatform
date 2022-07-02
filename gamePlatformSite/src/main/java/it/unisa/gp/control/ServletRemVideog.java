@@ -40,9 +40,9 @@ public class ServletRemVideog extends HttpServlet {
 		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		RemVideog abb = new RemVideogDS(ds);
-		RemVideogBean bean = new RemVideogBean("ABCD123","abc12");
+		RemVideogBean bean = new RemVideogBean("ABCD123","1223");
 		
-		/* //funziona
+		//funziona
 		try {
 			abb.doSave(bean);
 		} catch (SQLException e) {
@@ -50,7 +50,7 @@ public class ServletRemVideog extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
+		/*
 		//funziona
 		try {
 			abb.doDelete(bean.getCodiceFiscaleSupVid(), bean.getCodiceVideogioco());

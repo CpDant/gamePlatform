@@ -48,7 +48,7 @@ public class ServletSoftwareHouse extends HttpServlet {
 		
 		SoftwareHouseBean bean = new SoftwareHouseBean("ea sportss", "Canada", LocalDate.of(1987,12,22));
 		
-		/*
+		
 		try {
 			abb.doSave(bean);
 		} catch (SQLException e) {

@@ -56,15 +56,16 @@ public class TesterServlet extends HttpServlet {
 		out.println("<p> Ciao </p>");
 
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		Fattura fat = new FatturaDS(ds);
-		/*
+		Videogioco fat = new VideogiocoDS(ds);
+		
+		VideogiocoBean bean = new VideogiocoBean ("1223","ea sportss","fifa",100,2012,15,Pegi.diciotto);
 		try {
-			fat.doSave(123, LocalDateTime.now());
+			fat.doSave(bean);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 
 		/*
 		try {
@@ -74,9 +75,6 @@ public class TesterServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
-		
-		
 		
 		try {
 			fat.doDelete(123, 1);
@@ -84,7 +82,7 @@ public class TesterServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
 		
 		/*
 		FatturaBean bean = null;
