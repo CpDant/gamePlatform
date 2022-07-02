@@ -15,8 +15,6 @@ public class AssistenteClientiBean implements Serializable {
 	private String email;
 	private String passWord;
     private int retribuzioneAnnuale;
-    private int ticketDaRisolvere;
-    private int ticketRisolti;
 
 	public AssistenteClientiBean(String codiceFiscale, String nome, String cognome, LocalDate dataNascita,
 			String email, String passWord, int retribuzioneAnnuale) {
@@ -28,8 +26,6 @@ public class AssistenteClientiBean implements Serializable {
 		this.email = email;
 		this.passWord = passWord;
 		this.retribuzioneAnnuale = retribuzioneAnnuale;
-		this.ticketDaRisolvere = 0;
-		this.ticketRisolti = 0;
 	}
     
 	public String getCodiceFiscale() {
@@ -74,18 +70,6 @@ public class AssistenteClientiBean implements Serializable {
 	public void setRetribuzioneAnnuale(int retribuzioneAnnuale) {
 		this.retribuzioneAnnuale = retribuzioneAnnuale;
 	}
-	public int getTicketDaRisolvere() {
-		return ticketDaRisolvere;
-	}
-	public void setTicketDaRisolvere(int ticketDaRisolvere) {
-		this.ticketDaRisolvere = ticketDaRisolvere;
-	}
-	public int getTicketRisolti() {
-		return ticketRisolti;
-	}
-	public void setTicketRisolti(int ticketRisolti) {
-		this.ticketRisolti = ticketRisolti;
-	}
 
 	public String getRuolo() {
 		return RUOLO;
@@ -94,8 +78,7 @@ public class AssistenteClientiBean implements Serializable {
 	public String toString() {
 		return "AssistenteClientiBean [codiceFiscale=" + codiceFiscale + ", nome=" + nome + ", cognome=" + cognome
 				+ ", dataNascita=" + dataNascita + ", ruolo=" + RUOLO + ", email=" + email + ", passWord=" + passWord
-				+ ", retribuzioneAnnuale=" + retribuzioneAnnuale + ", ticketDaRisolvere=" + ticketDaRisolvere
-				+ ", ticketRisolti=" + ticketRisolti + "]";
+				+ ", retribuzioneAnnuale=" + retribuzioneAnnuale + "]";
 	}
 
 	public boolean equals(Object obj) {
@@ -109,8 +92,7 @@ public class AssistenteClientiBean implements Serializable {
 		return Objects.equals(codiceFiscale, other.codiceFiscale) && Objects.equals(cognome, other.cognome)
 				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(email, other.email)
 				&& Objects.equals(nome, other.nome) && Objects.equals(passWord, other.passWord)
-				&& retribuzioneAnnuale == other.retribuzioneAnnuale && Objects.equals(RUOLO, other.RUOLO)
-				&& ticketDaRisolvere == other.ticketDaRisolvere && ticketRisolti == other.ticketRisolti;
+				&& retribuzioneAnnuale == other.retribuzioneAnnuale && Objects.equals(RUOLO, other.RUOLO);
 	}
 	
 }

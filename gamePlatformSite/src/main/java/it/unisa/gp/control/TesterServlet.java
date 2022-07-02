@@ -16,6 +16,7 @@ import java.util.Collection;
 
 import it.unisa.gp.model.DAO.AbbonamentoDS;
 import it.unisa.gp.model.DAO.AcquistiDS;
+import it.unisa.gp.model.DAO.AddAssClDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
 import it.unisa.gp.model.DAO.ClientiDS;
 import it.unisa.gp.model.DAO.ModAbbDS;
@@ -29,6 +30,7 @@ import it.unisa.gp.model.DAO.AddSupVidDS;
 import it.unisa.gp.model.DAO.VideogiocoDS;
 import it.unisa.gp.model.bean.AbbonamentoBean;
 import it.unisa.gp.model.bean.AcquistiBean;
+import it.unisa.gp.model.bean.AddAssClBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
 import it.unisa.gp.model.bean.ClientiBean;
 import it.unisa.gp.model.bean.ModAbbBean;
@@ -43,6 +45,7 @@ import it.unisa.gp.model.bean.VideogiocoBean;
 import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
 import it.unisa.gp.model.interfaceDS.Abbonamento;
 import it.unisa.gp.model.interfaceDS.Acquisti;
+import it.unisa.gp.model.interfaceDS.AddAssCl;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
 import it.unisa.gp.model.interfaceDS.Clienti;
 import it.unisa.gp.model.interfaceDS.ModAbb;
@@ -115,11 +118,13 @@ public class TesterServlet extends HttpServlet {
         
         AddSupVid addSupVid = new AddSupVidDS(ds);
         AddSupVidBean addSupVidBean = new AddSupVidBean("mioCodiceFisc","ABCD123");
-        */
+        
         
         RemSupVid remSupVid = new RemSupVidDS(ds);
         RemSupVidBean remSupVidBean = new RemSupVidBean("acs4csa45","ABCD123");
-        
+        */
+        AddAssCl addAssCl = new AddAssClDS(ds);
+        AddAssClBean addAssBean = new AddAssClBean("zzasf654", "ABCD123");
         try {
             /*
             abb.doSave(abbBean1);
@@ -135,7 +140,7 @@ public class TesterServlet extends HttpServlet {
             add.doSave(addBean4);
             add.doSave(addBean5);
         	*/
-        	remSupVid.doSave(remSupVidBean);
+        	addAssCl.doSave(addAssBean, "zzasf654", "Luigi", "Consiglio", LocalDate.of(2001, 1, 1), "em", "passw", 5000);
         	
         } catch (SQLException e) {
             // TODO Auto-generated catch block

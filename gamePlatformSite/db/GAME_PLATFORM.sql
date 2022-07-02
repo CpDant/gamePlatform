@@ -38,8 +38,6 @@ CREATE TABLE IF NOT EXISTS assistente_clienti(
     email varchar(50) NOT NULL,
     pass_word char(40) NOT NULL,
     retribuzione_annuale int NOT NULL,
-    ticket_da_risolvere int DEFAULT 0,
-    ticket_risolti int DEFAULT 0,
     PRIMARY KEY(codice_fiscale)
 );
 

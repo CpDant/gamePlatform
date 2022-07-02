@@ -28,7 +28,7 @@ public class AssistenteClientiDS implements AssistenteClienti {
 		
 		String insertSQL = "INSERT INTO " + AssistenteClientiDS.TABLE_NAME
 				+ " (CODICE_FISCALE, NOME, COGNOME, DATA_NASCITA, RUOLO, EMAIL, PASS_WORD,"
-				+ "RETRIBUZIONE_ANNUALE, TICKET_DA_RISOLVERE, TICKET_RISOLTI) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "RETRIBUZIONE_ANNUALE) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
@@ -41,8 +41,6 @@ public class AssistenteClientiDS implements AssistenteClienti {
 			preparedStmt.setString(6, ass.getEmail());
 			preparedStmt.setString(7, ass.getPassWord());
 			preparedStmt.setInt(8, ass.getRetribuzioneAnnuale());
-			preparedStmt.setInt(9, ass.getTicketDaRisolvere());
-			preparedStmt.setInt(10, ass.getTicketRisolti());
 
 			preparedStmt.executeUpdate();
 
@@ -61,13 +59,13 @@ public class AssistenteClientiDS implements AssistenteClienti {
 
 	@Override
 	public synchronized void doUpdate(AssistenteClientiBean ass, String nome, String cognome, LocalDate dataNascita, String email,
-			String password, int retribuzioneAnnuale, int ticketDaRisolvere, int ticketRisolti) throws SQLException {
+			String password, int retribuzioneAnnuale) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
 		String updateSQL = "UPDATE " + AssistenteClientiDS.TABLE_NAME
 				+ " SET NOME = ?, COGNOME = ?, DATA_NASCITA = ?, EMAIL = ?, PASS_WORD = ?,"
-				+ "RETRIBUZIONE_ANNUALE = ?, TICKET_DA_RISOLVERE = ?, TICKET_RISOLTI = ?" + " WHERE CODICE_FISCALE = ?";
+				+ "RETRIBUZIONE_ANNUALE = ?" + " WHERE CODICE_FISCALE = ?";
 		
 		try {
 			connection = ds.getConnection();
@@ -78,8 +76,6 @@ public class AssistenteClientiDS implements AssistenteClienti {
 			preparedStmt.setString(4, email);
 			preparedStmt.setString(5, password);
 			preparedStmt.setInt(6, retribuzioneAnnuale);
-			preparedStmt.setInt(7, ticketDaRisolvere);
-			preparedStmt.setInt(8, ticketRisolti);
 			preparedStmt.setString(9, ass.getCodiceFiscale());
 
 			preparedStmt.executeUpdate();
@@ -149,8 +145,6 @@ public class AssistenteClientiDS implements AssistenteClienti {
 				ass.setEmail(rs.getString("EMAIL"));
 				ass.setPassWord(rs.getString("PASS_WORD"));
 				ass.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
-				ass.setTicketDaRisolvere(rs.getInt("TICKET_DA_RISOLVERE"));
-				ass.setTicketRisolti(rs.getInt("TICKET_RISOLTI"));
 			}
 
 		} finally {
@@ -193,8 +187,6 @@ public class AssistenteClientiDS implements AssistenteClienti {
 				ass.setEmail(rs.getString("EMAIL"));
 				ass.setPassWord(rs.getString("PASS_WORD"));
 				ass.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
-				ass.setTicketDaRisolvere(rs.getInt("TICKET_DA_RISOLVERE"));
-				ass.setTicketRisolti(rs.getInt("TICKET_RISOLTI"));
 				array.add(ass);
 			}
 

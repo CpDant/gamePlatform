@@ -10,7 +10,7 @@ public interface AssistenteClienti {
 	public void doSave(AssistenteClientiBean ass) throws SQLException;
 	
 	public void doUpdate(AssistenteClientiBean sup, String nome, String cognome, LocalDate dataNascita,
-			String email, String password, int retribuzioneAnnuale, int ticketDaRisolvere, int ticketRisolti) throws SQLException;
+			String email, String password, int retribuzioneAnnuale) throws SQLException;
 
 	public boolean doDelete(String codiceFiscale) throws SQLException;
 
