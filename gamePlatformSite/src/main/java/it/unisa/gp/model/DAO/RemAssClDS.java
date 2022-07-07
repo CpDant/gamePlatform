@@ -4,14 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
 import it.unisa.gp.model.bean.RemAssClBean;
-import it.unisa.gp.model.bean.AssistenteClientiBean;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
 import it.unisa.gp.model.interfaceDS.RemAssCl;
 

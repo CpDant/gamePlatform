@@ -1,7 +1,6 @@
 package it.unisa.gp.model.interfaceDS;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Collection;
 
 import it.unisa.gp.model.bean.RemAssClBean;

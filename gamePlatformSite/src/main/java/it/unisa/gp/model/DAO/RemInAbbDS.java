@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import javax.sql.DataSource;
 
-import it.unisa.gp.model.bean.AddInAbbBean;
 import it.unisa.gp.model.bean.RemInAbbBean;
 import it.unisa.gp.model.interfaceDS.AddInAbb;
 import it.unisa.gp.model.interfaceDS.RemInAbb;
