@@ -58,35 +58,6 @@ public class AddInAbbDS implements AddInAbb{
 	}
 
 	@Override
-	public synchronized boolean doDelete(String codiceSup, String codiceVid, String name) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStmt = null;
-
-		int result = 0;
-
-		String deleteSQL = "DELETE FROM " + AddInAbbDS.TABLE_NAME + " WHERE codice_fiscale_sup_vid = ? AND CODICE_VIDEOGIOCO = ? AND nome_univoco_abb = ?";
-
-		try {
-			connection = ds.getConnection();
-			preparedStmt = connection.prepareStatement(deleteSQL);
-			preparedStmt.setString(1, codiceSup);
-			preparedStmt.setString(2, codiceVid);
-			preparedStmt.setString(3, name);
-
-			result = preparedStmt.executeUpdate();
-
-		} finally {
-			try {
-				if (preparedStmt != null)
-					preparedStmt.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
-		}
-		return (result != 0);
-	}
-	
 	public synchronized boolean doDelete(String codiceVid, String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
@@ -116,20 +87,19 @@ public class AddInAbbDS implements AddInAbb{
 	}
 
 	@Override
-	public synchronized AddInAbbBean doRetrieveByKey(String codiceSup, String codiceVid, String name) throws SQLException {
+	public synchronized AddInAbbBean doRetrieveByKey(String codiceVid, String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
 		AddInAbbBean bean = new AddInAbbBean(null,null,null);
 
-		String selectSQL = "SELECT * FROM " + AddInAbbDS.TABLE_NAME + " WHERE codice_fiscale_sup_vid = ? AND CODICE_VIDEOGIOCO = ? AND nome_univoco_abb = ?";
+		String selectSQL = "SELECT * FROM " + AddInAbbDS.TABLE_NAME + " WHERE CODICE_VIDEOGIOCO = ? AND nome_univoco_abb = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(selectSQL);
-			preparedStmt.setString(1, codiceSup);
-			preparedStmt.setString(2, codiceVid);
-			preparedStmt.setString(3, name);
+			preparedStmt.setString(1, codiceVid);
+			preparedStmt.setString(2, name);
 
 			ResultSet rs = preparedStmt.executeQuery();
 
@@ -150,6 +120,44 @@ public class AddInAbbDS implements AddInAbb{
 			}
 		}
 		return bean;
+	}
+	
+	@Override
+	public synchronized Collection<AddInAbbBean> doRetrieveByKey(String name) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		Collection<AddInAbbBean> array = new LinkedList<AddInAbbBean>();
+
+		String selectSQL = "SELECT * FROM " + AddInAbbDS.TABLE_NAME + " WHERE nome_univoco_abb = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setString(1, name);
+			
+
+			ResultSet rs = preparedStmt.executeQuery();
+
+			while (rs.next()) {
+				AddInAbbBean bean = new AddInAbbBean(null,null,null);
+				bean.setCodiceFiscaleSupVid(rs.getString("codice_fiscale_sup_vid"));
+				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setNomeUnivocoAbb(rs.getString("nome_univoco_abb"));
+				
+				array.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return array;
 	}
 
 	@Override

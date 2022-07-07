@@ -10,10 +10,9 @@ import java.util.LinkedList;
 import javax.sql.DataSource;
 import it.unisa.gp.model.bean.AddAssClBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
-import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
 import it.unisa.gp.model.interfaceDS.AddAssCl;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
-import it.unisa.gp.model.interfaceDS.SupervisoreVideogiochi;
+
 
 public class AddAssClDS implements AddAssCl{
 

@@ -81,7 +81,7 @@ public class TesterServlet extends HttpServlet {
 
         
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-        
+        /*
         Abbonamento abb = new AbbonamentoDS(ds);
         AbbonamentoBean abbBean1 = new AbbonamentoBean("donato cuozzo",30,50);
         AbbonamentoBean abbBean2 = new AbbonamentoBean("alfredo cuozzo",30,50);
@@ -103,7 +103,7 @@ public class TesterServlet extends HttpServlet {
         AddInAbbBean addBean3 = new AddInAbbBean("acs4csa45", "cas6541", "donato cuozzo");
         AddInAbbBean addBean4 = new AddInAbbBean("acs4csa45", "cas6541", "alfredo cuozzo");
         AddInAbbBean addBean5 = new AddInAbbBean("acs4csa45", "asc5", "alfredo cuozzo");
-        
+        */
         
         /*
         RemVideog rem = new RemVideogDS(ds);
@@ -125,9 +125,8 @@ public class TesterServlet extends HttpServlet {
         */
         AddAssCl addAssCl = new AddAssClDS(ds);
         AddAssClBean addAssBean = new AddAssClBean("zzasf654", "ABCD123");
-        
         try {
-            
+            /*
             abb.doSave(abbBean1);
             abb.doSave(abbBean2);
             soft.doSave(softBean);
@@ -140,14 +139,17 @@ public class TesterServlet extends HttpServlet {
             add.doSave(addBean3);
             add.doSave(addBean4);
             add.doSave(addBean5);
-        	
+        	*/
         	addAssCl.doSave(addAssBean, "zzasf654", "Luigi", "Consiglio", LocalDate.of(2001, 1, 1), "em", "passw", 5000);
         	
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-          
+        
+        
+        
+        
 
 		/*
 		AddInAbbBean bean = null;

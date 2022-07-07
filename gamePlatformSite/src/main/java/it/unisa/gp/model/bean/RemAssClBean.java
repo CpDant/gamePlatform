@@ -3,13 +3,13 @@ package it.unisa.gp.model.bean;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class RemAssistClBean implements Serializable{
+public class RemAssClBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private String codiceFiscaleAssistCl;
 	private String codiceFiscaleAdmin;
 	
-	public RemAssistClBean(String codiceFiscaleAssistCl, String codiceFiscaleAdmin) {
+	public RemAssClBean(String codiceFiscaleAssistCl, String codiceFiscaleAdmin) {
 		super();
 		this.codiceFiscaleAssistCl = codiceFiscaleAssistCl;
 		this.codiceFiscaleAdmin = codiceFiscaleAdmin;
@@ -32,7 +32,7 @@ public class RemAssistClBean implements Serializable{
 	}
 
 	public String toString() {
-		return "RemAssistClBean [codiceFiscaleAssistCl=" + codiceFiscaleAssistCl + ", codiceFiscaleAdmin="
+		return "RemAssClBean [codiceFiscaleAssistCl=" + codiceFiscaleAssistCl + ", codiceFiscaleAdmin="
 				+ codiceFiscaleAdmin + "]";
 	}
 
@@ -44,7 +44,7 @@ public class RemAssistClBean implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RemAssistClBean other = (RemAssistClBean) obj;
+		RemAssClBean other = (RemAssClBean) obj;
 		return Objects.equals(codiceFiscaleAdmin, other.codiceFiscaleAdmin)
 				&& Objects.equals(codiceFiscaleAssistCl, other.codiceFiscaleAssistCl);
 	}

@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 import it.unisa.gp.model.bean.ModVideogBean;
-import it.unisa.gp.model.bean.VideogiocoBean;
 import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
 
 public interface ModVideog {

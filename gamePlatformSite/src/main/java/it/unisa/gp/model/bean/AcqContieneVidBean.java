@@ -7,12 +7,12 @@ public class AcqContieneVidBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private String codiceVidoegioco;
+	private String codiceVideogioco;
 	
-	public AcqContieneVidBean(int id, String codiceVidoegioco) {
+	public AcqContieneVidBean(int id, String codiceVideogioco) {
 		super();
 		this.id = id;
-		this.codiceVidoegioco = codiceVidoegioco;
+		this.codiceVideogioco = codiceVideogioco;
 	}
 
 	public int getId() {
@@ -23,16 +23,16 @@ public class AcqContieneVidBean implements Serializable{
 		this.id = id;
 	}
 
-	public String getCodiceVidoegioco() {
-		return codiceVidoegioco;
+	public String getCodiceVideogioco() {
+		return codiceVideogioco;
 	}
 
-	public void setCodiceVidoegioco(String codiceVidoegioco) {
-		this.codiceVidoegioco = codiceVidoegioco;
+	public void setCodiceVideogioco(String codiceVideogioco) {
+		this.codiceVideogioco = codiceVideogioco;
 	}
 
 	public String toString() {
-		return "AcqContieneVidBean [id=" + id + ", codiceVidoegioco=" + codiceVidoegioco + "]";
+		return "AcqContieneVidBean [id=" + id + ", codiceVideogioco=" + codiceVideogioco + "]";
 	}
 	
 	public boolean equals(Object obj) {
@@ -43,7 +43,7 @@ public class AcqContieneVidBean implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		AcqContieneVidBean other = (AcqContieneVidBean) obj;
-		return Objects.equals(codiceVidoegioco, other.codiceVidoegioco) && id == other.id;
+		return Objects.equals(codiceVideogioco, other.codiceVideogioco) && id == other.id;
 	}
 	
 	
