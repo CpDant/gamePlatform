@@ -9,11 +9,11 @@ public interface AddInAbb {
 
 	public void doSave(AddInAbbBean addInAbb) throws SQLException;
 	
-	public boolean doDelete(String codiceSup, String codiceVid, String name) throws SQLException;
-	
 	public boolean doDelete(String codiceVid, String name) throws SQLException;
 
-	public AddInAbbBean doRetrieveByKey(String codiceSup, String codiceVid, String name) throws SQLException;
+	public AddInAbbBean doRetrieveByKey(String codiceVid, String name) throws SQLException;
+	
+	public Collection<AddInAbbBean> doRetrieveByKey(String name) throws SQLException;
 	
 	public Collection<AddInAbbBean> doRetrieveAll(String order) throws SQLException;
 	
