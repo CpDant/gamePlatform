@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 import java.util.Collection;
 
 import it.unisa.gp.model.DAO.AbbonamentoDS;
+import it.unisa.gp.model.DAO.AcqContieneAbbDS;
+import it.unisa.gp.model.DAO.AcqContieneVidDS;
 import it.unisa.gp.model.DAO.AcquistiDS;
 import it.unisa.gp.model.DAO.AddAssClDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
@@ -45,6 +47,8 @@ import it.unisa.gp.model.bean.AddSupVidBean;
 import it.unisa.gp.model.bean.VideogiocoBean;
 import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
 import it.unisa.gp.model.interfaceDS.Abbonamento;
+import it.unisa.gp.model.interfaceDS.AcqContieneAbb;
+import it.unisa.gp.model.interfaceDS.AcqContieneVid;
 import it.unisa.gp.model.interfaceDS.Acquisti;
 import it.unisa.gp.model.interfaceDS.AddAssCl;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
@@ -123,11 +127,8 @@ public class TesterServlet extends HttpServlet {
         AddInAbbBean addBean3 = new AddInAbbBean("acs4csa45", "cas6541", "donato cuozzo");
         AddInAbbBean addBean4 = new AddInAbbBean("acs4csa45", "cas6541", "alfredo cuozzo");
         AddInAbbBean addBean5 = new AddInAbbBean("acs4csa45", "asc5", "alfredo cuozzo");
-<<<<<<< HEAD
-=======
+
         */
->>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
-        
         /*
         RemVideog rem = new RemVideogDS(ds);
         RemVideogBean beanR = new RemVideogBean("acs4csa45", "cas6541");
@@ -147,12 +148,7 @@ public class TesterServlet extends HttpServlet {
         RemSupVidBean remSupVidBean = new RemSupVidBean("acs4csa45","ABCD123");
         
         */
-        AddAssCl addAssCl = new AddAssClDS(ds);
-<<<<<<< HEAD
-        AddAssClBean addAssBean = new AddAssClBean("zzasf654", "ABCD123");
-=======
-        AddAssClBean addAssBean = new AddAssClBean("sballo", "ABCD123");
-        */
+
         
         //Tickets tick = new TicketsDS(ds)
         
@@ -188,9 +184,8 @@ public class TesterServlet extends HttpServlet {
         AddVideogBean addVidBean2 = new AddVideogBean("berrfsdsd","xcas65412");
         */
         
->>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
         try {
-            
+            /*
             abb.doSave(abbBean1);
             abb.doSave(abbBean2);
             soft.doSave(softBean);
@@ -203,9 +198,8 @@ public class TesterServlet extends HttpServlet {
             add.doSave(addBean3);
             add.doSave(addBean4);
             add.doSave(addBean5);
-<<<<<<< HEAD
-=======
-        	modAbb.doSave(bean1,"alfredo cuozzo",20,10);
+        	
+            modAbb.doSave(bean1,"alfredo cuozzo",20,10);
         	modAbb.doSave(bean2,"donato cuozzo",40,100);
         	
         	addAssCl.doSave(addAssBean, "sballo", "Marco", "Maffeo", LocalDate.of(2002,1,7), "banana33@gmail.com", "fragola86", 2);;
@@ -216,11 +210,8 @@ public class TesterServlet extends HttpServlet {
         	acqAbb.doSave(acqAbbBean1);
         	acqAbb.doSave(acqAbbBean2);
         	addVid.doSave(addVidBean2);
->>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
-        	
-<<<<<<< HEAD
+
         	addAssCl.doSave(addAssBean, "zzasf654", "Luigi", "Consiglio", LocalDate.of(2001, 1, 1), "em", "passw", 5000);
-=======
         	addVid.doSave(addVidBean2,"xcas65412", "ea sports", "moto gp", 645, 2020, 73, Pegi.sette);
         	*/
         	/*
@@ -231,7 +222,6 @@ public class TesterServlet extends HttpServlet {
         	acq.doUpdate(id);
         	*/
         	fat.doSave(id, LocalDateTime.now());
->>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
         	
         } catch (SQLException e) {
             // TODO Auto-generated catch block

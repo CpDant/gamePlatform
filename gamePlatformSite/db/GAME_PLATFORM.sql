@@ -242,6 +242,7 @@ CREATE TABLE IF NOT EXISTS mod_abb(
 CREATE TABLE IF NOT EXISTS acq_contiene_vid(
 	id int NOT NULL,
     codice_videogioco varchar(15) NOT NULL,
+    costo int NOT NULL,
     PRIMARY KEY(id, codice_videogioco),
     FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(id) REFERENCES acquisti(id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -249,7 +250,8 @@ CREATE TABLE IF NOT EXISTS acq_contiene_vid(
 
 CREATE TABLE IF NOT EXISTS acq_contiene_abb(
 	id int NOT NULL,
-    nome_univoco_abb varchar(20) NOT NULL, 
+    nome_univoco_abb varchar(20) NOT NULL,
+    costo int NOT NULL,
     PRIMARY KEY(id, nome_univoco_abb),
     FOREIGN KEY(nome_univoco_abb) REFERENCES abbonamento(nome_univoco) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(id) REFERENCES acquisti(id) ON UPDATE CASCADE ON DELETE CASCADE
