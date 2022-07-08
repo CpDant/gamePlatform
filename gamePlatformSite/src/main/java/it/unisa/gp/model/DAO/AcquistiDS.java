@@ -31,10 +31,13 @@ public class AcquistiDS implements Acquisti{
 	
 	
 	@Override
-	public synchronized void doSave(AcquistiBean acq) throws SQLException {
+	public synchronized void doSave(int id, String codFisc, String codiceRiscatto,
+			LocalDateTime dataOra, long numeroCartaPag) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		PreparedStatement preparedStmtIndFatt = null;
+		
+		
 		
 		String insertSQL = "INSERT INTO " + AcquistiDS.TABLE_NAME
 				+ " (ID, CODICE_RISCATTO, CODICE_FISCALE_CLIENTE, COSTO_IVA, COSTO_NETTO, DATA_ORA, IND_FATT, NUMERO_CARTA_PAGAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -46,26 +49,27 @@ public class AcquistiDS implements Acquisti{
 			connection = ds.getConnection();
 			
 			preparedStmtIndFatt = connection.prepareStatement(indFattSQL);
-			preparedStmtIndFatt.setString(1, acq.getCodiceFiscaleCliente());
-			ResultSet rs = preparedStmtIndFatt.executeQuery();
+			preparedStmtIndFatt.setString(1, codFisc);
+			ResultSet rs2 = preparedStmtIndFatt.executeQuery();
 			String indFatt = null;
-			if(rs.next()) {
-				indFatt = rs.getString("IND_FATT");
+			if(rs2.next()) {
+				indFatt = rs2.getString("IND_FATT");
 			}
 			
 			preparedStmt = connection.prepareStatement(insertSQL);
-			preparedStmt.setInt(1, acq.getId());
-			preparedStmt.setString(2, acq.getCodiceRiscatto());
-			preparedStmt.setString(3, acq.getCodiceFiscaleCliente());
-			preparedStmt.setInt(4, acq.getCostoIva());
-			preparedStmt.setInt(5, acq.getCostoNetto());
-			preparedStmt.setTimestamp(6, Timestamp.valueOf(acq.getDataOra()));
+			preparedStmt.setInt(1, id);
+			preparedStmt.setString(2, codiceRiscatto);
+			preparedStmt.setString(3, codFisc);
+			preparedStmt.setInt(4, 0);
+			preparedStmt.setInt(5, 0);
+			preparedStmt.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
 			preparedStmt.setString(7, indFatt);
-			preparedStmt.setLong(8, acq.getNumeroCartaPag());
+			preparedStmt.setLong(8, numeroCartaPag);
 			preparedStmt.executeUpdate();
 
 			connection.setAutoCommit(false);
 			connection.commit();
+			
 		} finally {
 			try {
 				if (preparedStmt != null)
@@ -81,7 +85,7 @@ public class AcquistiDS implements Acquisti{
 	}
 
 	@Override
-	public void doUpdate(AcquistiBean acq, String codRisc, int costIva, int costNetto, LocalDateTime dataOra,
+	public synchronized void doUpdate(AcquistiBean acq, String codRisc, int costIva, int costNetto, LocalDateTime dataOra,
 			String indFatt, long numCartaPag) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
@@ -116,7 +120,7 @@ public class AcquistiDS implements Acquisti{
 	}
 
 	@Override
-	public boolean doDelete(int name) throws SQLException {
+	public synchronized boolean doDelete(int name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -144,7 +148,7 @@ public class AcquistiDS implements Acquisti{
 	}
 
 	@Override
-	public AcquistiBean doRetrieveByKey(int id) throws SQLException {
+	public synchronized AcquistiBean doRetrieveByKey(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -182,7 +186,7 @@ public class AcquistiDS implements Acquisti{
 	}
 
 	@Override
-	public Collection<AcquistiBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<AcquistiBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
@@ -225,6 +229,71 @@ public class AcquistiDS implements Acquisti{
 			}
 		}
 		return acq;
+	}
+
+
+	@Override
+	public synchronized void doUpdate(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmtUpdate = null;
+		PreparedStatement preparedStmtCostoVid = null;
+		PreparedStatement preparedStmtCostoAbb = null;
+		
+		String costoVideogiocoSQL = "SELECT SUM(COSTO) AS COSTO_VID FROM acq_contiene_vid AS CONT_VID, videogioco AS VID"
+				+ " WHERE VID.CODICE = CONT_VID.CODICE_VIDEOGIOCO AND CONT_VID.ID = ?";
+		
+		String costoAbbonamentoSQL = "SELECT SUM(COSTO) AS COSTO_ABB FROM acq_contiene_abb AS CONT_ABB, abbonamento AS ABB"
+				+ " WHERE ABB.NOME_UNIVOCO = CONT_ABB.NOME_UNIVOCO_ABB AND CONT_ABB.ID = ?";
+		
+		String updateSQL = "UPDATE " + AcquistiDS.TABLE_NAME + " SET COSTO_IVA = ?, COSTO_NETTO = ? "
+				+ "WHERE ID = ?";
+		
+		try {
+			connection = ds.getConnection();
+			
+			preparedStmtCostoAbb = connection.prepareStatement(costoAbbonamentoSQL);
+			preparedStmtCostoAbb.setInt(1, id);
+			ResultSet rs = preparedStmtCostoAbb.executeQuery();
+			int costoAbb = 0;
+			if(rs.next()) {
+				costoAbb = rs.getInt("COSTO_ABB");
+			}
+			
+			preparedStmtCostoVid = connection.prepareStatement(costoVideogiocoSQL);
+			preparedStmtCostoVid.setInt(1, id);
+			ResultSet rs1 = preparedStmtCostoVid.executeQuery();
+			int costoVid = 0;
+			if(rs1.next()) {
+				costoVid = rs1.getInt("COSTO_VID");
+			}
+			
+			int costo = costoVid + costoAbb;
+			int costoIva = costo * AcquistiBean.iva / 100;
+			int costoNetto = costo - costoIva;
+			
+			preparedStmtUpdate = connection.prepareStatement(updateSQL);
+			preparedStmtUpdate.setInt(1, costoIva);
+			preparedStmtUpdate.setInt(2, costoNetto);
+			preparedStmtUpdate.setInt(3, id);
+			
+			preparedStmtUpdate.executeUpdate();
+
+			connection.setAutoCommit(false);
+			connection.commit();
+			
+		} finally {
+			try {
+				if (preparedStmtUpdate != null)
+					preparedStmtUpdate.close();
+				if (preparedStmtCostoVid != null)
+					preparedStmtCostoVid.close();
+				if (preparedStmtCostoAbb != null)
+					preparedStmtCostoAbb.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
 	}
 
 }

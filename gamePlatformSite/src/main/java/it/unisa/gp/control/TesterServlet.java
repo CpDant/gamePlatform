@@ -21,6 +21,7 @@ import it.unisa.gp.model.DAO.AcquistiDS;
 import it.unisa.gp.model.DAO.AddAssClDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
 import it.unisa.gp.model.DAO.ClientiDS;
+import it.unisa.gp.model.DAO.FatturaDS;
 import it.unisa.gp.model.DAO.ModAbbDS;
 import it.unisa.gp.model.DAO.RemAssClDS;
 import it.unisa.gp.model.DAO.RemInAbbDS;
@@ -58,6 +59,7 @@ import it.unisa.gp.model.interfaceDS.Acquisti;
 import it.unisa.gp.model.interfaceDS.AddAssCl;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
 import it.unisa.gp.model.interfaceDS.Clienti;
+import it.unisa.gp.model.interfaceDS.Fattura;
 import it.unisa.gp.model.interfaceDS.ModAbb;
 import it.unisa.gp.model.interfaceDS.RemAssCl;
 import it.unisa.gp.model.interfaceDS.RemInAbb;
@@ -94,6 +96,24 @@ public class TesterServlet extends HttpServlet {
         
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
         
+        AcqContieneAbb abb = new AcqContieneAbbDS(ds);
+        AcqContieneVid vid = new AcqContieneVidDS(ds);
+        Acquisti acq = new AcquistiDS(ds);
+        Fattura fat = new FatturaDS(ds);
+        
+        
+        
+        int id = 123;
+        
+        
+        /*
+        AcqContieneAbbBean contAbbBean = new AcqContieneAbbBean(id, "alfredo cuozzo");
+        AcqContieneAbbBean contAbbBean1 = new AcqContieneAbbBean(id, "donato cuozzo");
+        
+        AcqContieneVidBean contVidBean = new AcqContieneVidBean(id, "asc5");
+        */
+        
+        /*
         Abbonamento abb = new AbbonamentoDS(ds);
         AbbonamentoBean abbBean1 = new AbbonamentoBean("donato cuozzo",30,50);
         AbbonamentoBean abbBean2 = new AbbonamentoBean("alfredo cuozzo",30,50);
@@ -117,7 +137,7 @@ public class TesterServlet extends HttpServlet {
         AddInAbbBean addBean3 = new AddInAbbBean("acs4csa45", "cas6541", "donato cuozzo");
         AddInAbbBean addBean4 = new AddInAbbBean("acs4csa45", "cas6541", "alfredo cuozzo");
         AddInAbbBean addBean5 = new AddInAbbBean("acs4csa45", "asc5", "alfredo cuozzo");
-        
+        */
         
         /*
         RemVideog rem = new RemVideogDS(ds);
@@ -142,6 +162,8 @@ public class TesterServlet extends HttpServlet {
         AddAssCl addAssCl = new AddAssClDS(ds);
         AddAssClBean addAssBean = new AddAssClBean("sballo", "ABCD123");
         */
+        
+        //Tickets tick = new TicketsDS(ds)
         
         /*
         ModAbb modAbb = new ModAbbDS(ds);
@@ -169,11 +191,11 @@ public class TesterServlet extends HttpServlet {
         AcqContieneAbbBean acqAbbBean2 = new AcqContieneAbbBean(2,"donato cuozzo");
         */
         
-        
+        /*
         AddVideog addVid = new AddVideogDS(ds);
         AddVideogBean addVidBean1 = new AddVideogBean("berrfsdsd","ads4657");
         AddVideogBean addVidBean2 = new AddVideogBean("berrfsdsd","xcas65412");
-        
+        */
         
         try {
         	 /*
@@ -192,16 +214,26 @@ public class TesterServlet extends HttpServlet {
             add.doSave(addBean5);
         	modAbb.doSave(bean1,"alfredo cuozzo",20,10);
         	modAbb.doSave(bean2,"donato cuozzo",40,100);
+        	
         	addAssCl.doSave(addAssBean, "sballo", "Marco", "Maffeo", LocalDate.of(2002,1,7), "banana33@gmail.com", "fragola86", 2);;
+        	
         	acq.doSave(acqBean);
         	acqVid.doSave(acqVidBean1);
         	acqVid.doSave(acqVidBean2);
         	acqAbb.doSave(acqAbbBean1);
         	acqAbb.doSave(acqAbbBean2);
         	addVid.doSave(addVidBean2);
-        	*/
-        	addVid.doSave(addVidBean2,"xcas65412", "ea sports", "moto gp", 645, 2020, 73, Pegi.sette);
         	
+        	addVid.doSave(addVidBean2,"xcas65412", "ea sports", "moto gp", 645, 2020, 73, Pegi.sette);
+        	*/
+        	/*
+        	acq.doSave(id, "CJDEJFKMWOI3", "RISCATTOX", LocalDateTime.now(), 654851544566L);
+        	abb.doSave(contAbbBean1);
+        	abb.doSave(contAbbBean);
+        	vid.doSave(contVidBean);
+        	acq.doUpdate(id);
+        	*/
+        	fat.doSave(id, LocalDateTime.now());
         	
         } catch (SQLException e) {
             // TODO Auto-generated catch block

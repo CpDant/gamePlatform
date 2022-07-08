@@ -41,27 +41,32 @@ public class ServletTickets extends HttpServlet {
 		out.println("<p> Ciao </p>");
 		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+		
 		Tickets tic = new TicketsDS(ds);
-		TicketsBean bean = new TicketsBean(54,"123de","DNTFNC02A07L245L", CategoriaProbl.account, "ciao", LocalDateTime.of(2000,5,7,19,30));
-	
+		/*
+		TicketsBean bean = new TicketsBean(54,"sballo","CJDEJFKMWOI3", CategoriaProbl.account, "ciao afvelhcavsdhjk l avcbvbad kjvcabnvad jbcvakbjuac", LocalDateTime.now());
+		TicketsBean bean1 = new TicketsBean(546,"sballo","GDFSAOIAFSJM", CategoriaProbl.pagamenti, "testro pers", LocalDateTime.now());
+		TicketsBean bean2 = new TicketsBean(1,"zzasf654","GDFSAOIAFSJM", CategoriaProbl.abbonamenti, "example test", LocalDateTime.now());
 		//funziona
 		try {
-			tic.doSave(bean);
+			//tic.doSave(bean);
+			tic.doSave(bean1);
+			tic.doSave(bean2);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
-		/*//funziona
+		
 		try {
 			tic.doUpdate(bean, false, CategoriaProbl.pagamenti, "bunogiorno", LocalDateTime.of(2000,6,8,21,56));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-		
 		*/
+		
 		
 		/*
 		try {
@@ -81,19 +86,21 @@ public class ServletTickets extends HttpServlet {
 		}
 		
 		out.println(bean.toString()); 	//print di debug
-		
+		*/
 		
 		Collection<TicketsBean> tick = null;
 
 		try {
-			tick = (Collection<TicketsBean>) tic.doRetrieveAll("ID ASC");
+			tick = (Collection<TicketsBean>) tic.doRetrieveAllCliente(null, "GDFSAOIAFSJM");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		out.println(tick.toString()); 
-		*/
+		
+		
+		
 	
 	}
 

@@ -17,5 +17,9 @@ public interface Tickets {
 
 	public TicketsBean doRetrieveByKey(int id) throws SQLException;
 	
+	public Collection<TicketsBean> doRetrieveAllCliente(String order, String codFisc) throws SQLException;
+	
+	public Collection<TicketsBean> doRetrieveAllAssCl(String order, String codFisc) throws SQLException;
+	
 	public Collection<TicketsBean> doRetrieveAll(String order) throws SQLException;
 }

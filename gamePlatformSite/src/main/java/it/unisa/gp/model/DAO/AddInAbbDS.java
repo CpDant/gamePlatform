@@ -123,7 +123,7 @@ public class AddInAbbDS implements AddInAbb{
 	}
 	
 	@Override
-	public synchronized Collection<AddInAbbBean> doRetrieveByKey(String name) throws SQLException {
+	public synchronized Collection<AddInAbbBean> doRetrieveAllAbbonamento(String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
