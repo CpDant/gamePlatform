@@ -15,7 +15,7 @@ import it.unisa.gp.model.interfaceDS.AcqContieneVid;
 
 public class AcqContieneVidDS implements AcqContieneVid{
 
-private static final String TABLE_NAME = "acq_contiene_vid";
+	private static final String TABLE_NAME = "acq_contiene_vid";
 	
 	private DataSource ds = null;
 	
@@ -28,19 +28,31 @@ private static final String TABLE_NAME = "acq_contiene_vid";
 	
 	
 	@Override
-	public synchronized void doSave(AcqContieneVidBean acqVid) throws SQLException {
+	public synchronized void doSave(int id, String codiceVid) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
+		PreparedStatement preparedStmtCosto = null;
 		
 		String insertSQL = "INSERT INTO " + AcqContieneVidDS.TABLE_NAME
 				+ " (id, CODICE_VIDEOGIOCO, COSTO) VALUES (?, ?, ?)";
 		
+		String selectSQL = "SELECT COSTO FROM VIDEOGIOCO WHERE CODICE = ?";
+		
 		try {
 			connection = ds.getConnection();
+			
+			preparedStmtCosto = connection.prepareStatement(selectSQL);
+			preparedStmtCosto.setString(1, codiceVid);
+			ResultSet rs = preparedStmtCosto.executeQuery();
+			int costo = 0;
+			if(rs.next()) {
+				costo = rs.getInt("costo");
+			}
+			
 			preparedStmt = connection.prepareStatement(insertSQL);
-			preparedStmt.setInt(1, acqVid.getId());
-			preparedStmt.setString(2, acqVid.getCodiceVideogioco());
-			preparedStmt.setInt(3, acqVid.getCosto());
+			preparedStmt.setInt(1, id);
+			preparedStmt.setString(2, codiceVid);
+			preparedStmt.setInt(3, costo);
 
 			preparedStmt.executeUpdate();
 

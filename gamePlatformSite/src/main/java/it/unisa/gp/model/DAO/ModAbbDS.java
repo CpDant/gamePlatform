@@ -29,7 +29,7 @@ public class ModAbbDS implements ModAbb{
 	
 	
 	@Override
-	public void doSave(ModAbbBean modBean, String nomeUnivoco, int costo, int durata) throws SQLException {
+	public void doSave(ModAbbBean modBean, String nomeUnivoco, int costo, int durata, boolean eliminato) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
@@ -59,7 +59,7 @@ public class ModAbbDS implements ModAbb{
 		
 		Abbonamento abb = new AbbonamentoDS(ds);
 		AbbonamentoBean abbBean = new AbbonamentoBean(nomeUnivoco,0,0);
-		abb.doUpdate(abbBean,costo,durata);
+		abb.doUpdate(abbBean,costo,durata,eliminato);
 		
 	}
 

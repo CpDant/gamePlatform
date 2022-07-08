@@ -26,21 +26,31 @@ public class AcqContieneAbbDS implements AcqContieneAbb{
 	}
 	
 	@Override
-	public synchronized void doSave(AcqContieneAbbBean acqAbb) throws SQLException {
+	public synchronized void doSave(int id, String codiceAbb) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
-		
+		PreparedStatement preparedStmtCosto = null;
+
 		String insertSQL = "INSERT INTO " + AcqContieneAbbDS.TABLE_NAME
 				+ " (id, nome_univoco_abb, costo) VALUES (?,?,?)";
 		
+		String selectSQL = "SELECT COSTO FROM ABBONAMENTO WHERE NOME_UNIVOCO = ?";
+				
 		try {
 			connection = ds.getConnection();	
 			
+			preparedStmtCosto = connection.prepareStatement(selectSQL);
+			preparedStmtCosto.setString(1, codiceAbb);
+			ResultSet rs = preparedStmtCosto.executeQuery();
+			int costo = 0;
+			if(rs.next()) {
+				costo = rs.getInt("costo");
+			}
 			
 			preparedStmt = connection.prepareStatement(insertSQL);
-			preparedStmt.setInt(1, acqAbb.getId());
-			preparedStmt.setString(2, acqAbb.getNomeUnivocoAbb());
-			preparedStmt.setInt(3, acqAbb.getCosto());
+			preparedStmt.setInt(1, id);
+			preparedStmt.setString(2, codiceAbb);
+			preparedStmt.setInt(3, costo);
 			
 			preparedStmt.executeUpdate();
 

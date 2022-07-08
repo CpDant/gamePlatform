@@ -32,6 +32,8 @@ import it.unisa.gp.model.DAO.AddInAbbDS;
 import it.unisa.gp.model.DAO.AddSupVidDS;
 import it.unisa.gp.model.DAO.VideogiocoDS;
 import it.unisa.gp.model.bean.AbbonamentoBean;
+import it.unisa.gp.model.bean.AcqContieneAbbBean;
+import it.unisa.gp.model.bean.AcqContieneVidBean;
 import it.unisa.gp.model.bean.AcquistiBean;
 import it.unisa.gp.model.bean.AddAssClBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
@@ -88,27 +90,18 @@ public class TesterServlet extends HttpServlet {
         
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
         
-        AcqContieneAbb abb = new AcqContieneAbbDS(ds);
-        AcqContieneVid vid = new AcqContieneVidDS(ds);
+        /*
+        AcqContieneAbb aca = new AcqContieneAbbDS(ds);
+        AcqContieneVid acv = new AcqContieneVidDS(ds);
         Acquisti acq = new AcquistiDS(ds);
         Fattura fat = new FatturaDS(ds);
-        
-        
-        
+                
         int id = 123;
         
-        
-        /*
-        AcqContieneAbbBean contAbbBean = new AcqContieneAbbBean(id, "alfredo cuozzo");
-        AcqContieneAbbBean contAbbBean1 = new AcqContieneAbbBean(id, "donato cuozzo");
-        
-        AcqContieneVidBean contVidBean = new AcqContieneVidBean(id, "asc5");
-        */
-        
-        /*
+       
         Abbonamento abb = new AbbonamentoDS(ds);
-        AbbonamentoBean abbBean1 = new AbbonamentoBean("donato cuozzo",30,50);
-        AbbonamentoBean abbBean2 = new AbbonamentoBean("alfredo cuozzo",30,50);
+        AbbonamentoBean abbBean1 = new AbbonamentoBean("xbox pass",30,15);
+        AbbonamentoBean abbBean2 = new AbbonamentoBean("playstation pass",30,25);
 
         SoftwareHouse soft = new SoftwareHouseDS(ds);
         SoftwareHouseBean softBean = new SoftwareHouseBean("ea sports", "usa", LocalDate.of(1995, 10, 3));
@@ -122,17 +115,38 @@ public class TesterServlet extends HttpServlet {
         SupervisoreVideogiochiBean supBean = new SupervisoreVideogiochiBean("acs4csa45", "ciro", "Vitale", LocalDate.of(2001, 10, 3), "ciro@email", "passwrod", 51000);
 
         AddInAbb add = new AddInAbbDS(ds);
-        AddInAbbBean addBean1 = new AddInAbbBean("acs4csa45", "asc5", "donato cuozzo");
-        AddInAbbBean addBean2 = new AddInAbbBean("acs4csa45", "ads465", "donato cuozzo");
-        AddInAbbBean addBean3 = new AddInAbbBean("acs4csa45", "cas6541", "donato cuozzo");
-        AddInAbbBean addBean4 = new AddInAbbBean("acs4csa45", "cas6541", "alfredo cuozzo");
-        AddInAbbBean addBean5 = new AddInAbbBean("acs4csa45", "asc5", "alfredo cuozzo");
-
-        */
-        /*
-        RemVideog rem = new RemVideogDS(ds);
-        RemVideogBean beanR = new RemVideogBean("acs4csa45", "cas6541");
-        */
+        AddInAbbBean addBean1 = new AddInAbbBean("acs4csa45", "asc5", "xbox pass");
+        AddInAbbBean addBean2 = new AddInAbbBean("acs4csa45", "ads465", "xbox pass");
+        AddInAbbBean addBean3 = new AddInAbbBean("acs4csa45", "cas6541", "xbox pass");
+        AddInAbbBean addBean4 = new AddInAbbBean("acs4csa45", "cas6541", "playstation pass");
+        AddInAbbBean addBean5 = new AddInAbbBean("acs4csa45", "asc5", "playstation pass"); 
+        
+ 
+        try {
+        	
+        	abb.doSave(abbBean1);
+			abb.doSave(abbBean2);
+			soft.doSave(softBean);
+			vid.doSave(vidBean1);
+			vid.doSave(vidBean2);
+			vid.doSave(vidBean3);
+			sup.doSave(supBean);
+			add.doSave(addBean1);
+			add.doSave(addBean2);
+			add.doSave(addBean3);
+			add.doSave(addBean4);
+			add.doSave(addBean5);
+			
+			
+			
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
+		*/
+        
+    
         
         /*
         RemInAbb remAbb = new RemInAbbDS(ds);
@@ -162,21 +176,32 @@ public class TesterServlet extends HttpServlet {
         RemAssCl remAssCl = new RemAssClDS(ds);
         RemAssClBean remAssClBean = new RemAssClBean("sballo","ABCD123");
         */
-        /*
+        
+        
         Acquisti acq = new AcquistiDS(ds);
-        AcquistiBean acqBean = new AcquistiBean(2,"CODICE","CJDEJFKMWOI3",30,70,LocalDateTime.of(2022,10,14,17,34,21),null,5333122);
-        */
-      
-        /*
+        //AcquistiBean acqBean = new AcquistiBean(123,"CODICE","CJDEJFKMWOI3",30,70,LocalDateTime.of(2022,10,14,17,34,21),null,5333122);
         AcqContieneVid acqVid = new AcqContieneVidDS(ds);
-        AcqContieneVidBean acqVidBean1 = new AcqContieneVidBean(1,"ads465");
-        AcqContieneVidBean acqVidBean2 = new AcqContieneVidBean(2,"asc5");
-        
-        
         AcqContieneAbb acqAbb = new AcqContieneAbbDS(ds);
-        AcqContieneAbbBean acqAbbBean1 = new AcqContieneAbbBean(1,"alfredo cuozzo");
-        AcqContieneAbbBean acqAbbBean2 = new AcqContieneAbbBean(2,"donato cuozzo");
-        */
+        
+        RemVideog rem = new RemVideogDS(ds);
+        RemVideogBean beanR = new RemVideogBean("acs4csa45", "asc5");
+        
+        
+        try {
+			/*acq.doSave(123,"GDFSAOIAFSJM", "CODICE", LocalDateTime.of(2022,10,14,17,34,21), 5333122L);
+			acqVid.doSave(123, "ads465");
+			acqVid.doSave(123, "asc5");
+			acqAbb.doSave(123, "xbox pass");
+			acq.doUpdate(123);
+			*/
+        	rem.doSave(beanR);
+        
+        } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+
         
         /*
         AddVideog addVid = new AddVideogDS(ds);
@@ -184,6 +209,7 @@ public class TesterServlet extends HttpServlet {
         AddVideogBean addVidBean2 = new AddVideogBean("berrfsdsd","xcas65412");
         */
         
+        /*
         try {
             /*
             abb.doSave(abbBean1);
@@ -220,14 +246,15 @@ public class TesterServlet extends HttpServlet {
         	abb.doSave(contAbbBean);
         	vid.doSave(contVidBean);
         	acq.doUpdate(id);
-        	*/
+        	
+        
         	fat.doSave(id, LocalDateTime.now());
         	
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+        */
         
         
         

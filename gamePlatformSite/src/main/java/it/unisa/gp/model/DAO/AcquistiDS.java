@@ -239,10 +239,10 @@ public class AcquistiDS implements Acquisti{
 		PreparedStatement preparedStmtCostoVid = null;
 		PreparedStatement preparedStmtCostoAbb = null;
 		
-		String costoVideogiocoSQL = "SELECT SUM(COSTO) AS COSTO_VID FROM acq_contiene_vid AS CONT_VID, videogioco AS VID"
+		String costoVideogiocoSQL = "SELECT SUM(CONT_VID.COSTO) AS COSTO_VID FROM acq_contiene_vid AS CONT_VID, videogioco AS VID"
 				+ " WHERE VID.CODICE = CONT_VID.CODICE_VIDEOGIOCO AND CONT_VID.ID = ?";
 		
-		String costoAbbonamentoSQL = "SELECT SUM(COSTO) AS COSTO_ABB FROM acq_contiene_abb AS CONT_ABB, abbonamento AS ABB"
+		String costoAbbonamentoSQL = "SELECT SUM(CONT_ABB.COSTO) AS COSTO_ABB FROM acq_contiene_abb AS CONT_ABB, abbonamento AS ABB"
 				+ " WHERE ABB.NOME_UNIVOCO = CONT_ABB.NOME_UNIVOCO_ABB AND CONT_ABB.ID = ?";
 		
 		String updateSQL = "UPDATE " + AcquistiDS.TABLE_NAME + " SET COSTO_IVA = ?, COSTO_NETTO = ? "

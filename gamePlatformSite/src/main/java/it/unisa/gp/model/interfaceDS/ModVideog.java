@@ -9,7 +9,7 @@ import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
 public interface ModVideog {
 
 	public void doSave(ModVideogBean rem, String codice, String nomeVideogioco, int dimensione, int annoProduzione,
-			int costo, Pegi pegi) throws SQLException;
+			int costo, Pegi pegi,  boolean eliminato) throws SQLException;
 	
 	public boolean doDelete(String codiceFiscaleSupVid, String codiceVideogioco) throws SQLException;
 

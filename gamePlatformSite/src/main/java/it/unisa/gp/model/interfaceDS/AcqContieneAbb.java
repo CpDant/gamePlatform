@@ -7,7 +7,7 @@ import it.unisa.gp.model.bean.AcqContieneAbbBean;
 
 public interface AcqContieneAbb {
 
-	public void doSave(AcqContieneAbbBean acqAbb) throws SQLException;
+	public void doSave(int id, String codiceAbb) throws SQLException;
 	
 	public boolean doDelete(int id, String codiceAbb) throws SQLException;
 

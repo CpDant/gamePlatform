@@ -8,7 +8,7 @@ import it.unisa.gp.model.bean.ModAbbBean;
 
 public interface ModAbb {
 
-	public void doSave(ModAbbBean modBean, String nomeUnivoco, int costo, int durata) throws SQLException;
+	public void doSave(ModAbbBean modBean, String nomeUnivoco, int costo, int durata,  boolean eliminato) throws SQLException;
 	
 	public boolean doDelete(String codSup, String nome) throws SQLException;
 

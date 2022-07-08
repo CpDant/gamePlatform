@@ -7,7 +7,7 @@ import it.unisa.gp.model.bean.AcqContieneVidBean;
 
 public interface AcqContieneVid {
 
-	public void doSave(AcqContieneVidBean acqVid) throws SQLException;
+	public void doSave(int id, String codiceVid) throws SQLException;
 	
 	public boolean doDelete(int id, String codiceVid) throws SQLException;
 
