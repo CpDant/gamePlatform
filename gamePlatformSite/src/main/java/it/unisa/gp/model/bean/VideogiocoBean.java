@@ -14,6 +14,7 @@ public class VideogiocoBean implements Serializable {
     private Pegi pegi;
     private int  annoDiProduzione;
     private int costo;
+    private boolean eliminato;
     
 	public VideogiocoBean(String codice, String nomeSoftwareHouse, String nomeVideogioco, int dimensione,
 			int annoDiProduzione, int costo, Pegi pegi) {
@@ -68,11 +69,18 @@ public class VideogiocoBean implements Serializable {
 	public void setCosto(int costo) {
 		this.costo = costo;
 	}
+	
+	public boolean isEliminato() {
+		return eliminato;
+	}
+	public void setEliminato(boolean eliminato) {
+		this.eliminato = eliminato;
+	}
 
 	public String toString() {
 		return "VideogiocoBean [codice=" + codice + ", nomeSoftwareHouse=" + nomeSoftwareHouse + ", nomeVideogioco="
 				+ nomeVideogioco + ", dimensione=" + dimensione + ", pegi=" + pegi +", annoDiProduzione=" + annoDiProduzione + ", costo="
-				+ costo + "]";
+				+ costo + ", eliminato=" + eliminato +"]";
 	}
 
 	public boolean equals(Object obj) {
@@ -87,7 +95,8 @@ public class VideogiocoBean implements Serializable {
 				&& costo == other.costo && dimensione == other.dimensione
 				&& Objects.equals(nomeSoftwareHouse, other.nomeSoftwareHouse)
 				&& Objects.equals(nomeVideogioco, other.nomeVideogioco)
-				&& Objects.equals(pegi, other.pegi);
+				&& Objects.equals(pegi, other.pegi)
+				&& eliminato == other.eliminato;
 	}
 	
 }

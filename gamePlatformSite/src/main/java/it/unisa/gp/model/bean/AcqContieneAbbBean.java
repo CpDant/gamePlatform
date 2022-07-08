@@ -7,12 +7,14 @@ public class AcqContieneAbbBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int id;
+	private int costo;
 	private String nomeUnivocoAbb;
 	
-	public AcqContieneAbbBean(int id, String nomeUnivocoAbb) {
+	public AcqContieneAbbBean(int id, String nomeUnivocoAbb, int costo) {
 		super();
 		this.id = id;
 		this.nomeUnivocoAbb = nomeUnivocoAbb;
+		this.costo = costo;
 	}
 
 	public int getId() {
@@ -31,8 +33,17 @@ public class AcqContieneAbbBean implements Serializable{
 		this.nomeUnivocoAbb = nomeUnivocoAbb;
 	}
 
+
+	public int getCosto() {
+		return costo;
+	}
+
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
+	
 	public String toString() {
-		return "AcqContieneAbbBean [id=" + id + ", nomeUnivocoAbb=" + nomeUnivocoAbb + "]";
+		return "AcqContieneAbbBean [id=" + id + ", nomeUnivocoAbb=" + nomeUnivocoAbb + ", costo=" + costo + "]";
 	}
 
 	public boolean equals(Object obj) {
@@ -43,10 +54,7 @@ public class AcqContieneAbbBean implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		AcqContieneAbbBean other = (AcqContieneAbbBean) obj;
-		return id == other.id && Objects.equals(nomeUnivocoAbb, other.nomeUnivocoAbb);
+		return id == other.id && Objects.equals(nomeUnivocoAbb, other.nomeUnivocoAbb) && costo == other.costo;
 	}
-	
-	
-	
 	
 }

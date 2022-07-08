@@ -7,6 +7,7 @@ public class AcqContieneVidBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int id;
+	private int costo;
 	private String codiceVideogioco;
 	
 	public AcqContieneVidBean(int id, String codiceVideogioco) {
@@ -31,8 +32,16 @@ public class AcqContieneVidBean implements Serializable{
 		this.codiceVideogioco = codiceVideogioco;
 	}
 
+	public int getCosto() {
+		return costo;
+	}
+
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
+	
 	public String toString() {
-		return "AcqContieneVidBean [id=" + id + ", codiceVideogioco=" + codiceVideogioco + "]";
+		return "AcqContieneVidBean [id=" + id + ", codiceVideogioco=" + codiceVideogioco + ", costo=" + costo + "]";
 	}
 	
 	public boolean equals(Object obj) {
@@ -43,9 +52,8 @@ public class AcqContieneVidBean implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		AcqContieneVidBean other = (AcqContieneVidBean) obj;
-		return Objects.equals(codiceVideogioco, other.codiceVideogioco) && id == other.id;
+		return Objects.equals(codiceVideogioco, other.codiceVideogioco) && id == other.id && costo == other.costo;
 	}
-	
-	
+
 	
 }
