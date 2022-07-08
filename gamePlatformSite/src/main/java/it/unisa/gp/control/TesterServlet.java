@@ -23,6 +23,7 @@ import it.unisa.gp.model.DAO.AssistenteClientiDS;
 import it.unisa.gp.model.DAO.ClientiDS;
 import it.unisa.gp.model.DAO.FatturaDS;
 import it.unisa.gp.model.DAO.ModAbbDS;
+import it.unisa.gp.model.DAO.ModVideogDS;
 import it.unisa.gp.model.DAO.RemInAbbDS;
 import it.unisa.gp.model.DAO.RemSupVidDS;
 import it.unisa.gp.model.DAO.RemVideogDS;
@@ -39,6 +40,7 @@ import it.unisa.gp.model.bean.AddAssClBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
 import it.unisa.gp.model.bean.ClientiBean;
 import it.unisa.gp.model.bean.ModAbbBean;
+import it.unisa.gp.model.bean.ModVideogBean;
 import it.unisa.gp.model.bean.RemInAbbBean;
 import it.unisa.gp.model.bean.RemSupVidBean;
 import it.unisa.gp.model.bean.RemVideogBean;
@@ -57,6 +59,7 @@ import it.unisa.gp.model.interfaceDS.AssistenteClienti;
 import it.unisa.gp.model.interfaceDS.Clienti;
 import it.unisa.gp.model.interfaceDS.Fattura;
 import it.unisa.gp.model.interfaceDS.ModAbb;
+import it.unisa.gp.model.interfaceDS.ModVideog;
 import it.unisa.gp.model.interfaceDS.RemInAbb;
 import it.unisa.gp.model.interfaceDS.RemSupVid;
 import it.unisa.gp.model.interfaceDS.RemVideog;
@@ -186,6 +189,10 @@ public class TesterServlet extends HttpServlet {
         RemVideog rem = new RemVideogDS(ds);
         RemVideogBean beanR = new RemVideogBean("acs4csa45", "asc5");
         
+        ModVideog modVid = new ModVideogDS(ds);
+        ModVideogBean modBean = new ModVideogBean("acs4csa45", "ads465");
+        
+        Fattura fat = new FatturaDS(ds);
         
         try {
 			/*acq.doSave(123,"GDFSAOIAFSJM", "CODICE", LocalDateTime.of(2022,10,14,17,34,21), 5333122L);
@@ -193,9 +200,13 @@ public class TesterServlet extends HttpServlet {
 			acqVid.doSave(123, "asc5");
 			acqAbb.doSave(123, "xbox pass");
 			acq.doUpdate(123);
-			*/
+			
         	rem.doSave(beanR);
-        
+        	modVid.doSave(modBean, "ads465", "rocket", 645, 2015, 100, Pegi.tre, false);        	
+			*/
+        	
+        	fat.doSave(123, LocalDateTime.now());
+        	
         } catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
