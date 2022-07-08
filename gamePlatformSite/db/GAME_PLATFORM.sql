@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS videogioco(
     pegi enum('tre', 'sette', 'dodici', 'sedici', 'diciotto') NOT NULL,
     anno_di_produzione int,
     costo int NOT NULL,
+    eliminato boolean DEFAULT false,
     PRIMARY KEY(codice),
     FOREIGN KEY(nome_software_house) REFERENCES software_house(nome_univoco) ON UPDATE CASCADE ON DELETE CASCADE 
 );
