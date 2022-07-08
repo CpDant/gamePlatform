@@ -42,11 +42,12 @@ public class ServletClienti extends HttpServlet {
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		Clienti abb = new ClientiDS(ds);
 		
-		ClientiBean bean = new ClientiBean("CJDEJFKMWOI3", "Francesco Paolo", "D'Antuono", LocalDate.of(2012, 1, 7), "francescopaolo177@gmail.com" ,"passwordBella", "CpDant", "Via Casa D'Auria 3");
-		
+		//ClientiBean bean = new ClientiBean("CJDEJFKMWOI3", "Francesco Paolo", "D'Antuono", LocalDate.of(2012, 1, 7), "francescopaolo177@gmail.com" ,"passwordBella", "CpDant", "Via Casa D'Auria 3");
+		ClientiBean bean1 = new ClientiBean("GDFSAOIAFSJM", "Ciro Paolo", "SFDAFA", LocalDate.of(2012, 1, 7), "francescopaolo177@gmail.com" ,"passwordBella", "CpDant", "Via Casa D'Auria 3");
 		
 		try {
-			abb.doSave(bean);
+			//abb.doSave(bean);
+			abb.doSave(bean1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

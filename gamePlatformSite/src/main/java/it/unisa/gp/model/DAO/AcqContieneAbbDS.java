@@ -34,7 +34,9 @@ public class AcqContieneAbbDS implements AcqContieneAbb{
 				+ " (id, nome_univoco_abb) VALUES (?, ?)";
 		
 		try {
-			connection = ds.getConnection();
+			connection = ds.getConnection();	
+			
+			
 			preparedStmt = connection.prepareStatement(insertSQL);
 			preparedStmt.setInt(1, acqAbb.getId());
 			preparedStmt.setString(2, acqAbb.getNomeUnivocoAbb());

@@ -19,6 +19,7 @@ import it.unisa.gp.model.DAO.AcquistiDS;
 import it.unisa.gp.model.DAO.AddAssClDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
 import it.unisa.gp.model.DAO.ClientiDS;
+import it.unisa.gp.model.DAO.FatturaDS;
 import it.unisa.gp.model.DAO.ModAbbDS;
 import it.unisa.gp.model.DAO.RemInAbbDS;
 import it.unisa.gp.model.DAO.RemSupVidDS;
@@ -48,6 +49,7 @@ import it.unisa.gp.model.interfaceDS.Acquisti;
 import it.unisa.gp.model.interfaceDS.AddAssCl;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
 import it.unisa.gp.model.interfaceDS.Clienti;
+import it.unisa.gp.model.interfaceDS.Fattura;
 import it.unisa.gp.model.interfaceDS.ModAbb;
 import it.unisa.gp.model.interfaceDS.RemInAbb;
 import it.unisa.gp.model.interfaceDS.RemSupVid;
@@ -82,6 +84,24 @@ public class TesterServlet extends HttpServlet {
         
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
         
+        AcqContieneAbb abb = new AcqContieneAbbDS(ds);
+        AcqContieneVid vid = new AcqContieneVidDS(ds);
+        Acquisti acq = new AcquistiDS(ds);
+        Fattura fat = new FatturaDS(ds);
+        
+        
+        
+        int id = 123;
+        
+        
+        /*
+        AcqContieneAbbBean contAbbBean = new AcqContieneAbbBean(id, "alfredo cuozzo");
+        AcqContieneAbbBean contAbbBean1 = new AcqContieneAbbBean(id, "donato cuozzo");
+        
+        AcqContieneVidBean contVidBean = new AcqContieneVidBean(id, "asc5");
+        */
+        
+        /*
         Abbonamento abb = new AbbonamentoDS(ds);
         AbbonamentoBean abbBean1 = new AbbonamentoBean("donato cuozzo",30,50);
         AbbonamentoBean abbBean2 = new AbbonamentoBean("alfredo cuozzo",30,50);
@@ -103,6 +123,10 @@ public class TesterServlet extends HttpServlet {
         AddInAbbBean addBean3 = new AddInAbbBean("acs4csa45", "cas6541", "donato cuozzo");
         AddInAbbBean addBean4 = new AddInAbbBean("acs4csa45", "cas6541", "alfredo cuozzo");
         AddInAbbBean addBean5 = new AddInAbbBean("acs4csa45", "asc5", "alfredo cuozzo");
+<<<<<<< HEAD
+=======
+        */
+>>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
         
         /*
         RemVideog rem = new RemVideogDS(ds);
@@ -124,7 +148,47 @@ public class TesterServlet extends HttpServlet {
         
         */
         AddAssCl addAssCl = new AddAssClDS(ds);
+<<<<<<< HEAD
         AddAssClBean addAssBean = new AddAssClBean("zzasf654", "ABCD123");
+=======
+        AddAssClBean addAssBean = new AddAssClBean("sballo", "ABCD123");
+        */
+        
+        //Tickets tick = new TicketsDS(ds)
+        
+        /*
+        ModAbb modAbb = new ModAbbDS(ds);
+        ModAbbBean bean1 = new ModAbbBean("acs4csa45", "alfredo cuozzo");
+        ModAbbBean bean2 = new ModAbbBean("acs4csa45", "donato cuozzo");
+        */
+        
+        /*
+        RemAssCl remAssCl = new RemAssClDS(ds);
+        RemAssClBean remAssClBean = new RemAssClBean("sballo","ABCD123");
+        */
+        /*
+        Acquisti acq = new AcquistiDS(ds);
+        AcquistiBean acqBean = new AcquistiBean(2,"CODICE","CJDEJFKMWOI3",30,70,LocalDateTime.of(2022,10,14,17,34,21),null,5333122);
+        */
+      
+        /*
+        AcqContieneVid acqVid = new AcqContieneVidDS(ds);
+        AcqContieneVidBean acqVidBean1 = new AcqContieneVidBean(1,"ads465");
+        AcqContieneVidBean acqVidBean2 = new AcqContieneVidBean(2,"asc5");
+        
+        
+        AcqContieneAbb acqAbb = new AcqContieneAbbDS(ds);
+        AcqContieneAbbBean acqAbbBean1 = new AcqContieneAbbBean(1,"alfredo cuozzo");
+        AcqContieneAbbBean acqAbbBean2 = new AcqContieneAbbBean(2,"donato cuozzo");
+        */
+        
+        /*
+        AddVideog addVid = new AddVideogDS(ds);
+        AddVideogBean addVidBean1 = new AddVideogBean("berrfsdsd","ads4657");
+        AddVideogBean addVidBean2 = new AddVideogBean("berrfsdsd","xcas65412");
+        */
+        
+>>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
         try {
             
             abb.doSave(abbBean1);
@@ -139,8 +203,35 @@ public class TesterServlet extends HttpServlet {
             add.doSave(addBean3);
             add.doSave(addBean4);
             add.doSave(addBean5);
+<<<<<<< HEAD
+=======
+        	modAbb.doSave(bean1,"alfredo cuozzo",20,10);
+        	modAbb.doSave(bean2,"donato cuozzo",40,100);
         	
+        	addAssCl.doSave(addAssBean, "sballo", "Marco", "Maffeo", LocalDate.of(2002,1,7), "banana33@gmail.com", "fragola86", 2);;
+        	
+        	acq.doSave(acqBean);
+        	acqVid.doSave(acqVidBean1);
+        	acqVid.doSave(acqVidBean2);
+        	acqAbb.doSave(acqAbbBean1);
+        	acqAbb.doSave(acqAbbBean2);
+        	addVid.doSave(addVidBean2);
+>>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
+        	
+<<<<<<< HEAD
         	addAssCl.doSave(addAssBean, "zzasf654", "Luigi", "Consiglio", LocalDate.of(2001, 1, 1), "em", "passw", 5000);
+=======
+        	addVid.doSave(addVidBean2,"xcas65412", "ea sports", "moto gp", 645, 2020, 73, Pegi.sette);
+        	*/
+        	/*
+        	acq.doSave(id, "CJDEJFKMWOI3", "RISCATTOX", LocalDateTime.now(), 654851544566L);
+        	abb.doSave(contAbbBean1);
+        	abb.doSave(contAbbBean);
+        	vid.doSave(contVidBean);
+        	acq.doUpdate(id);
+        	*/
+        	fat.doSave(id, LocalDateTime.now());
+>>>>>>> branch 'master' of https://github.com/CpDant/gamePlatform.git
         	
         } catch (SQLException e) {
             // TODO Auto-generated catch block

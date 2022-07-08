@@ -13,7 +13,7 @@ public interface AddInAbb {
 
 	public AddInAbbBean doRetrieveByKey(String codiceVid, String name) throws SQLException;
 	
-	public Collection<AddInAbbBean> doRetrieveByKey(String name) throws SQLException;
+	public Collection<AddInAbbBean> doRetrieveAllAbbonamento(String name) throws SQLException;
 	
 	public Collection<AddInAbbBean> doRetrieveAll(String order) throws SQLException;
 	

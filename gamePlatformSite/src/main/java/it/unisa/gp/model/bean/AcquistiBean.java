@@ -7,6 +7,7 @@ import java.util.Objects;
 public class AcquistiBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	public static int iva = 22;
 	private int id;
 	private String codiceRiscatto;
 	private String codiceFiscaleCliente;
@@ -27,6 +28,14 @@ public class AcquistiBean implements Serializable{
 		this.dataOra = dataOra;
 		this.indFatt = indFatt;
 		this.numeroCartaPag = numeroCartaPag;
+	}
+	
+	public int getIva() {
+		return AcquistiBean.iva;
+	}
+
+	public void setIva(int iva) {
+		AcquistiBean.iva = iva;
 	}
 
 	public int getId() {
