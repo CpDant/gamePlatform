@@ -146,12 +146,6 @@ CREATE TABLE IF NOT EXISTS fattura(
     FOREIGN KEY(id) REFERENCES acquisti(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS dispositivo(
-	nome varchar(20) NOT NULL,
-    codice_videogioco varchar(15) NOT NULL,
-    PRIMARY KEY(nome, codice_videogioco),
-    FOREIGN KEY(codice_videogioco) REFERENCES videogioco(codice) ON UPDATE CASCADE ON DELETE CASCADE
-);
 
 
 
