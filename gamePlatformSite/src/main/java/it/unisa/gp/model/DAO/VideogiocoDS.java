@@ -27,7 +27,7 @@ public class VideogiocoDS implements Videogioco {
 		
 		String insertSQL = "INSERT INTO " + VideogiocoDS.TABLE_NAME
 				+ " (CODICE, NOME_SOFTWARE_HOUSE, NOME_VIDEOGIOCO, DIMENSIONE, PEGI, "
-				+ "ANNO_DI_PRODUZIONE, COSTO) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				+ "ANNO_DI_PRODUZIONE, COSTO, ELIMINATO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
@@ -39,7 +39,8 @@ public class VideogiocoDS implements Videogioco {
 			preparedStmt.setString(5, vid.getPegi().toString());
 			preparedStmt.setInt(6, vid.getAnnoDiProduzione());
 			preparedStmt.setInt(7, vid.getCosto());
-
+			preparedStmt.setBoolean(8, vid.isEliminato());
+			
 			preparedStmt.executeUpdate();
 
 			connection.setAutoCommit(false);
@@ -57,12 +58,12 @@ public class VideogiocoDS implements Videogioco {
 
 	@Override
 	public synchronized void doUpdate(VideogiocoBean vid, String nomeVideogioco, int dimensione, Pegi pegi, int annoProduzione,
-			int costo) throws SQLException {
+			int costo, boolean eliminato) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
 		String updateSQL = "UPDATE " + VideogiocoDS.TABLE_NAME
-				+ " SET NOME_VIDEOGIOCO = ?, DIMENSIONE = ?, PEGI = ?, ANNO_DI_PRODUZIONE = ?, COSTO = ?" + " WHERE CODICE = ?";
+				+ " SET NOME_VIDEOGIOCO = ?, DIMENSIONE = ?, PEGI = ?, ANNO_DI_PRODUZIONE = ?, COSTO = ?, ELIMINATO = ?" + " WHERE CODICE = ?";
 		
 		try {
 			connection = ds.getConnection();
@@ -72,8 +73,9 @@ public class VideogiocoDS implements Videogioco {
 			preparedStmt.setString(3, pegi.toString());
 			preparedStmt.setInt(4, annoProduzione);
 			preparedStmt.setInt(5, costo);
-			preparedStmt.setString(6, vid.getCodice());
-
+			preparedStmt.setBoolean(6, vid.isEliminato());
+			preparedStmt.setString(7, vid.getCodice());
+			
 			preparedStmt.executeUpdate();
 
 			connection.setAutoCommit(false);
@@ -88,25 +90,25 @@ public class VideogiocoDS implements Videogioco {
 			}
 		}
 		
-		
 	}
 
 	@Override
-	public synchronized boolean doDelete(String codice) throws SQLException {
+	public synchronized void doDelete(String codice) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
-
-		int result = 0;
-
-		String deleteSQL = "DELETE FROM " + VideogiocoDS.TABLE_NAME + " WHERE CODICE = ?";
-
+		
+		String updateSQL = "UPDATE " + VideogiocoDS.TABLE_NAME
+				+ " SET ELIMINATO = TRUE" + " WHERE CODICE = ?";
+		
 		try {
 			connection = ds.getConnection();
-			preparedStmt = connection.prepareStatement(deleteSQL);
+			preparedStmt = connection.prepareStatement(updateSQL);
 			preparedStmt.setString(1, codice);
+			
+			preparedStmt.executeUpdate();
 
-			result = preparedStmt.executeUpdate();
-
+			connection.setAutoCommit(false);
+			connection.commit();
 		} finally {
 			try {
 				if (preparedStmt != null)
@@ -116,7 +118,6 @@ public class VideogiocoDS implements Videogioco {
 					connection.close();
 			}
 		}
-		return (result != 0);
 	}
 
 	@Override
@@ -143,6 +144,7 @@ public class VideogiocoDS implements Videogioco {
 				bean.setPegi(Pegi.valueOf(rs.getString("PEGI")));
 				bean.setAnnoDiProduzione(rs.getInt("ANNO_DI_PRODUZIONE"));
 				bean.setCosto(rs.getInt("COSTO"));
+				bean.setEliminato(rs.getBoolean("ELIMINATO"));
 			}
 
 		} finally {
@@ -186,6 +188,7 @@ public class VideogiocoDS implements Videogioco {
 				bean.setPegi(Pegi.valueOf(rs.getString("PEGI")));
 				bean.setAnnoDiProduzione(rs.getInt("ANNO_DI_PRODUZIONE"));
 				bean.setCosto(rs.getInt("COSTO"));
+				bean.setEliminato(rs.getBoolean("ELIMINATO"));
 				array.add(bean);
 			}
 

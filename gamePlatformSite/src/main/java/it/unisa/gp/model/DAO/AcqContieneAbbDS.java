@@ -31,7 +31,7 @@ public class AcqContieneAbbDS implements AcqContieneAbb{
 		PreparedStatement preparedStmt = null;
 		
 		String insertSQL = "INSERT INTO " + AcqContieneAbbDS.TABLE_NAME
-				+ " (id, nome_univoco_abb) VALUES (?, ?)";
+				+ " (id, nome_univoco_abb, costo) VALUES (?,?,?)";
 		
 		try {
 			connection = ds.getConnection();	
@@ -40,7 +40,8 @@ public class AcqContieneAbbDS implements AcqContieneAbb{
 			preparedStmt = connection.prepareStatement(insertSQL);
 			preparedStmt.setInt(1, acqAbb.getId());
 			preparedStmt.setString(2, acqAbb.getNomeUnivocoAbb());
-
+			preparedStmt.setInt(3, acqAbb.getCosto());
+			
 			preparedStmt.executeUpdate();
 
 			connection.setAutoCommit(false);
@@ -71,7 +72,7 @@ public class AcqContieneAbbDS implements AcqContieneAbb{
 			preparedStmt = connection.prepareStatement(deleteSQL);
 			preparedStmt.setInt(1, id);
 			preparedStmt.setString(2, codiceAbb);
-
+			
 			result = preparedStmt.executeUpdate();
 
 		} finally {
@@ -91,7 +92,7 @@ public class AcqContieneAbbDS implements AcqContieneAbb{
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		AcqContieneAbbBean bean = new AcqContieneAbbBean(0,null);
+		AcqContieneAbbBean bean = new AcqContieneAbbBean(0,null,0);
 
 		String selectSQL = "SELECT * FROM " + AcqContieneAbbDS.TABLE_NAME + " WHERE id = ? AND nome_univoco_abb = ?";
 
@@ -106,7 +107,7 @@ public class AcqContieneAbbDS implements AcqContieneAbb{
 			while (rs.next()) {
 				bean.setId(rs.getInt("id"));
 				bean.setNomeUnivocoAbb(rs.getString("nome_univoco_abb"));
-				
+				bean.setCosto(rs.getInt("costo"));
 			}
 
 		} finally {
@@ -142,10 +143,11 @@ public class AcqContieneAbbDS implements AcqContieneAbb{
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while (rs.next()) {
-				AcqContieneAbbBean bean = new AcqContieneAbbBean(0,null);
+				AcqContieneAbbBean bean = new AcqContieneAbbBean(0,null,0);
 				
 				bean.setId(rs.getInt("id"));
 				bean.setNomeUnivocoAbb(rs.getString("nome_univoco_abb"));
+				bean.setCosto(rs.getInt("costo"));
 				array.add(bean);
 			}
 

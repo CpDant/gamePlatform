@@ -14,7 +14,7 @@ public class VideogiocoBean implements Serializable {
     private Pegi pegi;
     private int  annoDiProduzione;
     private int costo;
-    private boolean eliminato;
+    private boolean eliminato = false;
     
 	public VideogiocoBean(String codice, String nomeSoftwareHouse, String nomeVideogioco, int dimensione,
 			int annoDiProduzione, int costo, Pegi pegi) {

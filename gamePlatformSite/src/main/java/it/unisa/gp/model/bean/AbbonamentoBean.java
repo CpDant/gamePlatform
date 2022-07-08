@@ -9,6 +9,7 @@ public class AbbonamentoBean implements Serializable{
 	private String nomeUnivoco;
     private int costo;
     private int durata;
+    private boolean eliminato = false; 
     
 	public AbbonamentoBean(String nomeUnivoco, int costo, int durata) {
 		super();
@@ -36,8 +37,17 @@ public class AbbonamentoBean implements Serializable{
 		this.durata = durata;
 	}
 
+	public boolean isEliminato() {
+		return eliminato;
+	}
+
+	public void setEliminato(boolean eliminato) {
+		this.eliminato = eliminato;
+	}
+	
+	
 	public String toString() {
-		return "AbbonamentoBean [nomeUnivoco=" + nomeUnivoco + ", costo=" + costo + ", durata=" + durata + "]";
+		return "AbbonamentoBean [nomeUnivoco=" + nomeUnivoco + ", costo=" + costo + ", durata=" + durata + ", eliminato=" +eliminato+ "]";
 	}
 
 	public boolean equals(Object obj) {
@@ -48,7 +58,9 @@ public class AbbonamentoBean implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		AbbonamentoBean other = (AbbonamentoBean) obj;
-		return costo == other.costo && durata == other.durata && Objects.equals(nomeUnivoco, other.nomeUnivoco);
+		return costo == other.costo && durata == other.durata && Objects.equals(nomeUnivoco, other.nomeUnivoco) && eliminato == other.eliminato;
 	}
+
+
 
 }

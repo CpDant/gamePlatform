@@ -33,13 +33,14 @@ private static final String TABLE_NAME = "acq_contiene_vid";
 		PreparedStatement preparedStmt = null;
 		
 		String insertSQL = "INSERT INTO " + AcqContieneVidDS.TABLE_NAME
-				+ " (id, CODICE_VIDEOGIOCO) VALUES (?, ?)";
+				+ " (id, CODICE_VIDEOGIOCO, COSTO) VALUES (?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(insertSQL);
 			preparedStmt.setInt(1, acqVid.getId());
 			preparedStmt.setString(2, acqVid.getCodiceVideogioco());
+			preparedStmt.setInt(3, acqVid.getCosto());
 
 			preparedStmt.executeUpdate();
 
@@ -91,7 +92,7 @@ private static final String TABLE_NAME = "acq_contiene_vid";
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 
-		AcqContieneVidBean bean = new AcqContieneVidBean(0,null);
+		AcqContieneVidBean bean = new AcqContieneVidBean(0,null,0);
 
 		String selectSQL = "SELECT * FROM " + AcqContieneVidDS.TABLE_NAME + " WHERE id = ? AND CODICE_VIDEOGIOCO = ?";
 
@@ -106,7 +107,7 @@ private static final String TABLE_NAME = "acq_contiene_vid";
 			while (rs.next()) {
 				bean.setId(rs.getInt("id"));
 				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
-				
+				bean.setCosto(rs.getInt("COSTO"));
 			}
 
 		} finally {
@@ -142,10 +143,11 @@ private static final String TABLE_NAME = "acq_contiene_vid";
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while (rs.next()) {
-				AcqContieneVidBean bean = new AcqContieneVidBean(0,null);
+				AcqContieneVidBean bean = new AcqContieneVidBean(0,null,0);
 				
 				bean.setId(rs.getInt("id"));
 				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setCosto(rs.getInt("COSTO"));
 				array.add(bean);
 			}
 

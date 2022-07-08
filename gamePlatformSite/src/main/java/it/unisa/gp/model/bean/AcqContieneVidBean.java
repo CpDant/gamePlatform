@@ -10,10 +10,11 @@ public class AcqContieneVidBean implements Serializable{
 	private int costo;
 	private String codiceVideogioco;
 	
-	public AcqContieneVidBean(int id, String codiceVideogioco) {
+	public AcqContieneVidBean(int id, String codiceVideogioco, int costo) {
 		super();
 		this.id = id;
 		this.codiceVideogioco = codiceVideogioco;
+		this.costo = costo;
 	}
 
 	public int getId() {

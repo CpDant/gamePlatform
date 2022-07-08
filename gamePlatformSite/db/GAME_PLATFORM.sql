@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS abbonamento(
 	nome_univoco varchar(20) NOT NULL,
     costo int NOT NULL,
     durata tinyint NOT NULL,
+    eliminato boolean DEFAULT false,
     PRIMARY KEY(nome_univoco)
 );
 

@@ -33,7 +33,7 @@ public class AbbonamentoDS implements Abbonamento{
 		PreparedStatement preparedStmt = null;
 		
 		String insertSQL = "INSERT INTO " + AbbonamentoDS.TABLE_NAME
-				+ " (NOME_UNIVOCO, COSTO, DURATA) VALUES (?, ?, ?)";
+				+ " (NOME_UNIVOCO, COSTO, DURATA, ELIMINATO) VALUES (?, ?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection();
@@ -41,6 +41,7 @@ public class AbbonamentoDS implements Abbonamento{
 			preparedStmt.setString(1, abb.getNomeUnivoco());
 			preparedStmt.setInt(2, abb.getCosto());
 			preparedStmt.setInt(3, abb.getDurata());
+			preparedStmt.setBoolean(4, abb.isEliminato());
 
 			preparedStmt.executeUpdate();
 
@@ -59,19 +60,20 @@ public class AbbonamentoDS implements Abbonamento{
 	}
 
 	@Override
-	public synchronized void doUpdate(AbbonamentoBean abb, int costo, int durata) throws SQLException {
+	public synchronized void doUpdate(AbbonamentoBean abb, int costo, int durata, boolean eliminato) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		
 		String updateSQL = "UPDATE " + AbbonamentoDS.TABLE_NAME
-				+ " SET COSTO = ? , DURATA = ?" + " WHERE NOME_UNIVOCO = ?";
+				+ " SET COSTO = ? , DURATA = ? , ELIMINATO = ?" + " WHERE NOME_UNIVOCO = ?";
 		
 		try {
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(updateSQL);
 			preparedStmt.setInt(1, costo);
 			preparedStmt.setInt(2, durata);
-			preparedStmt.setString(3, abb.getNomeUnivoco());
+			preparedStmt.setBoolean(3, eliminato);
+			preparedStmt.setString(4, abb.getNomeUnivoco());
 
 			preparedStmt.executeUpdate();
 
@@ -87,25 +89,25 @@ public class AbbonamentoDS implements Abbonamento{
 			}
 		}
 		
-		
 	}
 
 	@Override
-	public synchronized boolean doDelete(String name) throws SQLException {
+	public synchronized void doDelete(String name) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
-
-		int result = 0;
-
-		String deleteSQL = "DELETE FROM " + AbbonamentoDS.TABLE_NAME + " WHERE NOME_UNIVOCO = ?";
-
+		
+		String updateSQL = "UPDATE " + AbbonamentoDS.TABLE_NAME
+				+ " SET ELIMINATO = TRUE" + " WHERE NOME_UNIVOCO = ?";
+		
 		try {
 			connection = ds.getConnection();
-			preparedStmt = connection.prepareStatement(deleteSQL);
+			preparedStmt = connection.prepareStatement(updateSQL);
 			preparedStmt.setString(1, name);
 
-			result = preparedStmt.executeUpdate();
+			preparedStmt.executeUpdate();
 
+			connection.setAutoCommit(false);
+			connection.commit();
 		} finally {
 			try {
 				if (preparedStmt != null)
@@ -115,7 +117,6 @@ public class AbbonamentoDS implements Abbonamento{
 					connection.close();
 			}
 		}
-		return (result != 0);
 	}
 
 	@Override
@@ -139,6 +140,7 @@ public class AbbonamentoDS implements Abbonamento{
 				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
 				bean.setCosto(rs.getInt("COSTO"));
 				bean.setDurata(rs.getInt("DURATA"));
+				bean.setEliminato(rs.getBoolean("ELIMINATO"));
 			}
 
 		} finally {
@@ -180,6 +182,7 @@ public class AbbonamentoDS implements Abbonamento{
 				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
 				bean.setCosto(rs.getInt("COSTO"));
 				bean.setDurata(rs.getInt("DURATA"));
+				bean.setEliminato(rs.getBoolean("ELIMINATO"));
 				array.add(bean);
 			}
 

@@ -9,9 +9,9 @@ public interface Videogioco {
 	public void doSave(VideogiocoBean vid) throws SQLException;
 	
 	public void doUpdate(VideogiocoBean vid, String nomeVideogioco, int dimensione, Pegi pegi,
-			int annoProduzione, int costo) throws SQLException;
+			int annoProduzione, int costo, boolean eliminato) throws SQLException;
 
-	public boolean doDelete(String codice) throws SQLException;
+	public void doDelete(String codice) throws SQLException;
 
 	public VideogiocoBean doRetrieveByKey(String codice) throws SQLException;
 	
