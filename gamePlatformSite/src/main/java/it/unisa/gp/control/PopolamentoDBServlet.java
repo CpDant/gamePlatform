@@ -31,6 +31,7 @@ import it.unisa.gp.model.DAO.SoftwareHouseDS;
 import it.unisa.gp.model.DAO.SupervisoreVideogiochiDS;
 import it.unisa.gp.model.DAO.AddInAbbDS;
 import it.unisa.gp.model.DAO.AddSupVidDS;
+import it.unisa.gp.model.DAO.AdministratorsDS;
 import it.unisa.gp.model.DAO.VideogiocoDS;
 import it.unisa.gp.model.bean.AbbonamentoBean;
 import it.unisa.gp.model.bean.AcqContieneAbbBean;
@@ -48,6 +49,7 @@ import it.unisa.gp.model.bean.SoftwareHouseBean;
 import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
 import it.unisa.gp.model.bean.AddInAbbBean;
 import it.unisa.gp.model.bean.AddSupVidBean;
+import it.unisa.gp.model.bean.AdministratorsBean;
 import it.unisa.gp.model.bean.VideogiocoBean;
 import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
 import it.unisa.gp.model.interfaceDS.Abbonamento;
@@ -67,19 +69,20 @@ import it.unisa.gp.model.interfaceDS.SoftwareHouse;
 import it.unisa.gp.model.interfaceDS.SupervisoreVideogiochi;
 import it.unisa.gp.model.interfaceDS.AddInAbb;
 import it.unisa.gp.model.interfaceDS.AddSupVid;
+import it.unisa.gp.model.interfaceDS.Administrators;
 import it.unisa.gp.model.interfaceDS.Videogioco;
 
 /**
- * Servlet implementation class TesterServlet
+ * Servlet implementation class PopolamentoDBServlet
  */
-@WebServlet("/TesterServlet")
-public class TesterServlet extends HttpServlet {
+@WebServlet("/PopolamentoDBServlet")
+public class PopolamentoDBServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public TesterServlet() {
+	public PopolamentoDBServlet() {
 		super();
 	}
 
@@ -92,6 +95,43 @@ public class TesterServlet extends HttpServlet {
 
         
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+        
+        // Creazione DataSource necessari
+        Administrators adminDS = new AdministratorsDS(ds);
+        AddAssCl addAssClDS = new AddAssClDS(ds);
+        AddSupVid addSupVidDS = new AddSupVidDS(ds);
+        
+        
+        
+        
+        // Administrators
+        AdministratorsBean adminBean = new AdministratorsBean("CZZLRD76L31F205Y", "Alfredo", "Cuozzo", LocalDate.of(1976, 7, 31), "alfred@email.it", "acs9q8s6", 40000);
+        
+        // Add Assistente Clienti
+        AddAssClBean addAssClBean1 = new AddAssClBean("RSSMRA80C16H501O", "CZZLRD76L31F205Y");
+        AddAssClBean addAssClBean2 = new AddAssClBean("DNGMHL95T28M082G", "CZZLRD76L31F205Y");
+        
+        // Add Supervisore Videogiochi
+        AddSupVidBean addSupVidBean1 = new AddSupVidBean("NDRNCL71A02F205D", "CZZLRD76L31F205Y");
+        AddSupVidBean addSupVidBean2 = new AddSupVidBean("VRRMSM99S23F839O", "CZZLRD76L31F205Y");
+        
+        
+        // Aggiunta al DB
+        try {
+        	// Administrators
+			adminDS.doSave(adminBean);
+			
+			// Assistente Clienti
+			addAssClDS.doSave(addAssClBean1, "RSSMRA80C16H501O", "Mario", "Rossi", LocalDate.of(1980, 3, 16), "mar.rossi@gmail.com", "1324pass!@", 32000);
+			addAssClDS.doSave(addAssClBean2, "DNGMHL95T28M082G", "Michele", "De Angelis", LocalDate.of(1995, 12, 28), "dex.ang@libero.it", "99acm!mila", 35000);
+			
+			// Supervisore Videogiochi
+			addSupVidDS.doSave(addSupVidBean1, "NDRNCL71A02F205D", "Nicola", "Andreazzoli", LocalDate.of(1971, 1, 2), "andr1971@hotmail.it", "sa5618aspq", 40000);
+			addSupVidDS.doSave(addSupVidBean2, "VRRMSM99S23F839O", "Massimo", "Varriale", LocalDate.of(1999, 11, 23), "max.va10@gmail.com", "CiAo!@1999", 37000);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         /*
         AcqContieneAbb aca = new AcqContieneAbbDS(ds);
@@ -180,7 +220,7 @@ public class TesterServlet extends HttpServlet {
         RemAssClBean remAssClBean = new RemAssClBean("sballo","ABCD123");
         */
         
-        
+        /*
         Acquisti acq = new AcquistiDS(ds);
         //AcquistiBean acqBean = new AcquistiBean(123,"CODICE","CJDEJFKMWOI3",30,70,LocalDateTime.of(2022,10,14,17,34,21),null,5333122);
         AcqContieneVid acqVid = new AcqContieneVidDS(ds);
@@ -195,7 +235,7 @@ public class TesterServlet extends HttpServlet {
         Fattura fat = new FatturaDS(ds);
         
         try {
-			/*acq.doSave(123,"GDFSAOIAFSJM", "CODICE", LocalDateTime.of(2022,10,14,17,34,21), 5333122L);
+			acq.doSave(123,"GDFSAOIAFSJM", "CODICE", LocalDateTime.of(2022,10,14,17,34,21), 5333122L);
 			acqVid.doSave(123, "ads465");
 			acqVid.doSave(123, "asc5");
 			acqAbb.doSave(123, "xbox pass");
@@ -203,7 +243,7 @@ public class TesterServlet extends HttpServlet {
 			
         	rem.doSave(beanR);
         	modVid.doSave(modBean, "ads465", "rocket", 645, 2015, 100, Pegi.tre, false);        	
-			*/
+			
         	
         	fat.doSave(123, LocalDateTime.now());
         	
@@ -211,8 +251,8 @@ public class TesterServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        */
         
-
         
         /*
         AddVideog addVid = new AddVideogDS(ds);
