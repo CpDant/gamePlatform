@@ -18,6 +18,7 @@ import it.unisa.gp.model.DAO.AbbonamentoDS;
 import it.unisa.gp.model.DAO.AcqContieneAbbDS;
 import it.unisa.gp.model.DAO.AcqContieneVidDS;
 import it.unisa.gp.model.DAO.AcquistiDS;
+import it.unisa.gp.model.DAO.AddAbbDS;
 import it.unisa.gp.model.DAO.AddAssClDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
 import it.unisa.gp.model.DAO.ClientiDS;
@@ -31,12 +32,14 @@ import it.unisa.gp.model.DAO.SoftwareHouseDS;
 import it.unisa.gp.model.DAO.SupervisoreVideogiochiDS;
 import it.unisa.gp.model.DAO.AddInAbbDS;
 import it.unisa.gp.model.DAO.AddSupVidDS;
+import it.unisa.gp.model.DAO.AddVideogDS;
 import it.unisa.gp.model.DAO.AdministratorsDS;
 import it.unisa.gp.model.DAO.VideogiocoDS;
 import it.unisa.gp.model.bean.AbbonamentoBean;
 import it.unisa.gp.model.bean.AcqContieneAbbBean;
 import it.unisa.gp.model.bean.AcqContieneVidBean;
 import it.unisa.gp.model.bean.AcquistiBean;
+import it.unisa.gp.model.bean.AddAbbBean;
 import it.unisa.gp.model.bean.AddAssClBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
 import it.unisa.gp.model.bean.ClientiBean;
@@ -49,6 +52,7 @@ import it.unisa.gp.model.bean.SoftwareHouseBean;
 import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
 import it.unisa.gp.model.bean.AddInAbbBean;
 import it.unisa.gp.model.bean.AddSupVidBean;
+import it.unisa.gp.model.bean.AddVideogBean;
 import it.unisa.gp.model.bean.AdministratorsBean;
 import it.unisa.gp.model.bean.VideogiocoBean;
 import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
@@ -56,6 +60,7 @@ import it.unisa.gp.model.interfaceDS.Abbonamento;
 import it.unisa.gp.model.interfaceDS.AcqContieneAbb;
 import it.unisa.gp.model.interfaceDS.AcqContieneVid;
 import it.unisa.gp.model.interfaceDS.Acquisti;
+import it.unisa.gp.model.interfaceDS.AddAbb;
 import it.unisa.gp.model.interfaceDS.AddAssCl;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
 import it.unisa.gp.model.interfaceDS.Clienti;
@@ -69,6 +74,7 @@ import it.unisa.gp.model.interfaceDS.SoftwareHouse;
 import it.unisa.gp.model.interfaceDS.SupervisoreVideogiochi;
 import it.unisa.gp.model.interfaceDS.AddInAbb;
 import it.unisa.gp.model.interfaceDS.AddSupVid;
+import it.unisa.gp.model.interfaceDS.AddVideog;
 import it.unisa.gp.model.interfaceDS.Administrators;
 import it.unisa.gp.model.interfaceDS.Videogioco;
 
@@ -100,10 +106,14 @@ public class PopolamentoDBServlet extends HttpServlet {
         Administrators adminDS = new AdministratorsDS(ds);
         AddAssCl addAssClDS = new AddAssClDS(ds);
         AddSupVid addSupVidDS = new AddSupVidDS(ds);
+        SoftwareHouse softHouseDS = new SoftwareHouseDS(ds);
+        AddVideog addVidDS = new AddVideogDS(ds);
+        AddAbb addAbbDS = new AddAbbDS(ds);
+        AddInAbb addInAbbDS = new AddInAbbDS(ds);
         
         
         
-        
+        /*
         // Administrators
         AdministratorsBean adminBean = new AdministratorsBean("CZZLRD76L31F205Y", "Alfredo", "Cuozzo", LocalDate.of(1976, 7, 31), "alfred@email.it", "acs9q8s6", 40000);
         
@@ -115,9 +125,47 @@ public class PopolamentoDBServlet extends HttpServlet {
         AddSupVidBean addSupVidBean1 = new AddSupVidBean("NDRNCL71A02F205D", "CZZLRD76L31F205Y");
         AddSupVidBean addSupVidBean2 = new AddSupVidBean("VRRMSM99S23F839O", "CZZLRD76L31F205Y");
         
+        // Software House
+        SoftwareHouseBean softHouseBean1 = new SoftwareHouseBean("Ea Sports", "USA", LocalDate.of(1982, 5, 27));
+        SoftwareHouseBean softHouseBean2 = new SoftwareHouseBean("Rockstar Games", "USA", LocalDate.of(1998, 12, 1));
+        SoftwareHouseBean softHouseBean3 = new SoftwareHouseBean("Bethesda", "USA", LocalDate.of(1986, 7, 10));
+        SoftwareHouseBean softHouseBean4 = new SoftwareHouseBean("Ubisoft", "France", LocalDate.of(1986, 3, 28));
+        SoftwareHouseBean softHouseBean5 = new SoftwareHouseBean("Epic Games", "USA", LocalDate.of(1991, 1, 15));
+        
+        // Add Videogiochi
+        AddVideogBean addVidBean1 = new AddVideogBean("NDRNCL71A02F205D", "ASC894Q3");
+        AddVideogBean addVidBean2 = new AddVideogBean("VRRMSM99S23F839O", "Q9A632ZM");
+        AddVideogBean addVidBean3 = new AddVideogBean("NDRNCL71A02F205D", "BVNMQ456");
+        AddVideogBean addVidBean4 = new AddVideogBean("VRRMSM99S23F839O", "QPOL7896");
+        AddVideogBean addVidBean5 = new AddVideogBean("NDRNCL71A02F205D", "ZZMLPO41");
+        AddVideogBean addVidBean6 = new AddVideogBean("VRRMSM99S23F839O", "PLZX0000");
+        AddVideogBean addVidBean7 = new AddVideogBean("VRRMSM99S23F839O", "1PLO32Q6");     
+        AddVideogBean addVidBean8 = new AddVideogBean("NDRNCL71A02F205D", "D23T479P");
+        AddVideogBean addVidBean9 = new AddVideogBean("VRRMSM99S23F839O", "34F67RR2");
+        AddVideogBean addVidBean10 = new AddVideogBean("NDRNCL71A02F205D", "FD32SS16");
+        AddVideogBean addVidBean11 = new AddVideogBean("NDRNCL71A02F205D", "PLO094FT");
+        AddVideogBean addVidBean12 = new AddVideogBean("VRRMSM99S23F839O", "2SFNR5A1");
+        AddVideogBean addVidBean13 = new AddVideogBean("NDRNCL71A02F205D", "MD09THZA");
+        AddVideogBean addVidBean14 = new AddVideogBean("VRRMSM99S23F839O", "CVWE44P0");      
+        AddVideogBean addVidBean15 = new AddVideogBean("NDRNCL71A02F205D", "RSS567V3");
+        AddVideogBean addVidBean16 = new AddVideogBean("NDRNCL71A02F205D", "ACV458V1");
+        AddVideogBean addVidBean17 = new AddVideogBean("VRRMSM99S23F839O", "FCR787U0");
+        AddVideogBean addVidBean18 = new AddVideogBean("VRRMSM99S23F839O", "WDT712T8");
+        AddVideogBean addVidBean19 = new AddVideogBean("VRRMSM99S23F839O", "TDT789T9");
+        AddVideogBean addVidBean20 = new AddVideogBean("NDRNCL71A02F205D", "ACV345T1");
+        */
+        // Add Abbonamenti
+        AddAbbBean addAbbBean1 = new AddAbbBean("VRRMSM99S23F839O", "Silver Pass");
+        AddAbbBean addAbbBean2 = new AddAbbBean("VRRMSM99S23F839O", "Gold Pass");
+        AddAbbBean addAbbBean3 = new AddAbbBean("NDRNCL71A02F205D", "Platinum Pass");
+        
+        // Add In Abbonamenti
+        
+        
         
         // Aggiunta al DB
         try {
+        	/*
         	// Administrators
 			adminDS.doSave(adminBean);
 			
@@ -128,6 +176,42 @@ public class PopolamentoDBServlet extends HttpServlet {
 			// Supervisore Videogiochi
 			addSupVidDS.doSave(addSupVidBean1, "NDRNCL71A02F205D", "Nicola", "Andreazzoli", LocalDate.of(1971, 1, 2), "andr1971@hotmail.it", "sa5618aspq", 40000);
 			addSupVidDS.doSave(addSupVidBean2, "VRRMSM99S23F839O", "Massimo", "Varriale", LocalDate.of(1999, 11, 23), "max.va10@gmail.com", "CiAo!@1999", 37000);
+			
+			// Software House
+			softHouseDS.doSave(softHouseBean1);
+			softHouseDS.doSave(softHouseBean2);
+			softHouseDS.doSave(softHouseBean3);
+			softHouseDS.doSave(softHouseBean4);
+			softHouseDS.doSave(softHouseBean5);
+			
+			// Videogiochi
+			addVidDS.doSave(addVidBean1, "ASC894Q3", "Bethesda", "Skyrim", 40, 2011, 50, Pegi.diciotto);
+			addVidDS.doSave(addVidBean2, "Q9A632ZM", "Bethesda", "Fallout 4", 60, 2015, 45, Pegi.diciotto);
+			addVidDS.doSave(addVidBean3, "BVNMQ456", "Ea Sports", "FIFA 22", 55, 2022, 28, Pegi.tre);
+			addVidDS.doSave(addVidBean4, "QPOL7896", "Ea Sports", "F1 22", 10, 2022, 35, Pegi.tre);
+			addVidDS.doSave(addVidBean5, "ZZMLPO41", "Ea Sports", "NHL 21", 26, 2022, 35, Pegi.tre);
+			addVidDS.doSave(addVidBean6, "PLZX0000", "Epic Games", "Fortnite", 80, 2017, 40, Pegi.dodici);
+			addVidDS.doSave(addVidBean7, "1PLO32Q6", "Epic Games", "Rocket League", 13, 2015, 40, Pegi.tre);
+			addVidDS.doSave(addVidBean8, "D23T479P", "Epic Games", "Fall Guys", 22, 2019, 20, Pegi.tre);
+			addVidDS.doSave(addVidBean9, "34F67RR2", "Epic Games", "Unreal Tournament", 20, 2017, 35, Pegi.sette);
+			addVidDS.doSave(addVidBean10, "FD32SS16", "Rockstar Games", "GTA V", 80, 2013, 40, Pegi.diciotto);
+			addVidDS.doSave(addVidBean11, "PLO094FT", "Rockstar Games", "Red Dead Redemption 2", 73, 2018, 60, Pegi.diciotto);
+			addVidDS.doSave(addVidBean12, "2SFNR5A1", "Rockstar Games", "Bully", 14, 2006, 25, Pegi.diciotto);
+			addVidDS.doSave(addVidBean13, "MD09THZA", "Rockstar Games", "Max Payne 3", 43, 2012, 40, Pegi.diciotto);
+			addVidDS.doSave(addVidBean14, "CVWE44P0", "Rockstar Games", "The Italian Job", 7, 2001, 30, Pegi.diciotto);
+			addVidDS.doSave(addVidBean15, "RSS567V3", "Ubisoft", "Rainbow Six Siege", 50, 2015, 30, Pegi.diciotto);
+	        addVidDS.doSave(addVidBean16, "ACV458V1", "Ubisoft", "Assassin's Creed: Valhalla", 70, 2020, 45, Pegi.diciotto);
+	        addVidDS.doSave(addVidBean17, "FCR787U0", "Ubisoft", "Far Cry 6", 90, 2021, 60, Pegi.diciotto);
+	        addVidDS.doSave(addVidBean18, "WDT712T8", "Ubisoft", "Watch Dogs 2", 40, 2016, 15, Pegi.sedici);
+	        addVidDS.doSave(addVidBean19, "TDT789T9", "Ubisoft", "The Division 2", 65, 2019, 35, Pegi.sedici);
+	        addVidDS.doSave(addVidBean20, "ACV345T1", "Ubisoft", "Assassin's Creed: Odyssey", 55, 2018, 25, Pegi.diciotto);
+	        */
+	        // Abbonamenti
+        	addAbbDS.doSave(addAbbBean1, "Silver Pass", 20, 3);
+        	addAbbDS.doSave(addAbbBean2, "Gold Pass", 50, 6);
+        	addAbbDS.doSave(addAbbBean3, "Platinum Pass", 80, 12);
+        	
+        	// Add in Abbonamenti
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -163,6 +247,8 @@ public class PopolamentoDBServlet extends HttpServlet {
         AddInAbbBean addBean3 = new AddInAbbBean("acs4csa45", "cas6541", "xbox pass");
         AddInAbbBean addBean4 = new AddInAbbBean("acs4csa45", "cas6541", "playstation pass");
         AddInAbbBean addBean5 = new AddInAbbBean("acs4csa45", "asc5", "playstation pass"); 
+        
+        
         
  
         try {
