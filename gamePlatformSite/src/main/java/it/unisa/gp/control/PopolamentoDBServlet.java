@@ -30,6 +30,7 @@ import it.unisa.gp.model.DAO.RemSupVidDS;
 import it.unisa.gp.model.DAO.RemVideogDS;
 import it.unisa.gp.model.DAO.SoftwareHouseDS;
 import it.unisa.gp.model.DAO.SupervisoreVideogiochiDS;
+import it.unisa.gp.model.DAO.TelefonoDS;
 import it.unisa.gp.model.DAO.AddInAbbDS;
 import it.unisa.gp.model.DAO.AddSupVidDS;
 import it.unisa.gp.model.DAO.AddVideogDS;
@@ -50,6 +51,7 @@ import it.unisa.gp.model.bean.RemSupVidBean;
 import it.unisa.gp.model.bean.RemVideogBean;
 import it.unisa.gp.model.bean.SoftwareHouseBean;
 import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
+import it.unisa.gp.model.bean.TelefonoBean;
 import it.unisa.gp.model.bean.AddInAbbBean;
 import it.unisa.gp.model.bean.AddSupVidBean;
 import it.unisa.gp.model.bean.AddVideogBean;
@@ -72,6 +74,7 @@ import it.unisa.gp.model.interfaceDS.RemSupVid;
 import it.unisa.gp.model.interfaceDS.RemVideog;
 import it.unisa.gp.model.interfaceDS.SoftwareHouse;
 import it.unisa.gp.model.interfaceDS.SupervisoreVideogiochi;
+import it.unisa.gp.model.interfaceDS.Telefono;
 import it.unisa.gp.model.interfaceDS.AddInAbb;
 import it.unisa.gp.model.interfaceDS.AddSupVid;
 import it.unisa.gp.model.interfaceDS.AddVideog;
@@ -110,7 +113,8 @@ public class PopolamentoDBServlet extends HttpServlet {
         AddVideog addVidDS = new AddVideogDS(ds);
         AddAbb addAbbDS = new AddAbbDS(ds);
         AddInAbb addInAbbDS = new AddInAbbDS(ds);
-        
+        Clienti clientiDS = new ClientiDS(ds);
+        Telefono telDS = new TelefonoDS(ds);
         
         
         /*
@@ -153,15 +157,63 @@ public class PopolamentoDBServlet extends HttpServlet {
         AddVideogBean addVidBean18 = new AddVideogBean("VRRMSM99S23F839O", "WDT712T8");
         AddVideogBean addVidBean19 = new AddVideogBean("VRRMSM99S23F839O", "TDT789T9");
         AddVideogBean addVidBean20 = new AddVideogBean("NDRNCL71A02F205D", "ACV345T1");
-        */
+        
         // Add Abbonamenti
         AddAbbBean addAbbBean1 = new AddAbbBean("VRRMSM99S23F839O", "Silver Pass");
         AddAbbBean addAbbBean2 = new AddAbbBean("VRRMSM99S23F839O", "Gold Pass");
         AddAbbBean addAbbBean3 = new AddAbbBean("NDRNCL71A02F205D", "Platinum Pass");
         
         // Add In Abbonamenti
+        AddInAbbBean addInAbbBean1 = new AddInAbbBean("VRRMSM99S23F839O", "ASC894Q3", "Silver Pass");
+        AddInAbbBean addInAbbBean2 = new AddInAbbBean("VRRMSM99S23F839O", "PLZX0000", "Silver Pass");
+        AddInAbbBean addInAbbBean3 = new AddInAbbBean("VRRMSM99S23F839O", "BVNMQ456", "Silver Pass");
+        AddInAbbBean addInAbbBean4 = new AddInAbbBean("VRRMSM99S23F839O", "FD32SS16", "Silver Pass");
         
+        AddInAbbBean addInAbbBean5 = new AddInAbbBean("VRRMSM99S23F839O", "FD32SS16", "Gold Pass");
+        AddInAbbBean addInAbbBean6 = new AddInAbbBean("VRRMSM99S23F839O", "PLO094FT", "Gold Pass");
+        AddInAbbBean addInAbbBean7 = new AddInAbbBean("VRRMSM99S23F839O", "ACV458V1", "Gold Pass");
+        AddInAbbBean addInAbbBean8 = new AddInAbbBean("VRRMSM99S23F839O", "ACV345T1", "Gold Pass");
+        AddInAbbBean addInAbbBean9 = new AddInAbbBean("VRRMSM99S23F839O", "TDT789T9", "Gold Pass");
+        AddInAbbBean addInAbbBean10 = new AddInAbbBean("VRRMSM99S23F839O", "MD09THZA", "Gold Pass");
+        AddInAbbBean addInAbbBean11 = new AddInAbbBean("VRRMSM99S23F839O", "CVWE44P0", "Gold Pass");
+        AddInAbbBean addInAbbBean12 = new AddInAbbBean("VRRMSM99S23F839O", "FCR787U0", "Gold Pass");
+        AddInAbbBean addInAbbBean13 = new AddInAbbBean("VRRMSM99S23F839O", "QPOL7896", "Gold Pass");
+        AddInAbbBean addInAbbBean14 = new AddInAbbBean("VRRMSM99S23F839O", "BVNMQ456", "Gold Pass");
         
+        AddInAbbBean addInAbbBean15 = new AddInAbbBean("NDRNCL71A02F205D", "ASC894Q3", "Platinum Pass");
+        AddInAbbBean addInAbbBean16 = new AddInAbbBean("NDRNCL71A02F205D", "Q9A632ZM", "Platinum Pass");
+        AddInAbbBean addInAbbBean17 = new AddInAbbBean("NDRNCL71A02F205D", "QPOL7896", "Platinum Pass");
+        AddInAbbBean addInAbbBean18 = new AddInAbbBean("NDRNCL71A02F205D", "ZZMLPO41", "Platinum Pass");
+        AddInAbbBean addInAbbBean19 = new AddInAbbBean("NDRNCL71A02F205D", "PLZX0000", "Platinum Pass");
+        AddInAbbBean addInAbbBean20 = new AddInAbbBean("NDRNCL71A02F205D", "1PLO32Q6", "Platinum Pass");
+        AddInAbbBean addInAbbBean21 = new AddInAbbBean("NDRNCL71A02F205D", "D23T479P", "Platinum Pass");
+        AddInAbbBean addInAbbBean22 = new AddInAbbBean("NDRNCL71A02F205D", "34F67RR2", "Platinum Pass");
+        AddInAbbBean addInAbbBean23 = new AddInAbbBean("NDRNCL71A02F205D", "FD32SS16", "Platinum Pass");
+        AddInAbbBean addInAbbBean24 = new AddInAbbBean("NDRNCL71A02F205D", "PLO094FT", "Platinum Pass");
+        AddInAbbBean addInAbbBean25 = new AddInAbbBean("NDRNCL71A02F205D", "2SFNR5A1", "Platinum Pass");
+        AddInAbbBean addInAbbBean26 = new AddInAbbBean("NDRNCL71A02F205D", "MD09THZA", "Platinum Pass");
+        AddInAbbBean addInAbbBean27 = new AddInAbbBean("NDRNCL71A02F205D", "CVWE44P0", "Platinum Pass");
+        AddInAbbBean addInAbbBean28 = new AddInAbbBean("NDRNCL71A02F205D", "RSS567V3", "Platinum Pass");
+        AddInAbbBean addInAbbBean29 = new AddInAbbBean("NDRNCL71A02F205D", "ACV458V1", "Platinum Pass");
+        AddInAbbBean addInAbbBean30 = new AddInAbbBean("NDRNCL71A02F205D", "FCR787U0", "Platinum Pass");
+        AddInAbbBean addInAbbBean31 = new AddInAbbBean("NDRNCL71A02F205D", "WDT712T8", "Platinum Pass");
+        AddInAbbBean addInAbbBean32 = new AddInAbbBean("NDRNCL71A02F205D", "ACV345T1", "Platinum Pass");
+        */
+        
+        // Clienti e telefoni
+        ClientiBean clientiBean1 = new ClientiBean("VTLCRI01H12H703D", "Ciro", "Vitale", LocalDate.of(2001, 6, 12), "cirovit@gmail.com", "as894c65a1", "pipita089", "via Roma 1");
+        ClientiBean clientiBean2 = new ClientiBean("DNTFNC01A07H703I", "Francesco Paolo", "D'Antuono", LocalDate.of(2001, 1, 7), "cpdant@email.it", "piuyu3232", "cpDant", "Via De Gasperi 36A");
+        ClientiBean clientiBean3 = new ClientiBean("CNSLGWE91M06H703", "Luigi", "Consiglio", LocalDate.of(2001, 9, 6), "luicons79@gmail.com", "passwordStrafiga", "luicons", "Via Uffizi Romani 7");
+        ClientiBean clientiBean4 = new ClientiBean("MSCCRS01M06F839W", "Christian", "Mascolo", LocalDate.of(2001, 8, 6), "crMa@gmail.com", "asgteeta", "MascoloC11", "Via Degli Alburni 15");
+        ClientiBean clientiBean5 = new ClientiBean("MRNRRT00A01H703C", "Roberto", "Miron", LocalDate.of(2000, 01, 19), "RobMir@gmail.com", "fsadjfhas", "elMiron00", "Via Milano 5");
+        
+        TelefonoBean telBean1 = new TelefonoBean(3891569700L, "VTLCRI01H12H703D");
+        TelefonoBean telBean2 = new TelefonoBean(3891932217L, "VTLCRI01H12H703D");
+        TelefonoBean telBean3 = new TelefonoBean(3335696522L, "DNTFNC01A07H703I");
+        TelefonoBean telBean4 = new TelefonoBean(3452395632L, "CNSLGWE91M06H703");
+        TelefonoBean telBean5 = new TelefonoBean(3332678916L, "MRNRRT00A01H703C");
+        TelefonoBean telBean6 = new TelefonoBean(3885468749L, "MRNRRT00A01H703C");
+        TelefonoBean telBean7 = new TelefonoBean(3713178692L, "MSCCRS01M06F839W");
         
         // Aggiunta al DB
         try {
@@ -205,13 +257,62 @@ public class PopolamentoDBServlet extends HttpServlet {
 	        addVidDS.doSave(addVidBean18, "WDT712T8", "Ubisoft", "Watch Dogs 2", 40, 2016, 15, Pegi.sedici);
 	        addVidDS.doSave(addVidBean19, "TDT789T9", "Ubisoft", "The Division 2", 65, 2019, 35, Pegi.sedici);
 	        addVidDS.doSave(addVidBean20, "ACV345T1", "Ubisoft", "Assassin's Creed: Odyssey", 55, 2018, 25, Pegi.diciotto);
-	        */
+	        
 	        // Abbonamenti
         	addAbbDS.doSave(addAbbBean1, "Silver Pass", 20, 3);
         	addAbbDS.doSave(addAbbBean2, "Gold Pass", 50, 6);
         	addAbbDS.doSave(addAbbBean3, "Platinum Pass", 80, 12);
         	
         	// Add in Abbonamenti
+        	addInAbbDS.doSave(addInAbbBean1);
+        	addInAbbDS.doSave(addInAbbBean2);
+        	addInAbbDS.doSave(addInAbbBean3);
+        	addInAbbDS.doSave(addInAbbBean4);
+        	addInAbbDS.doSave(addInAbbBean5);
+        	addInAbbDS.doSave(addInAbbBean6);
+        	addInAbbDS.doSave(addInAbbBean7);
+        	addInAbbDS.doSave(addInAbbBean8);
+        	addInAbbDS.doSave(addInAbbBean9);
+        	addInAbbDS.doSave(addInAbbBean10);
+        	addInAbbDS.doSave(addInAbbBean11);
+        	addInAbbDS.doSave(addInAbbBean12);
+        	addInAbbDS.doSave(addInAbbBean13);
+        	addInAbbDS.doSave(addInAbbBean14);
+        	addInAbbDS.doSave(addInAbbBean15);
+        	addInAbbDS.doSave(addInAbbBean16);
+        	addInAbbDS.doSave(addInAbbBean17);
+        	addInAbbDS.doSave(addInAbbBean18);
+        	addInAbbDS.doSave(addInAbbBean19);
+        	addInAbbDS.doSave(addInAbbBean20);
+        	addInAbbDS.doSave(addInAbbBean21);
+        	addInAbbDS.doSave(addInAbbBean22);
+        	addInAbbDS.doSave(addInAbbBean23);
+        	addInAbbDS.doSave(addInAbbBean24);
+        	addInAbbDS.doSave(addInAbbBean25);
+        	addInAbbDS.doSave(addInAbbBean26);
+        	addInAbbDS.doSave(addInAbbBean27);
+        	addInAbbDS.doSave(addInAbbBean28);
+        	addInAbbDS.doSave(addInAbbBean29);
+        	addInAbbDS.doSave(addInAbbBean30);
+        	addInAbbDS.doSave(addInAbbBean31);
+        	addInAbbDS.doSave(addInAbbBean32);
+        	*/
+        	// Clienti e telefoni
+        	clientiDS.doSave(clientiBean1);
+        	clientiDS.doSave(clientiBean2);
+        	clientiDS.doSave(clientiBean3);
+        	clientiDS.doSave(clientiBean4);
+        	clientiDS.doSave(clientiBean5);
+        	
+        	telDS.doSave(telBean1);
+        	telDS.doSave(telBean2);
+        	telDS.doSave(telBean3);
+        	telDS.doSave(telBean4);
+        	telDS.doSave(telBean5);
+        	telDS.doSave(telBean6);
+        	telDS.doSave(telBean7);
+        	
+        	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
