@@ -160,8 +160,14 @@ public class PopolamentoDBServlet extends HttpServlet {
         AddAbbBean addAbbBean3 = new AddAbbBean("NDRNCL71A02F205D", "Platinum Pass");
         
         // Add In Abbonamenti
-        
-        
+        AddInAbbBean AddInAbbBean15 = new AddInAbbBean("NDRNCL71A02F205D", "", "Platinum Pass");
+        AddInAbbBean AddInAbbBean15 = new AddInAbbBean("NDRNCL71A02F205D", "", "Platinum Pass");
+        AddInAbbBean AddInAbbBean15 = new AddInAbbBean("NDRNCL71A02F205D", "", "Platinum Pass");
+        AddInAbbBean AddInAbbBean15 = new AddInAbbBean("NDRNCL71A02F205D", "", "Platinum Pass");
+        AddInAbbBean AddInAbbBean15 = new AddInAbbBean("NDRNCL71A02F205D", "", "Platinum Pass");
+        AddInAbbBean AddInAbbBean15 = new AddInAbbBean("NDRNCL71A02F205D", "", "Platinum Pass");
+        AddInAbbBean AddInAbbBean15 = new AddInAbbBean("NDRNCL71A02F205D", "", "Platinum Pass");
+        AddInAbbBean AddInAbbBean15 = new AddInAbbBean("NDRNCL71A02F205D", "", "Platinum Pass");
         
         // Aggiunta al DB
         try {
