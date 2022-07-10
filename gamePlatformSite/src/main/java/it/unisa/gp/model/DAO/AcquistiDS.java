@@ -31,8 +31,7 @@ public class AcquistiDS implements Acquisti{
 	
 	
 	@Override
-	public synchronized void doSave(int id, String codFisc, String codiceRiscatto,
-			LocalDateTime dataOra, long numeroCartaPag) throws SQLException {
+	public synchronized void doSave(int id, String codFisc, String codiceRiscatto, long numeroCartaPag) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
 		PreparedStatement preparedStmtIndFatt = null;

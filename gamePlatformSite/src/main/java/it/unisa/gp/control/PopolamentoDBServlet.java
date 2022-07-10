@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import it.unisa.gp.model.DAO.AcqContieneAbbDS;
+import it.unisa.gp.model.DAO.AcqContieneVidDS;
+import it.unisa.gp.model.DAO.AcquistiDS;
 import it.unisa.gp.model.DAO.AddAbbDS;
 import it.unisa.gp.model.DAO.AddAssClDS;
 import it.unisa.gp.model.DAO.ClientiDS;
@@ -21,6 +24,7 @@ import it.unisa.gp.model.DAO.AddInAbbDS;
 import it.unisa.gp.model.DAO.AddSupVidDS;
 import it.unisa.gp.model.DAO.AddVideogDS;
 import it.unisa.gp.model.DAO.AdministratorsDS;
+import it.unisa.gp.model.DAO.AziendaDS;
 import it.unisa.gp.model.bean.AddAbbBean;
 import it.unisa.gp.model.bean.AddAssClBean;
 import it.unisa.gp.model.bean.ClientiBean;
@@ -30,7 +34,11 @@ import it.unisa.gp.model.bean.AddInAbbBean;
 import it.unisa.gp.model.bean.AddSupVidBean;
 import it.unisa.gp.model.bean.AddVideogBean;
 import it.unisa.gp.model.bean.AdministratorsBean;
+import it.unisa.gp.model.bean.AziendaBean;
 import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
+import it.unisa.gp.model.interfaceDS.AcqContieneAbb;
+import it.unisa.gp.model.interfaceDS.AcqContieneVid;
+import it.unisa.gp.model.interfaceDS.Acquisti;
 import it.unisa.gp.model.interfaceDS.AddAbb;
 import it.unisa.gp.model.interfaceDS.AddAssCl;
 import it.unisa.gp.model.interfaceDS.Clienti;
@@ -40,6 +48,7 @@ import it.unisa.gp.model.interfaceDS.AddInAbb;
 import it.unisa.gp.model.interfaceDS.AddSupVid;
 import it.unisa.gp.model.interfaceDS.AddVideog;
 import it.unisa.gp.model.interfaceDS.Administrators;
+import it.unisa.gp.model.interfaceDS.Azienda;
 
 /**
  * Servlet implementation class PopolamentoDBServlet
@@ -75,7 +84,10 @@ public class PopolamentoDBServlet extends HttpServlet {
         AddInAbb addInAbbDS = new AddInAbbDS(ds);
         Clienti clientiDS = new ClientiDS(ds);
         Telefono telDS = new TelefonoDS(ds);
-        
+        Acquisti acqDS = new AcquistiDS(ds);
+        AcqContieneAbb acqConAbbDS = new AcqContieneAbbDS(ds);
+        AcqContieneVid acqConVidDS = new AcqContieneVidDS(ds);
+        Azienda aziendaDS = new AziendaDS(ds);
         
         
         // Administrators
@@ -174,6 +186,10 @@ public class PopolamentoDBServlet extends HttpServlet {
         TelefonoBean telBean6 = new TelefonoBean(3885468749L, "MRNRRT00A01H703C");
         TelefonoBean telBean7 = new TelefonoBean(3713178692L, "MSCCRS01M06F839W");
         
+        // Aziende
+        AziendaBean aziendaBean1 = new AziendaBean("27484435602", "DNTFNC01A07H703I", "S2TE4IU", "dantuono@pec.it");
+        AziendaBean aziendaBean2 = new AziendaBean("93456729918", "MRNRRT00A01H703C", "9WSBBI2", "miron@pec.it");
+        
         // Aggiunta al DB
         try {
         	
@@ -271,6 +287,40 @@ public class PopolamentoDBServlet extends HttpServlet {
         	telDS.doSave(telBean6);
         	telDS.doSave(telBean7);
         	
+        	// Acquisti, AcqContieneAbb e AcqContieneVid
+        	acqDS.doSave(1, "DNTFNC01A07H703I", "AS4DR5I0Q", 5432954670123456L);
+         	acqConAbbDS.doSave(1, "Silver Pass");
+        	acqConAbbDS.doSave(1, "Platinum Pass");
+        	acqDS.doUpdate(1);
+        	
+			acqDS.doSave(2, "DNTFNC01A07H703I", "RW5ETF2E3", 5432954670123456L);
+			acqConAbbDS.doSave(2, "Gold Pass");
+			acqConVidDS.doSave(2,"ASC894Q3");
+        	acqConVidDS.doSave(2,"QPOL7896");
+        	acqConVidDS.doSave(2,"CVWE44P0");
+        	acqConVidDS.doSave(2,"RSS567V3");
+        	acqConVidDS.doSave(2,"2SFNR5A1");
+        	acqDS.doUpdate(2);
+        	
+			acqDS.doSave(3, "CNSLGWE91M06H703", "SE321FGMX", 1734024385967031L);
+			acqConVidDS.doSave(3,"FD32SS16");
+        	acqConVidDS.doSave(3,"ACV345T1");
+        	acqConVidDS.doSave(3,"2SFNR5A1");
+        	acqConVidDS.doSave(3,"TDT789T9");
+        	acqDS.doUpdate(3);
+        	
+			acqDS.doSave(4, "MSCCRS01M06F839W", "P05FFMAT3", 3564189674435061L);
+			acqConAbbDS.doSave(4, "Platinum Pass");
+			acqDS.doUpdate(4);
+			
+			acqDS.doSave(5, "MRNRRT00A01H703C", "QSMN22P11", 2456437890221543L);
+			acqConVidDS.doSave(5,"TDT789T9");
+        	acqConAbbDS.doSave(5, "Gold Pass");
+        	acqDS.doUpdate(5);
+        	
+        	// Aziende
+        	aziendaDS.doSave(aziendaBean1);
+        	aziendaDS.doSave(aziendaBean2);
         	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
