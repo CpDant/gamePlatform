@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +19,11 @@ import it.unisa.gp.model.DAO.AcquistiDS;
 import it.unisa.gp.model.DAO.AddAbbDS;
 import it.unisa.gp.model.DAO.AddAssClDS;
 import it.unisa.gp.model.DAO.ClientiDS;
+import it.unisa.gp.model.DAO.FatturaDS;
+import it.unisa.gp.model.DAO.RecensioneDS;
 import it.unisa.gp.model.DAO.SoftwareHouseDS;
 import it.unisa.gp.model.DAO.TelefonoDS;
+import it.unisa.gp.model.DAO.TicketsDS;
 import it.unisa.gp.model.DAO.AddInAbbDS;
 import it.unisa.gp.model.DAO.AddSupVidDS;
 import it.unisa.gp.model.DAO.AddVideogDS;
@@ -28,8 +32,12 @@ import it.unisa.gp.model.DAO.AziendaDS;
 import it.unisa.gp.model.bean.AddAbbBean;
 import it.unisa.gp.model.bean.AddAssClBean;
 import it.unisa.gp.model.bean.ClientiBean;
+import it.unisa.gp.model.bean.RecensioneBean;
 import it.unisa.gp.model.bean.SoftwareHouseBean;
 import it.unisa.gp.model.bean.TelefonoBean;
+import it.unisa.gp.model.bean.TicketsBean;
+import it.unisa.gp.model.bean.RecensioneBean.Grado;
+import it.unisa.gp.model.bean.TicketsBean.CategoriaProbl;
 import it.unisa.gp.model.bean.AddInAbbBean;
 import it.unisa.gp.model.bean.AddSupVidBean;
 import it.unisa.gp.model.bean.AddVideogBean;
@@ -42,8 +50,11 @@ import it.unisa.gp.model.interfaceDS.Acquisti;
 import it.unisa.gp.model.interfaceDS.AddAbb;
 import it.unisa.gp.model.interfaceDS.AddAssCl;
 import it.unisa.gp.model.interfaceDS.Clienti;
+import it.unisa.gp.model.interfaceDS.Fattura;
+import it.unisa.gp.model.interfaceDS.Recensione;
 import it.unisa.gp.model.interfaceDS.SoftwareHouse;
 import it.unisa.gp.model.interfaceDS.Telefono;
+import it.unisa.gp.model.interfaceDS.Tickets;
 import it.unisa.gp.model.interfaceDS.AddInAbb;
 import it.unisa.gp.model.interfaceDS.AddSupVid;
 import it.unisa.gp.model.interfaceDS.AddVideog;
@@ -88,7 +99,9 @@ public class PopolamentoDBServlet extends HttpServlet {
         AcqContieneAbb acqConAbbDS = new AcqContieneAbbDS(ds);
         AcqContieneVid acqConVidDS = new AcqContieneVidDS(ds);
         Azienda aziendaDS = new AziendaDS(ds);
-        
+        Fattura fatDS = new FatturaDS(ds);
+        Tickets tickDS = new TicketsDS(ds);
+        Recensione recDS = new RecensioneDS(ds);
         
         // Administrators
         AdministratorsBean adminBean = new AdministratorsBean("CZZLRD76L31F205Y", "Alfredo", "Cuozzo", LocalDate.of(1976, 7, 31), "alfred@email.it", "acs9q8s6", 40000);
@@ -189,6 +202,34 @@ public class PopolamentoDBServlet extends HttpServlet {
         // Aziende
         AziendaBean aziendaBean1 = new AziendaBean("27484435602", "DNTFNC01A07H703I", "S2TE4IU", "dantuono@pec.it");
         AziendaBean aziendaBean2 = new AziendaBean("93456729918", "MRNRRT00A01H703C", "9WSBBI2", "miron@pec.it");
+        
+        // Tickets
+        TicketsBean tickBean1 = new TicketsBean(1, "RSSMRA80C16H501O", "VTLCRI01H12H703D", CategoriaProbl.pagamenti, 
+        		"Salve, non riesco ad effettuare il pagamento sul vostro sito in fase di checkout. Cordiali saluti.", LocalDateTime.now());
+        
+        TicketsBean tickBean2 = new TicketsBean(2, "RSSMRA80C16H501O", "MSCCRS01M06F839W", CategoriaProbl.account, 
+        		"Ciao, vorrei cambiare password ma non trovo l'opzione nella scheda del mio account.", LocalDateTime.now());
+        
+        TicketsBean tickBean3 = new TicketsBean(3, "DNGMHL95T28M082G", "CNSLGWE91M06H703", CategoriaProbl.rimborso, 
+        		"Ho effettuato un acquisto per errore, vorrei il rimborso dell'acquisto con id: 3. Attendo vostri aggiornamenti.", LocalDateTime.now());
+        
+        TicketsBean tickBean4 = new TicketsBean(4, "DNGMHL95T28M082G", "DNTFNC01A07H703I", CategoriaProbl.abbonamenti, 
+        		"Buonsalve, desidero avere notizie in merito all'uscita dei nuovi abbonamenti, se possibile. Grazie, Sir D'Antuono.", LocalDateTime.now());
+        
+        // Recensioni
+        RecensioneBean recBean1 = new RecensioneBean("DNTFNC01A07H703I", "2SFNR5A1", LocalDateTime.now(), "Gioco fantastico, incredibile gameplay", Grado.cinque);
+        RecensioneBean recBean2 = new RecensioneBean("DNTFNC01A07H703I", "ASC894Q3", LocalDateTime.now(), "Bel gioco, migliorabile", Grado.quattro);
+        RecensioneBean recBean3 = new RecensioneBean("DNTFNC01A07H703I", "CVWE44P0", LocalDateTime.now(), "Un esperienza di gioco immersiva e coinvolgente, lo consiglio!!!", Grado.cinque);
+        RecensioneBean recBean4 = new RecensioneBean("DNTFNC01A07H703I", "QPOL7896", LocalDateTime.now(), "Gioco per niente realistico, le aspettative erano altissime... Ma il gioco non merita.", Grado.uno);
+        RecensioneBean recBean5 = new RecensioneBean("DNTFNC01A07H703I", "RSS567V3", LocalDateTime.now(), "Bel gioco", Grado.quattro);
+        
+        RecensioneBean recBean6 = new RecensioneBean("CNSLGWE91M06H703", "2SFNR5A1", LocalDateTime.now(), "Entusiasmante gameplay, giocabilità assurda :D", Grado.cinque);
+        RecensioneBean recBean7 = new RecensioneBean("CNSLGWE91M06H703", "ACV345T1", LocalDateTime.now(), "Bel gioco, qualche bug andrebbe risolto", Grado.tre);
+        RecensioneBean recBean8 = new RecensioneBean("CNSLGWE91M06H703", "FD32SS16", LocalDateTime.now(), "Gran bel gioco ma nell'online ho riscontrato molti rallentamenti di rete", Grado.quattro);
+        RecensioneBean recBean9 = new RecensioneBean("CNSLGWE91M06H703", "TDT789T9", LocalDateTime.now(), "Ho riscontrato bug da risolvere urgentementi, li ho segnalati... Spero che li patchino,"
+        		+ " altrimenti sarò costretto a mettere una stella :(", Grado.due);
+        
+        RecensioneBean recBean10 = new RecensioneBean("MRNRRT00A01H703C", "TDT789T9", LocalDateTime.now(), "Gioco straordinario!!!", Grado.cinque);
         
         // Aggiunta al DB
         try {
@@ -321,6 +362,29 @@ public class PopolamentoDBServlet extends HttpServlet {
         	// Aziende
         	aziendaDS.doSave(aziendaBean1);
         	aziendaDS.doSave(aziendaBean2);
+        	
+        	// Fatture
+        	fatDS.doSave(1, LocalDateTime.now());
+			fatDS.doSave(2, LocalDateTime.now());
+			fatDS.doSave(5, LocalDateTime.now());
+			
+			// Tickets
+			tickDS.doSave(tickBean1);
+			tickDS.doSave(tickBean2);
+			tickDS.doSave(tickBean3);
+			tickDS.doSave(tickBean4);
+			
+			// Recensioni
+			recDS.doSave(recBean1);
+        	recDS.doSave(recBean2);
+        	recDS.doSave(recBean3);
+        	recDS.doSave(recBean4);
+        	recDS.doSave(recBean5);
+        	recDS.doSave(recBean6);
+        	recDS.doSave(recBean7);
+        	recDS.doSave(recBean8);
+        	recDS.doSave(recBean9);
+        	recDS.doSave(recBean10);
         	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
