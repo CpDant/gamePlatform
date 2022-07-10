@@ -12,6 +12,8 @@ public interface Tickets {
 	public void doSave(TicketsBean tic) throws SQLException;
 	
 	public void doUpdate(TicketsBean tic, boolean resolved, CategoriaProbl categoriaProbl, String messaggio, LocalDateTime dataOra) throws SQLException;
+	
+	public void doUpdate(int id) throws SQLException;
 
 	public boolean doDelete(int id) throws SQLException;
 

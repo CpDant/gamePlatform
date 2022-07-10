@@ -293,6 +293,35 @@ public class TicketsDS implements Tickets{
 			}
 		}
 		return array;
+	}
+
+
+	@Override
+	public void doUpdate(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+		
+		String updateSQL = "UPDATE " + TicketsDS.TABLE_NAME
+				+ " SET RESOLVED = TRUE" + " WHERE ID = ?";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(updateSQL);
+			preparedStmt.setInt(1, id);
+			
+			preparedStmt.executeUpdate();
+
+			connection.setAutoCommit(false);
+			connection.commit();
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}			
 	}	
 		
 }
