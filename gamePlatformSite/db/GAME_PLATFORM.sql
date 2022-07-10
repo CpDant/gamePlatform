@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS clienti(
 );
 
 CREATE TABLE IF NOT EXISTS tickets(
-	id int NOT NULL AUTO_INCREMENT,
+	id int NOT NULL,
     codice_fiscale_assist_cl char(16) NOT NULL,
     codice_fiscale_cliente char(16) NOT NULL,
     resolved boolean DEFAULT false NOT NULL,
