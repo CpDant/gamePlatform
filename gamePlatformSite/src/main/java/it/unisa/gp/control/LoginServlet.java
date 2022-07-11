@@ -12,6 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import it.unisa.gp.model.DAO.AdministratorsDS;
+import it.unisa.gp.model.DAO.AssistenteClientiDS;
+import it.unisa.gp.model.DAO.ClientiDS;
+import it.unisa.gp.model.DAO.SupervisoreVideogiochiDS;
+import it.unisa.gp.model.bean.AdministratorsBean;
+import it.unisa.gp.model.bean.AssistenteClientiBean;
+import it.unisa.gp.model.bean.ClientiBean;
+import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
+import it.unisa.gp.model.interfaceDS.Administrators;
+import it.unisa.gp.model.interfaceDS.AssistenteClienti;
+import it.unisa.gp.model.interfaceDS.Clienti;
+import it.unisa.gp.model.interfaceDS.SupervisoreVideogiochi;
+
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
@@ -20,11 +33,34 @@ public class LoginServlet extends HttpServlet {
 		{			
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
-
+			DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 			String redirectedPage;
 			String ruolo = null;
 			try {
 				ruolo = checkLogin(email, password);
+				
+				ClientiBean clBean = null;
+				SupervisoreVideogiochiBean supBean = null;
+				AssistenteClientiBean assBean = null;
+				AdministratorsBean admBean = null;
+				if(ruolo.equals("cliente")) {
+					Clienti clDS = new ClientiDS(ds);
+					clBean = clDS.doRetrieveByKeyEmail(email);
+					request.getSession().setAttribute("utente", clBean);
+				} else if(ruolo.equals("supVid")) {
+					SupervisoreVideogiochi supDS = new SupervisoreVideogiochiDS(ds);
+					supBean = supDS.doRetrieveByKeyEmail(email);
+					request.getSession().setAttribute("utente", supBean);
+				} else if(ruolo.equals("assCl")) {
+					AssistenteClienti assDS = new AssistenteClientiDS(ds);
+					assBean = assDS.doRetrieveByKeyEmail(email);
+					request.getSession().setAttribute("utente", assBean);
+				} else if(ruolo.equals("admin")) {
+					Administrators admDS = new AdministratorsDS(ds);
+					admBean = admDS.doRetrieveByKeyEmail(email);
+					request.getSession().setAttribute("utente", admBean);
+				}
+				
 				
 				request.getSession().setAttribute("roles", ruolo);
 				redirectedPage = "/protected.jsp";
