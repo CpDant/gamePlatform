@@ -16,5 +16,7 @@ public interface AssistenteClienti {
 
 	public AssistenteClientiBean doRetrieveByKey(String codiceFiscale) throws SQLException;
 	
+	public AssistenteClientiBean doRetrieveByKeyEmail(String email) throws SQLException;
+	
 	public Collection<AssistenteClientiBean> doRetrieveAll(String order) throws SQLException;
 }

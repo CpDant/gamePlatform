@@ -16,5 +16,7 @@ public interface Administrators {
 
 	public AdministratorsBean doRetrieveByKey(String codiceFiscale) throws SQLException;
 	
+	public AdministratorsBean doRetrieveByKeyEmail(String email) throws SQLException;
+	
 	public Collection<AdministratorsBean> doRetrieveAll(String order) throws SQLException;
 }

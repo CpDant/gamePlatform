@@ -202,4 +202,42 @@ public class AssistenteClientiDS implements AssistenteClienti {
 		return array;
 	}
 
+	@Override
+	public AssistenteClientiBean doRetrieveByKeyEmail(String email) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		AssistenteClientiBean ass = new AssistenteClientiBean(null,null,null,null,null,null,0);
+
+		String selectSQL = "SELECT * FROM " + AssistenteClientiDS.TABLE_NAME + " WHERE EMAIL = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setString(1, email);
+
+			ResultSet rs = preparedStmt.executeQuery();
+
+			while (rs.next()) {
+				ass.setCodiceFiscale(rs.getString("CODICE_FISCALE"));
+				ass.setNome(rs.getString("NOME"));
+				ass.setCognome(rs.getString("COGNOME"));
+				ass.setDataNascita((rs.getDate("DATA_NASCITA")).toLocalDate());
+				ass.setEmail(rs.getString("EMAIL"));
+				ass.setPassWord(rs.getString("PASS_WORD"));
+				ass.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return ass;
+	}
+
 }

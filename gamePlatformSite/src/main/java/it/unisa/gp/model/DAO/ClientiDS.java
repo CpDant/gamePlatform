@@ -215,6 +215,48 @@ public class ClientiDS implements Clienti{
 		}
 		return array;
 	}
+
+
+	@Override
+	public ClientiBean doRetrieveByKeyEmail(String email) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		ClientiBean bean = new ClientiBean(null,null,null,null,null,null,null,null);
+
+		String selectSQL = "SELECT * FROM " + ClientiDS.TABLE_NAME + " WHERE EMAIL = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setString(1, email);
+			
+
+			ResultSet rs = preparedStmt.executeQuery();
+
+			while (rs.next()) {
+				bean.setCodiceFiscale(rs.getString("CODICE_FISCALE"));
+				bean.setNome(rs.getString("NOME"));
+				bean.setCognome(rs.getString("COGNOME"));
+				Date date = rs.getDate("DATA_NASCITA");
+				bean.setDataNascita(date.toLocalDate());
+				bean.setEmail(rs.getString("EMAIL"));
+				bean.setPassWord(rs.getString("PASS_WORD"));
+				bean.setUsername(rs.getString("USERNAME"));
+				bean.setIndFatt(rs.getString("IND_FATT"));
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return bean;
+	}
 }
 
 

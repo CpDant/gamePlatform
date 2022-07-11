@@ -16,5 +16,7 @@ public interface Clienti {
 
 	public ClientiBean doRetrieveByKey(String name) throws SQLException;
 	
+	public ClientiBean doRetrieveByKeyEmail(String email) throws SQLException;
+	
 	public Collection<ClientiBean> doRetrieveAll(String order) throws SQLException;
 }

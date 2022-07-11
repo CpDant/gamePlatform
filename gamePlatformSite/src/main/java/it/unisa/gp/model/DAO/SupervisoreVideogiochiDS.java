@@ -203,4 +203,43 @@ public class SupervisoreVideogiochiDS implements SupervisoreVideogiochi {
 		return array;
 	}
 
+	@Override
+	public SupervisoreVideogiochiBean doRetrieveByKeyEmail(String email) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		SupervisoreVideogiochiBean sup = new SupervisoreVideogiochiBean(null,null,null,null,null,null,0);
+
+		String selectSQL = "SELECT * FROM " + SupervisoreVideogiochiDS.TABLE_NAME + " WHERE EMAIL = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setString(1, email);
+
+			ResultSet rs = preparedStmt.executeQuery();
+
+			while (rs.next()) {
+				sup.setCodiceFiscale(rs.getString("CODICE_FISCALE"));
+				sup.setNome(rs.getString("NOME"));
+				sup.setNome(rs.getString("COGNOME"));
+				sup.setDataNascita((rs.getDate("DATA_NASCITA")).toLocalDate());
+				sup.setNome(rs.getString("RUOLO"));
+				sup.setNome(rs.getString("EMAIL"));
+				sup.setNome(rs.getString("PASS_WORD"));
+				sup.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return sup;
+	}
+
 }

@@ -17,5 +17,7 @@ public interface SupervisoreVideogiochi {
 
 	public SupervisoreVideogiochiBean doRetrieveByKey(String codiceFiscale) throws SQLException;
 	
+	public SupervisoreVideogiochiBean doRetrieveByKeyEmail(String email) throws SQLException;
+	
 	public Collection<SupervisoreVideogiochiBean> doRetrieveAll(String order) throws SQLException;
 }

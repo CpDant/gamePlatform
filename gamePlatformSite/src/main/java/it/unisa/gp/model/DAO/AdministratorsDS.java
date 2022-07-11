@@ -206,4 +206,43 @@ public class AdministratorsDS implements Administrators{
 		return array;
 	}
 
+	@Override
+	public AdministratorsBean doRetrieveByKeyEmail(String email) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		AdministratorsBean bean = new AdministratorsBean(null, null, null, null, null, null, 0);
+
+		String selectSQL = "SELECT * FROM " + AdministratorsDS.TABLE_NAME + " WHERE EMAIL = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setString(1, email);
+
+			ResultSet rs = preparedStmt.executeQuery();
+
+			while (rs.next()) {
+				bean.setCodiceFiscale(rs.getString("CODICE_FISCALE"));
+				bean.setNome(rs.getString("NOME"));
+				bean.setCognome(rs.getString("COGNOME"));
+				Date date = rs.getDate("DATA_NASCITA"); 
+				bean.setDataNascita(date.toLocalDate());
+				bean.setEmail(rs.getString("EMAIL"));
+				bean.setPassWord(rs.getString("PASS_WORD"));
+				bean.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return bean;
+	}
+
 }
