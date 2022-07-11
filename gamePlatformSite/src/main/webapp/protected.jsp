@@ -24,7 +24,7 @@ Congratulations. You have accessed a protected document.
 
 <%= roles %>
 
-<form action="Logout" method="get" > 
+<form action="LogoutServlet" method="get" > 
      <input type="submit" value="Logout"/>
 </form> 
 </body>
