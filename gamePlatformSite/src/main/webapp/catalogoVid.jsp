@@ -21,7 +21,7 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="utf-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet">
 <title>Catalogo Videogiochi</title>
@@ -43,7 +43,7 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 					<div class="card-body">
 						<h5 class="card-title"><%= vid.getNomeVideogioco() %></h5>
 						<h6 class="price"> &euro; <%= vid.getCosto() %></h6>
-						<a href="#" class="btn">
+						<a href="AddToCartServlet?id=<%=vid.getCodice()%>" class="btn">
 							<img src="img\icon\shopping-cart.svg" alt="add-to-cart" class="icona">	
 						</a>
 					</div>

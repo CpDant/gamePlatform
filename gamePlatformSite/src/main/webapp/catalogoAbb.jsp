@@ -21,7 +21,7 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="utf-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet">
 <title>Catalogo Abbonamenti</title>
@@ -43,7 +43,7 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 					<div class="card-body">
 						<h5 class="card-title"><%= abb.getNomeUnivoco() %></h5>
 						<h6 class="price"> &euro; <%= abb.getCosto() %></h6>
-						<a href="#" class="btn">
+						<a href="AddToCartServlet?id=<%= abb.getNomeUnivoco() %>" class="btn">
 							<img src="img\icon\shopping-cart.svg" alt="add-to-cart" class="icona">	
 						</a>
 					</div>
