@@ -18,6 +18,7 @@ import it.unisa.gp.model.DAO.ClientiDS;
 import it.unisa.gp.model.DAO.SupervisoreVideogiochiDS;
 import it.unisa.gp.model.bean.AdministratorsBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
+import it.unisa.gp.model.bean.Carrello;
 import it.unisa.gp.model.bean.ClientiBean;
 import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
 import it.unisa.gp.model.interfaceDS.Administrators;
@@ -47,6 +48,7 @@ public class LoginServlet extends HttpServlet {
 					Clienti clDS = new ClientiDS(ds);
 					clBean = clDS.doRetrieveByKeyEmail(email);
 					request.getSession().setAttribute("utente", clBean);
+					request.getSession().setAttribute("carrello", new Carrello(ds)); 
 				} else if(ruolo.equals("supVid")) {
 					SupervisoreVideogiochi supDS = new SupervisoreVideogiochiDS(ds);
 					supBean = supDS.doRetrieveByKeyEmail(email);

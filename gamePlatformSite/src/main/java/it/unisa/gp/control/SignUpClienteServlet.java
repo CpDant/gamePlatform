@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import it.unisa.gp.model.DAO.ClientiDS;
 import it.unisa.gp.model.DAO.TelefonoDS;
+import it.unisa.gp.model.bean.Carrello;
 import it.unisa.gp.model.bean.ClientiBean;
 import it.unisa.gp.model.bean.TelefonoBean;
 import it.unisa.gp.model.interfaceDS.Clienti;
@@ -94,6 +95,7 @@ public class SignUpClienteServlet extends HttpServlet {
 		try {
 			request.getSession().setAttribute("utente", clienteBean);
 			request.getSession().setAttribute("roles", "cliente");
+			request.getSession().setAttribute("carrello", new Carrello(ds));
 			
 			redirectedPage = "/protected.jsp";
 			
