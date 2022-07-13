@@ -28,15 +28,21 @@ public class AddToCartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Carrello carrello = (Carrello) request.getSession().getAttribute("carrello");
-		String id = request.getParameter("id");
-		if(id.contains(" Pass")) {
-			carrello.addAbb(id);
+		String ruolo = (String) request.getSession().getAttribute("roles");
+		if(ruolo != null) {
+			Carrello carrello = (Carrello) request.getSession().getAttribute("carrello");
+			String id = request.getParameter("id");
+			if(id.contains(" Pass")) {
+				carrello.addAbb(id);
+			}else {
+				carrello.addVid(id);
+			}
+			
+			response.sendRedirect(request.getContextPath() + "/carrello.jsp");
 		}else {
-			carrello.addVid(id);
+			response.sendRedirect(request.getContextPath() + "/login-form.jsp");
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/carrello.jsp");
 	}
 
 	/**
