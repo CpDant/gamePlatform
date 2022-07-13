@@ -29,7 +29,8 @@
 	if(flag == true){	
 %>
 	<div class="container">
-		<div class="d-flex py-3"><h3>Prezzo totale: &euro; <%= carrello.getTotale() %></h3><a class="mx-3 btn btn-primary" href="#">Compra ora</a></div>
+		<h2>Carrello</h2>
+		<div class="d-flex py-3"><h3>Prezzo totale: &euro; <%= carrello.getTotale() %></h3><a class="mx-3 btn btn-primary" href="/gamePlatformSite/checkOut.jsp">Compra ora</a></div>
 		<%
 			Collection<VideogiocoBean> arrVid = carrello.getArrVidBean();
 			Collection<AbbonamentoBean> arrAbb = carrello.getArrAbbBean();
