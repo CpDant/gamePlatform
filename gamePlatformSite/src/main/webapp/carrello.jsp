@@ -1,4 +1,4 @@
-<%@ page language="java" import="it.unisa.gp.model.bean.Carrello, java.util.*, it.unisa.gp.model.bean.VideogiocoBean, it.unisa.gp.model.bean.AbbonamentoBean" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" import="it.unisa.gp.model.bean.Carrello, java.util.*, it.unisa.gp.model.bean.VideogiocoBean, it.unisa.gp.model.bean.AbbonamentoBean" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
 
@@ -25,16 +25,35 @@
 	<link href="style/style.css" rel="stylesheet">
 </head>
 <body>
+<script>
+	function remOggetto(id){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			if (this.readyState == 4 && this.status == 200){
+				document.getElementById("cont").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET","RemFromCartServlet?id=" + id,true);
+		xhttp.send();
+	}
+
+
+
+
+
+
+</script>
 <%
 	if(flag == true){	
 %>
-	<div class="container">
+	<div id = "cont" class="container">
 		<div class="d-flex py-3"><h3>Prezzo totale: &euro; <%= carrello.getTotale() %></h3><a class="mx-3 btn btn-primary" href="#">Compra ora</a></div>
 		<%
 			Collection<VideogiocoBean> arrVid = carrello.getArrVidBean();
 			Collection<AbbonamentoBean> arrAbb = carrello.getArrAbbBean();
 			if(arrVid.isEmpty() && arrAbb.isEmpty()){
-		%>		<p>Il carrello è vuoto.</p>	
+		%>		
+			<p>Il carrello è vuoto.</p>	
 		<% 
 			}else{
 				
@@ -54,12 +73,14 @@
 					for(AbbonamentoBean abbBean : arrAbb){
 				%>
 				
-				<tr>
+				<tr id = "<%= abbBean.getNomeUnivoco() %>">
 					
 					<td><%= abbBean.getNomeUnivoco() %></td>
 					<td>Abbonamento</td>
 					<td>&euro; <%= abbBean.getCosto() %></td>
-					<td><a class="btn btn-sm btn-danger" href="#">Rimuovi</a></td>
+					<td>
+						<button type="button" class="btn btn-sm btn-danger" onclick='remOggetto("<%= abbBean.getNomeUnivoco() %>")'>Rimuovi</button>
+					</td>
 				</tr>
 				<%
 					}
@@ -70,12 +91,12 @@
 					for(VideogiocoBean vidBean : arrVid){
 				%>
 				
-				<tr>
+				<tr id = "<%=vidBean.getCodice()%>">
 					
 					<td><%= vidBean.getNomeVideogioco() %></td>
 					<td>Videogioco</td>
 					<td>&euro; <%= vidBean.getCosto() %></td>
-					<td><a class="btn btn-sm btn-danger" href="#">Rimuovi</a></td>
+					<td><button type="button" class="btn btn-sm btn-danger" onclick='remOggetto("<%= vidBean.getCodice() %>")'>Rimuovi</button></td>
 				</tr>
 				<%
 					}
