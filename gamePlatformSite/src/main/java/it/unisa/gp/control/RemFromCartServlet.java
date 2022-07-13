@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import it.unisa.gp.model.bean.Carrello;
 
 /**
- * Servlet implementation class AddToCartServlet
+ * Servlet implementation class RemFromCartServlet
  */
-@WebServlet("/AddToCartServlet")
-public class AddToCartServlet extends HttpServlet {
+@WebServlet("/RemFromCartServlet")
+public class RemFromCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddToCartServlet() {
+    public RemFromCartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,21 +28,14 @@ public class AddToCartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String ruolo = (String) request.getSession().getAttribute("roles");
-		if(ruolo != null) {
-			Carrello carrello = (Carrello) request.getSession().getAttribute("carrello");
-			String id = request.getParameter("id");
-			if(id.contains(" Pass")) {
-				carrello.addAbb(id);
-			}else {
-				carrello.addVid(id);
-			}
-			
-			response.sendRedirect(request.getContextPath() + "/carrello.jsp");
+		Carrello carrello = (Carrello)request.getSession().getAttribute("carrello");
+		String id = request.getParameter("id");
+		if(id.contains(" Pass")) {
+			carrello.remAbb(id);
 		}else {
-			response.sendRedirect(request.getContextPath() + "/login-form.jsp");
+			carrello.remVid(id);
 		}
-		
+		response.sendRedirect(request.getContextPath() + "/carrello.jsp");
 	}
 
 	/**
