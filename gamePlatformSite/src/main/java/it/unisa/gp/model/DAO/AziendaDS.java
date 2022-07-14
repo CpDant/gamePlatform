@@ -150,6 +150,42 @@ public class AziendaDS implements Azienda{
 	}
 
 	@Override
+	public synchronized AziendaBean doRetrieveByKeyCodFis(String codFis) throws SQLException {
+		
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		AziendaBean bean = new AziendaBean(null,null,null,null);
+
+		String selectSQL = "SELECT * FROM " + AziendaDS.TABLE_NAME + " WHERE CODICE_FISCALE_CLIENTE = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setString(1, codFis);
+
+			ResultSet rs = preparedStmt.executeQuery();
+
+			while (rs.next()) {
+				bean.setpIva(rs.getString("P_IVA"));
+				bean.setCodiceFiscaleCliente(rs.getString("CODICE_FISCALE_CLIENTE"));
+				bean.setSdi(rs.getString("SDI"));
+				bean.setPec(rs.getString("PEC"));
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return bean;
+	}
+	
+	@Override
 	public synchronized Collection<AziendaBean> doRetrieveAll(String order) throws SQLException {
 		
 		Connection connection = null;

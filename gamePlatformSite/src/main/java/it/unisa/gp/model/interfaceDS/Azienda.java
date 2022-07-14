@@ -15,6 +15,8 @@ public interface Azienda {
 
 	public AziendaBean doRetrieveByKey(String pIva) throws SQLException;
 	
+	public AziendaBean doRetrieveByKeyCodFis(String codFis) throws SQLException;
+	
 	public Collection<AziendaBean> doRetrieveAll(String order) throws SQLException;
 
 }
