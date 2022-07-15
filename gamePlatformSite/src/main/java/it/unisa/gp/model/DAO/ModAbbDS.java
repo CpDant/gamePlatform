@@ -30,9 +30,9 @@ public class ModAbbDS implements ModAbb{
 	
 	@Override
 	public void doSave(ModAbbBean modBean, String nomeUnivoco, int costo, int durata, boolean eliminato) throws SQLException {
+		/*
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
-		
 		String insertSQL = "INSERT INTO " + ModAbbDS.TABLE_NAME
 				+ " (CODICE_FISCALE_SUP_VID, nome_univoco_abb) VALUES (?, ?)";
 		
@@ -56,7 +56,7 @@ public class ModAbbDS implements ModAbb{
 					connection.close();
 			}
 		}
-		
+		*/
 		Abbonamento abb = new AbbonamentoDS(ds);
 		AbbonamentoBean abbBean = new AbbonamentoBean(nomeUnivoco,0,0);
 		abb.doUpdate(abbBean,costo,durata,eliminato);

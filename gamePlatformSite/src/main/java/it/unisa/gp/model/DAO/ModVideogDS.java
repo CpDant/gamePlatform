@@ -30,9 +30,9 @@ public class ModVideogDS implements ModVideog {
 	@Override
 	public void doSave(ModVideogBean mod, String codice, String nomeVideogioco, int dimensione, int annoProduzione,
 			int costo, Pegi pegi,  boolean eliminato) throws SQLException {
+		/*
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;
-		
 		String insertSQL = "INSERT INTO " + ModVideogDS.TABLE_NAME
 				+ " (CODICE_FISCALE_SUP_VID, CODICE_VIDEOGIOCO) VALUES (?, ?)";
 		
@@ -56,7 +56,7 @@ public class ModVideogDS implements ModVideog {
 					connection.close();
 			}
 		}
-		
+		*/
 		Videogioco vid = new VideogiocoDS(ds);
 		VideogiocoBean vidBean = new VideogiocoBean(codice, null, null, 0, 0, 0, null);
 		vid.doUpdate(vidBean,nomeVideogioco, dimensione, pegi, annoProduzione, costo, eliminato);
