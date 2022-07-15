@@ -15,7 +15,7 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 	
 	DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 	Abbonamento abbDS = new AbbonamentoDS(ds);
-	Collection<AbbonamentoBean> colAbb = abbDS.doRetrieveAll("costo");
+	Collection<AbbonamentoBean> colAbb = abbDS.doRetrieveAllExists("costo");
 %>
 
 <!DOCTYPE html>

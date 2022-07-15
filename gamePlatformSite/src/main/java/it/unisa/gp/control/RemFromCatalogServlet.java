@@ -11,21 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import it.unisa.gp.model.DAO.RemAbbDS;
+import it.unisa.gp.model.DAO.RemVideogDS;
 import it.unisa.gp.model.bean.RemAbbBean;
+import it.unisa.gp.model.bean.RemVideogBean;
 import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
 import it.unisa.gp.model.interfaceDS.RemAbb;
+import it.unisa.gp.model.interfaceDS.RemVideog;
 
 /**
- * Servlet implementation class RemAbbFromCatServlet
+ * Servlet implementation class RemFromCatalogServlet
  */
-@WebServlet("/RemAbbFromCatServlet")
-public class RemAbbFromCatServlet extends HttpServlet {
+@WebServlet("/RemFromCatalogServlet")
+public class RemFromCatalogServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemAbbFromCatServlet() {
+    public RemFromCatalogServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,20 +39,29 @@ public class RemAbbFromCatServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		RemAbb remAbbDS = new RemAbbDS(ds);		
 		SupervisoreVideogiochiBean supVidBean = (SupervisoreVideogiochiBean) request.getSession().getAttribute("utente");
 		
 		String id = request.getParameter("id");
 		System.out.println(id);
-		
-		try {
-			remAbbDS.doSave(new RemAbbBean(supVidBean.getCodiceFiscale(), id));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(id.contains(" Pass")) {
+			RemAbb remAbbDS = new RemAbbDS(ds);
+			try {
+				remAbbDS.doSave(new RemAbbBean(supVidBean.getCodiceFiscale(), id));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.sendRedirect(request.getContextPath() + "/catalogoAbbSup.jsp");
+		}else {
+			RemVideog remVidDS = new RemVideogDS(ds);
+			try {
+				remVidDS.doSave(new RemVideogBean(supVidBean.getCodiceFiscale(),id));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.sendRedirect(request.getContextPath() + "/catalogoVidSup.jsp");
 		}
-		
-		response.sendRedirect(request.getContextPath() + "/catalogoAbbSup.jsp");
 	}
 		
 	/**

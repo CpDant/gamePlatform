@@ -15,7 +15,7 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 	
 	DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 	Videogioco vidDS = new VideogiocoDS(ds);
-	Collection<VideogiocoBean> colVid = vidDS.doRetrieveAll(null);
+	Collection<VideogiocoBean> colVid = vidDS.doRetrieveAllExists(null);
 %>
 
 <!DOCTYPE html>

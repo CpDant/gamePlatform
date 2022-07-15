@@ -15,7 +15,7 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 	
 	DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 	Videogioco vidDS = new VideogiocoDS(ds);
-	Collection<VideogiocoBean> colVid = vidDS.doRetrieveAll(null);
+	Collection<VideogiocoBean> colVid = vidDS.doRetrieveAllExists(null);
 %>
 
 <!DOCTYPE html>
@@ -27,7 +27,19 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 <title>Gestione Videogiochi</title>
 </head>
 <body>
-	<div class="container">
+<script>
+	function remOggetto(id){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			if (this.readyState == 4 && this.status == 200){
+				document.getElementById("cont").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET","RemFromCatalogServlet?id=" + id,true);
+		xhttp.send();
+	}
+</script>
+	<div class="container" id="cont">
 		<div class="card-header my-3">
 			<h2>Gestione Videogiochi</h2>
 		</div>
@@ -49,11 +61,9 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 						<h5 class="card-title"><%= vid.getNomeVideogioco() %></h5>
 						<h6 class="price"> &euro; <%= vid.getCosto() %></h6>
 						<a href="#" class="btn border-dark">
-							<img src="img\icon\pencil.svg" alt="add-to-cart" class="icona">	
+							<img src="img\icon\pencil.svg" alt="mod-videog" class="icona">	
 						</a>
-						<a href="#" class="btn border-dark">
-							<img src="img\icon\trash.svg" alt="add-to-cart" class="icona">	
-						</a>
+						<button type="button" class="btn border-dark" onclick='remOggetto("<%= vid.getCodice() %>")'><img src="img\icon\trash.svg" alt="rem-videog" class="icona"></button>
 					</div>
 				</div>
 			</div>

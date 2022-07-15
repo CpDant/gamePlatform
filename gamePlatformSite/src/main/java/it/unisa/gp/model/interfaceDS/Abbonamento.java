@@ -17,4 +17,6 @@ public interface Abbonamento {
 	public AbbonamentoBean doRetrieveByKey(String name) throws SQLException;
 	
 	public Collection<AbbonamentoBean> doRetrieveAll(String order) throws SQLException;
+	
+	public Collection<AbbonamentoBean> doRetrieveAllExists(String order) throws SQLException;
 }

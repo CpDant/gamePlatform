@@ -204,4 +204,49 @@ public class VideogiocoDS implements Videogioco {
 		return array;
 	}
 	
+	@Override
+	public synchronized Collection<VideogiocoBean> doRetrieveAllExists(String order) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		Collection<VideogiocoBean> array = new LinkedList<VideogiocoBean>();
+
+		String selectSQL = "SELECT * FROM " + VideogiocoDS.TABLE_NAME + " WHERE ELIMINATO = FALSE";
+		
+
+		if (order != null && !order.equals("")) {
+			selectSQL += " ORDER BY " + order;
+		}
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while (rs.next()) {
+				VideogiocoBean bean = new VideogiocoBean(null,null,null,0,0,0,null);
+				bean.setCodice(rs.getString("CODICE"));
+				bean.setNomeSoftwareHouse(rs.getString("NOME_SOFTWARE_HOUSE"));
+				bean.setNomeVideogioco(rs.getString("NOME_VIDEOGIOCO"));
+				bean.setDimensione(rs.getInt("DIMENSIONE"));
+				bean.setPegi(Pegi.valueOf(rs.getString("PEGI")));
+				bean.setAnnoDiProduzione(rs.getInt("ANNO_DI_PRODUZIONE"));
+				bean.setCosto(rs.getInt("COSTO"));
+				bean.setEliminato(rs.getBoolean("ELIMINATO"));
+				array.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return array;
+	}
+	
 }

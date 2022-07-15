@@ -15,7 +15,7 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 	
 	DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 	Abbonamento abbDS = new AbbonamentoDS(ds);
-	Collection<AbbonamentoBean> colAbb = abbDS.doRetrieveAll("costo");
+	Collection<AbbonamentoBean> colAbb = abbDS.doRetrieveAllExists("costo");
 %>
 
 <!DOCTYPE html>
@@ -33,10 +33,10 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function(){
 			if (this.readyState == 4 && this.status == 200){
-				document.getElementById("cata").innerHTML = this.responseText;
+				document.getElementById("cont").innerHTML = this.responseText;
 			}
 		};
-		xhttp.open("GET","RemAbbFromCatServlet?id=" + id,true);
+		xhttp.open("GET","RemFromCatalogServlet?id=" + id,true);
 		xhttp.send();
 	}
 </script>
@@ -63,10 +63,10 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 						<h5 class="card-title"><%= abb.getNomeUnivoco() %></h5>
 						<h6 class="price"> &euro; <%= abb.getCosto() %></h6>
 						<a href="#" class="btn border-dark">
-							<img src="img\icon\pencil.svg" alt="add-to-cart" class="icona">	
+							<img src="img\icon\pencil.svg" alt="mod-abb" class="icona">	
 						</a>
 	
-						<button type="button" class="btn border-dark" onclick='remOggetto("<%= abb.getNomeUnivoco() %>")'>Rimuovi</button>
+						<button type="button" class="btn border-dark" onclick='remOggetto("<%= abb.getNomeUnivoco() %>")'><img src="img\icon\trash.svg" alt="rem-abb" class="icona"></button>
 					</div>
 				</div>
 			</div>

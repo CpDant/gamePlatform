@@ -16,4 +16,6 @@ public interface Videogioco {
 	public VideogiocoBean doRetrieveByKey(String codice) throws SQLException;
 	
 	public Collection<VideogiocoBean> doRetrieveAll(String order) throws SQLException;
+	
+	public Collection<VideogiocoBean> doRetrieveAllExists(String order) throws SQLException;
 }

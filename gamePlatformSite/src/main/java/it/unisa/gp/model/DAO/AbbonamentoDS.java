@@ -197,5 +197,47 @@ public class AbbonamentoDS implements Abbonamento{
 		}
 		return array;
 	}
+	
+	@Override
+	public synchronized Collection<AbbonamentoBean> doRetrieveAllExists(String order) throws SQLException {
+		
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		Collection<AbbonamentoBean> array = new LinkedList<AbbonamentoBean>();
+
+		String selectSQL = "SELECT * FROM " + AbbonamentoDS.TABLE_NAME + " WHERE ELIMINATO = FALSE";
+		
+
+		if (order != null && !order.equals("")) {
+			selectSQL += " ORDER BY " + order;
+		}
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while (rs.next()) {
+				AbbonamentoBean bean = new AbbonamentoBean(null,0,0);
+				bean.setNomeUnivoco(rs.getString("NOME_UNIVOCO"));
+				bean.setCosto(rs.getInt("COSTO"));
+				bean.setDurata(rs.getInt("DURATA"));
+				bean.setEliminato(rs.getBoolean("ELIMINATO"));
+				array.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return array;
+	}
 
 }
