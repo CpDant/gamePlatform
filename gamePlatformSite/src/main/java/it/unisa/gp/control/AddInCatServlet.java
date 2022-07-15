@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.sql.DataSource;
 
-
-
+import it.unisa.gp.model.DAO.AddAbbDS;
+import it.unisa.gp.model.DAO.AddInAbbDS;
+import it.unisa.gp.model.DAO.AddVideogDS;
+import it.unisa.gp.model.bean.AddAbbBean;
+import it.unisa.gp.model.bean.AddInAbbBean;
+import it.unisa.gp.model.bean.AddVideogBean;
+import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
 import it.unisa.gp.model.bean.VideogiocoBean.Pegi;
+import it.unisa.gp.model.interfaceDS.AddAbb;
+import it.unisa.gp.model.interfaceDS.AddInAbb;
+import it.unisa.gp.model.interfaceDS.AddVideog;
 
 /**
  * Servlet implementation class AddInCatServlet
@@ -43,31 +52,49 @@ public class AddInCatServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+		SupervisoreVideogiochiBean supVidBean = (SupervisoreVideogiochiBean) request.getSession().getAttribute("utente");
 		
 		
 		if(request.getParameter("tipo").equals("videogioco")) {
-			String nomeVid = request.getParameter("nome-vid");
-			System.out.println(nomeVid);
-			String codVid = request.getParameter("cod-vid");
-			System.out.println(codVid);
-			int dimVid = Integer.parseInt(request.getParameter("dim-vid"));
-			System.out.println(dimVid);
+			String nome = request.getParameter("nome-vid");
+			String cod = request.getParameter("cod-vid");
+			int dim = Integer.parseInt(request.getParameter("dim-vid"));
 			int annoProd = Integer.parseInt(request.getParameter("annoProd"));
-			System.out.println(annoProd);
-			int costoVid = Integer.parseInt(request.getParameter("costo"));
-			System.out.println(costoVid);
+			int costo = Integer.parseInt(request.getParameter("costo"));
 			String softHouse = request.getParameter("softHouse");
-			System.out.println(softHouse);
 			Pegi pegi = Pegi.valueOf(request.getParameter("pegi"));
-			System.out.println(pegi);
+			
+			AddVideog addVidDS = new AddVideogDS(ds);
+			try {
+				addVidDS.doSave(new AddVideogBean(supVidBean.getCodiceFiscale(), cod), cod, softHouse, nome, dim, annoProd, costo, pegi);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}else {
-			String nomeAbb = request.getParameter("nome-abb");
-			System.out.println(nomeAbb);
-			int costoAbb = Integer.parseInt(request.getParameter("costo"));
-			System.out.println(costoAbb);
+			String nome = request.getParameter("nome-abb");
+			int costo = Integer.parseInt(request.getParameter("costo"));
 			int durata = Integer.parseInt(request.getParameter("durata"));
-			System.out.println(durata);
+			
+			AddAbb addAbbDS = new AddAbbDS(ds);
+			try {
+				addAbbDS.doSave(new AddAbbBean(supVidBean.getCodiceFiscale(), nome), nome, costo, durata);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String[] checkboxNamesList = request.getParameterValues("vidContenuti");
+			AddInAbb addInAbbDS = new AddInAbbDS(ds);
+			for (int i = 0; i < checkboxNamesList.length; i++) {			    
+				try {
+					addInAbbDS.doSave(new AddInAbbBean(supVidBean.getCodiceFiscale(), checkboxNamesList[i], nome));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 		}
 		
 		Part part = request.getPart("inputImage");
@@ -82,7 +109,12 @@ public class AddInCatServlet extends HttpServlet {
             System.out.println("uploaded");
         }else{
             System.out.println("something wrong");
-
+        }
+        
+        if(request.getParameter("tipo").equals("videogioco")) {
+        	response.sendRedirect(request.getContextPath() + "/catalogoVidSup.jsp");
+        } else {
+        	response.sendRedirect(request.getContextPath() + "/catalogoAbbSup.jsp");
         }
 	}
 	

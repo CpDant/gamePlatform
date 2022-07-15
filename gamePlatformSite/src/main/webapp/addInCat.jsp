@@ -1,11 +1,15 @@
-<%@ page language="java" import="javax.sql.DataSource,it.unisa.gp.model.bean.SoftwareHouseBean,
-	it.unisa.gp.model.DAO.SoftwareHouseDS, it.unisa.gp.model.interfaceDS.SoftwareHouse, java.util.*" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" import="javax.sql.DataSource, it.unisa.gp.model.bean.SoftwareHouseBean, it.unisa.gp.model.bean.VideogiocoBean,
+	it.unisa.gp.model.DAO.SoftwareHouseDS, it.unisa.gp.model.interfaceDS.SoftwareHouse,
+	it.unisa.gp.model.DAO.VideogiocoDS, it.unisa.gp.model.interfaceDS.Videogioco, java.util.*" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
 <%
 	DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 	SoftwareHouse softDS = new SoftwareHouseDS(ds);
+	Videogioco vidDS = new VideogiocoDS(ds);
 	Collection<SoftwareHouseBean> collSoft = softDS.doRetrieveAll(null);
+	Collection<VideogiocoBean> collVid = vidDS.doRetrieveAll(null);
+	
 %>
 
 <!DOCTYPE html>
@@ -30,7 +34,7 @@ $(document).ready(function () {
 										+ "</div>"
 										+"<div class='col-md-6 mb-3'>"
 											+ "<label for='cod-vid'>Codice: </label>"
-											+ "<input type='text' class='form-control' id='cod-vid' name='cod-vid' required>"
+											+ "<input type='text' class='form-control' id='cod-vid' name='cod-vid' maxlength='8' required>"
 										+ "</div>"
 									+ "</div>"
 									+ "<div class='row'>"
@@ -47,7 +51,7 @@ $(document).ready(function () {
 											+ "</select>"
 										+ "</div>"
 										+ "<div class='col-md-6 mb-3'>"
-											+ "<label for='dim-vid'>Dimensione: </label>"
+											+ "<label for='dim-vid'>Dimensione (GB): </label>"
 											+ "<input type='text' class='form-control' id='dim-vid' name='dim-vid' required>"
 										+ "</div>"
 									+ "</div>"	
@@ -73,8 +77,8 @@ $(document).ready(function () {
 									+ "</div>"
 									+ "<div class='row'>"
 										+ "<div class='col-md-6 mb-3'>"
-											+ "<label for='inputImageVid'>Immagine del videogioco:</label>"
-											+ "<input type='file' class='form-control' id='inputImage' name='inputImage'>"
+											+ "<label for='inputImage'>Immagine del videogioco:</label>"
+											+ "<input type='file' class='form-control' id='inputImage' name='inputImage' required>"
 										+ "</div>"
 									+ "</div>"
 								+ "</div>");
@@ -94,9 +98,23 @@ $(document).ready(function () {
 								+ "</div>"
 								+ "<div class='row'>"
 									+ "<div class='col-md-6 mb-3'>"
-										+ "<label for='inputImageAbb'>Immagine dell'abbonamento:</label>"
-										+ "<input type='file' class='form-control' id='inputImage' name='inputImage'>"
-									+ "</div>");
+										+ "<label for='inputImage'>Immagine dell'abbonamento:</label>"
+										+ "<input type='file' class='form-control' id='inputImage' name='inputImage' required>"
+									+ "</div>"
+								+ "</div>"
+								
+								+ "<div class='row'>"
+									+ "<label>Videgiochi contenuti:</label>"
+									<%
+										for(VideogiocoBean vidBean: collVid){
+									%>
+									+ "<div class='mb-1'><input type='checkbox' name='vidContenuti' id='<%= vidBean.getNomeVideogioco()%>' value='<%= vidBean.getCodice()%>'> <%= vidBean.getNomeVideogioco()%></div>"
+									<%
+										}
+									%>
+									
+								+"</div>"
+								+ "<br/>");
 				$("#submit").css("display", "inline");
 				
 			}else{
@@ -136,6 +154,18 @@ function validate(){
 	}
 	return true;
 }
+
+$(document).ready(function () {
+    $('#submit').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("You must check at least one checkbox.");
+        return false;
+      }
+
+    });
+});
 
 </script>
 </head>
