@@ -32,7 +32,7 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 			<h2>Gestione Abbonamenti</h2>
 		</div>
 		<div style="text-align:center">
-			<a href="#" class="btn border-dark">
+			<a href="/gamePlatformSite/addInCat.jsp" class="btn border-dark">
 				<img src="img\icon\add.svg" alt="add-to-cart" class="icona"> Aggiungi Abbonamento	
 			</a>
 		</div>
