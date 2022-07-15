@@ -26,8 +26,22 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 <link href="style/style.css" rel="stylesheet">
 <title>Gestione Abbonamenti</title>
 </head>
+
 <body>
-	<div class="container">
+<script>
+	function remOggetto(id){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			if (this.readyState == 4 && this.status == 200){
+				document.getElementById("cata").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET","RemAbbFromCatServlet?id=" + id,true);
+		xhttp.send();
+	}
+</script>
+
+	<div class="container" id="cont">
 		<div class="card-header my-3">
 			<h2>Gestione Abbonamenti</h2>
 		</div>
@@ -42,7 +56,7 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 				for(AbbonamentoBean abb: colAbb){
 		%>
 		
-			<div class="col-md-4 my-3">
+			<div class="col-md-4 my-3" id="cata">
 				<div class="card text-center w-100" style="width: 18rem;">
 					<img class="card-img-top" src="img\abb\<%=abb.getNomeUnivoco()%>.jpg" alt="Card image cap">
 					<div class="card-body">
@@ -51,9 +65,8 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 						<a href="#" class="btn border-dark">
 							<img src="img\icon\pencil.svg" alt="add-to-cart" class="icona">	
 						</a>
-						<a href="#" class="btn border-dark">
-							<img src="img\icon\trash.svg" alt="add-to-cart" class="icona">	
-						</a>
+	
+						<button type="button" class="btn border-dark" onclick='remOggetto("<%= abb.getNomeUnivoco() %>")'>Rimuovi</button>
 					</div>
 				</div>
 			</div>

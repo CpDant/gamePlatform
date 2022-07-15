@@ -140,11 +140,10 @@ public class SupervisoreVideogiochiDS implements SupervisoreVideogiochi {
 			while (rs.next()) {
 				sup.setCodiceFiscale(rs.getString("CODICE_FISCALE"));
 				sup.setNome(rs.getString("NOME"));
-				sup.setNome(rs.getString("COGNOME"));
+				sup.setCognome(rs.getString("COGNOME"));
 				sup.setDataNascita((rs.getDate("DATA_NASCITA")).toLocalDate());
-				sup.setNome(rs.getString("RUOLO"));
-				sup.setNome(rs.getString("EMAIL"));
-				sup.setNome(rs.getString("PASS_WORD"));
+				sup.setEmail(rs.getString("EMAIL"));
+				sup.setPassWord(rs.getString("PASS_WORD"));
 				sup.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
 			}
 
@@ -222,11 +221,10 @@ public class SupervisoreVideogiochiDS implements SupervisoreVideogiochi {
 			while (rs.next()) {
 				sup.setCodiceFiscale(rs.getString("CODICE_FISCALE"));
 				sup.setNome(rs.getString("NOME"));
-				sup.setNome(rs.getString("COGNOME"));
+				sup.setCognome(rs.getString("COGNOME"));
 				sup.setDataNascita((rs.getDate("DATA_NASCITA")).toLocalDate());
-				sup.setNome(rs.getString("RUOLO"));
-				sup.setNome(rs.getString("EMAIL"));
-				sup.setNome(rs.getString("PASS_WORD"));
+				sup.setEmail(rs.getString("EMAIL"));
+				sup.setPassWord(rs.getString("PASS_WORD"));
 				sup.setRetribuzioneAnnuale(rs.getInt("RETRIBUZIONE_ANNUALE"));
 			}
 
