@@ -36,7 +36,16 @@
 		xhttp.open("GET","RemFromCartServlet?id=" + id,true);
 		xhttp.send();
 	}
-
+	
+	function checkTot(tot){
+		if(tot == "0"){
+			alert("Per procedere all'acquisto devi contenere almeno un oggetto nel carrello.");
+		} else {
+			window.location.href="/gamePlatformSite/checkOut.jsp";
+		}
+	}
+	
+	
 </script>
 <%
 	if(flag == true){	
@@ -44,7 +53,7 @@
 
 	<div id = "cont" class="container">
 	<h2>Carrello</h2>
-		<div class="d-flex py-3"><h3>Prezzo totale: &euro; <%= carrello.getTotale() %></h3><a class="mx-3 btn btn-primary" href="/gamePlatformSite/checkOut.jsp">Compra ora</a></div>
+		<div class="d-flex py-3"><h3>Prezzo totale: &euro; <%= carrello.getTotale() %></h3><button class="mx-3 btn btn-primary" onclick='checkTot("<%= carrello.getTotale() %>")'>Compra ora</button></div>
 
 		<%
 			Collection<VideogiocoBean> arrVid = carrello.getArrVidBean();
