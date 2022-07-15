@@ -24,4 +24,6 @@ public interface Tickets {
 	public Collection<TicketsBean> doRetrieveAllAssCl(String order, String codFisc) throws SQLException;
 	
 	public Collection<TicketsBean> doRetrieveAll(String order) throws SQLException;
+	
+	public Collection<TicketsBean> doRetrieveAllExists(String order, boolean resolved) throws SQLException;
 }

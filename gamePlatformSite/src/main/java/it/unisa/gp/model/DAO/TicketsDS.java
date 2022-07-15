@@ -295,6 +295,50 @@ public class TicketsDS implements Tickets{
 		return array;
 	}
 
+	
+public synchronized Collection<TicketsBean> doRetrieveAllExists(String order, boolean resolved) throws SQLException {
+		
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		Collection<TicketsBean> array = new LinkedList<TicketsBean>();
+
+		String selectSQL = "SELECT * FROM " + TicketsDS.TABLE_NAME + " WHERE RESOLVED = ?";
+		
+
+		if (order != null && !order.equals("")) {
+			selectSQL += " ORDER BY " + order;
+		}
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setBoolean(1, resolved);
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while (rs.next()) {
+				TicketsBean bean = new TicketsBean(0, null, null, null, null, null);
+				bean.setId(rs.getInt("ID"));
+				bean.setCodiceFiscaleAssistCl(rs.getString("CODICE_FISCALE_ASSIST_CL"));
+				bean.setCodiceFiscaleCliente(rs.getString("CODICE_FISCALE_CLIENTE"));
+				bean.setResolved(rs.getBoolean("Resolved"));
+				bean.setCategoria(CategoriaProbl.valueOf(rs.getString("CATEGORIA_PROBL")));											
+				bean.setMessaggio(rs.getString("MESSAGGIO"));
+				bean.setDataOra((rs.getTimestamp("DATA_ORA").toLocalDateTime()));
+				array.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return array;
+	}
 
 	@Override
 	public void doUpdate(int id) throws SQLException {
