@@ -158,12 +158,11 @@
 				</div>
 				<div id="datiFattura">
 				
+				</div>
+				
 				<div class="row">
 					<div class="col-md-6 mb-3" > Se vuoi modificare i dati personali, <a href="#">clicca qui</a>  </div>
 				</div>
-				
-				</div>
-
 				<hr class="mb-4">
 
 				<h4 class="mb-3">Pagamento</h4>
