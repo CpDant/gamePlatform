@@ -47,6 +47,9 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 			<a href="/gamePlatformSite/addInCat.jsp" class="btn border-dark">
 				<img src="img\icon\add.svg" alt="add-to-cart" class="icona"> Aggiungi Videogioco	
 			</a>
+			<a href="/gamePlatformSite/modInCat.jsp" class="btn border-dark"> 	
+				<img src="img\icon\pencil.svg" alt="mod-abb" class="icona">	Modifica Videogioco
+			</a>
 		</div>
 		<div class="row">
 		<%
@@ -60,9 +63,6 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 					<div class="card-body">
 						<h5 class="card-title"><%= vid.getNomeVideogioco() %></h5>
 						<h6 class="price"> &euro; <%= vid.getCosto() %></h6>
-						<a href="#" class="btn border-dark">
-							<img src="img\icon\pencil.svg" alt="mod-videog" class="icona">	
-						</a>
 						<button type="button" class="btn border-dark" onclick='remOggetto("<%= vid.getCodice() %>")'><img src="img\icon\trash.svg" alt="rem-videog" class="icona"></button>
 					</div>
 				</div>

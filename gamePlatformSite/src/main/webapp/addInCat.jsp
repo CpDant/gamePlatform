@@ -8,7 +8,7 @@
 	SoftwareHouse softDS = new SoftwareHouseDS(ds);
 	Videogioco vidDS = new VideogiocoDS(ds);
 	Collection<SoftwareHouseBean> collSoft = softDS.doRetrieveAll(null);
-	Collection<VideogiocoBean> collVid = vidDS.doRetrieveAll(null);
+	Collection<VideogiocoBean> collVid = vidDS.doRetrieveAllExists(null);
 	
 %>
 

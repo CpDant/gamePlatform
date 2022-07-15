@@ -49,6 +49,9 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 			<a href="/gamePlatformSite/addInCat.jsp" class="btn border-dark">
 				<img src="img\icon\add.svg" alt="add-to-cart" class="icona"> Aggiungi Abbonamento	
 			</a>
+			<a href="/gamePlatformSite/modInCat.jsp" class="btn border-dark"> 	
+				<img src="img\icon\pencil.svg" alt="mod-abb" class="icona">	Modifica Abbonamento
+			</a>
 		</div>
 		<div class="row">
 		<%
@@ -62,10 +65,6 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 					<div class="card-body">
 						<h5 class="card-title"><%= abb.getNomeUnivoco() %></h5>
 						<h6 class="price"> &euro; <%= abb.getCosto() %></h6>
-						<a href="#" class="btn border-dark">
-							<img src="img\icon\pencil.svg" alt="mod-abb" class="icona">	
-						</a>
-	
 						<button type="button" class="btn border-dark" onclick='remOggetto("<%= abb.getNomeUnivoco() %>")'><img src="img\icon\trash.svg" alt="rem-abb" class="icona"></button>
 					</div>
 				</div>
