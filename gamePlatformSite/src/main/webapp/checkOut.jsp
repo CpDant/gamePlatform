@@ -206,7 +206,7 @@
 				<hr class="mb-4">
 			</div>	
 		</div>
-		<button class="btn btn-primary btn-lg btn-block" type="submit">Procedi al pagamento</button>
+		<button class="btn btn-primary btn-block" type="submit">Procedi al pagamento</button>
 	</form>				
 	</div>
 
