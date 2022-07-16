@@ -119,7 +119,7 @@
 <div class="container">
 	<form action="SignUpClienteServlet" method="post" onsubmit="return validate(this)"> 
 	
-	<%@ include file="../style/header.jsp" %> 
+	<%@ include file="../style/headerReg.jsp" %> 
 		<div class="col-md-8 order-md-1">		
 			<h4 class="mb-3">Registrazione</h4>    
 			
