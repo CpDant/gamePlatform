@@ -5,10 +5,11 @@
 <head>
 <meta charset="utf-8">
 <title>Registrazione</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="style/style.css" rel="stylesheet">
 </head>
 
 <script>
-
 	function checkCodFis(inputtxt) {
 	    var codice = /^[a-zA-Z]{6}[0-9]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9]{2}([a-zA-Z]{1}[0-9]{3})[a-zA-Z]{1}$/;
 	    if (inputtxt.value.match(codice))
@@ -55,7 +56,6 @@
 			return true;
 		
 		return false;
-
 	}	
 	
 	function validate(obj) {
@@ -101,9 +101,7 @@
 				valid = false;
 				alert("L'indirizzo deve avere questo formato: <via/piazza/etc.> <nome> <numero civico/SNC>");
 				address.focus();
-			}
-
-		
+			}		
 		
 		var numbers1 = document.getElementsByName("tel1")[0];
 			if(!checkPhonenumber(numbers1)) {
@@ -111,54 +109,84 @@
 				alert("Numero di telefono errato o non valido.");
 				numbers1.focus();
 			}
-		
-				
 
-		
-				
 		return valid;
-		
-		
+
 	}
 </script>
 
 <body>
-<form action="SignUpClienteServlet" method="post" onsubmit="return validate(this)"> 
-	<fieldset>
-	     <legend>Registrazione</legend>
-	     <label for="codFis">Codice Fiscale</label>
-	     <input id="codFis" type="text" name="codFis" placeholder="codice fiscale" required>  
-	     <br>   
-	     <label for="nome">Nome</label>
-	     <input id="nome" type="text" name="nome" placeholder="nome" required> 
-	     <br>
-	     <label for="cognome">Cognome</label>
-	     <input id="cognome" type="text" name="cognome" placeholder="cognome" required> 
-	     <br>   
-	     <label for="data">Data</label>
-	     <input id="data" type="date" name="data" placeholder="data" required> 
-	     <br>     
-	     <label for="email">Email</label>
-	     <input id="email" type="email" name="email" placeholder="email" required> 
-	     <br>
-	     <label for="password">Password</label>
-	     <input id="password" type="password" name="password" placeholder="password" required> 
-	     <br>
-	     <label for="username">Username</label>
-	     <input id="username" type="text" name="username" placeholder="username" required> 
-	     <br>     
-	     <label for="indFatt">Indirizzo di fatturazione</label>
-	     <input id="indFatt" type="text" name="indFatt" placeholder="indirizzo di fatturazione" required> 
-	     <br>
-	     <label for="tel1">Numero telefono(formato: senza spazi)</label>
-	     <input id="tel1" type="tel" name="tel1" placeholder="numero di telefono" required> 
-	     <br>
-	     
-	     
-	     <input type="submit" value="Registrati"/>
-	     <input type="reset" value="Reset"/>
-	</fieldset>
-</form>
+<%@ include file="../style/header.jsp" %>
+<div class="container"> 
+	<form action="SignUpClienteServlet" method="post" onsubmit="return validate(this)"> 
+		
+		<div class="col-md-8 order-md-1">		
+			<h4 class="mb-3">Registrazione</h4>    
+			
+			<div class='row'>
+				<div class='col-md-6 mb-3'>		
+					<label for="nome">Nome</label> 
+					<input id="nome" type="text" name="nome" class="form-control" placeholder="nome" required>
+				</div>
+				<div class='col-md-6 mb-3'>	
+					<label for="cognome">Cognome</label> 
+					<input id="cognome" type="text" name="cognome" class="form-control" placeholder="cognome" required>
+			    </div>
+			</div>
+			
+			<div class='row'>
+				<div class='col-md-6 mb-3'>		
+			     <label for="codFis">Codice Fiscale</label>
+			     <input id="codFis" type="text" name="codFis" class="form-control" placeholder="codice fiscale" required>  
+				</div>
+				<div class='col-md-6 mb-3'>	
+			     <label for="data">Data</label>
+			     <input id="data" type="date" name="data" class="form-control" placeholder="data" required> 
+			    </div>
+	   	   </div>
+	   	   
+			<div class='row'>
+				<div class='col-md-6 mb-3'>		
+			     <label for="email">Email</label>
+			     <input id="email" type="email" name="email" class="form-control" placeholder="email" required>   
+				</div>
+				<div class='col-md-6 mb-3'>	
+			     <label for="password">Password</label>
+			     <input id="password" type="password" name="password" class="form-control" placeholder="password" required> 
+			    </div>
+	   	   </div>
+	
+			<div class='row'>
+				<div class='col-md-6 mb-3'>		
+			     <label for="username">Username</label>
+			     <input id="username" type="text" name="username" class="form-control" placeholder="username" required>    
+				</div>
+				<div class='col-md-6 mb-3'>	
+			     <label for="indFatt">Indirizzo di fatturazione</label>
+			     <input id="indFatt" type="text" name="indFatt" class="form-control" placeholder="indirizzo di fatturazione" required>  
+			    </div>
+	   	   </div>
+	   	   
+			<div class='row'>
+				<div class='col-md-6 mb-3'>		
+			     <label for="tel1">Numero telefono(formato: senza spazi)</label>
+			     <input id="tel1" type="tel" name="tel1" class="form-control" placeholder="numero di telefono" required>    
+				</div>
+	   	   </div>   	       	   
+	   	   
+			     <input type="submit" value="Registrati"/>
+			     <input type="reset" value="Reset"/>
+		<hr class="mb-4">
+		</div>
+	</form>
+	
+</div>
+
+<div> 
+	<%@ include file="../style/footer.jsp" %>
+</div>
 
 </body>
 </html>
+
+

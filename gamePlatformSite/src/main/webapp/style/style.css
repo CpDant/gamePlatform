@@ -5,3 +5,12 @@
 	width:25px;
 	height:25px;
 }
+
+#footer {
+	position: absolute;
+	width: 55%;
+	border: 2px solid grey;
+	margin: 2px;
+	padding: 5px;
+	bottom: 5px;
+	text-align: center;
