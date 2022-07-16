@@ -86,7 +86,7 @@ $(document).ready(function () {
 									+ "<div class='row'>"
 										+ "<div class='col-md-6 mb-3'>"
 											+ "<label for='inputImage'>Immagine del videogioco:</label>"
-											+ "<input type='file' class='form-control' id='inputImage' name='inputImage' required>"
+											+ "<input type='file' class='form-control' id='inputImage' name='inputImage' accept='image/*' required>"
 										+ "</div>"
 									+ "</div>"
 								+ "</div>");
@@ -110,8 +110,7 @@ $(document).ready(function () {
 										+ "<input type='file' class='form-control' id='inputImage' name='inputImage' required>"
 									+ "</div>"
 								+ "</div>"
-								
-								+ "<div class='row'>"
+									+ "<div class='row'>"
 									+ "<label>Videgiochi contenuti:</label>"
 									<%
 										for(VideogiocoBean vidBean: collVid){
@@ -164,15 +163,17 @@ function validate(){
 }
 
 $(document).ready(function () {
-    $('#submit').click(function() {
-      checked = $("input[type=checkbox]:checked").length;
+	if($("#tipo").val() == "abbonamento"){
+		 $('#submit').click(function() {
+		      checked = $("input[type=checkbox]:checked").length;
 
-      if(!checked) {
-        alert("You must check at least one checkbox.");
-        return false;
-      }
+		      if(!checked) {
+		        alert("You must check at least one checkbox.");
+		        return false;
+		      }
 
-    });
+		  });
+	}
 });
 
 </script>

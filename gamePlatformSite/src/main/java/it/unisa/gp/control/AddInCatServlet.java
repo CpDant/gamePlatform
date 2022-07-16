@@ -1,9 +1,7 @@
 package it.unisa.gp.control;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -65,6 +63,14 @@ public class AddInCatServlet extends HttpServlet {
 			String softHouse = request.getParameter("softHouse");
 			Pegi pegi = Pegi.valueOf(request.getParameter("pegi"));
 			
+			Part part = request.getPart("inputImage");
+	        String fileName = cod+"_1.jpg";
+	        System.out.println(fileName);
+	        
+	        String path = getServletContext().getRealPath("/"+"img"+"/videog"+File.separator+fileName);
+	        System.out.println(path);
+	        part.write(path);
+			
 			AddVideog addVidDS = new AddVideogDS(ds);
 			try {
 				addVidDS.doSave(new AddVideogBean(supVidBean.getCodiceFiscale(), cod), cod, softHouse, nome, dim, annoProd, costo, pegi);
@@ -76,6 +82,14 @@ public class AddInCatServlet extends HttpServlet {
 			String nome = request.getParameter("nome-abb");
 			int costo = Integer.parseInt(request.getParameter("costo"));
 			int durata = Integer.parseInt(request.getParameter("durata"));
+			
+			Part part = request.getPart("inputImage");
+	        String fileName = nome+".jpg";
+	        System.out.println(fileName);
+	        
+	        String path = getServletContext().getRealPath("/"+"img"+"/abb"+File.separator+fileName);
+	        System.out.println(path);
+	        part.write(path);
 			
 			AddAbb addAbbDS = new AddAbbDS(ds);
 			try {
@@ -97,47 +111,13 @@ public class AddInCatServlet extends HttpServlet {
 			
 		}
 		
-		Part part = request.getPart("inputImage");
-        String fileName = part.getSubmittedFileName();
-        
-        String path = getServletContext().getRealPath("/"+"img"+File.separator+fileName);
-        System.out.println(path);
-        
-        InputStream is = part.getInputStream();
-        boolean test = uploadFile(is,path);
-        if(test){
-            System.out.println("uploaded");
-        }else{
-            System.out.println("something wrong");
-        }
+		
         
         if(request.getParameter("tipo").equals("videogioco")) {
         	response.sendRedirect(request.getContextPath() + "/catalogoVidSup.jsp");
         } else {
         	response.sendRedirect(request.getContextPath() + "/catalogoAbbSup.jsp");
         }
-	}
+      }
 	
-	public boolean uploadFile(InputStream is, String path){
-        boolean test = false;
-        try{
-            byte[] byt = new byte[is.available()];
-            is.read();
-            
-            FileOutputStream fops = new FileOutputStream(path);
-            fops.write(byt);
-            fops.flush();
-            fops.close();
-            
-            test = true;
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        return test;
-    }
 }
-
-	
-
