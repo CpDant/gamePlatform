@@ -116,10 +116,10 @@
 </script>
 
 <body>
-<%@ include file="../style/header.jsp" %>
-<div class="container"> 
+<div class="container">
 	<form action="SignUpClienteServlet" method="post" onsubmit="return validate(this)"> 
-		
+	
+	<%@ include file="../style/header.jsp" %> 
 		<div class="col-md-8 order-md-1">		
 			<h4 class="mb-3">Registrazione</h4>    
 			
@@ -174,16 +174,16 @@
 				</div>
 	   	   </div>   	       	   
 	   	   
-			     <input type="submit" value="Registrati"/>
-			     <input type="reset" value="Reset"/>
-		<hr class="mb-4">
+			     <input type="submit" value="Registrati" class="btn btn-primary btn-block"/>
+			     <input type="reset" value="Reset" class="btn btn-danger btn-block"/>
 		</div>
+		
 	</form>
-	
-</div>
+	</div>
 
+<br/><br/><br/><br/>
 <div> 
-	<%@ include file="../style/footer.jsp" %>
+	<%@ include file="../style/footerReg.jsp" %>
 </div>
 
 </body>
