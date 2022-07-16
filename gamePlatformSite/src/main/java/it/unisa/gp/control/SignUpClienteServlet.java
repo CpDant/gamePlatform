@@ -59,8 +59,9 @@ public class SignUpClienteServlet extends HttpServlet {
 		String tel1 = request.getParameter("tel1");
 		String tel2 = request.getParameter("tel2");
 		
+		System.out.println(tel2);
 		int num = 1;
-		if (tel2 != null) {
+		if (tel2 != "") {
 			num++;
 		}
 
