@@ -39,7 +39,7 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 		
 			<div class="col-md-4 my-3">
 				<div class="card text-center w-100" style="width: 18rem;">
-					<img class="card-img-top" src="img\abb\<%=abb.getNomeUnivoco()%>.jpg" alt="Card image">
+					<img class="card-img-top" src="ImageServlet?immagine=<%=abb.getNomeUnivoco()%>.jpg" alt="Card image">
 					<div class="card-body">
 						<h5 class="card-title"><%= abb.getNomeUnivoco() %></h5>
 						<h6 class="price"> &euro; <%= abb.getCosto() %></h6>
