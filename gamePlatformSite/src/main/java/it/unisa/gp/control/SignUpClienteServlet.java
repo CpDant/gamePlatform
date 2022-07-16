@@ -57,23 +57,12 @@ public class SignUpClienteServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String indFatt = request.getParameter("indFatt");
 		String tel1 = request.getParameter("tel1");
-		String tel2 = request.getParameter("tel2");
 		
-		System.out.println(tel2);
-		int num = 1;
-		if (tel2 != "") {
-			num++;
-		}
+
 
 		ClientiBean clienteBean = new ClientiBean(codFis, nome, cognome, LocalDate.parse(data), email, password, username, indFatt);
 		TelefonoBean telBean1 = null;
-		TelefonoBean telBean2 = null;
-		if(num == 1) {
-			telBean1 = new TelefonoBean(Long.valueOf(tel1), codFis);
-		} else {
-			telBean1 = new TelefonoBean(Long.valueOf(tel1), codFis);
-			telBean2 = new TelefonoBean(Long.valueOf(tel2), codFis);
-		}
+		telBean1 = new TelefonoBean(Long.valueOf(tel1), codFis);
 		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		Clienti clDS = new ClientiDS(ds);
@@ -81,12 +70,7 @@ public class SignUpClienteServlet extends HttpServlet {
 		
 		try {
 			clDS.doSave(clienteBean);
-			if(num == 1) {
 			telDS.doSave(telBean1);
-			} else {
-				telDS.doSave(telBean1);
-				telDS.doSave(telBean2);
-			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
