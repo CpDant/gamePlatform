@@ -163,8 +163,9 @@ function validate(){
 }
 
 $(document).ready(function () {
-	if($("#tipo").val() == "abbonamento"){
+	
 		 $('#submit').click(function() {
+			if($("#tipo").val() == "abbonamento"){
 		      checked = $("input[type=checkbox]:checked").length;
 
 		      if(!checked) {
@@ -172,8 +173,8 @@ $(document).ready(function () {
 		        return false;
 		      }
 
-		  });
-	}
+		  }
+	});
 });
 
 </script>
