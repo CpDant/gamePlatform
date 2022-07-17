@@ -30,6 +30,7 @@
 <title>Modifica elemento in Catalogo</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon.png">
 <script src="script/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function () {
