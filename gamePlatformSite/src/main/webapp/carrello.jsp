@@ -116,16 +116,19 @@
 			}
 		%>
 
-				
-		<% 
-			}else{
-		%>		
-				<p>La funzionalità carrello non è disponibile se non sei autenticato, effettua il <a href = "/gamePlatformSite/login-form.jsp">login</a></p>
-		<%	
-			}
-		
-		%>
-	</div>
+	</div>			
+<% 
+	}else{
+%>		
+		<div id = "cont" class="container">
+			<h2>Carrello</h2>
+			<p>La funzionalità carrello non è disponibile se non sei autenticato, effettua il <a href = "/gamePlatformSite/login-form.jsp">login</a></p>
+		</div>
+<%	
+	}
+
+%>
+
 
 </body>
 </html>
