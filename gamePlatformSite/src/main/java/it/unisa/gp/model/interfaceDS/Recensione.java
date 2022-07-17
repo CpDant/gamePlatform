@@ -17,5 +17,7 @@ public interface Recensione {
 
 	public RecensioneBean doRetrieveByKey(String codiceFiscaleCliente,  String codice) throws SQLException;
 	
+	public Collection<RecensioneBean> doRetrieveAllVideog(String codice, String order) throws SQLException;
+	
 	public Collection<RecensioneBean> doRetrieveAll(String order) throws SQLException;
 }

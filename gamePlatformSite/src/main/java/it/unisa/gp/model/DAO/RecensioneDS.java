@@ -200,6 +200,50 @@ public class RecensioneDS implements Recensione{
 			}
 		}
 		return array;
-	}	
+	}
+	
+	@Override
+	public synchronized Collection<RecensioneBean> doRetrieveAllVideog(String codice, String order) throws SQLException {
+		
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		Collection<RecensioneBean> array = new LinkedList<RecensioneBean>();
+
+		String selectSQL = "SELECT * FROM " + RecensioneDS.TABLE_NAME + " WHERE codice = ?";
+
+		if (order != null && !order.equals("")) {
+			selectSQL += " ORDER BY " + order;
+		}
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			
+			preparedStmt.setString(1,codice);
+			
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while (rs.next()) {
+				RecensioneBean bean = new RecensioneBean(null, null, null, null, null);
+				bean.setCodiceFiscaleCliente(rs.getString("CODICE_FISCALE_CLIENTE"));
+				bean.setCodice(rs.getString("CODICE"));
+				bean.setDataOraIns((rs.getTimestamp("DATA_ORA_INS").toLocalDateTime()));
+				bean.setDescrizione(rs.getString("DESCRIZIONE"));
+				bean.setGradoDiApprezzamento(Grado.valueOf(rs.getString("GRADO_DI_APPREZZAMENTO")));
+				array.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return array;
+	}
 
 }
