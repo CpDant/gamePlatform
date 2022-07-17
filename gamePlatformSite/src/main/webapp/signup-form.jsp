@@ -52,7 +52,7 @@
 	}
 
 	function checkAddress(inputtxt) {
-		var letters = /(Via|Piazza|Corso) [a-zA-Z']+(| [a-zA-Z']+) [0-9]{1,3}/g;
+		var letters = /(Via|via|Piazza|piazza|Corso|corso) [a-zA-Z']+(| [a-zA-Z']+) [0-9]{1,3}/g;
 		if (inputtxt.value.match(letters))
 			return true;
 		
@@ -100,7 +100,7 @@
 		var address = document.getElementsByName("indFatt")[0];
 			if (!checkAddress(address)) {
 				valid = false;
-				alert("L'indirizzo deve avere questo formato: <via/piazza/etc.> <nome> <numero civico/SNC>");
+				alert("L'indirizzo deve avere questo formato: <via/piazza/corso> <nome> <numero civico>");
 				address.focus();
 			}		
 		
@@ -117,7 +117,9 @@
 </script>
 
 <body>
+
 <%@ include file="../fragments/header.jsp" %>
+
 <div class="col fixed-center d-flex justify-content-center mb-2">
 	<form action="SignUpClienteServlet" method="post" onsubmit="return validate(this)"> 
 	
@@ -127,57 +129,57 @@
 			
 			<div class='row'>
 				<div class='col-md-6 mb-3'>		
-					<label for="nome">Nome</label> 
+					<label for="nome">Nome*</label> 
 					<input id="nome" type="text" name="nome" class="form-control" placeholder="nome" required>
 				</div>
 				<div class='col-md-6 mb-3'>	
-					<label for="cognome">Cognome</label> 
+					<label for="cognome">Cognome*</label> 
 					<input id="cognome" type="text" name="cognome" class="form-control" placeholder="cognome" required>
 			    </div>
 			</div>
 			
 			<div class='row'>
 				<div class='col-md-6 mb-3'>		
-			     <label for="codFis">Codice Fiscale</label>
+			     <label for="codFis">Codice Fiscale*</label>
 			     <input id="codFis" type="text" name="codFis" class="form-control" placeholder="codice fiscale" required>  
 				</div>
 				<div class='col-md-6 mb-3'>	
-			     <label for="data">Data</label>
+			     <label for="data">Data*</label>
 			     <input id="data" type="date" name="data" class="form-control" placeholder="data" required> 
 			    </div>
 	   	   </div>
 	   	   
 			<div class='row'>
 				<div class='col-md-6 mb-3'>		
-			     <label for="email">Email</label>
+			     <label for="email">Email*</label>
 			     <input id="email" type="email" name="email" class="form-control" placeholder="email" required>   
 				</div>
 				<div class='col-md-6 mb-3'>	
-			     <label for="password">Password</label>
+			     <label for="password">Password*</label>
 			     <input id="password" type="password" name="password" class="form-control" placeholder="password" required> 
 			    </div>
 	   	   </div>
 	
 			<div class='row'>
 				<div class='col-md-6 mb-3'>		
-			     <label for="username">Username</label>
+			     <label for="username">Username*</label>
 			     <input id="username" type="text" name="username" class="form-control" placeholder="username" required>    
 				</div>
 				<div class='col-md-6 mb-3'>	
-			     <label for="indFatt">Indirizzo di fatturazione</label>
+			     <label for="indFatt">Indirizzo di fatturazione*</label>
 			     <input id="indFatt" type="text" name="indFatt" class="form-control" placeholder="indirizzo di fatturazione" required>  
 			    </div>
 	   	   </div>
 	   	   
 			<div class='row'>
 				<div class='col-md-6 mb-3'>		
-			     <label for="tel1">Numero telefono(formato: senza spazi)</label>
+			     <label for="tel1">Numero telefono(formato: senza spazi)*</label>
 			     <input id="tel1" type="tel" name="tel1" class="form-control" placeholder="numero di telefono" required>    
 				</div>
 	   	   </div>   	       	   
 	   	   
-			     <input type="submit" value="Registrati" class="btn btn-primary btn-block"/>
-			     <input type="reset" value="Reset" class="btn btn-danger btn-block"/>
+	     <input type="submit" value="Registrati" class="btn btn-primary btn-block"/>
+	     <input type="reset" value="Reset" class="btn btn-danger btn-block"/>
 		
 		
 	</form>

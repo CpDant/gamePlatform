@@ -6,11 +6,5 @@
 	height:25px;
 }
 
-#footer {
-	position: absolute;
-	width: 55%;
-	border: 2px solid grey;
-	margin: 2px;
-	padding: 5px;
-	bottom: 5px;
-	text-align: center;
+body{display:flex;min-height:100vh;flex-direction:column;}
+.main-content{flex:1;}
