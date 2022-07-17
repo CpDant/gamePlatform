@@ -7,6 +7,7 @@
 <title>Registrazione</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon.png">
 </head>
 
 <script>
@@ -116,11 +117,12 @@
 </script>
 
 <body>
-<div class="container">
+<%@ include file="../fragments/header.jsp" %>
+<div class="col fixed-center d-flex justify-content-center mb-2">
 	<form action="SignUpClienteServlet" method="post" onsubmit="return validate(this)"> 
 	
-	<%@ include file="../style/headerReg.jsp" %> 
-		<div class="col-md-8 order-md-1">		
+	 
+			
 			<h4 class="mb-3">Registrazione</h4>    
 			
 			<div class='row'>
@@ -176,14 +178,14 @@
 	   	   
 			     <input type="submit" value="Registrati" class="btn btn-primary btn-block"/>
 			     <input type="reset" value="Reset" class="btn btn-danger btn-block"/>
-		</div>
+		
 		
 	</form>
-	</div>
+</div>
 
-<br/><br/><br/><br/>
+
 <div> 
-	<%@ include file="../style/footerReg.jsp" %>
+	<%@ include file="../fragments/footerReg.jsp" %>
 </div>
 
 </body>

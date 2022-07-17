@@ -7,11 +7,16 @@
 <title>Login</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon.png">
 </head>
 <body>
-<div class="col d-flex justify-content-center mb-2">
+
+
+<%@ include file="../fragments/header.jsp" %> 
+
+<div class="col fixed-center d-flex justify-content-center mb-2">
 <form action="LoginServlet" method="post"> 
-	<br/><br/><br/><br/><br/><br/><br/>
+	
 	<div class="form-outline mb-4">
 		 <label class="form-label" for="email">Email</label>
 	     <input id="email" type="email" name="email" class="form-control" placeholder="email">
@@ -31,6 +36,9 @@
    		 <p>Non sei registrato? <a href="/gamePlatformSite/signup-form.jsp">Registrati</a></p>
     </div>
      
+    <div> 
+		<%@ include file="../fragments/footerReg.jsp" %>
+	</div>
 </form>
 </div>
 
