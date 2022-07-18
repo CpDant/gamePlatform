@@ -117,6 +117,40 @@ public class TelefonoDS implements Telefono{
 		}
 		return bean;
 	}
+	
+	@Override
+	public synchronized TelefonoBean doRetrieveByKeyCliente(String codice) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		TelefonoBean bean = new TelefonoBean(0,null);
+
+		String selectSQL = "SELECT * FROM " + TelefonoDS.TABLE_NAME + " WHERE CODICE_FISCALE_CLIENTE = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setString(1, codice);
+			
+
+			ResultSet rs = preparedStmt.executeQuery();
+
+			while (rs.next()) {
+				bean.setNumero(rs.getLong("NUMERO"));
+				bean.setCodiceFiscaleCliente(rs.getString("CODICE_FISCALE_CLIENTE"));			
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return bean;
+	}
 
 	@Override
 	public synchronized Collection<TelefonoBean> doRetrieveAll(String order) throws SQLException {

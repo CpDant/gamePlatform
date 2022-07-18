@@ -30,7 +30,7 @@
 					<button class="btn dropdown-toggle border-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img\icon\user.png" alt="user" style="font-size:0;width:40px;height:40px;"></button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<a class="dropdown-item" href="utentePage.jsp">Mio Profilo</a>
-						<a class="dropdown-item" href="#">I miei ordini</a>
+						<a class="dropdown-item" href="ordini.jsp">I miei ordini</a>
 						<a class="dropdown-item" href="assistenza.jsp">Contatta assistenza</a>
 						<a class="dropdown-item" href="LogoutServlet">Logout</a>
 					</div>

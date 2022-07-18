@@ -15,5 +15,7 @@ public interface Telefono {
 
 	public TelefonoBean doRetrieveByKey(long numero) throws SQLException;
 	
+	public TelefonoBean doRetrieveByKeyCliente(String codice) throws SQLException;
+	
 	public Collection<TelefonoBean> doRetrieveAll(String order) throws SQLException;
 }
