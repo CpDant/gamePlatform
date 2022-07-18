@@ -47,10 +47,11 @@
 	
 	
 </script>
+<%@ include file="../fragments/header.jsp"%>
 <%
 	if(flag == true){	
 %>
-
+	
 	<div id = "cont" class="container">
 	<h2>Carrello</h2>
 		<div class="d-flex py-3"><h3>Prezzo totale: &euro; <%= carrello.getTotale() %></h3><button class="mx-3 btn btn-primary" onclick='checkTot("<%= carrello.getTotale() %>")'>Compra ora</button></div>
@@ -129,6 +130,6 @@
 
 %>
 
-
+<%@ include file="../fragments/footerReg.jsp" %>
 </body>
 </html>
