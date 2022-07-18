@@ -31,7 +31,7 @@
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<a class="dropdown-item" href="utentePage.jsp">Mio Profilo</a>
 						<a class="dropdown-item" href="#">I miei ordini</a>
-						<a class="dropdown-item" href="#">Contatta assistenza</a>
+						<a class="dropdown-item" href="assistenza.jsp">Contatta assistenza</a>
 						<a class="dropdown-item" href="LogoutServlet">Logout</a>
 					</div>
 				</div>
