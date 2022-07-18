@@ -201,6 +201,43 @@ public class FatturaDS implements Fattura {
 	}
 
 	@Override
+	public synchronized FatturaBean doRetrieveByKeyAcquisti(int codiceAcquisto) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		FatturaBean bean = new FatturaBean(0,0,0,0,null,null);
+
+		String selectSQL = "SELECT * FROM " + FatturaDS.TABLE_NAME + " WHERE ID = ? ";
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setInt(1, codiceAcquisto);
+
+			ResultSet rs = preparedStmt.executeQuery();
+
+			while (rs.next()) {
+				bean.setId(rs.getInt("ID"));
+				bean.setNumero(rs.getInt("NUMERO"));
+				bean.setCostoIva(rs.getInt("COSTO_IVA"));
+				bean.setCostoNetto(rs.getInt("COSTO_NETTO"));
+				bean.setDataOra(rs.getTimestamp("DATA_ORA").toLocalDateTime());
+				bean.setIndFatt(rs.getString("IND_FATT"));
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return bean;
+	}
+	
+	@Override
 	public synchronized Collection<FatturaBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStmt = null;

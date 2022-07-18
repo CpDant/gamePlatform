@@ -15,5 +15,7 @@ public interface Fattura {
 
 	public FatturaBean doRetrieveByKey(int id, int numero) throws SQLException;
 	
+	public FatturaBean doRetrieveByKeyAcquisti(int codiceAcquisto) throws SQLException;
+	
 	public Collection<FatturaBean> doRetrieveAll(String order) throws SQLException;
 }
