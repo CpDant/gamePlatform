@@ -1,23 +1,93 @@
-<div class="mx-5">
+<div style="background-color: rgba(0, 0, 0, 0.05);" class='mb-3'>
+	<%
+		String ruoloHeader = (String) session.getAttribute("roles");
+	%>
+	<header class="d-flex flex-wrap justify-content-center py-3 mb-3 mt-3" >
 
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-3 mt-3">
-      
-		
-      <ul class="nav nav-pills">
-      	<li class="nav-item">
-	      	<a href="/" class="">
-	        	<img src="img/icon/logo.png" style="width:20%">
-	        </a>
-        </li>
-      	<li class="nav-item"><input type="search" class="form-control" placeholder="Search" aria-label="Search"/></li>
-        &nbsp;<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Catalogo</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Menu</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Login</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Sign Up</a></li>
-        <li class="nav-item"><a href="#" class="nav-link btn"><img src="img\icon\shopping-cart.svg" alt="add-to-cart" class="icona"></a></li>
-      </ul>
-    </header>
-    
+
+		<ul class="nav nav-pills">
+			<li class="nav-item"><a href="/" class=""> <img src="img/icon/logo.png" style="width: 20%"></a></li>
+			
+			<%
+				if(ruoloHeader == null){
+			%>
+			<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+			<li class="nav-item"><a href="catalogoVid.jsp" class="nav-link">Catalogo Videogioco</a></li>
+			<li class="nav-item"><a href="catalogoAbb.jsp" class="nav-link">Catalogo Abbonamento</a></li>
+			<li class="nav-item"><a href="carrello.jsp" class="nav-link btn"><img src="img\icon\shopping-cart.png" alt="add-to-cart" class="icona"></a></li>
+			<li class="nav-item"><a href="login-form.jsp" class="nav-link btn"><img src="img\icon\user.png" alt="user" style="font-size:0;width:40px;height:40px;"> Accedi</a></li>
+			<%
+				} else if (ruoloHeader.equals("cliente")) {
+			%>
+			
+			<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+			<li class="nav-item"><a href="catalogoVid.jsp" class="nav-link">Catalogo Videogioco</a></li>
+			<li class="nav-item"><a href="catalogoAbb.jsp" class="nav-link">Catalogo Abbonamento</a></li>
+			<li class="nav-item"><a href="carrello.jsp" class="nav-link btn"><img src="img\icon\shopping-cart.png" alt="add-to-cart" class="icona"></a></li>
+			
+			<li class="nav-item">
+				<div class="dropdown">
+					<button class="btn dropdown-toggle border-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img\icon\user.png" alt="user" style="font-size:0;width:40px;height:40px;"></button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="utentePage.jsp">Mio Profilo</a>
+						<a class="dropdown-item" href="#">I miei ordini</a>
+						<a class="dropdown-item" href="#">Contatta assistenza</a>
+						<a class="dropdown-item" href="LogoutServlet">Logout</a>
+					</div>
+				</div>
+			</li>
+			
+			<%
+				} else if (ruoloHeader.equals("supVid")) {
+			%>
+			<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+			<li class="nav-item"><a href="catalogoVidSup.jsp" class="nav-link">Catalogo Videogioco</a></li>
+			<li class="nav-item"><a href="catalogoAbbSup.jsp" class="nav-link">Catalogo Abbonamento</a></li>
+			<li class="nav-item"><a href="addInCat.jsp" class="nav-link">Modifica Catalogo</a></li>
+			
+			<li class="nav-item">
+				<div class="dropdown">
+					<button class="btn dropdown-toggle border-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img\icon\user.png" alt="user" style="font-size:0;width:40px;height:40px;"></button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="utentePage.jsp">Mio Profilo</a>
+						<a class="dropdown-item" href="LogoutServlet">Logout</a>
+					</div>
+				</div>
+			</li>
+			<%
+				} else if (ruoloHeader.equals("assCl")) {
+			%>
+			<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+			<li class="nav-item"><a href="gestTick.jsp" class="nav-link">Gestisci Tickets</a></li>
+				
+			<li class="nav-item">
+				<div class="dropdown">
+					<button class="btn dropdown-toggle border-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img\icon\user.png" alt="user" style="font-size:0;width:40px;height:40px;"></button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="utentePage.jsp">Mio Profilo</a>
+						<a class="dropdown-item" href="LogoutServlet">Logout</a>
+					</div>
+				</div>
+			</li>
+			<%
+				} else if (ruoloHeader.equals("admin")) {
+			%>
+			<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+			<li class="nav-item"><a href="addOperatore.jsp" class="nav-link">Aggiungi Operatore</a></li>
+				
+			<li class="nav-item">
+				<div class="dropdown">
+					<button class="btn dropdown-toggle border-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img\icon\user.png" alt="user" style="font-size:0;width:40px;height:40px;"></button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="utentePage.jsp">Mio Profilo</a>
+						<a class="dropdown-item" href="LogoutServlet">Logout</a>
+					</div>
+				</div>
+			</li>
+			<%
+				}
+			%>
+		</ul>
+	</header>
+
 </div>
-<hr class=" py-2">
