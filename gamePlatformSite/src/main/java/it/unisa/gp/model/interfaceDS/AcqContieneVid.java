@@ -3,6 +3,7 @@ package it.unisa.gp.model.interfaceDS;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import it.unisa.gp.model.bean.AcqContieneAbbBean;
 import it.unisa.gp.model.bean.AcqContieneVidBean;
 
 public interface AcqContieneVid {
@@ -15,5 +16,6 @@ public interface AcqContieneVid {
 	
 	public Collection<AcqContieneVidBean> doRetrieveAll(String order) throws SQLException;
 	
+	public Collection<AcqContieneVidBean> doRetrieveAllVid(int id, String order) throws SQLException;
 	//metodo doUpdate non implementato poich� nella tabella ci sono solo chiavi
 }

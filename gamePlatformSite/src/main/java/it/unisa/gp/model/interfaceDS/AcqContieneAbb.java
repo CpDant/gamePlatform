@@ -14,6 +14,8 @@ public interface AcqContieneAbb {
 	public AcqContieneAbbBean doRetrieveByKey(int id, String codiceAbb) throws SQLException;
 	
 	public Collection<AcqContieneAbbBean> doRetrieveAll(String order) throws SQLException;
+
+	public Collection<AcqContieneAbbBean> doRetrieveAllAbb(int id, String order) throws SQLException;
 	
 	//metodo doUpdate non implementato poich� nella tabella ci sono solo chiavi
 }

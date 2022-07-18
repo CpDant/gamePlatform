@@ -172,4 +172,48 @@ public class AcqContieneAbbDS implements AcqContieneAbb{
 		}
 		return array;
 	}
+	
+	
+	@Override
+	public synchronized Collection<AcqContieneAbbBean> doRetrieveAllAbb(int id, String order) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		Collection<AcqContieneAbbBean> array = new LinkedList<AcqContieneAbbBean>();
+
+		String selectSQL = "SELECT * FROM " + AcqContieneAbbDS.TABLE_NAME + " WHERE id=? ";
+		
+
+		if (order != null && !order.equals("")) {
+			selectSQL += " ORDER BY " + order;
+		}
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setInt(1, id);
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while (rs.next()) {
+				AcqContieneAbbBean bean = new AcqContieneAbbBean(0,null,0);
+				
+				bean.setId(rs.getInt("id"));
+				bean.setNomeUnivocoAbb(rs.getString("nome_univoco_abb"));
+				bean.setCosto(rs.getInt("costo"));
+				array.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return array;
+	}
+	
+	
 }

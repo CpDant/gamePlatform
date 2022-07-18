@@ -174,4 +174,46 @@ public class AcqContieneVidDS implements AcqContieneVid{
 		}
 		return array;
 	}
+	
+	@Override
+	public synchronized Collection<AcqContieneVidBean> doRetrieveAllVid(int id, String order) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		Collection<AcqContieneVidBean> array = new LinkedList<AcqContieneVidBean>();
+
+		String selectSQL = "SELECT * FROM " + AcqContieneVidDS.TABLE_NAME + " WHERE ID=?";
+		
+
+		if (order != null && !order.equals("")) {
+			selectSQL += " ORDER BY " + order;
+		}
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setInt(1, id);
+			
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while (rs.next()) {
+				AcqContieneVidBean bean = new AcqContieneVidBean(0,null,0);
+				
+				bean.setId(rs.getInt("id"));
+				bean.setCodiceVideogioco(rs.getString("CODICE_VIDEOGIOCO"));
+				bean.setCosto(rs.getInt("COSTO"));
+				array.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return array;
+	}
 }
