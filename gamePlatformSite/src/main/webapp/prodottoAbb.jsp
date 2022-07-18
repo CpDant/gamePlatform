@@ -11,8 +11,9 @@
 
 <%	
 	String roles = (String) session.getAttribute("roles");
+	
 	if(roles == null){
-		response.sendRedirect(request.getContextPath() + "/login-form.jsp");
+		
 	} else if (roles.equals("admin") || roles.equals("assCl")) {
 		response.sendRedirect(request.getContextPath() + "/errorPage.jsp");
 	}
@@ -48,7 +49,7 @@
 <body>
 	<%@ include file="../fragments/header.jsp" %>
 	<div class="container mt-5 mb-5" id="product-section">
-		<div class="row">
+		<div class="row text-center">
 			<div class="col-md-6 border-end">
 				<img class="image-responsive" width="80%" src="ImageServlet?immagine=<%=abbBean.getNomeUnivoco()%>.jpg" alt="image">
 			</div>
@@ -56,9 +57,18 @@
 				<h3><%=abbBean.getNomeUnivoco()%></h3>
 				<h5>Prezzo: &euro;<%= abbBean.getCosto() %></h5>
 				<h5>Durata: <%= abbBean.getDurata() %> mesi</h5>
+				<% if(roles==null || roles.equals("cliente")){
+            	   
+               
+                %>
                <a href="AddToCartServlet?id=<%=abbBean.getNomeUnivoco()%>" class="btn border-dark"> 
                		<img src="img\icon\shopping-cart.svg" alt="add-to-cart" class="icona"> Aggiungi al carrello
 			   </a>
+			   <%
+			   
+				  }
+			   
+			   %>
 			</div>
 		</div><!-- end row -->
 		<br/>
@@ -80,7 +90,7 @@
 					<div class="row text-center">
 					 
 						<div class="col-md-12 mb-md-5">
-							<img class ="image-responsive" width ="30%" src="ImageServlet?immagine=<%=vidBean.getCodice()%>_1.jpg">
+							<img class ="image-responsive" width="30%"  src="ImageServlet?immagine=<%=vidBean.getCodice()%>_1.jpg">
 							<h5 class="mb-3"><%=vidBean.getNomeVideogioco() %></h5>
 							
 						</div>

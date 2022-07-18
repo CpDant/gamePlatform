@@ -60,7 +60,10 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 		
 			<div class="col-md-3 my-3">
 				<div class="card text-center w-100" style="width: 18rem;">
-					<img class="card-img-top" src="ImageServlet?immagine=<%=vid.getCodice()%>_1.jpg" alt="Card image">
+					<form>
+						 <input type="hidden" name="userId" value="<%=vid.getCodice()%>">
+						<a href="prodottoVideog.jsp?id=<%=vid.getCodice()%>"> <img class="card-img-top" src="ImageServlet?immagine=<%=vid.getCodice()%>_1.jpg" alt="Card image"> </a>
+					</form>
 					<div class="card-body">
 						<h5 class="card-title"><%= vid.getNomeVideogioco() %></h5>
 						<h6 class="price"> &euro; <%= vid.getCosto() %></h6>

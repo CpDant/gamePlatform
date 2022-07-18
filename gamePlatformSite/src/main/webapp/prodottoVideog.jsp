@@ -8,8 +8,9 @@
 
 <%	
 	String roles = (String) session.getAttribute("roles");
+	
 	if(roles == null){
-		response.sendRedirect(request.getContextPath() + "/login-form.jsp");
+		
 	} else if (roles.equals("admin") || roles.equals("assCl")) {
 		response.sendRedirect(request.getContextPath() + "/errorPage.jsp");
 	}
@@ -42,7 +43,7 @@
 <body>
 	<%@ include file="../fragments/header.jsp" %>
 	<div class="container mt-5 mb-5" id="product-section">
-		<div class="row">
+		<div class="row text-center">
 			<div class="col-md-6 border-end">
 				<img class="image-responsive" width="80%" src="ImageServlet?immagine=<%=vidBean.getCodice()%>_1.jpg" alt="image">
 			</div>
@@ -51,8 +52,8 @@
 				<h5>Prezzo: &euro;<%= vidBean.getCosto() %></h5>
 				<div class="mt-5"> <span class="fw-bold">Specifiche</span>
                    <div>
-                       <ul>
-                           <li>Prodotto da: <%= vidBean.getNomeSoftwareHouse() %></li>
+                       <ul style="list-style-type:none">
+                           <li class="text-center">Prodotto da: <%= vidBean.getNomeSoftwareHouse() %></li>
                            <li>Dimensione: <%= vidBean.getDimensione() %> (GB)</li>
                            <li>Sviluppato nel: <%= vidBean.getAnnoDiProduzione() %></li>
                            <li>Pegi: <%= vidBean.getPegi() %></li>
@@ -60,9 +61,19 @@
                        </ul>
                    </div>
                </div>
+               <% if(roles==null || roles.equals("cliente")){
+            	   
+               
+               %>
                <a href="AddToCartServlet?id=<%=vidBean.getCodice()%>" class="btn border-dark"> 
                		<img src="img\icon\shopping-cart.svg" alt="add-to-cart" class="icona"> Aggiungi al carrello
 			   </a>
+			   <%
+			   
+              	 }
+               
+			   %>
+			   
 			</div>
 		</div><!-- end row -->
 		<br/>

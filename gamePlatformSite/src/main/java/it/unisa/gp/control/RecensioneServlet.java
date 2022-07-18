@@ -43,22 +43,29 @@ public class RecensioneServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		Recensione recDS = new RecensioneDS(ds);
-		ClientiBean cliente = (ClientiBean) request.getSession().getAttribute("utente");
-		String codiceVid = request.getParameter("id");
-		String descrizione = (String) request.getParameter("textArea");
-		Grado gradApp = Grado.valueOf(request.getParameter("grado"));
-		try {
-			recDS.doSave(new RecensioneBean(cliente.getCodiceFiscale(), codiceVid, LocalDateTime.now(),descrizione,gradApp));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String ruolo = (String) request.getSession().getAttribute("roles");
+		if(ruolo == null) {
+			response.sendRedirect(request.getContextPath() + "/login-form.jsp");
+		}else if(ruolo.equals("supVid")) {
+			response.sendRedirect(request.getContextPath() + "/catalogoVidSup.jsp");
+		}else if(ruolo.equals("cliente")){
+			DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+			Recensione recDS = new RecensioneDS(ds);
+			ClientiBean cliente = (ClientiBean) request.getSession().getAttribute("utente");
+			String codiceVid = request.getParameter("id");
+			String descrizione = (String) request.getParameter("textArea");
+			Grado gradApp = Grado.valueOf(request.getParameter("grado"));
+			try {
+				recDS.doSave(new RecensioneBean(cliente.getCodiceFiscale(), codiceVid, LocalDateTime.now(),descrizione,gradApp));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.sendRedirect(request.getContextPath() + "/prodottoVideog.jsp?id=" + codiceVid);
+		}else {
+			response.sendRedirect(request.getContextPath() + "/errorPage.jsp");
 		}
 		
-		
-		
-		response.sendRedirect(request.getContextPath() + "/prodottoVideog.jsp?id=" + codiceVid);
 	}
 
 }
