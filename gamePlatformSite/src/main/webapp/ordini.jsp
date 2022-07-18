@@ -2,8 +2,7 @@
 	import = "javax.sql.DataSource,it.unisa.gp.model.bean.ClientiBean, it.unisa.gp.model.bean.AcquistiBean, 
 	it.unisa.gp.model.interfaceDS.Acquisti, it.unisa.gp.model.DAO.AcquistiDS,
 	it.unisa.gp.model.DAO.AziendaDS, it.unisa.gp.model.interfaceDS.Azienda, it.unisa.gp.model.bean.AziendaBean,
-	
-	java.util.*"
+	java.time.format.DateTimeFormatter, java.time.LocalDateTime, java.util.*"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
@@ -22,7 +21,8 @@
 		existAz = false;
 	else 
 		existAz = true;
-
+	
+	final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:MM");
 %>
 
 <html>
@@ -39,8 +39,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<%@ include file="../fragments/header.jsp" %>
 	<div class="container">
-	
-		<div class="col-md-6 mb-3"> Nome: <%=cliente.getNome()%></div>
 
 		<table class="table table-light align-middle">
 			<thead>
@@ -61,7 +59,7 @@
 					
 					<td><%= acq.getId() %></td>
 					<td><%= acq.getCodiceRiscatto() %></td>
-					<td><%= acq.getDataOra()%></td>
+					<td><%= acq.getDataOra().format(dtf) %></td>
 					<td><%= acq.getCostoIva() + acq.getCostoNetto() %></td>
 					
 					<td>

@@ -41,7 +41,7 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 		xhttp.send();
 	}
 </script>
-
+	<%@ include file="../fragments/header.jsp" %>
 	<div class="container" id="cont">
 		<div class="card-header my-3">
 			<h2>Gestione Abbonamenti</h2>
@@ -79,6 +79,6 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 		%>
 		</div>
 	</div>
-
+	<%@ include file="../fragments/footerReg.jsp" %>
 </body>
 </html>

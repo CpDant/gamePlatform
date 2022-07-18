@@ -40,6 +40,7 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 		xhttp.send();
 	}
 </script>
+	<%@ include file="../fragments/header.jsp" %>
 	<div class="container" id="cont">
 		<div class="card-header my-3">
 			<h2>Gestione Videogiochi</h2>
@@ -77,6 +78,6 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 		%>
 		</div>
 	</div>
-
+	<%@ include file="../fragments/footerReg.jsp" %>
 </body>
 </html>

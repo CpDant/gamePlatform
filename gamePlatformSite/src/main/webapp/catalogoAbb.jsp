@@ -28,6 +28,7 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 <title>Catalogo Abbonamenti</title>
 </head>
 <body>
+	<%@ include file="../fragments/header.jsp" %>
 	<div class="container">
 		<div class="card-header my-3">
 			<h2>Catalogo Abbonamenti</h2>
@@ -59,6 +60,6 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 		%>
 		</div>
 	</div>
-
+	<%@ include file="../fragments/footerReg.jsp" %>
 </body>
 </html>

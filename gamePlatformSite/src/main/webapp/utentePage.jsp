@@ -1,12 +1,13 @@
 <%@ page import="javax.sql.DataSource,it.unisa.gp.model.bean.ClientiBean, 
 	it.unisa.gp.model.bean.AdministratorsBean, it.unisa.gp.model.bean.SupervisoreVideogiochiBean,
 	it.unisa.gp.model.bean.SupervisoreVideogiochiBean, it.unisa.gp.model.bean.AssistenteClientiBean,
+	it.unisa.gp.model.DAO.AziendaDS, it.unisa.gp.model.interfaceDS.Azienda, it.unisa.gp.model.bean.AziendaBean, 
 	java.util.*" language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
 <%
 	String roles = (String) session.getAttribute("roles");
-	
+	DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 	 
 	ClientiBean clBean = null;
 	AdministratorsBean admBean = null;
@@ -23,6 +24,15 @@
 	} else if (roles.equals("cliente")) {
 		clBean = (ClientiBean) session.getAttribute("utente");
 	}
+	
+	Azienda aziendaDS = new AziendaDS(ds);
+	AziendaBean azBean = aziendaDS.doRetrieveByKeyCodFis(clBean.getCodiceFiscale());
+	
+	boolean existAz = false;
+	if(azBean.getCodiceFiscaleCliente() == null)
+		existAz = false;
+	else 
+		existAz = true;
 %>
     
 <!DOCTYPE html>
@@ -37,11 +47,65 @@
 </head>
 <body>
 	<script>
+	function datiFattura(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			if (this.readyState == 4 && this.status == 200){
+				if(<%=existAz%> == false){
+					if (document.querySelector('#fattura:checked') != null){
+						document.getElementById("datiFattura").innerHTML = ""
+							+"<div class='row'>"
+								+"<h4>Dati aziendali</h4>"
+								+"<div class='col-md-6 mb-3'>"
+									+"<label for='pIva'> Partita Iva&#42; </label>" 
+									+"<input type='text' class='form-control' id='pIva' name='pIva' placeholder='' required>"
+								+"</div>"
+								
+								+"<div class='col-md-6 mb-3'>"
+								+"<label for='sdi'> Sdi&#42; </label>" 
+								+"<input type='text' class='form-control' id='sdi' name='sdi' placeholder='' required>"
+								+"</div>"
+								
+								+"<div class='col-md-6 mb-3'>"
+								+"<label for='pec'> Pec&#42; </label>" 
+								+"<input type='email' class='form-control' id='pec' name='pec' placeholder='' required>"
+								+"</div>"
+							+"</div>";					
+					} else {
+						document.getElementById("datiFattura").innerHTML = "<p></p>";	
+					}					
+				} else {
+					if (document.querySelector('#fattura:checked') != null){
+						document.getElementById("datiFattura").innerHTML = ""
+							+"<div class='row'>"
+								+"<h4>Dati aziendali</h4>"
+								+"<div class='col-md-6 mb-3'>"
+								+"<label for='sdi'> Sdi; </label>" 
+								+"<input type='text' class='form-control' id='sdi' name='sdi' placeholder=''>"
+								+"</div>"
+								
+								+"<div class='col-md-6 mb-3'>"
+								+"<label for='pec'> Pec; </label>" 
+								+"<input type='email' class='form-control' id='pec' name='pec' placeholder=''>"
+								+"</div>"
+							+"</div>";					
+					} else {
+						document.getElementById("datiFattura").innerHTML = "<p></p>";	
+					}					
+				}
+			}
+		};
+		xhttp.open("GET","",true);
+		xhttp.send();
+	}
+	
+	
 		function modificaDati(roles) {
 			if(roles == "cliente"){
 				document.getElementById("datiModifica").innerHTML=""
 					+"<form action='ModificaDatiServlet' method='post'>"
 						+"<div class='row'>"
+							+"<h4>Dati personali</h4>"
 							+"<div class='col-md-6 mb-3'>"
 								+"<label for='nome'> Nome </label>" 
 								+"<input type='text' class='form-control' id='nome' name='nome' placeholder=''>"
@@ -71,8 +135,13 @@
 								+"<input type='text' class='form-control' id='indFatt' name='indFatt' placeholder=''>"
 							+"</div>"
 							
+						+"</div><br/>"
+						+"<div class='col-md-6 mb-3'><input type='checkbox' name='fattura' id='fattura' onclick='datiFattura()'> Dati aziendali </div>"
+						+"<br/>"
+						+"<div id='datiFattura' class='row'>"
+							
+							
 						+"</div>"
-						
 						+"<input type='submit' value='Modifica' class='btn btn-primary'>"
 						+""
 					+"</form>";

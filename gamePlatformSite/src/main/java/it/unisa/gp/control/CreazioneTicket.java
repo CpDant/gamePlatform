@@ -3,7 +3,6 @@ package it.unisa.gp.control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -14,14 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import it.unisa.gp.model.DAO.AddAssClDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
 import it.unisa.gp.model.DAO.TicketsDS;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
 import it.unisa.gp.model.bean.ClientiBean;
 import it.unisa.gp.model.bean.TicketsBean;
 import it.unisa.gp.model.bean.TicketsBean.CategoriaProbl;
-import it.unisa.gp.model.interfaceDS.AddAssCl;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
 import it.unisa.gp.model.interfaceDS.Tickets;
 
@@ -62,7 +59,6 @@ public class CreazioneTicket extends HttpServlet {
 		int min = 100000;
 		int max = 999999;
     	int id = (int) (Math.random() * (max - min)) + min;
-		AssistenteClientiBean assClBean = null;
 		try {
 			List<AssistenteClientiBean> colAssCl = (List<AssistenteClientiBean>) assClDS.doRetrieveAll(null);
 			Random rand = new Random();

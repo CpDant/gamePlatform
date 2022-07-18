@@ -159,6 +159,12 @@
 		
 		
 		<br/><br/>
+			 <% 
+			 	if(roles==null){
+			 		
+			 	}else if(roles.equals("cliente")){
+			 		
+             %>
 			<form action="RecensioneServlet?id=<%=vidBean.getCodice() %>" method="post">
 				<div class="row">
 					<div class="form-group">
@@ -181,6 +187,9 @@
 				</div>
 				<input type="submit" value="Aggiungi recensione" class="btn btn-block btn-warning"/>
 			</form>
+			<%
+			 	}
+			%>
 		
 	</div><!-- end container -->
 	<%@ include file="../fragments/footerReg.jsp" %>

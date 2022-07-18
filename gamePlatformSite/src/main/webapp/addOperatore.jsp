@@ -90,6 +90,9 @@ function genPassw(){
 		<input id = "submit" type = "submit" value = "Aggiungi" class="btn btn-primary btn-block mt-3">
 	</form>
 </div>
-<%@ include file="../fragments/footerReg.jsp" %> 
+<div>
+	<%@ include file="../fragments/footerReg.jsp" %>
+</div>
+
 </body>
 </html>

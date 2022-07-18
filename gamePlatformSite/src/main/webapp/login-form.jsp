@@ -14,9 +14,10 @@
 
 <%@ include file="../fragments/header.jsp" %> 
 
-<div class="col fixed-center d-flex justify-content-center mb-2">
+<div class="col fixed-center d-flex justify-content-center align-items-center">
+	
 	<form action="LoginServlet" method="post"> 
-		
+		<h2>Accedi</h2><br/>
 		<div class="form-outline mb-3">
 			 <label class="form-label" for="email">Email</label>
 		     <input id="email" type="email" name="email" class="form-control" placeholder="email">

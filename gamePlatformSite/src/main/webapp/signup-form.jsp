@@ -120,7 +120,7 @@
 
 <%@ include file="../fragments/header.jsp" %>
 
-<div class="col fixed-center d-flex justify-content-center mb-2">
+<div class="col fixed-center d-flex justify-content-center align-items-center">
 	<form action="SignUpClienteServlet" method="post" onsubmit="return validate(this)"> 
 	
 	 

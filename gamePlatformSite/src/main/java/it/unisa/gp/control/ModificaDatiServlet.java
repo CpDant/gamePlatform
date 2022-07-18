@@ -14,14 +14,17 @@ import javax.sql.DataSource;
 
 import it.unisa.gp.model.DAO.AdministratorsDS;
 import it.unisa.gp.model.DAO.AssistenteClientiDS;
+import it.unisa.gp.model.DAO.AziendaDS;
 import it.unisa.gp.model.DAO.ClientiDS;
 import it.unisa.gp.model.DAO.SupervisoreVideogiochiDS;
 import it.unisa.gp.model.bean.AdministratorsBean;
 import it.unisa.gp.model.bean.AssistenteClientiBean;
+import it.unisa.gp.model.bean.AziendaBean;
 import it.unisa.gp.model.bean.ClientiBean;
 import it.unisa.gp.model.bean.SupervisoreVideogiochiBean;
 import it.unisa.gp.model.interfaceDS.Administrators;
 import it.unisa.gp.model.interfaceDS.AssistenteClienti;
+import it.unisa.gp.model.interfaceDS.Azienda;
 import it.unisa.gp.model.interfaceDS.Clienti;
 import it.unisa.gp.model.interfaceDS.SupervisoreVideogiochi;
 
@@ -117,6 +120,58 @@ public class ModificaDatiServlet extends HttpServlet {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			
+			Azienda aziendaDS = new AziendaDS(ds);
+			AziendaBean azBean = null;
+			try {
+				azBean = aziendaDS.doRetrieveByKeyCodFis(clBean.getCodiceFiscale());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			boolean existAz = false;
+			if(azBean.getCodiceFiscaleCliente() == null)
+				existAz = false;
+			else 
+				existAz = true;
+			
+			String partIva = null;
+			String sdi = null;
+			String pec = null;
+			
+			if(existAz) {
+				sdi = request.getParameter("sdi");
+				if(sdi.equals("")) {
+					sdi = azBean.getSdi();
+				}
+				
+				pec = request.getParameter("pec");
+				if(pec.equals("")) {
+					pec = azBean.getPec();
+				}
+				try {
+					aziendaDS.doUpdate(azBean, sdi, pec);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}else {
+				partIva = request.getParameter("pIva");
+				sdi = request.getParameter("sdi");
+				pec = request.getParameter("pec");
+				
+				try {
+					aziendaDS.doSave(new AziendaBean(partIva, clBean.getCodiceFiscale(), sdi, pec ));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
 			}
 			
 			request.getSession().setAttribute("utente", clBean);

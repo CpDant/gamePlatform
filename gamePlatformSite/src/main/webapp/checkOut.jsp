@@ -153,14 +153,14 @@
 				</div>
 				
 				<div class="row">
-					<div class="col-md-6 mb-3"> Richiedi fattura <input type="checkbox" name="fattura" id="fattura" onclick="datiFattura()"> </div>
+					<div class="col-md-6 mb-3"><input type="checkbox" name="fattura" id="fattura" onclick="datiFattura()"> Richiedi fattura  </div>
 				</div>
 				<div id="datiFattura">
 				
 				</div>
 				
 				<div class="row">
-					<div class="col-md-6 mb-3" > Se vuoi modificare i dati personali, <a href="#">clicca qui</a>  </div>
+					<div class="col-md-6 mb-3" > Se vuoi modificare i dati personali, <a href="utentePage.jsp">clicca qui</a>  </div>
 				</div>
 				<hr class="mb-4">
 

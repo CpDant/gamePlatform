@@ -25,6 +25,7 @@
  		<h2>Grazie per aver effettuato l'acquisto</h2>
  		<p>id acquisto: <%= id %> </p>
  		<p>codice riscatto: <%=acqBean.getCodiceRiscatto() %> </p>
+ 		<p><a href="ordini.jsp">visualizza tutti gli ordini</a></p>
  	</div>
 </body>
 </html>

@@ -180,6 +180,7 @@ $(document).ready(function () {
 </script>
 </head>
 <body>
+	<%@ include file="../fragments/header.jsp"%>
 	<div id ="cont" class="container">
 		<h2>Aggiungi in Catalogo</h2>
 		<br/><br/>
@@ -201,6 +202,6 @@ $(document).ready(function () {
 				<input id = "submit" type = "submit" value = "Aggiungi" class="btn btn-primary btn-block" style="display:none">
 			</form>
 		</div>
-		
+		<div><%@ include file="../fragments/footerReg.jsp" %></div>
 </body>
 </html>
