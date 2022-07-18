@@ -2,8 +2,14 @@
 
 .icona{
 	font-size:0;
-	width:25px;
-	height:25px;
+	width:40px;
+	height:40px;
+}
+
+.user{
+	font-size:0;
+	width:35px;
+	height:35px;
 }
 
 body{display:flex;min-height:100vh;flex-direction:column;}
