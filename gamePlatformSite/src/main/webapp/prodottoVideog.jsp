@@ -122,14 +122,14 @@
 								<% 
 									for(int i=1; i<=grado; i++){
 								%>
-									<img src="img\icon\star.svg" alt="add-to-cart" class="icona">
+									<img src="img\icon\star.svg" alt="star-piena" class="icona">
 									
 								<% } %>
 								
 								<% 
 									for(int i=grado; i<5; i++){
 								%>
-									<img src="img\icon\star-vuota.svg" alt="add-to-cart" class="icona")>
+									<img src="img\icon\star-vuota.svg" alt="star-vuota" class="icona")>
 									
 								<% } %>
 							</ul>

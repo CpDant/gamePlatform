@@ -53,10 +53,11 @@ public class AddInCatServlet extends HttpServlet {
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		SupervisoreVideogiochiBean supVidBean = (SupervisoreVideogiochiBean) request.getSession().getAttribute("utente");
 		
-		
+		String codVid = null;
+		String nomeAbb = null;
 		if(request.getParameter("tipo").equals("videogioco")) {
 			String nome = request.getParameter("nome-vid");
-			String cod = request.getParameter("cod-vid");
+			codVid = request.getParameter("cod-vid");
 			int dim = Integer.parseInt(request.getParameter("dim-vid"));
 			int annoProd = Integer.parseInt(request.getParameter("annoProd"));
 			int costo = Integer.parseInt(request.getParameter("costo"));
@@ -64,7 +65,7 @@ public class AddInCatServlet extends HttpServlet {
 			Pegi pegi = Pegi.valueOf(request.getParameter("pegi"));
 			
 			Part part = request.getPart("inputImage");
-	        String fileName = cod+"_1.jpg";
+	        String fileName = codVid+"_1.jpg";
 	        System.out.println(fileName);
 	        
 	        String path = getServletContext().getRealPath("/"+"img"+"/videog"+File.separator+fileName);
@@ -73,18 +74,18 @@ public class AddInCatServlet extends HttpServlet {
 			
 			AddVideog addVidDS = new AddVideogDS(ds);
 			try {
-				addVidDS.doSave(new AddVideogBean(supVidBean.getCodiceFiscale(), cod), cod, softHouse, nome, dim, annoProd, costo, pegi);
+				addVidDS.doSave(new AddVideogBean(supVidBean.getCodiceFiscale(), codVid), codVid, softHouse, nome, dim, annoProd, costo, pegi);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else {
-			String nome = request.getParameter("nome-abb");
+			nomeAbb = request.getParameter("nome-abb");
 			int costo = Integer.parseInt(request.getParameter("costo"));
 			int durata = Integer.parseInt(request.getParameter("durata"));
 			
 			Part part = request.getPart("inputImage");
-	        String fileName = nome+".jpg";
+	        String fileName = nomeAbb+".jpg";
 	        System.out.println(fileName);
 	        
 	        String path = getServletContext().getRealPath("/"+"img"+"/abb"+File.separator+fileName);
@@ -93,7 +94,7 @@ public class AddInCatServlet extends HttpServlet {
 			
 			AddAbb addAbbDS = new AddAbbDS(ds);
 			try {
-				addAbbDS.doSave(new AddAbbBean(supVidBean.getCodiceFiscale(), nome), nome, costo, durata);
+				addAbbDS.doSave(new AddAbbBean(supVidBean.getCodiceFiscale(), nomeAbb), nomeAbb, costo, durata);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -102,7 +103,7 @@ public class AddInCatServlet extends HttpServlet {
 			AddInAbb addInAbbDS = new AddInAbbDS(ds);
 			for (int i = 0; i < checkboxNamesList.length; i++) {			    
 				try {
-					addInAbbDS.doSave(new AddInAbbBean(supVidBean.getCodiceFiscale(), checkboxNamesList[i], nome));
+					addInAbbDS.doSave(new AddInAbbBean(supVidBean.getCodiceFiscale(), checkboxNamesList[i], nomeAbb));
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -114,9 +115,9 @@ public class AddInCatServlet extends HttpServlet {
 		
         
         if(request.getParameter("tipo").equals("videogioco")) {
-        	response.sendRedirect(request.getContextPath() + "/catalogoVidSup.jsp");
+        	response.sendRedirect(request.getContextPath() + "/prodottoVideog.jsp?id=" + codVid);
         } else {
-        	response.sendRedirect(request.getContextPath() + "/catalogoAbbSup.jsp");
+        	response.sendRedirect(request.getContextPath() + "/prodottoAbb.jsp?id=" + nomeAbb);
         }
       }
 	

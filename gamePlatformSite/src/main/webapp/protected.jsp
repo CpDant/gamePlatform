@@ -32,34 +32,42 @@ if (roles == null) {
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon.png">
 <title>Protected Page</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="style/style.css" rel="stylesheet">
 </head>
 <body>
-<h1>Welcome to the Protected Page</h1>
-Congratulations. You have accessed a protected document.
-<br><br>
-
-<%
-if(roles.equals("cliente")) {
-%>
-	<%= clBean.toString() %>
-<%
-} else if(roles.equals("supVid")) {
-%>
-	<%= supBean.toString() %>
-<%
-} else if(roles.equals("assCl")) {
-%>
-	<%= assBean.toString() %>
-<%
-} else if(roles.equals("admin")) {
-%>
-	<%= admBean.toString() %>
-<%	
-}
-%>
-
-<form action="LogoutServlet" method="get" > 
-     <input type="submit" value="Logout"/>
-</form> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<%@ include file="../fragments/header.jsp"%>
+	<div class="container">
+		<h1>Welcome to the Protected Page</h1>
+		Congratulations. You have accessed a protected document.
+		<br>
+		<br>
+	
+		<%
+		if (roles.equals("cliente")) {
+		%>
+		<%=clBean.toString()%>
+		<%
+		} else if (roles.equals("supVid")) {
+		%>
+		<%=supBean.toString()%>
+		<%
+		} else if (roles.equals("assCl")) {
+		%>
+		<%=assBean.toString()%>
+		<%
+		} else if (roles.equals("admin")) {
+		%>
+		<%=admBean.toString()%>
+		<%
+		}
+		%>
+	
+		<form action="LogoutServlet" method="get">
+			<input type="submit" value="Logout" />
+		</form>
+	</div>
+	<%@ include file="../fragments/footerReg.jsp" %>
 </body>
 </html>

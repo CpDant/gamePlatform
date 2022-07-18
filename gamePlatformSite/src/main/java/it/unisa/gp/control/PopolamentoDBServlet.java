@@ -80,7 +80,7 @@ public class PopolamentoDBServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-        out.println("<p> Ciao </p>");
+        out.println("<p> Servlet di popolamento effettuata con successo. </p>");
 
         
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");

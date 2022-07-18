@@ -76,7 +76,7 @@ public class AssistenteClientiDS implements AssistenteClienti {
 			preparedStmt.setString(4, email);
 			preparedStmt.setString(5, password);
 			preparedStmt.setInt(6, retribuzioneAnnuale);
-			preparedStmt.setString(9, ass.getCodiceFiscale());
+			preparedStmt.setString(7, ass.getCodiceFiscale());
 
 			preparedStmt.executeUpdate();
 

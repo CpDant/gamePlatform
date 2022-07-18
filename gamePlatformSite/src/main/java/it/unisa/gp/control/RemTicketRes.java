@@ -41,7 +41,7 @@ public class RemTicketRes extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		response.sendRedirect(request.getContextPath() + "/assistClienti.jsp");
+		response.sendRedirect(request.getContextPath() + "/gestTick.jsp");
 	}
 
 	/**

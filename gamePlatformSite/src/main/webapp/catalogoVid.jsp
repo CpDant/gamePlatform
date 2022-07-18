@@ -28,6 +28,8 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 <title>Catalogo Videogiochi</title>
 </head>
 <body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<%@ include file="../fragments/header.jsp" %>
 	<div class="container">
 		<div class="card-header my-3">
 			<h2>Catalogo Videogiochi</h2>
@@ -59,6 +61,6 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 		%>
 		</div>
 	</div>
-
+	<%@ include file="../fragments/footerReg.jsp" %>
 </body>
 </html>
