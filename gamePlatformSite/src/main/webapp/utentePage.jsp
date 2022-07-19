@@ -263,7 +263,10 @@
 		<h2>Il mio profilo</h2>
 		<br/>
 		<%
-			if(roles.equals("cliente")){
+			if(roles == null){
+		%>
+		<%
+			} else if(roles.equals("cliente")){
 		%>
 			<div class="row">
 				<h4>Riepilogo dati personali</h4>
