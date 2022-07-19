@@ -12,7 +12,7 @@
 	
 	DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 	Acquisti acquistiDS = new AcquistiDS(ds);
-	Collection<AcquistiBean> colAcq= acquistiDS.doRetrieveAllCliente(cliente.getCodiceFiscale(),null);
+	Collection<AcquistiBean> colAcq= acquistiDS.doRetrieveAllCliente(cliente.getCodiceFiscale(), "data_ora");
 	
 	Azienda aziendaDS = new AziendaDS(ds);
 	AziendaBean azBean = aziendaDS.doRetrieveByKeyCodFis(cliente.getCodiceFiscale());
@@ -23,6 +23,7 @@
 		existAz = true;
 	
 	final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+	
 %>
 
 <html>
@@ -38,50 +39,101 @@
 <body>
 	<script src="script/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-	<%@ include file="../fragments/header.jsp" %>
-	<div class="container">
-		<h2>I miei ordini</h2>
-		<br/>
-		<table class="table table-light align-middle">
-			<thead>
-				<tr>
-					<th scope="col">Id</th>
-					<th scope="col">Codice Riscatto</th>
-					<th scope="col">Data e Ora</th>
-					<th scope="col">Prezzo</th>
-					<th scope="col"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<% 
-					for(AcquistiBean acq: colAcq){
-				%>
-				
-				<tr id = "<%= acq.getId() %>">
+	<div id="pagina">
+		<%@ include file="../fragments/header.jsp" %>
+		<div class="container">
+			<h2>I miei ordini</h2>
+			<br/>
+			<form action="FiltraOrdiniData" method="post">
+				<div class="col-md-2 mb-3">
+					<label for="first">Da:</label>
+					<input id="first" type="date" name="first" class="form-control" placeholder="first" required>
+					<label for="last">A:</label>
+					<input id="last" type="date" name="last" class="form-control" placeholder="last" required>
+					<button type="submit" value="Filtra per data" class="btn btn-primary mt-2">Filtra per data</button>
+				</div>
+				<br/>
+			
+			</form>
+			<table class="table table-light align-middle" id="tabellaOrdini">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Codice Riscatto</th>
+						<th scope="col">Data e Ora</th>
+						<th scope="col">Prezzo</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						Collection<AcquistiBean> colAcqByData = (Collection<AcquistiBean>) request.getAttribute("orderList");
+						if(colAcqByData == null){
+							for(AcquistiBean acq: colAcq){
+					%>
 					
-					<td><%= acq.getId() %></td>
-					<td><%= acq.getCodiceRiscatto() %></td>
-					<td><%= acq.getDataOra().format(dtf) %></td>
-					<td><%= acq.getCostoIva() + acq.getCostoNetto() %></td>
+					<tr id = "<%= acq.getId() %>">
+						
+						<td><%= acq.getId() %></td>
+						<td><%= acq.getCodiceRiscatto() %></td>
+						<td><%= acq.getDataOra().format(dtf) %></td>
+						<td><%= acq.getCostoIva() + acq.getCostoNetto() %></td>
+						
+						<td>
+						<form>
+							 <input type="hidden" name="idAcq" value="<%=acq.getId()%>">
+								<a href="viewFattura.jsp?idAcq=<%=acq.getId()%>" class="btn btn-primary"> Visualizza fattura </a>
+						</form>
+						 </td>
 					
-					<td>
-					<form>
-						 <input type="hidden" name="idAcq" value="<%=acq.getId()%>">
-							<a href="viewFattura.jsp?idAcq=<%=acq.getId()%>" class="btn btn-primary"> Visualizza fattura </a>
-					</form>
-					 </td>
+					</tr>
+					
+					<%
+							}
+						} else {
+							if(colAcqByData.size() > 0){
+								for(AcquistiBean acq: colAcqByData){
+								
+					%>
+					<tr id = "<%= acq.getId() %>">
+						
+						<td><%= acq.getId() %></td>
+						<td><%= acq.getCodiceRiscatto() %></td>
+						<td><%= acq.getDataOra().format(dtf) %></td>
+						<td><%= acq.getCostoIva() + acq.getCostoNetto() %></td>
+						
+						<td>
+						<form>
+							 <input type="hidden" name="idAcq" value="<%=acq.getId()%>">
+								<a href="viewFattura.jsp?idAcq=<%=acq.getId()%>" class="btn btn-primary"> Visualizza fattura </a>
+						</form>
+						 </td>
+					
+					</tr>
+					<%
+								}
+							} else {
+					%>
+					<tr>
+						<td>Non c'è stato nessuno acquisto effettuato nell'intervallo di date inserite.</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<%
+								
+							}
+						}							
+					%>
+				</tbody>
 				
-				</tr>
-				
-				<%
-					}
-				%>
-			</tbody>
-		
-		</table>  
-		
+			
+			</table>  
+			
+		</div>
+	
+		<%@ include file="../fragments/footerReg.jsp" %>
 	</div>
-
-	<%@ include file="../fragments/footerReg.jsp" %>
 </body>
 </html>
