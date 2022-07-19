@@ -51,6 +51,7 @@ it.unisa.gp.model.DAO.TicketsDS, java.util.*" contentType="text/html; charset=IS
 <%@ include file="../fragments/header.jsp" %>
 <div id = "cont" class="container page">
 	<h2>Gestione tickets</h2>
+		
 		<br/>
 		<%
 			if(colTic.isEmpty()){
@@ -63,10 +64,8 @@ it.unisa.gp.model.DAO.TicketsDS, java.util.*" contentType="text/html; charset=IS
 			<thead>
 				<tr>
 					<th scope="col">Id</th>
-					<th scope="col">Codice Fiscale Cliente</th>
 					<th scope="col">Problema</th>
 					<th scope="col">Messaggio</th>
-					<th scope="col">Data e ora</th>
 					<th scope="col"></th>
 				</tr>
 			</thead>
@@ -78,10 +77,8 @@ it.unisa.gp.model.DAO.TicketsDS, java.util.*" contentType="text/html; charset=IS
 					<tr id = "<%= ticBean.getId() %>">
 					
 						<td><%= ticBean.getId() %></td>
-						<td><%= ticBean.getCodiceFiscaleCliente() %></td>
 						<td><%= ticBean.getCategoria() %></td>
 						<td><%= ticBean.getMessaggio() %></td>
-						<td><%= ticBean.getDataOra() %></td>
 						<td>
 							<button type="button" class="btn border-dark" onclick='remOggetto("<%= ticBean.getId() %>")'><img src="img\icon\check.svg" alt="prob-risolto" class="icona"></button>
 						</td>
