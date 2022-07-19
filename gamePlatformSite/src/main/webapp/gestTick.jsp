@@ -31,13 +31,13 @@ it.unisa.gp.model.DAO.TicketsDS, java.util.*" contentType="text/html; charset=IS
 <body>
 <script src="script/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<%@ include file="../fragments/header.jsp" %>
+
 <script>
 	function remOggetto(id){
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function(){
 			if (this.readyState == 4 && this.status == 200){
-				document.getElementById("cont").innerHTML = this.responseText;
+				document.getElementById("pagina").innerHTML = this.responseText;
 			}
 		};
 		xhttp.open("GET","RemTicketRes?id=" + id,true);
@@ -46,7 +46,8 @@ it.unisa.gp.model.DAO.TicketsDS, java.util.*" contentType="text/html; charset=IS
 </script>
 
 
-
+<div id="pagina">
+<%@ include file="../fragments/header.jsp" %>
 <div id = "cont" class="container">
 	<h2>Gestione tickets</h2>
 		<br/>
@@ -94,5 +95,6 @@ it.unisa.gp.model.DAO.TicketsDS, java.util.*" contentType="text/html; charset=IS
 		</table>
 	</div>
 	<%@ include file="../fragments/footerReg.jsp" %>
+	</div>
 </body>
 </html>

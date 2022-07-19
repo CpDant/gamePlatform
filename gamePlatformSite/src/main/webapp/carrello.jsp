@@ -33,7 +33,7 @@
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function(){
 			if (this.readyState == 4 && this.status == 200){
-				document.getElementById("cont").innerHTML = this.responseText;
+				document.getElementById("pagina").innerHTML = this.responseText;
 			}
 		};
 		xhttp.open("GET","RemFromCartServlet?id=" + id,true);
@@ -50,7 +50,9 @@
 	
 	
 </script>
+<div id= "pagina">
 <%@ include file="../fragments/header.jsp"%>
+
 <%
 	if(flag == true){	
 %>
@@ -133,7 +135,9 @@
 	}
 
 %>
-<div><%@ include file="../fragments/footerReg.jsp" %></div>
+<%@ include file="../fragments/footerReg.jsp" %>
+
+</div>
 
 </body>
 </html>

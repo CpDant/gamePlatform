@@ -33,7 +33,7 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function(){
 			if (this.readyState == 4 && this.status == 200){
-				document.getElementById("cont").innerHTML = this.responseText;
+				document.getElementById("pagina").innerHTML = this.responseText;
 			}
 		};
 		xhttp.open("GET","RemFromCatalogServlet?id=" + id,true);
@@ -41,6 +41,7 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 	}
 </script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<div id="pagina">
 	<%@ include file="../fragments/header.jsp" %>
 	<div class="container" id="cont">
 		<div class="card-header my-3">
@@ -81,5 +82,6 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 		</div>
 	</div>
 	<%@ include file="../fragments/footerReg.jsp" %>
+	</div>
 </body>
 </html>
