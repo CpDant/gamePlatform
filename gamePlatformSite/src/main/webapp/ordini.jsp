@@ -22,7 +22,7 @@
 	else 
 		existAz = true;
 	
-	final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:MM");
+	final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 %>
 
 <html>
@@ -66,7 +66,7 @@
 					<td>
 					<form>
 						 <input type="hidden" name="idAcq" value="<%=acq.getId()%>">
-						<a href="viewFattura.jsp?idAcq=<%=acq.getId()%>"> Visualizza fattura </a>
+							<a href="viewFattura.jsp?idAcq=<%=acq.getId()%>" class="btn btn-primary"> Visualizza fattura </a>
 					</form>
 					 </td>
 				

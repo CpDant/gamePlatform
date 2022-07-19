@@ -1,5 +1,5 @@
-<!-- Footer -->
-<footer class="text-center text-lg-start text-muted mt-5">
+
+<footer id="footer" class="text-center text-lg-start text-muted">
   <!-- Section: Social media -->
 
   <!-- Section: Social media -->
@@ -16,4 +16,5 @@
   </div>
   <!-- Copyright -->
 </footer>
+
 <!-- Footer -->

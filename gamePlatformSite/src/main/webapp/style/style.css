@@ -12,8 +12,12 @@
 	height:35px;
 }
 
-body{display:flex;min-height:100vh;flex-direction:column;}
-.main-content{flex:1;}
+#footer {
+    position: relative;
+    width: 100%;
+    bottom: 0px;
+    text-align: center;
+}
 
 .vertical{
     position: absolute;
