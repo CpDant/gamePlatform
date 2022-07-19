@@ -152,6 +152,7 @@
 				document.getElementById("datiModifica").innerHTML=""
 					+"<form action='ModificaDatiServlet' method='post'>"
 						+"<div class='row'>"
+							+"<h4>Dati personali</h4>"
 							+"<div class='col-md-6 mb-3'>"
 								+"<label for='nome'> Nome </label>" 
 								+"<input type='text' class='form-control' id='nome' name='nome' placeholder=''>"
@@ -185,6 +186,7 @@
 				document.getElementById("datiModifica").innerHTML=""
 					+"<form action='ModificaDatiServlet' method='post'>"
 						+"<div class='row'>"
+							+"<h4>Dati personali</h4>"
 							+"<div class='col-md-6 mb-3'>"
 								+"<label for='nome'> Nome </label>" 
 								+"<input type='text' class='form-control' id='nome' name='nome' placeholder=''>"
@@ -218,6 +220,7 @@
 				document.getElementById("datiModifica").innerHTML=""
 					+"<form action='ModificaDatiServlet' method='post'>"
 						+"<div class='row'>"
+						+"<h4>Dati personali</h4>"
 							+"<div class='col-md-6 mb-3'>"
 								+"<label for='nome'> Nome </label>" 
 								+"<input type='text' class='form-control' id='nome' name='nome' placeholder=''>"
@@ -263,6 +266,7 @@
 			if(roles.equals("cliente")){
 		%>
 			<div class="row">
+				<h4>Riepilogo dati personali</h4>
 				<div class="col-md-6 mb-3"> Nome: <%=clBean.getNome()%></div>
 				<div class="col-md-6 mb-3"> Cognome: <%=clBean.getCognome()%></div>
 				<div class="col-md-6 mb-3"> Codice Fiscale:	<%=clBean.getCodiceFiscale() %> </div>
@@ -270,17 +274,34 @@
 				<div class="col-md-6 mb-3"> Username: <%=clBean.getUsername() %> </div>
 				<div class="col-md-6 mb-3"> Email: <%=clBean.getEmail() %> </div>
 				<div class="col-md-6 mb-3"> Indirizzo di fatturazione <%=clBean.getIndFatt() %></div>
+				
+				<h4 class="mt-3">Riepilogo dati aziendali</h4>
+				<%
+					if(existAz){
+				%>
+				<div class="col-md-6 mb-3"> Partita Iva: <%=azBean.getpIva()%></div>
+				<div class="col-md-6 mb-3"> Sdi: <%=azBean.getSdi()%></div>
+				<div class="col-md-6 mb-3"> Pec:	<%=azBean.getPec() %> </div>
+				<% 		
+					} else {
+				%>
+				<p>Non è associata nessuna azienda al tuo account, per farlo e successivamente poter richiedere la fattura di un ordine, inserisci i dati relativi alla tua azienda in "Dati aziendali" cliccando "Modifica dati personali".</p>
+				<%
+					}
+				%>
 				<div class="row">
 					<div>
 						<a href='ordini.jsp' class='btn btn-primary'>Visualizza tutti gli ordini</a> <br/><br/>
 						<button onclick="modificaDati('<%=roles%>')" class="btn btn-primary">Modifica dati personali</button>
 					</div>
 				</div>
+				
 			</div>
 		<%
 			} else if(roles.equals("supVid")) {
 		%>
 			<div class="row">
+				<h4>Riepilogo dati personali</h4>
 				<div class="col-md-6 mb-3"> Nome: <%=supBean.getNome()%></div>
 				<div class="col-md-6 mb-3"> Cognome: <%=supBean.getCognome()%></div>
 				<div class="col-md-6 mb-3"> Codice Fiscale:	<%=supBean.getCodiceFiscale() %> </div>
@@ -301,6 +322,7 @@
 			} else if(roles.equals("assCl")) {
 		%>
 			<div class="row">
+				<h4>Riepilogo dati personali</h4>
 				<div class="col-md-6 mb-3"> Nome: <%=assBean.getNome()%></div>
 				<div class="col-md-6 mb-3"> Cognome: <%=assBean.getCognome()%></div>
 				<div class="col-md-6 mb-3"> Codice Fiscale:	<%=assBean.getCodiceFiscale() %> </div>
@@ -318,6 +340,7 @@
 			} else if(roles.equals("admin")) {
 		%>
 			<div class="row">
+				<h4>Riepilogo dati personali</h4>
 				<div class="col-md-6 mb-3"> Nome: <%=admBean.getNome()%></div>
 				<div class="col-md-6 mb-3"> Cognome: <%=admBean.getCognome()%></div>
 				<div class="col-md-6 mb-3"> Codice Fiscale:	<%=admBean.getCodiceFiscale() %> </div>
