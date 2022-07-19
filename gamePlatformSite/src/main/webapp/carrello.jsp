@@ -20,6 +20,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carrello</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet">
@@ -57,7 +58,7 @@
 	if(flag == true){	
 %>
 	
-	<div id = "cont" class="container">
+	<div id = "cont" class="container page">
 	<h2>Carrello</h2>
 		<div class="d-flex py-3"><h3>Prezzo totale: &euro; <%= carrello.getTotale() %></h3><button class="mx-3 btn btn-primary" onclick='checkTot("<%= carrello.getTotale() %>")'>Compra ora</button></div>
 
@@ -126,7 +127,7 @@
 <% 
 	}else{
 %>		
-		<div id = "cont" class="container">
+		<div id = "cont" class="container page">
 			<h2>Carrello</h2>
 			<br/>
 			<p>La funzionalità carrello non è disponibile se non sei autenticato, effettua il <a href = "/gamePlatformSite/login-form.jsp">login</a></p>

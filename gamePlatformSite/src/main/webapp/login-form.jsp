@@ -13,6 +13,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet">
@@ -23,7 +24,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <%@ include file="../fragments/header.jsp" %> 
 
-<div class="col fixed-center d-flex justify-content-center align-items-center">
+<div class="col fixed-center d-flex justify-content-center align-items-center page">
 	
 	<form action="LoginServlet" method="post"> 
 		<h2>Accedi</h2><br/>

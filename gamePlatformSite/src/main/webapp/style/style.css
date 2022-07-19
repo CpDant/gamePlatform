@@ -12,16 +12,14 @@
 	height:35px;
 }
 
-#footer {
-    position: relative;
-    width: 100%;
-    bottom: 0px;
-    text-align: center;
-}
 
 .vertical{
     position: absolute;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
+}
+
+.page{
+	min-height:80vh;
 }

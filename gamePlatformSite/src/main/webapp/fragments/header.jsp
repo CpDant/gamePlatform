@@ -2,7 +2,7 @@
 	<%
 		String ruoloHeader = (String) session.getAttribute("roles");
 	%>
-	<header class="d-flex flex-wrap justify-content-center py-3 mb-3" >
+	<header class="d-flex flex-wrap justify-content-center py-3" >
 
 
 		<ul class="nav nav-pills">
@@ -14,8 +14,8 @@
 			<li class="nav-item mt-1"><a href="index.jsp" class="nav-link" aria-current="page">Home</a></li>
 			<li class="nav-item mt-1"><a href="catalogoVid.jsp" class="nav-link">Catalogo Videogioco</a></li>
 			<li class="nav-item mt-1"><a href="catalogoAbb.jsp" class="nav-link">Catalogo Abbonamento</a></li>
-			<li class="nav-item"><a href="carrello.jsp" class="nav-link btn"><img src="img\icon\shopping-cart.png" alt="add-to-cart" class="icona"></a></li>
-			<li class="nav-item"><a href="login-form.jsp" class="nav-link btn"><img src="img\icon\user.png" alt="user" style="font-size:0;width:40px;height:40px;"> Accedi</a></li>
+			<li class="nav-item"><a href="carrello.jsp" class="nav-link btn"><img src="img\icon\shopping-cart.png" class="" alt="add-to-cart" class="icona"></a></li>
+			<li class="nav-item"><a href="login-form.jsp" class="nav-link btn"><img src="img\icon\user.png" class="img-responsive" alt="user" style="font-size:0;width:40px;height:40px;"> Accedi</a></li>
 			<%
 				} else if (ruoloHeader.equals("cliente")) {
 			%>
