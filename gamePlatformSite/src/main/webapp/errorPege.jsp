@@ -16,7 +16,7 @@
 <div class="container page">
 <div class="alert alert-danger alert-dismissible fade show">
     <h4 class="alert-heading"><i class="bi-exclamation-octagon-fill"></i> Oops! Qualcosa è andato storto.</h4>
-    <p>Non hai i permessi necessari per entrare in questa pagina torna alla pagina di login e entra con le credenziali corrette per poter avere accesso a questa pagina.</p>
+    <p>Stai tentando di aggiungere un prodotto al carrello che è già presente, <a href="carrello.jsp">clicca qui per visualizzare il carrello.</a></p>
 </div>
 </div>
 <%@ include file="../fragments/footerReg.jsp" %>

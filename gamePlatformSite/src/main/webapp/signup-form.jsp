@@ -199,9 +199,8 @@
 </div>
 
 
-<div> 
 	<%@ include file="../fragments/footerReg.jsp" %>
-</div>
+
 
 </body>
 </html>

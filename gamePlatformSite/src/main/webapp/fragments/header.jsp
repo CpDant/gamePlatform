@@ -5,7 +5,7 @@
 	<header class="d-flex flex-wrap justify-content-center py-3" >
 
 
-		<ul class="nav nav-pills">
+		<ul class="nav nav-pills justify-content-center align-items-center text-center">
 			<li class="nav-item"><a href="index.jsp" class=""> <img src="img/icon/logo.png" style="width: 20%"></a></li>
 			
 			<%

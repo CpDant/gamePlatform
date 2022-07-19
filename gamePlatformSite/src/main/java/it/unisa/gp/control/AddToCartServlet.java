@@ -56,7 +56,7 @@ public class AddToCartServlet extends HttpServlet {
 				if(!colAbb.contains(abbBean)) {
 					carrello.addAbb(id);
 				}else {
-					response.sendRedirect(request.getContextPath() + "/errorPage.jsp");
+					response.sendRedirect(request.getContextPath() + "/errorPege.jsp");
 					return;
 				}
 				
@@ -73,7 +73,7 @@ public class AddToCartServlet extends HttpServlet {
 				if(!colVid.contains(vidBean)) {
 					carrello.addVid(id);
 				}else {
-					response.sendRedirect(request.getContextPath() + "/errorPage.jsp");
+					response.sendRedirect(request.getContextPath() + "/errorPege.jsp");
 					return;
 				}
 				
