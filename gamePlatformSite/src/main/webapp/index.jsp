@@ -30,6 +30,16 @@
 	<script src="script/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
+	<script>
+		$(document).ready(function(){
+		  $("div#rocket").hover(function(){
+		    $("div#roccia").css("width", "50%");
+		    }, function(){
+		    $("div#roccia").css("width", "30%");
+		  });
+		});
+	</script>	
+
 	<%@ include file="../fragments/header.jsp"%>
 	<div class="container">
 		<div class="row text-center">
@@ -64,8 +74,8 @@
 		<div class="row text-center">
 			<h3 class="my-3">Scegliamo un gioco per te</h3>
 			
-			<div class="col-md-4 my-3 mx-auto ">
-				<div class="card text-center w-100">
+			<div id="roccia" class="col-md-4 my-3 mx-auto">
+				<div id="rocket" class="card text-center w-100">
 					<a href="prodottoVideog.jsp?id=<%=vidBean.getCodice()%>"> <img class="card-img-top image-responsive" src="ImageServlet?immagine=<%=vidBean.getCodice()%>_1.jpg" alt="Card image"> </a>				
 				</div>
 			</div>	
@@ -77,9 +87,11 @@
 			<h3 class="my-3">Ultimi arrivi</h3>
 			
 			<div class="col-md-3 my-3">
+			
 				<div class="card text-center w-100">
 					<a href="prodottoVideog.jsp?id=1PLO32Q6"> <img class="card-img-top" src="ImageServlet?immagine=1PLO32Q6_1.jpg" alt="Card image"> </a>				
 				</div>
+				
 			</div>
 
 			<div class="col-md-3 my-3">
