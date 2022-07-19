@@ -23,3 +23,13 @@
 .page{
 	min-height:80vh;
 }
+
+
+.image-piccola{
+	transition: 0.25s;
+}
+
+.image-grande{
+	width: 550px!important;
+
+}
