@@ -11,7 +11,7 @@
 			<%
 				if(ruoloHeader == null){
 			%>
-			<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+			<li class="nav-item"><a href="index.jsp" class="nav-link" aria-current="page">Home</a></li>
 			<li class="nav-item"><a href="catalogoVid.jsp" class="nav-link">Catalogo Videogioco</a></li>
 			<li class="nav-item"><a href="catalogoAbb.jsp" class="nav-link">Catalogo Abbonamento</a></li>
 			<li class="nav-item"><a href="carrello.jsp" class="nav-link btn"><img src="img\icon\shopping-cart.png" alt="add-to-cart" class="icona"></a></li>
@@ -20,7 +20,7 @@
 				} else if (ruoloHeader.equals("cliente")) {
 			%>
 			
-			<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+			<li class="nav-item"><a href="index.jsp" class="nav-link" aria-current="page">Home</a></li>
 			<li class="nav-item"><a href="catalogoVid.jsp" class="nav-link">Catalogo Videogioco</a></li>
 			<li class="nav-item"><a href="catalogoAbb.jsp" class="nav-link">Catalogo Abbonamento</a></li>
 			<li class="nav-item"><a href="carrello.jsp" class="nav-link btn"><img src="img\icon\shopping-cart.png" alt="add-to-cart" class="icona"></a></li>
@@ -40,9 +40,9 @@
 			<%
 				} else if (ruoloHeader.equals("supVid")) {
 			%>
-			<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-			<li class="nav-item"><a href="catalogoVidSup.jsp" class="nav-link">Catalogo Videogioco</a></li>
-			<li class="nav-item"><a href="catalogoAbbSup.jsp" class="nav-link">Catalogo Abbonamento</a></li>
+			<li class="nav-item"><a href="index.jsp" class="nav-link" aria-current="page">Home</a></li>
+			<li class="nav-item"><a href="catalogoVidSup.jsp" class="nav-link">Gestione Videogioco</a></li>
+			<li class="nav-item"><a href="catalogoAbbSup.jsp" class="nav-link">Gestione Abbonamento</a></li>
 			<li class="nav-item"><a href="addInCat.jsp" class="nav-link">Modifica Catalogo</a></li>
 			
 			<li class="nav-item">
@@ -57,8 +57,8 @@
 			<%
 				} else if (ruoloHeader.equals("assCl")) {
 			%>
-			<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-			<li class="nav-item"><a href="gestTick.jsp" class="nav-link">Gestisci Tickets</a></li>
+			<li class="nav-item"><a href="index.jsp" class="nav-link" aria-current="page">Home</a></li>
+			<li class="nav-item"><a href="gestTick.jsp" class="nav-link">Gestione Tickets</a></li>
 				
 			<li class="nav-item">
 				<div class="dropdown">
@@ -72,7 +72,7 @@
 			<%
 				} else if (ruoloHeader.equals("admin")) {
 			%>
-			<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+			<li class="nav-item"><a href="index.jsp" class="nav-link" aria-current="page">Home</a></li>
 			<li class="nav-item"><a href="addOperatore.jsp" class="nav-link">Aggiungi Operatore</a></li>
 				
 			<li class="nav-item">

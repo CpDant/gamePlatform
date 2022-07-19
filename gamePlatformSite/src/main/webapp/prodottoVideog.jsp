@@ -30,7 +30,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Videogioco</title>
+<title><%=vidBean.getNomeVideogioco()%></title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700|Open+Sans:400,700">
@@ -41,16 +41,21 @@
 <script src="script/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<%@ include file="../fragments/header.jsp" %>
+	<div class="container">
+		<h2 class="text-center"><%=vidBean.getNomeVideogioco()%></h2>
+	</div>
 	<div class="container mt-5 mb-5" id="product-section">
 		<div class="row text-center">
 			<div class="col-md-6 border-end">
-				<img class="image-responsive" width="80%" src="ImageServlet?immagine=<%=vidBean.getCodice()%>_1.jpg" alt="image">
+				<img class="image-responsive" width="70%" src="ImageServlet?immagine=<%=vidBean.getCodice()%>_1.jpg" alt="image">
 			</div>
 			<div class="col-md-6">
-				<h3><%=vidBean.getNomeVideogioco()%></h3>
+				<h4>Videogioco</h4>
+				<br/>
 				<h5>Prezzo: &euro;<%= vidBean.getCosto() %></h5>
-				<div class="mt-5"> <span class="fw-bold">Specifiche</span>
+				<div class="mt-5"> <span class="fw-bold">Specifiche:</span>
                    <div>
                        <ul style="list-style-type:none">
                            <li class="text-center">Prodotto da: <%= vidBean.getNomeSoftwareHouse() %></li>
@@ -65,6 +70,7 @@
             	   
                
                %>
+               <br/>
                <a href="AddToCartServlet?id=<%=vidBean.getCodice()%>" class="btn border-dark"> 
                		<img src="img\icon\shopping-cart.svg" alt="add-to-cart" class="icona"> Aggiungi al carrello
 			   </a>

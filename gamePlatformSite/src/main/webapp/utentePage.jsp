@@ -13,6 +13,8 @@
 	AdministratorsBean admBean = null;
 	SupervisoreVideogiochiBean supBean = null;
 	AssistenteClientiBean assBean = null;
+	AziendaBean azBean = null;
+	boolean existAz = false;
 	if(roles == null){
 		response.sendRedirect(request.getContextPath() + "/login-form.jsp");
 	} else if (roles.equals("admin")) {
@@ -23,16 +25,17 @@
 		assBean = (AssistenteClientiBean) session.getAttribute("utente");
 	} else if (roles.equals("cliente")) {
 		clBean = (ClientiBean) session.getAttribute("utente");
+		Azienda aziendaDS = new AziendaDS(ds);
+		azBean = aziendaDS.doRetrieveByKeyCodFis(clBean.getCodiceFiscale());
+		
+		existAz = false;
+		if(azBean.getCodiceFiscaleCliente() == null)
+			existAz = false;
+		else 
+			existAz = true;
 	}
 	
-	Azienda aziendaDS = new AziendaDS(ds);
-	AziendaBean azBean = aziendaDS.doRetrieveByKeyCodFis(clBean.getCodiceFiscale());
 	
-	boolean existAz = false;
-	if(azBean.getCodiceFiscaleCliente() == null)
-		existAz = false;
-	else 
-		existAz = true;
 %>
     
 <!DOCTYPE html>
@@ -80,12 +83,12 @@
 							+"<div class='row'>"
 								+"<h4>Dati aziendali</h4>"
 								+"<div class='col-md-6 mb-3'>"
-								+"<label for='sdi'> Sdi; </label>" 
+								+"<label for='sdi'> Sdi </label>" 
 								+"<input type='text' class='form-control' id='sdi' name='sdi' placeholder=''>"
 								+"</div>"
 								
 								+"<div class='col-md-6 mb-3'>"
-								+"<label for='pec'> Pec; </label>" 
+								+"<label for='pec'> Pec </label>" 
 								+"<input type='email' class='form-control' id='pec' name='pec' placeholder=''>"
 								+"</div>"
 							+"</div>";					
@@ -251,9 +254,11 @@
 		
 		
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<%@ include file="../fragments/header.jsp" %>
 	<div class="container">
 		<h2>Il mio profilo</h2>
+		<br/>
 		<%
 			if(roles.equals("cliente")){
 		%>

@@ -21,8 +21,9 @@
 <head>
 <meta charset="utf-8">
 <title>Carrello</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="style/style.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="style/style.css" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon.png">
 </head>
 <body>
 <script src="script/jquery-3.6.0.min.js"></script>
@@ -125,6 +126,7 @@
 %>		
 		<div id = "cont" class="container">
 			<h2>Carrello</h2>
+			<br/>
 			<p>La funzionalità carrello non è disponibile se non sei autenticato, effettua il <a href = "/gamePlatformSite/login-form.jsp">login</a></p>
 		</div>
 <%	

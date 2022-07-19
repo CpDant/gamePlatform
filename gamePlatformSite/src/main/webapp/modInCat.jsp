@@ -27,7 +27,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Modifica elemento in Catalogo</title>
+<title>Modifica Prodotto</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon.png">
@@ -164,9 +164,13 @@ function validate(){
 </script>
 </head>
 <body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	
+	
+	<%@ include file="../fragments/header.jsp" %>
 	<div id ="cont" class="container">
-		<h2>Modifica in Catalogo</h2>
-		<br/><br/>
+		<h2>Modifica Prodotto</h2>
+		<br/>
 		
 			<form action="ModInCatServlet" method="post" onsubmit="return validate()">
 				<div>
@@ -213,7 +217,7 @@ function validate(){
 				
 				<input id = "submit" type = "submit" value = "Modifica" class="btn btn-primary btn-block" style="display:none">
 			</form>
-		</div>
-		
+	</div>
+	<%@ include file="../fragments/footerReg.jsp" %>
 </body>
 </html>

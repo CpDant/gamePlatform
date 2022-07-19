@@ -31,9 +31,12 @@ function genPassw(){
 	document.getElementById("password").value = password;
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <%@ include file="../fragments/header.jsp" %> 
 <div class="container">
 	<h2>Aggiungi operatore</h2>
+	<br/>
+	
 	<form action="AddOperatorServlet" method="post">
 		<div class="row mt-3">
 			<div class="col-md-6 mb-3">

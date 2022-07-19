@@ -23,9 +23,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon.png">
 </head>
 <body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<%@ include file="../fragments/header.jsp" %> 
 	<div class="container">
 		<h2>Operatore aggiunto correttamente!</h2>
+		<br/>
 		<div class="row mt-3">
 			<div>
 				<p>L'operatore:</p>

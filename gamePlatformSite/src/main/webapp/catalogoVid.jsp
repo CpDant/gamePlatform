@@ -33,6 +33,7 @@ it.unisa.gp.model.DAO.VideogiocoDS, java.util.*" contentType="text/html; charset
 	<div class="container">
 		<div class="card-header my-3">
 			<h2>Catalogo Videogiochi</h2>
+			<br/>
 		</div>
 		<div class="row">
 		<%

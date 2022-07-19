@@ -82,7 +82,7 @@ public class SignUpClienteServlet extends HttpServlet {
 			request.getSession().setAttribute("roles", "cliente");
 			request.getSession().setAttribute("carrello", new Carrello(ds));
 			
-			redirectedPage = "/protected.jsp";
+			redirectedPage = "/index.jsp";
 			
 		} catch (Exception e) {
 			request.getSession().setAttribute("roles", null);

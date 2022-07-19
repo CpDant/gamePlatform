@@ -26,7 +26,7 @@ it.unisa.gp.model.DAO.TicketsDS, java.util.*" contentType="text/html; charset=IS
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon.png">
-<title>Gestisci tickets</title>
+<title>Gestione tickets</title>
 </head>
 <body>
 <script src="script/jquery-3.6.0.min.js"></script>
@@ -48,13 +48,12 @@ it.unisa.gp.model.DAO.TicketsDS, java.util.*" contentType="text/html; charset=IS
 
 
 <div id = "cont" class="container">
-	<h2>Gestisci tickets</h2>
-		<br/>
+	<h2>Gestione tickets</h2>
 		<br/>
 		<%
 			if(colTic.isEmpty()){
 		%>		
-			<p>Non ci sono ticket da risolvere</p>	
+			<p>Non ci sono ticket da risolvere.</p>	
 		<% 
 			}else{
 		%>

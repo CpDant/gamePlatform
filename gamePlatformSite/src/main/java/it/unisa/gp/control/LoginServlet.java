@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 				
 				
 				request.getSession().setAttribute("roles", ruolo);
-				redirectedPage = "/protected.jsp";
+				redirectedPage = "/index.jsp";
 				
 			} catch (Exception e) {
 				request.getSession().setAttribute("roles", null);

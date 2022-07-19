@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
+<%
+	String roles = (String) session.getAttribute("roles");
+	
+	if(roles == null){
+		
+	} else {
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
+	}
+%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -11,7 +20,7 @@
 </head>
 <body>
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <%@ include file="../fragments/header.jsp" %> 
 
 <div class="col fixed-center d-flex justify-content-center align-items-center">

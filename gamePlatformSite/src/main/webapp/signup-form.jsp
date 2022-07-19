@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
+<%
+
+	String roles = (String) session.getAttribute("roles");
+	
+	if(roles == null){
+		
+	} else {
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
+	}
+	
+%>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -117,7 +129,7 @@
 </script>
 
 <body>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <%@ include file="../fragments/header.jsp" %>
 
 <div class="col fixed-center d-flex justify-content-center align-items-center">
@@ -125,8 +137,8 @@
 	
 	 
 			
-			<h4 class="mb-3">Registrazione</h4>    
-			
+			<h2 class="mb-3">Registrazione</h2>    
+			<br/>
 			<div class='row'>
 				<div class='col-md-6 mb-3'>		
 					<label for="nome">Nome*</label> 

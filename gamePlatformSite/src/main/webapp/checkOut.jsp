@@ -78,7 +78,10 @@
 	}
 </script>
 
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
+
+	<%@ include file="../fragments/header.jsp" %>
 	<div id="cont" class="container">
 		<h2>CheckOut</h2>
 
@@ -207,7 +210,7 @@
 		<button class="btn btn-primary btn-block" type="submit">Procedi al pagamento</button>
 	</form>				
 	</div>
-
+	<%@ include file="../fragments/footerReg.jsp" %>
 
 </body>
 </html>

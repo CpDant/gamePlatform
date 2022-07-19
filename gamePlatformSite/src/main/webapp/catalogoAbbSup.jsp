@@ -41,10 +41,12 @@ it.unisa.gp.model.DAO.AbbonamentoDS, java.util.*" contentType="text/html; charse
 		xhttp.send();
 	}
 </script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<%@ include file="../fragments/header.jsp" %>
 	<div class="container" id="cont">
 		<div class="card-header my-3">
 			<h2>Gestione Abbonamenti</h2>
+			<br/>
 		</div>
 		<div style="text-align:center">
 			<a href="/gamePlatformSite/addInCat.jsp" class="btn border-dark">
