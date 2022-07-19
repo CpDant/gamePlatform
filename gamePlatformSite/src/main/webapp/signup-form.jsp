@@ -142,7 +142,7 @@
 			<div class='row'>
 				<div class='col-md-6 mb-3'>		
 					<label for="nome">Nome*</label> 
-					<input id="nome" type="text" name="nome" class="form-control" placeholder="nome" required>
+					<input id="nome" type="text" name="nome" class="form-control" placeholder="nome" required autofocus>
 				</div>
 				<div class='col-md-6 mb-3'>	
 					<label for="cognome">Cognome*</label> 

@@ -29,7 +29,7 @@
 		<h2>Accedi</h2><br/>
 		<div class="form-outline mb-3">
 			 <label class="form-label" for="email">Email</label>
-		     <input id="email" type="email" name="email" class="form-control" placeholder="email">
+		     <input id="email" type="email" name="email" class="form-control" placeholder="email" autofocus>
 		     
 		</div> 
 		<div class="form-outline mb-3">
