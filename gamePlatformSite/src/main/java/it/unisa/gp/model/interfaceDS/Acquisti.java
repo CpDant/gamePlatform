@@ -21,4 +21,6 @@ public interface Acquisti {
 	public Collection<AcquistiBean> doRetrieveAll(String order) throws SQLException;
 	
 	public Collection<AcquistiBean> doRetrieveAllCliente(String codCliente, String order) throws SQLException;
+	
+	public Collection<AcquistiBean> doRetrieveAllByDate(String codCliente, String first, String last, String order) throws SQLException;
 }

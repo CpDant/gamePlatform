@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -314,6 +315,57 @@ public class AcquistiDS implements Acquisti{
 			connection = ds.getConnection();
 			preparedStmt = connection.prepareStatement(selectSQL);
 			preparedStmt.setString(1, codCliente);
+
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while (rs.next()) {
+				AcquistiBean bean = new AcquistiBean(0,null,null,0,0,null,null,0);
+				
+				bean.setId(rs.getInt("ID"));
+				bean.setCodiceRiscatto(rs.getString("CODICE_RISCATTO"));
+				bean.setCodiceFiscaleCliente(rs.getString("CODICE_FISCALE_CLIENTE"));
+				bean.setCostoIva(rs.getInt("COSTO_IVA"));
+				bean.setCostoNetto(rs.getInt("COSTO_NETTO"));
+				bean.setDataOra(rs.getTimestamp("DATA_ORA").toLocalDateTime());
+				bean.setIndFatt(rs.getString("IND_FATT"));
+				bean.setNumeroCartaPag(rs.getLong("NUMERO_CARTA_PAGAM"));
+				acq.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStmt != null)
+					preparedStmt.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return acq;
+	}
+
+
+	@Override
+	public Collection<AcquistiBean> doRetrieveAllByDate(String codCliente, String first, String last, String order) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStmt = null;
+
+		Collection<AcquistiBean> acq = new LinkedList<AcquistiBean>();
+		
+		
+		String selectSQL = "SELECT * FROM " + AcquistiDS.TABLE_NAME + " WHERE CODICE_FISCALE_CLIENTE = ? AND DATA_ORA BETWEEN ? AND ?";
+		
+
+		if (order != null && !order.equals("")) {
+			selectSQL += " ORDER BY " + order;
+		}
+
+		try {
+			connection = ds.getConnection();
+			preparedStmt = connection.prepareStatement(selectSQL);
+			preparedStmt.setString(1, codCliente);
+			preparedStmt.setDate(2, java.sql.Date.valueOf(first));
+			preparedStmt.setDate(3, java.sql.Date.valueOf(last));
 
 			ResultSet rs = preparedStmt.executeQuery();
 			
