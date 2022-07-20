@@ -42,7 +42,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<div id="pagina">
 		<%@ include file="../fragments/header.jsp" %>
-		<div class="container">
+		<div class="container page">
 			<h2>I miei ordini</h2>
 			<br/>
 			<form action="FiltraOrdiniData" method="post">
@@ -138,7 +138,6 @@
 	</div>
 
 
-	<%@ include file="../fragments/footerReg.jsp" %>
 	
 </body>
 </html>
