@@ -21,5 +21,15 @@
 }
 
 .page{
-	min-height:80vh;
+	min-height:49.5vh;
+}
+
+
+.image-piccola{
+	transition: 0.25s;
+}
+
+.image-grande{
+	width: 550px!important;
+
 }

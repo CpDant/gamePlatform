@@ -33,9 +33,9 @@
 	<script>
 		$(document).ready(function(){
 		  $("div#rocket").hover(function(){
-		    $("div#roccia").css("width", "50%");
+		    $("div#roccia a .image-piccola").addClass("image-grande");
 		    }, function(){
-		    $("div#roccia").css("width", "30%");
+		    $("div#roccia a .image-piccola").removeClass("image-grande");
 		  });
 		});
 	</script>	
@@ -76,7 +76,7 @@
 			
 			<div id="roccia" class="col-md-4 my-3 mx-auto">
 				<div id="rocket" class="card text-center w-100">
-					<a href="prodottoVideog.jsp?id=<%=vidBean.getCodice()%>"> <img class="card-img-top image-responsive" src="ImageServlet?immagine=<%=vidBean.getCodice()%>_1.jpg" alt="Card image"> </a>				
+					<a href="prodottoVideog.jsp?id=<%=vidBean.getCodice()%>"> <img class="image-piccola card-img-top image-responsive" src="ImageServlet?immagine=<%=vidBean.getCodice()%>_1.jpg" alt="Card image"> </a>				
 				</div>
 			</div>	
 		</div>
