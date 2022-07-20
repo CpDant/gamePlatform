@@ -1,7 +1,7 @@
 
 
 
-  <footer class="bg-primary text-center text-lg-start text-white">
+  <footer class="bg-primary text-center text-lg-start text-white mt-3">
     <!-- Grid container -->
     <div class="container p-4">
       <!--Grid row-->
