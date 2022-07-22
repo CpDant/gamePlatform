@@ -16,7 +16,7 @@ Hanno contribuito a questo progetto:
 ## Intro
 
 GamePlatform è un sito e-commerce pensato e realizzato per i videogiocatori che vogliono accedere ad una serie di videogiochi con prezzi abbordabili, usufruendo di abbonamenti
-che permettono di risparmiare accedendo ad un insieme di videogiochi piuttosto che effettuare acquisti singoli che risultano essere economicamente svantaggiosi.
+che permettono di risparmiare accedendo ad un insieme di videogiochi piuttosto che effettuare acquisti singoli che risulterebbero essere economicamente svantaggiosi.
 
 Lo scopo di GamePlatform è quello di rendere l'esperienza dell'utente quanto più appagante e intuitiva possibile. 
 
