@@ -43,7 +43,7 @@
 			<li class="nav-item mt-1"><a href="index.jsp" class="nav-link" aria-current="page">Home</a></li>
 			<li class="nav-item mt-1"><a href="catalogoVidSup.jsp" class="nav-link">Gestione Videogioco</a></li>
 			<li class="nav-item mt-1"><a href="catalogoAbbSup.jsp" class="nav-link">Gestione Abbonamento</a></li>
-			<li class="nav-item mt-1"><a href="addInCat.jsp" class="nav-link">Modifica Catalogo</a></li>
+			<li class="nav-item mt-1"><a href="modInCat.jsp" class="nav-link">Modifica Catalogo</a></li>
 			
 			<li class="nav-item">
 				<div class="dropdown">

@@ -44,7 +44,7 @@
 					<textarea class="form-control" id="textArea" name="textArea" rows="7"></textarea>
 				</div>
 				<div class="col-md-6 mb-3">
-						<label for="problema">Grado di Apprezzamento</label> <br/> 
+						<label for="problema">Problema riscontrato</label> <br/> 
 						<select name="problema" id="problema" class="form-control">
 							<option value="pagamenti" id="pagamenti">pagamenti</option>
 							<option value="account" id="account">account</option>
