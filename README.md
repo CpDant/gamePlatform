@@ -5,6 +5,13 @@
 ### THE PROJECT IS A SIMULATION, THE LOGOS AND COMPANY NAME HAVE BEEN USED FOR UNIVERSITY EDUCATIONAL PURPOSES ONLY.
 
 <p align="center"><img src="gamePlatformSite/src/main/webapp/img/icon/logo.png"></p>
+Hanno contribuito a questo progetto: 
+
+![GitHub Contributors Image](https://contrib.rocks/image?repo=CpDant/gamePlatform)
+
+* [Francesco Paolo D'Antuono](https://github.com/CpDant)
+* [Ciro Vitale](https://github.com/cirovitale)
+* [Luigi Consiglio](https://github.com/luicons01)
 
 ## Intro
 
@@ -42,3 +49,5 @@ Per la creazione dello schema necessario (denominato "gameplatform") nel databas
 da scaricare [qui](gamePlatformSite/db/GAME_PLATFORM.sql).
 
 Inoltre per popolare il database è prevista una servlet di popolamento locata [qui](gamePlatformSite/src/main/java/it/unisa/gp/control/PopolamentoDBServlet.java).
+
+
